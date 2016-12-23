@@ -1,0 +1,53 @@
+/* 顶部样式*/
+.commonbox {clear:both; margin: 0px auto 10px; overflow:hidden; width:980px;}
+.box1 {background:#ffffff; height:95px;}
+.logo_new { float:left; width:210px; height:88px;padding-top:7px;text-align:center;}
+.rtcon_box {float: right; width: 760px}
+.login {background: url(../img/login.png) repeat-x left -33px transparent;  height: 32px}
+.login a{color: #444444;text-decoration: none;}
+.login li {float: left; line-height:32px; height: 32px}
+.login_left {background: url(../img/login.png) no-repeat transparent; width: 3px}
+.denglu {padding-right: 20px; padding-left: 15px; background: url(../img/denglu.gif) no-repeat right 50%; position:relative; width:600px;}
+.login_right {background: url(../img/login.png) no-repeat left -66px transparent; width: 15px}
+.icon2 {}
+.icon2 span{ float:left; width:12px;height:12px; margin:10px 5px 10px 0px;background: url(../img/ico.png) no-repeat left -18px transparent;}
+.icon2 a{float:left;}
+li.icon3 { margin:10px 5px 10px 0px; width:12px; height:12px;background: url(../img/ico.png) no-repeat transparent;}
+.centerad {padding-top: 3px}
+.a11d {float: left; width: 470px; height: 57px}
+.kefu {background: url(../img/kefu_index.gif) no-repeat 50% bottom; float: left; width: 270px; height: 60px}
+.qc {clear: both}
+
+/* 导航栏样式*/
+.nav {margin: 0px auto; height: 37px;background:url(../img/nav.jpg) no-repeat;}
+.nav .nav_width {margin: 0px auto; width: 980px; }
+.nav .nav_width li{ font-size:14px;}
+.nav .nav_width li {float: left; height: 37px; text-align: center}
+.nav .nav_width li a{display:block;color:#fff;padding-top:14px;text-decoration:none}
+.nav .nav_width li a:hover{color: #f8f8c3; height: 23px}
+.nav .nav_width li a#current{color: #f8f8c3; height: 23px}
+.nav_left {float: left; width: 4px; height: 31px}
+
+/*彩种导航*/
+.commonlottery {background: url(../img/lottery.png) repeat-x transparent; height: 59px;color: #606060}
+.commonlottery li {float: left; line-height: 23px; height: 54px;text-align: left;}
+.commonlottery a {color: #606060; padding-right:8px;text-decoration: none;}
+.commonlottery a:link,.commonlottery a:visited{ color:#444; text-decoration:none;}
+.commonlottery a:hover,.commonlottery a:active{ color:#444; text-decoration:none;}
+.lione,.litwo,.lithree,.lifour,.lifive {padding-left: 75px; padding-top: 5px; background: url(fucai_index.gif) no-repeat left 50%;}
+.lione {background: url(../img/lottery.png) no-repeat left -121px transparent;width: 110px;}
+.litwo {background: url(../img/lottery.png) no-repeat left -182px transparent;width: 145px;}
+.lithree{background: url(../img/lottery.png) no-repeat left -61px transparent;width: 126px; }
+.lifour{background: url(../img/lottery.png) no-repeat left -243px transparent;width: 140px;} 
+.lifive{background: url(../img/lottery.png) no-repeat left -304px transparent;width: 63px;}
+#lottertrtbg {background: url(../img/lottery.png) no-repeat left -365px transparent; float: right; width: 7px; height: 59px}
+
+
+/* 底部样式*/
+.commonfoot {background: url(../img/foot.png) repeat-x transparent;height: 100px;margin: 10px auto 10px;overflow: hidden;width:980px;}
+.commonfoot .left {background: url(../img/foot.png) no-repeat left -176px transparent;float: left;width: 100%;; _background-image: url(../img/foot.gif)}
+.commonfoot .left .right{background: url(../img/foot.png) no-repeat right -370px transparent;height: 155px;width: 100%;}
+.commonfoot .left .right .nav_a {color: #CCCCCC;line-height: 26px;text-align: center;}
+.commonfoot a {color: #545454;text-decoration: none;}
+.commonfoot a:visited {color: #545454;text-decoration: none;}
+.Copyright {float: left;line-height: 21px;padding-top: 10px;text-align: center;width: 100%;}
