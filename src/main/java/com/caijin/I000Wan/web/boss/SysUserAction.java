@@ -27,7 +27,6 @@ public class SysUserAction {
 
 	@RequestMapping("/sysuser/list")
 	public String userList(){
-		
 		return "boss/system/user";
 	}
 	

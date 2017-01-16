@@ -244,7 +244,6 @@ public class HeMaiController {
  				.valueOf(order.getTotalMoney())) {
  			memberUser.setAvailableScore(memberUser.getAvailableScore()
  					- Integer.valueOf(order.getTotalMoney()));
-// 			order.setPayStatus(Order.PAY_STATUS_SUCESS);
  			memberUserService.update(memberUser);
  			return new ModelAndView("order/alipaysuccess");
  		} 

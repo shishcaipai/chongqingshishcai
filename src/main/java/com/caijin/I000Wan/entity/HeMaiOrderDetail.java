@@ -90,7 +90,7 @@ public class HeMaiOrderDetail extends BaseEntity {
 	public void setType(int type) {
 		this.type = type;
 	}
-	@Column(length = 256)
+	@Column(name="descption", length = 256)
 	public String getDesc() {
 		return desc;
 	}

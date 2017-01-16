@@ -18,7 +18,7 @@
     });
 
     var firstMenuName = $('#css3menu a:first').attr('name');
-    addNav(_menus[firstMenuName]); //首次加载basic 左侧菜单
+    addNav(_menus[firstMenuName]); // 首次加载basic 左侧菜单
     InitLeftMenu();
 });
 
@@ -59,12 +59,11 @@ function GetMenuList(data, menulist) {
     }
     return menulist;
 }
-//左侧导航加载
+// 左侧导航加载
 function addNav(data) {
-
     $.each(data, function(i, sm) {
         var menulist1 = "";
-        //sm 常用菜单  邮件 列表
+        // sm 常用菜单 邮件 列表
         menulist1 = GetMenuList(sm, menulist1);
         menulist1 = "<ul id='tt1' class='easyui-tree' animate='true' dnd='true'>" + menulist1.substring(4); 
         $('#wnav').accordion('add', {
@@ -101,8 +100,8 @@ function InitLeftMenu() {
 }
 
 /**
-* 菜单项鼠标Hover
-*/
+ * 菜单项鼠标Hover
+ */
 function hoverMenuItem() {
     $(".easyui-accordion").find('a').hover(function() {
         $(this).parent().addClass("hover");
@@ -269,7 +268,7 @@ function clockon() {
     var timer = setTimeout("clockon()", 200);
 }
 
-/************************************************************************Index页面********************************************************/
+/** **********************************************************************Index页面******************************************************* */
 
 var _menus = {
     user: [{
@@ -281,8 +280,8 @@ var _menus = {
                  "menuid": "119",
                  "menuname": "用户列表",
                  "icon": "icon-nav",
-                 //"url": "http://www.jj1000w.com/boss/sysuser/list"
-                 "url": "http://localhost:8080/1000-Wan-Web/boss/sysuser/list"
+                 // "url": "http://www.jj1000w.com/boss/sysuser/list"
+                 "url": "http://localhost:8080/caipiao100/boss/sysuser/list"
 			}]
     }],
             member: [{
@@ -293,9 +292,22 @@ var _menus = {
                     "menuid": "211",
                     "menuname": "会员信息列表",
                     "icon": "icon-nav",
-                    //"url": "http://www.jj1000w.com/boss/member/list"
-                     "url": "http://localhost:8080/1000-Wan-Web/boss/member/list"
-                }]
+                    // "url": "http://www.jj1000w.com/boss/member/list"
+                     "url": "http://localhost:8080/caipiao100/boss/member/list"
+                },
+                {
+                    "menuid": "211",
+                    "menuname": "会员充值",
+                    "icon": "icon-nav",
+                     "url": "http://localhost:8080/caipiao100/boss/member/chongzhi"
+                },
+                {
+                    "menuid": "211",
+                    "menuname": "充值记录",
+                    "icon": "icon-nav",
+                     "url": "http://localhost:8080/caipiao100/boss/member/chongzhilist"
+                }
+                ]
 	}],
 		     order: [{
                 "menuid": "30",
@@ -305,9 +317,10 @@ var _menus = {
                     "menuid": "211",
                     "menuname": "订单管理",
                     "icon": "icon-nav",
-                    //"url": "http://www.jj1000w.com/boss/order/list"
-                    "url": "http://localhost:8080/1000-Wan-Web/boss/order/list"
-                }]
+                    // "url": "http://www.jj1000w.com/boss/order/list"
+                    "url": "http://localhost:8080/caipiao100/boss/order/list"
+                }
+                ]
 	}],
 			 apply: [{
                 "menuid": "40",
@@ -317,13 +330,25 @@ var _menus = {
                     "menuid": "211",
                     "menuname": "提款申请管理",
                     "icon": "icon-nav",
-                    //"url": "http://www.jj1000w.com/boss/applyrecord/list"
-                    "url": "http://localhost:8080/1000-Wan-Web/boss/applyrecord/list"
+                    // "url": "http://www.jj1000w.com/boss/applyrecord/list"
+                    "url": "http://localhost:8080/caipiao100/boss/applyrecord/list"
                 }]
-	}]
+	}],
+	zhongjian: [{
+    "menuid": "40",
+    "icon": "icon-sys",
+    "menuname": "中奖管理",
+    "menus": [{
+        "menuid": "211",
+        "menuname": "中奖管理",
+        "icon": "icon-nav",
+        // "url": "http://www.jj1000w.com/boss/applyrecord/list"
+        "url": "http://localhost:8080/caipiao100/boss/applyrecord/list"
+    }]
+}]
 
                 };
-                //设置登录窗口
+                // 设置登录窗口
                 function openPwd() {
                     $('#w').window({
                         title: '修改密码',
@@ -335,14 +360,14 @@ var _menus = {
                         resizable: false
                     });
                 }
-                //关闭登录窗口
+                // 关闭登录窗口
                 function closePwd() {
                     $('#w').window('close');
                 }
 
 
 
-                //修改密码
+                // 修改密码
                 function serverLogin() {
                     var $newpass = $('#txtNewPass');
                     var $rePass = $('#txtRePass');
@@ -386,10 +411,10 @@ var _menus = {
                         $.messager.confirm('系统提示', '您确定要退出本次登录吗?', function(r) {
 
                             if (r) {
-                                //location.href = '/ajax/loginout.ashx';
+                                // location.href = '/ajax/loginout.ashx';
                                 location.href = "login.html";
                             }
                         });
                     })
                 });
-                /*************************************************************************************************************************************/
+                /** ********************************************************************************************************************************** */

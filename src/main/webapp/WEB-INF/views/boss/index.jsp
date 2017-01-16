@@ -59,6 +59,9 @@
 				<li>
 					<a name="apply" href="javascript:;" title="提款申请管理">提款申请管理</a>
 				</li>
+				<li>
+					<a name="zhongjian" href="javascript:;" title="中奖管理">中奖管理</a>
+				</li>
 				
 			</ul>
 		</div>

@@ -43,9 +43,7 @@
 		});	
 		
 	});
-	
-	
-	
+
 	function searchMemberUser(){
 		
 		var memberUser = {};
@@ -87,6 +85,7 @@
 		$("#update").show();
 		$("#add").hide();
 	}
+	
 	
 	/**
 	 * 修改信息提交

@@ -11,10 +11,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 引入Jquery -->
 <script type="text/javascript"	src="<%=basePath%>/static/js/jquery-1.7.2.min.js" charset="utf-8"></script>
 <script src="<%=basePath%>static/js/commonUtil.js" type="text/javascript"></script>
-<script src="<%=basePath%>static/boss/js/memberUser.js" type="text/javascript"></script>
+<script src="<%=basePath%>static/boss/js/chongzhimemberUser.js" type="text/javascript"></script>
 <%@ include file="../../common/easyUiInclude.jsp"%>
-
+<script type="text/javascript">
+/**
+ * 弹出充值页面
+ * @param str
+ * @returns
+ */
+function chongZhiDialog(){
+	var selectedRows=$("#memberUserDataGrid").datagrid('getSelections');
+	if(selectedRows.length!=1){
+		$.messager.alert('系统提示','请选择一条要编辑的数据！');
+		return;
+	}
+	var row=selectedRows[0];
+	$("#dlg").dialog("open").dialog("setTitle","会员充值信息");
+	$("#memberUserForm").form("load",row);
+	$("#update").show();
+	$("#add").hide();
+}
+/**
+ * 修改信息提交
+ */
+function saveUsermenberChongzhiDialog(){
+	if($("#userName").val().trim()==''){
+		$.messager.show({ title : '提示', msg :'请输入用户名！'});  
+		return;
+	}
+	var memberUser = {};
+	memberUser["userName"]=$("#userName").val();
+	memberUser["availableScore"]=$("#availableScore").val();
+	memberUser["actionScore"]=$("#actionScore").val();
+	//保存
+	$.ajax({
+		url : '../../boss/member/chongzhi',
+		data:memberUser,
+		type:'post',
+		dataType:'text',
+		success : function(result) {
+			$.messager.show({ title : '提示', msg : result });
+			closeMemberUserDialog();
+			clearSearchForm();
+			$('#memberUserDataGrid').datagrid("reload");
+		}    
+	});
+}
+</script>
 </head>
+
 <body>
 <!-- 工具栏 -->
 <div id="tb" style="height:auto">
@@ -43,10 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</form>
 	<div>
 		<a href="javascript:searchMemberUser()" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a>
-		<!-- <a href="javascript:addMemberUserDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a> -->
-		<a href="javascript:updateMemberUserDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
-		<a href="javascript:deleteMemberUser()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
-		<a href="javascript:clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">清空</a>
+		<a href="javascript:chongZhiDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">充值</a>
 	</div>
 </div>
 
@@ -60,18 +102,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</tr>
 		<tr>	
 			<td>真实名：</td>
-			<td><input  type="text" id="realName" name="real_name"/></td>
+			<td><input  type="text" id="realName" name="real_name" readonly="readonly"/></td>
 			<td>身份证号码：</td>
-			<td><input type="text" id="identityCard" name="identity_card"/></td>
+			<td><input type="text" id="identityCard" name="identity_card" readonly="readonly"/></td>
 		</tr>
 			<td>手机号：</td>
-			<td><input type="text" id="telephone" name="telephone"/></td>
-			<td>支付宝账号：</td>
-			<td><input type="text" id="bankCode" name="bank_code"/></td>
+			<td><input type="text" id="telephone" name="telephone" readonly="readonly"/></td>
+			<td>充值金额</td>
+			<td><input type="text" id=availableScore name="availableScore"/></td>
+			<td>赠送金额</td>
+			<td><input type="text" id="actionScore" name="actionScore"/></td>
 		<tr>
 			<td colspan="4" align="right">
-	       	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="add" onClick="saveMemberUser()">提交</a>&nbsp;&nbsp;
-		   	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="update" onClick="updateMemberUser()">保存</a>&nbsp;&nbsp;
+		   	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="update" onClick="saveUsermenberChongzhiDialog()">保存</a>&nbsp;&nbsp;
 	       	<a href="javascript:closeMemberUserDialog()" class="easyui-linkbutton" iconCls="icon-cancel" >关闭</a>
 	     	</td>
 		</tr>
