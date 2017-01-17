@@ -10,7 +10,10 @@ import com.caijin.I000Wan.entity.HeMaiOrder;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.OrderDetail;
 
-public interface HeMaiOrderDao extends CommonDao<HeMaiOrder,String>{
+public interface HeMaiOrderDao extends CommonDao<HeMaiOrder, String> {
 	@Query("select o from HeMaiOrder o where o.orderDetail = ?1 ")
-   List<HeMaiOrder> findOrderHemaiByOrderId(Order order);
+	List<HeMaiOrder> findOrderHemaiByOrderId(HeMaiOrderDetail order);
+
+	@Query("select o from HeMaiOrder o")
+	List<HeMaiOrder> findAllHemaiOrders();
 }

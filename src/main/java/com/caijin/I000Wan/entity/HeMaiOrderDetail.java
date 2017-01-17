@@ -19,7 +19,7 @@ public class HeMaiOrderDetail extends BaseEntity {
 	private Integer fensum;
 	// 保底份数
 	private Integer minimumGuaranteeSum;
-	// 已认购购份数
+	// 发起人购份数
 	private Integer subGuaranteeSum;
 	// 发起人
 	private MemberUser memberUser;

@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.caijin.I000Wan.entity.HeMaiOrder;
 import com.caijin.I000Wan.entity.HeMaiOrderDetail;
 import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
@@ -27,6 +29,7 @@ import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
 import com.caijin.I000Wan.util.DateUtils;
 import com.caijin.I000Wan.util.GenerateOrderNoUtil;
+import com.caijin.I000Wan.util.StaticDefine;
 
 @Controller
 @RequestMapping(value = "/hemai")
@@ -48,6 +51,19 @@ public class HeMaiController {
 
 	@Autowired
 	private MemberUserService memberUserService;
+	
+	@RequestMapping(value = "/hemaiview")
+	public String hemaiview(HttpServletRequest request,Model model) {
+		Integer pageNum = Integer.valueOf(request.getParameter("pageNum") == null ? "1" : request.getParameter("pageNum"));
+		Integer size = heMaiOrderDetailService.findHemaiOrderDetailsSize();
+		Integer pageSize = size%StaticDefine.PAGE_SIZE == 0 ? size/StaticDefine.PAGE_SIZE : size/StaticDefine.PAGE_SIZE + 1;
+		List<HeMaiOrderDetail> heMaiOrders = heMaiOrderDetailService.findAllHemaiOrderDetails((pageNum - 1) * StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE);
+		model.addAttribute("heMaiOrderDetails", heMaiOrders);
+		model.addAttribute("size", size);
+		model.addAttribute("page", pageSize);
+		model.addAttribute("pageNum", pageNum);
+		return "caipiao/hemailist";
+	}
 
 	@RequestMapping(value = "/order")
 	public ModelAndView orderSure(HttpServletRequest request) {
@@ -244,6 +260,7 @@ public class HeMaiController {
  				.valueOf(order.getTotalMoney())) {
  			memberUser.setAvailableScore(memberUser.getAvailableScore()
  					- Integer.valueOf(order.getTotalMoney()));
+// 			order.setPayStatus(Order.PAY_STATUS_SUCESS);
  			memberUserService.update(memberUser);
  			return new ModelAndView("order/alipaysuccess");
  		} 
