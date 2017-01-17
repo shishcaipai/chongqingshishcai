@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.caijin.I000Wan.entity.ChongZhiRecord;
 import com.caijin.I000Wan.entity.MemberUser;
+import com.caijin.I000Wan.entity.User;
+import com.caijin.I000Wan.service.ChongZhiRecordService;
 import com.caijin.I000Wan.service.MemberUserService;
 import com.caijin.I000Wan.util.DataGridModel;
 import com.caijin.I000Wan.util.PageModel;
@@ -27,6 +30,8 @@ public class MemberAction {
 
 	@Autowired
 	private MemberUserService memberUserService;
+	@Autowired
+	private ChongZhiRecordService chongZhiRecordService;
 
 	@RequestMapping("/member/list")
 	public String memberList() {
@@ -114,6 +119,9 @@ public class MemberAction {
 	public void saveChongzhiItemInfo(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String msg = "";
+		User sysUser=(User)request.getSession().getAttribute("sysUSer");
+		if(sysUser!=null){
+		
 		try {
 			if (request.getParameter("userName") != null) {
 				MemberUser user = memberUserService.findByUserName(request
@@ -138,12 +146,25 @@ public class MemberAction {
 						+ availableScore);
 				user.setTotalScore(user.getTotalScore() + availableScore
 						+ availableScore);
+				user.setCreateDate(new Date());
+				user.setUpdateDate(new Date());
 				memberUserService.update(user);
+				ChongZhiRecord   record=new ChongZhiRecord();
+				record.setUser(sysUser);
+				record.setMemberUser(user);
+				record.setCreateDate(new Date());
+				record.setUpdateDate(new Date());
+				record.setAvailableScore(availableScore);
+				record.setActionScore(actionScore);
+				chongZhiRecordService.save(record);
 			}
 			msg = "修改成功";
 		} catch (Exception e) {
 			e.printStackTrace();
 			msg = "修改失败";
+		}
+		}else{
+			msg = "您可能长时间未登陆，已失效请重新登陆";
 		}
 		renderText(response, msg);
 	}

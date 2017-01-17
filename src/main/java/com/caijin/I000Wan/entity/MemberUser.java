@@ -30,10 +30,10 @@ public class MemberUser extends BaseEntity {
 	private String sex;// 性别
 	private String bankName;// 银行名称
 	private Boolean activated;// 账号是否邮件激活
-	private Integer totalScore = 0;// 总金额
-	private Integer availableScore = 0;// 可用金额
-	private Integer actionScore = 0;// 活动金额
-	private Integer frozenScore = 0;// 冻结金额
+	private float totalScore = 0;// 总金额
+	private float availableScore = 0;// 可用金额
+	private float actionScore = 0;// 活动金额
+	private float frozenScore = 0;// 冻结金额
 	private String randomCode;// 账号验证邮件随机码(和session绑定)
 
 	@Column(name = "user_name", length = 255)
@@ -186,37 +186,37 @@ public class MemberUser extends BaseEntity {
 	}
 
 	@Column(name = "total_score")
-	public Integer getTotalScore() {
+	public float getTotalScore() {
 		return totalScore;
 	}
 
-	public void setTotalScore(int totalScore) {
+	public void setTotalScore(float totalScore) {
 		this.totalScore = totalScore;
 	}
 
 	@Column(name = "available_score")
-	public Integer getAvailableScore() {
+	public float getAvailableScore() {
 		return availableScore;
 	}
 
-	public void setAvailableScore(Integer availableScore) {
+	public void setAvailableScore(float availableScore) {
 		this.availableScore = availableScore;
 	}
 
 	@Column(name = "action_score")
-	public Integer getActionScore() {
+	public float getActionScore() {
 		return actionScore;
 	}
 
-	public void setActionScore(Integer actionScore) {
+	public void setActionScore(float actionScore) {
 		this.actionScore = actionScore;
 	}
 	@Column(name = "frozen_score")
-	public Integer getFrozenScore() {
+	public float getFrozenScore() {
 		return frozenScore;
 	}
 
-	public void setFrozenScore(Integer frozenScore) {
+	public void setFrozenScore(float frozenScore) {
 		this.frozenScore = frozenScore;
 	}
 
