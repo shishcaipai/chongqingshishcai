@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.caijin.I000Wan.common.entity.BaseEntity;
 
@@ -32,6 +33,9 @@ public class HeMaiOrderDetail extends BaseEntity {
 	private int type;// 1 方案公开 2 跟单后公开 3 完全保密
 	// 描述
 	private String desc;
+	
+	@Transient
+	private Integer otherBuyNum;
 	@Column(length = 100)
 	public Float getFloatManay() {
 		return floatManay;
@@ -103,6 +107,12 @@ public class HeMaiOrderDetail extends BaseEntity {
 	}
 	public void setHemaiId(String hemaiId) {
 		this.hemaiId = hemaiId;
+	}
+	public Integer getOtherBuyNum() {
+		return otherBuyNum;
+	}
+	public void setOtherBuyNum(Integer otherBuyNum) {
+		this.otherBuyNum = otherBuyNum;
 	}
 	
 	

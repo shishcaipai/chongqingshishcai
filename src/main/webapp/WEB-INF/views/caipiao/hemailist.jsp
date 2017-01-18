@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -149,25 +150,37 @@
 						<td style="padding-left: 15px;">${order.memberUser.userName}</td>
 
 						<td><span class="new_hemai_red">${order.order.totalMoney}</span></td>
-						<td><span class="new_hemai_red">${order.order.totalMoney/order.fensum}</span></td>
+						<td><span class="new_hemai_red"><fmt:formatNumber value="${order.order.totalMoney/order.fensum}" pattern="##.##" minFractionDigits="2" /></span></td>
 						<td style="color: #333;"><span style="float: left;">
-								${order.floatManay/order.order.totalMoney*100}% +
-								${(order.fensum - order.subGuaranteeSum)/order.fensum * 100 }% </td>
-						<td>${order.fensum - order.subGuaranteeSum }</td>
+								<fmt:formatNumber value="${order.floatManay*100/order.order.totalMoney }" pattern="##.##" minFractionDigits="2" />% +
+								<fmt:formatNumber value="${(order.fensum - order.subGuaranteeSum - order.otherBuyNum) * 100 / order.fensum }" pattern="##.##" minFractionDigits="2" />% </td>
+						<td>${order.fensum - order.subGuaranteeSum - order.otherBuyNum }</td>
 
 
-						<td class="new_hemai_srk"><input name="buynum" type="text"
-							class="rec_text" id="btnBuy1num" value="0" /></td>
-						<td class="new_hemai_an"><a
-							onclick="javascript:btnBuy(this);"
-							style="margin-left: 25px; cursor: pointer; text-decoration: underline; color: blue;"
-							id="btnBuy1"> <input type="hidden" value="10522" /> <input
-								type="hidden" value="2" /> <input type="hidden" value="28.00" />
-								<input type="hidden" value="0" /> 购买
-						</a> <!-- <input name="提交" type="submit" class="btn_Dora_s" value="" onclick="return confirm(&#39;是否认购？&#39;)" /> -->
-						</td>
-
-
+			<c:choose>
+        	    <c:when test="${0 == order.fensum - order.subGuaranteeSum}">
+                     <td class="new_hemai_srk">
+						<span style="margin-left: 20px">-</span>
+					</td>
+					<td class="new_hemai_an">
+						<span style="margin-left: 25px">成功</span>
+					</td>
+                </c:when>
+                <c:otherwise>
+                     <td class="new_hemai_srk">
+						<input name="buynum" type="text" class="rec_text" id="btnBuy1num" value="0" />
+					</td>
+					<td class="new_hemai_an">
+						<a onclick="javascript:btnBuy(this);" style="margin-left: 25px; cursor: pointer; text-decoration: underline; color: blue;" id="btnBuy1"> 
+							<input type="hidden" value="10522" />
+							<input type="hidden" value="2" /> 
+							<input type="hidden" value="28.00" />
+							<input type="hidden" value="0" /> 
+							购买
+						</a> 
+					</td>
+               </c:otherwise>
+        	</c:choose>   
 
 					</tr>
 				</c:forEach>

@@ -1,5 +1,6 @@
 package com.caijin.I000Wan.web;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,6 +59,18 @@ public class HeMaiController {
 		Integer size = heMaiOrderDetailService.findHemaiOrderDetailsSize();
 		Integer pageSize = size%StaticDefine.PAGE_SIZE == 0 ? size/StaticDefine.PAGE_SIZE : size/StaticDefine.PAGE_SIZE + 1;
 		List<HeMaiOrderDetail> heMaiOrders = heMaiOrderDetailService.findAllHemaiOrderDetails((pageNum - 1) * StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE);
+		if(null != heMaiOrders) {
+			for(int i=0; i<heMaiOrders.size(); i++) {
+				List<HeMaiOrder> orders = heMaiService.findOrderHemaiByOrderId(heMaiOrders.get(i));
+				Integer buyNum = 0;
+				if(null != orders) {
+					for(int j=0; j<orders.size(); j++) {
+						buyNum += orders.get(j).getSubGuaranteeSum();
+					}
+				}
+				heMaiOrders.get(i).setOtherBuyNum(buyNum);
+			}
+		}
 		model.addAttribute("heMaiOrderDetails", heMaiOrders);
 		model.addAttribute("size", size);
 		model.addAttribute("page", pageSize);
@@ -217,6 +230,11 @@ public class HeMaiController {
 
 	@RequestMapping(value = "/placeorder")
 	public ModelAndView placeAorde(HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		Map<String, Object> model = new HashMap<String, Object>();
 		String orderID = (String) request.getParameter("orderId");
 		// 份成
@@ -240,7 +258,7 @@ public class HeMaiController {
         heMaiOrderDetail.setOrder(order);
         heMaiOrderDetail.setDesc(dec);
         heMaiOrderDetail.setHemaiId(order.getOrderId());
-        int i=Integer.valueOf(bdNum);
+        int i=Integer.valueOf(null == bdNum ? "0" : bdNum);
         int total=Integer.valueOf(totalNum);
         int reNums=Integer.valueOf(reNum);
          if(i>0){
@@ -252,6 +270,7 @@ public class HeMaiController {
          heMaiOrderDetail.setFensum(total);
          heMaiOrderDetail.setFloatManay((float)((float)order.getTotalMoney()/total*reNums));
          heMaiOrderDetail.setType(Integer.valueOf(type));
+         heMaiOrderDetail.setCreateDate(new Date());
          heMaiOrderDetailService.save(heMaiOrderDetail);
          if (order == null) {
 				return new ModelAndView("redirect:/user/login");
