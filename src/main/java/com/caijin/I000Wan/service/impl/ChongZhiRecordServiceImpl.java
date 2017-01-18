@@ -1,6 +1,7 @@
 package com.caijin.I000Wan.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,13 +34,23 @@ public class ChongZhiRecordServiceImpl extends CommonServiceImpl<ChongZhiRecord,
 
 	@Override
 	public List<ChongZhiRecord> findByTopUser(User user, int n) {
-		// TODO Auto-generated method stub
-		return chongZhiRecordDao.findByTopUser(user,n);
+		return chongZhiRecordDao.findByTopUser(user.getId(),n);
 	}
 
 	@Override
 	public List<ChongZhiRecord> findByTopMenberUser(MemberUser menberuser, int n) {
-		// TODO Auto-generated method stub
-		return chongZhiRecordDao.findByTopMenberUser(menberuser,n);
+		return chongZhiRecordDao.findByTopMenberUser(menberuser.getId(),n);
+	}
+	@Override
+	public List<ChongZhiRecord> findByTopMenberUserAndUser(MemberUser menberuser,User user, int n) {
+		return chongZhiRecordDao.findByTopMenberUserOrUser(menberuser.getId(), user.getId(), n);
+	}
+	@Override
+	public void deleteAll() {
+		 chongZhiRecordDao.deleteAll();;
+	}
+	@Override
+	public void delete(ChongZhiRecord  record) {
+		 chongZhiRecordDao.delete(record);
 	}
 }
