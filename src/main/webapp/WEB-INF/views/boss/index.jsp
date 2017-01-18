@@ -62,7 +62,9 @@
 				<li>
 					<a name="zhongjian" href="javascript:;" title="中奖管理">中奖管理</a>
 				</li>
-				
+				<li>
+					<a name="jiaose" href="javascript:;" title="角色管理">角色管理</a>
+				</li>
 			</ul>
 		</div>
 		<div region="south" split="true"

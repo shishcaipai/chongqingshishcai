@@ -20,6 +20,7 @@ import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.User;
 import com.caijin.I000Wan.service.ChongZhiRecordService;
 import com.caijin.I000Wan.service.MemberUserService;
+import com.caijin.I000Wan.service.UserService;
 import com.caijin.I000Wan.util.DataGridModel;
 import com.caijin.I000Wan.util.PageModel;
 import com.caijin.I000Wan.util.Result;
@@ -32,7 +33,9 @@ public class MemberAction {
 	private MemberUserService memberUserService;
 	@Autowired
 	private ChongZhiRecordService chongZhiRecordService;
-
+	
+	@Autowired
+	private UserService userService;
 	@RequestMapping("/member/list")
 	public String memberList() {
 
@@ -119,51 +122,60 @@ public class MemberAction {
 	public void saveChongzhiItemInfo(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String msg = "";
-		User sysUser=(User)request.getSession().getAttribute("sysUSer");
-		if(sysUser!=null){
-		
-		try {
-			if (request.getParameter("userName") != null) {
-				MemberUser user = memberUserService.findByUserName(request
-						.getParameter("userName"));
-				user.setUpdateDate(new Date());
-				Integer actionScore = 0;
-				Integer availableScore = 0;
-				try {
-					actionScore = Integer.valueOf(request
-							.getParameter("actionScore"));
-				} catch (Exception e) {
+		User sysUser = (User) request.getSession().getAttribute("sysUSer");
+		if (sysUser != null) {
+			try{
+			sysUser=userService.find(sysUser.getId());
+			try {
+				if (request.getParameter("userName") != null) {
+					MemberUser user = memberUserService.findByUserName(request
+							.getParameter("userName"));
+					user.setUpdateDate(new Date());
+					Integer actionScore = 0;
+					Integer availableScore = 0;
+					try {
+						actionScore = Integer.valueOf(request
+								.getParameter("actionScore"));
+					} catch (Exception e) {
 
-				}
-				try {
-					availableScore = Integer.valueOf(request
-							.getParameter("availableScore"));
-				} catch (Exception e) {
+					}
+					try {
+						availableScore = Integer.valueOf(request
+								.getParameter("availableScore"));
+					} catch (Exception e) {
 
+					}
+					user.setActionScore(user.getActionScore() + actionScore);
+					user.setAvailableScore(user.getAvailableScore()
+							+ availableScore);
+					user.setTotalScore(user.getTotalScore() + availableScore
+							+ availableScore);
+					user.setCreateDate(new Date());
+					user.setUpdateDate(new Date());
+					memberUserService.update(user);
+					ChongZhiRecord record = new ChongZhiRecord();
+					record.setUser(sysUser);
+					record.setMemberUser(user);
+					record.setCreateDate(new Date());
+					record.setUpdateDate(new Date());
+					record.setAvailableScore(availableScore);
+					record.setActionScore(actionScore);
+					chongZhiRecordService.save(record);
 				}
-				user.setActionScore(user.getActionScore() + actionScore);
-				user.setAvailableScore(user.getAvailableScore()
-						+ availableScore);
-				user.setTotalScore(user.getTotalScore() + availableScore
-						+ availableScore);
-				user.setCreateDate(new Date());
-				user.setUpdateDate(new Date());
-				memberUserService.update(user);
-				ChongZhiRecord   record=new ChongZhiRecord();
-				record.setUser(sysUser);
-				record.setMemberUser(user);
-				record.setCreateDate(new Date());
-				record.setUpdateDate(new Date());
-				record.setAvailableScore(availableScore);
-				record.setActionScore(actionScore);
-				chongZhiRecordService.save(record);
+				msg = "修改成功";
+			} catch (Exception e) {
+				e.printStackTrace();
+				msg = "修改失败";
+				if (e instanceof org.hibernate.TransientPropertyValueException
+						|| e instanceof org.hibernate.TransientPropertyValueException
+						|| e instanceof org.springframework.dao.InvalidDataAccessApiUsageException) {
+					msg = "您可能长时间未登陆，已失效请重新登陆";
+				}
 			}
-			msg = "修改成功";
-		} catch (Exception e) {
-			e.printStackTrace();
-			msg = "修改失败";
-		}
-		}else{
+			} catch (Exception e) {
+					msg = "您可能长时间未登陆，已失效请重新登陆";
+			}
+		} else {
 			msg = "您可能长时间未登陆，已失效请重新登陆";
 		}
 		renderText(response, msg);

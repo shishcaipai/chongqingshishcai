@@ -228,6 +228,7 @@ public class OrderController {
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
 		try {
 			if (memberUser != null) {
+				memberUser=memberUserService.find(memberUser.getId());
 				Integer totalMoney = 0;
 				// 投注名称
 				String name = (String) request.getParameter("playname");
@@ -335,7 +336,7 @@ public class OrderController {
 					order.setLotteryCount(lotteryCount);
 					order.setIsCut(Integer.valueOf(ZjCut));
 					orderService.save(order);
-					String[] lotteryCodes = lotteryCode.split("$");
+					String[] lotteryCodes = lotteryCode.split("\\$");
 					OrderDetail orderDetail;
 					StringBuffer buffer = new StringBuffer();
 					for (int i = 0; i < lotteryCodes.length; i++) {

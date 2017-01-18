@@ -305,7 +305,7 @@ var _menus = {
                     "menuid": "211",
                     "menuname": "充值记录",
                     "icon": "icon-nav",
-                     "url": "http://localhost:8080/caipiao100/boss/member/chongzhilist"
+                     "url": "http://localhost:8080/caipiao100/boss/record/list"
                 }
                 ]
 	}],
@@ -345,6 +345,27 @@ var _menus = {
         // "url": "http://www.jj1000w.com/boss/applyrecord/list"
         "url": "http://localhost:8080/caipiao100/boss/applyrecord/list"
     }]
+	
+}],
+jiaose: [{
+    "menuid": "40",
+    "icon": "icon-sys",
+    "menuname": "角色管理",
+    "menus": [{
+        "menuid": "211",
+        "menuname": "角色列表",
+        "icon": "icon-nav",
+        "url": "http://localhost:8080/caipiao100/boss/role/list"
+    },
+    {
+        "menuid": "212",
+        "menuname": "菜单管理",
+        "icon": "icon-nav",
+        "url": "http://localhost:8080/caipiao100/boss/menu/list"
+    }
+    
+    ]
+	
 }]
 
                 };
