@@ -25,6 +25,8 @@ import com.caijin.I000Wan.dto.JinZuChuanConfirmDTO;
 import com.caijin.I000Wan.dto.JqsConfirmDTO;
 import com.caijin.I000Wan.dto.LotteryConfirmInfoDTO;
 import com.caijin.I000Wan.entity.FootballMatch;
+import com.caijin.I000Wan.entity.HeMaiOrder;
+import com.caijin.I000Wan.entity.HeMaiOrderDetail;
 import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.OrderDetail;
@@ -36,6 +38,7 @@ import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
 import com.caijin.I000Wan.util.DateUtils;
 import com.caijin.I000Wan.util.GenerateOrderNoUtil;
+import com.caijin.I000Wan.util.StaticDefine;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -684,6 +687,24 @@ public class OrderController {
 			order.setUpdateDate(new Date());
 			orderService.update(order);
 		}
+	}
+	
+	@RequestMapping(value = "/betting_record")
+	public String bettingRecord(HttpServletRequest request,Model model) {
+		MemberUser user = (MemberUser)request.getSession().getAttribute("memberUser");
+		if (user == null) {
+			return "redirect:/user/login";
+		}
+		Integer pageNum = Integer.valueOf(request.getParameter("pageNum") == null ? "1" : request.getParameter("pageNum"));
+		Integer size = orderDetailService.findOrderDetailsSize(user.getId());
+		Integer pageSize = size%StaticDefine.PAGE_SIZE == 0 ? size/StaticDefine.PAGE_SIZE : size/StaticDefine.PAGE_SIZE + 1;
+		List<OrderDetail> orderDetails = orderDetailService.findAllOrderDetails((pageNum - 1) * StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE, user.getId());
+			
+		model.addAttribute("orderDetails", orderDetails);
+		model.addAttribute("size", size);
+		model.addAttribute("page", pageSize);
+		model.addAttribute("pageNum", pageNum);
+		return "order/bettingRecord";
 	}
 
 }

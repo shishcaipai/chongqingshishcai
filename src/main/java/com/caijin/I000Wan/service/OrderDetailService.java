@@ -8,5 +8,8 @@ import com.caijin.I000Wan.entity.OrderDetail;
 
 public interface OrderDetailService extends CommonService<OrderDetail,String>{
 	List<OrderDetail> findOrderDetailByOrderId(Order orderId);
+	
+	List<OrderDetail> findAllOrderDetails(Integer pageNum, int size, String id);
+	Integer findOrderDetailsSize(String id);
 
 }

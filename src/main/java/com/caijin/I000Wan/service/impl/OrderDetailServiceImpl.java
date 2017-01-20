@@ -28,6 +28,16 @@ public class OrderDetailServiceImpl extends CommonServiceImpl<OrderDetail,String
 	public List<OrderDetail> findOrderDetailByOrderId(Order orderId) {
 			return orderDetailDao.findOrderDetailByOrderId(orderId);
 	}
+
+	@Override
+	public List<OrderDetail> findAllOrderDetails(Integer pageNum, int size, String id) {
+		return orderDetailDao.findAllOrderDetails(pageNum, size, id);
+	}
+
+	@Override
+	public Integer findOrderDetailsSize(String id) {
+		return orderDetailDao.findOrderDetailsSize(id);
+	}
 	
 	
 }

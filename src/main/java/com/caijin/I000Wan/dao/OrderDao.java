@@ -27,4 +27,10 @@ public interface OrderDao extends OrderCustomDao,CommonDao<Order,String>{
 	@Query("select o from Order o where o.orderId = ?1 and o.payStatus = ?2 ")
 	Order findOrder(String orderId,Integer payStatus);
 	
+	@Query(value="select o.* from trade_order o where o.member_id = ?3 limit ?1,?2 ",nativeQuery=true)
+	List<Order> findAllOrders(Integer pageNum, int size, String id);
+	
+	@Query("select count(o) from Order o")
+	int findOrderSize();
+	
 }

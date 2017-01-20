@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.caijin.I000Wan.common.service.impl.CommonServiceImpl;
 import com.caijin.I000Wan.dao.OrderDao;
+import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
+import com.caijin.I000Wan.entity.OrderDetail;
 import com.caijin.I000Wan.service.OrderService;
 
 @Component
@@ -48,5 +50,18 @@ public class OrderServiceImpl extends CommonServiceImpl<Order,String> implements
 	public Order findOrder(String orderId,Integer payStatus){
 		return orderDao.findOrder(orderId,payStatus);
 	}
-	
+
+
+	@Override
+	public List<Order> findAllOrders(Integer pageNum, int size, MemberUser user) {
+		return orderDao.findAllOrders(pageNum, size, user.getId());
+	}
+
+
+	@Override
+	public Integer findOrderSize() {
+		return orderDao.findOrderSize();
+	}
+
+
 }
