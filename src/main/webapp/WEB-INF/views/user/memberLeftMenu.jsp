@@ -46,7 +46,7 @@
 				我的彩票
 			</dt>
 			<dd>
-				<a href="#">投注记录</a><a href="#">追号记录</a>
+				<a href="<%=basePath%>betting_record">投注记录</a><a href="#">追号记录</a>
 			</dd>
 		</dl>
 		<dl class="fn_clear">

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.caijin.I000Wan.common.service.CommonService;
+import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
 
 public interface OrderService extends CommonService<Order,String>{
@@ -22,4 +23,13 @@ public interface OrderService extends CommonService<Order,String>{
 	Order findOrderByOrderId(String orderId);
 	
 	Order findOrder(String orderId,Integer payStatus);
+	
+	/**
+	 * 投注记录
+	 * @param pageNum
+	 * @param size
+	 * @return
+	 */
+	List<Order> findAllOrders(Integer pageNum, int size, MemberUser user);
+	Integer findOrderSize();
 }
