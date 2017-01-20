@@ -26,8 +26,7 @@ public class RoleMenuServiceImpl extends CommonServiceImpl<RoleMenu,String> impl
 
 	@Override
 	public List<RoleMenu> findByRole(Role role) {
-		// TODO Auto-generated method stub
-		return roleMenuDao.findAll();
+		return roleMenuDao.findByRole(role.getId());
 	}
 
 }

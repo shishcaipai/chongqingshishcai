@@ -2,6 +2,8 @@ package com.caijin.I000Wan.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.caijin.I000Wan.common.entity.BaseEntity;
@@ -25,6 +27,8 @@ public class User extends BaseEntity{
 	 * 真实姓名
 	 */
 	private String realName;
+	
+	private Role  role;
 
 	@Column(name = "username",length=50)
 	public String getUsername() {
@@ -51,6 +55,15 @@ public class User extends BaseEntity{
 
 	public void setRealName(String realName) {
 		this.realName = realName;
+	}
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	

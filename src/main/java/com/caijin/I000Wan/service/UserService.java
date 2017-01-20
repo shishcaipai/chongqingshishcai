@@ -11,5 +11,5 @@ public interface UserService extends CommonService<User,String>{
 	User findUserByName(String userName);
 	
 	List<Map> findUserList(String userName,String realName,String startDate,String endDate);
-	
+	 List<User> findAll();
 }

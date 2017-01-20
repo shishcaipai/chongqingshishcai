@@ -25,6 +25,9 @@ public class UserServiceImpl extends CommonServiceImpl<User,String>  implements 
 	public User findUserByName(String userName){
 		return userDao.findUserByName(userName);
 	}
+	public List<User> findAll(){
+		return  userDao.findAll();
+	}
 	
 	public List<Map> findUserList(String userName,String realName,String startDate,String endDate){
 		return userDao.findUserList(userName,realName,startDate,endDate);

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -81,6 +82,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
 		closed="true" buttons="#dlg-buttons">
 		<form id="fm" method="post" novalidate accept-charset="utf-8" onsubmit="document.charset='utf-8'">
+		<div class="fitem">
+		<label>菜单类型:</label> <select id="menu_type" name="menu_type" >
+						<option value="1"  >父菜单</option>
+						<option value="2">子菜单</option>
+				</select>
+		</div>
+			<div id="fu_caidan" name="fu_caidan" class="fitem">
+				<label>父菜单:</label> <select id="menu_first_name" name="menu_first_name">
+					<c:forEach items="${requestScope.menus}" var="menus">
+						<option value="${menus.id}">${menus.menu}</option>
+					</c:forEach>
+				</select>
+			</div>
 			<div class="fitem">
 			<label>菜单名称:</label>
 			<input id="menu" name="menu" class="easyui-textbox" >
@@ -97,6 +111,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
 	</div>
 <script type="text/javascript">
+$("#menu_type").change(function(){
+	alert($("#menu_type").val());
+	if($("#menu_type").val()==1){
+		 $("#fu_caidan").hide();
+	}else{
+		 $("#fu_caidan").show();
+	}
+	});
+
+
 var url;
 function newMenu(){
 	$('#dlg').dialog('open').dialog('setTitle','创建菜单');

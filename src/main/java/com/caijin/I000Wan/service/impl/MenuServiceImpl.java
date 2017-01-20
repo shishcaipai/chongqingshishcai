@@ -28,5 +28,9 @@ public class MenuServiceImpl extends CommonServiceImpl<Menu,String> implements M
 	public List<Menu> findByRoleId(String roleId) {
 		return menuDao.findByRoleId( roleId) ;
 	}
+	@Override
+	public List<Menu> findAllbyType(int type) {
+		return menuDao.findAllbyType(type);
+	}
 
 }
