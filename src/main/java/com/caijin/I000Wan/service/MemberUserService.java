@@ -15,4 +15,6 @@ public interface MemberUserService extends CommonService<MemberUser,String>{
 	List<Map> findMemberList(String userName,String realName,String mobile,String startDate,String endDate);
 	
 	Result getMemberUserAll(PageModel pageModel,String userName,String realName,String mobile,String startDate,String endDate);
+
+	MemberUser findByRegeisterID(String registerID);
 }

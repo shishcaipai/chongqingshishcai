@@ -11,38 +11,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=basePath %>static/css/jqueryui.css" type="text/css" rel="stylesheet" />
 <link href="<%=basePath %>static/css/style.css" type="text/css" rel="stylesheet" />
 <script src="<%=basePath %>static/js/commonUtil.js" type="text/javascript"></script>
+<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+	type="text/css" />
+	<link href="http://www.ib18.cn/res/css/page.css" rel="stylesheet"
+	type="text/css" />
+<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+	type="text/css" />
 <title>1000万不是梦想！</title>
 </head>
 
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
-<jsp:include page="../banner.jsp"></jsp:include>
 <!--main-->
-<div class="main fn_clear user">
-	<div class="wrap">
-        <jsp:include page="memberLeftMenu.jsp"></jsp:include>
-        
-        <div class="userbox">
-            <div class="modelu">
-            	<div class="title"><em>实名认证</em></div>
+<div id="account">
+		<div class="account_left">
+			<jsp:include page="memberLeftMenu.jsp"></jsp:include>
+		</div>
+		<div class="account_right">
+        <div class="p_yd01">
+            	<div class="p_daohang"><em>实名认证</em></div>
             	<input id="userName" type="hidden" value="${sessionScope.memberUser.userName}"/>
             	<input id="realNameHidden" type="hidden" value="${memberUser.realName}"/>
-                <div class="mdbox">
+                <div class="tc_yhzx_k">
                 	<p style="margin-bottom:10px; padding:10px; background:#f6f6f6;">实名认证、核实会员真实姓名和身份证号码、真实姓名绑定支付宝账号<span class="red">如需修改，请联系客服</span></p>
-                	<div class="serbox serbox2" style="padding:30px" id="realNameEdit">
+                	<div class="tc_yhzx_k" style="padding:30px" id="realNameEdit">
                     	<table cellpadding="6" cellspacing="6" class="tb2">
                         	<tr>
-                            	<td align="right">真实姓名：</td>
-                                <td><input id="realName" type="text" class="inp3" size="30" <c:if test="${not empty memberUser.realName}">readonly=\"readonly\"</c:if> value="${memberUser.realName}"/></td>
+                            	<td class="tikuan_a2" align="right">真实姓名：</td>
+                                <td class="tikuan_a3"><input id="realName" type="text" class="inp3" size="30" <c:if test="${not empty memberUser.realName}">readonly=\"readonly\"</c:if> value="${memberUser.realName}"/></td>
                             </tr>
                             <tr>
-                            	<td align="right">身份证号：</td>
-                                <td><input id="identityCard" type="text" class="inp3" size="30" <c:if test="${not empty memberUser.identityCard}">readonly=\"readonly\"</c:if> value="${memberUser.identityCard}"/></td>
+                            	<td class="tikuan_a2" align="right">身份证号：</td>
+                                <td class="tikuan_a3"><input id="identityCard" type="text" class="inp3" size="30" <c:if test="${not empty memberUser.identityCard}">readonly=\"readonly\"</c:if> value="${memberUser.identityCard}"/></td>
                             </tr>
                             <c:if test="${empty memberUser.identityCard}">
 	                            <tr>
-	                            	<td align="right">确认身份证号：</td>
-	                                <td><input id="reIdentityCard" type="text" class="inp3" size="30"  <c:if test="${not empty memberUser.identityCard}">readonly=\"readonly\"</c:if> value="${memberUser.identityCard}"/></td>
+	                            	<td class="tikuan_a2" align="right">确认身份证号：</td>
+	                                <td class="tikuan_a3"><input id="reIdentityCard" type="text" class="inp3" size="30"  <c:if test="${not empty memberUser.identityCard}">readonly=\"readonly\"</c:if> value="${memberUser.identityCard}"/></td>
 	                            </tr>
 	                            <tr>
 	                            	<td align="right"></td>
@@ -54,7 +59,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </table>
                     </div>
                 </div>
-            </div>
         </div>
         
     </div>

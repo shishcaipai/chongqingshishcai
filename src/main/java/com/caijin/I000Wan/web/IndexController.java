@@ -1,8 +1,14 @@
 package com.caijin.I000Wan.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.caijin.I000Wan.entity.BetDate;
-import com.caijin.I000Wan.entity.FootballMatch;
+import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.Period;
-import com.caijin.I000Wan.service.BetDateService;
-import com.caijin.I000Wan.service.FootballMatchService;
+import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *Index Controller
@@ -27,14 +33,12 @@ import com.caijin.I000Wan.service.PeriodService;
 @Controller
 public class IndexController {
 	
-	@Autowired
-	private FootballMatchService footballMatchService;
 	
 	@Autowired
 	private PeriodService periodService;
 	
 	@Autowired
-	private BetDateService betDateService;
+	private  OrderService orderService;
   
 	/**
 	 * 跳转到首页
@@ -42,10 +46,9 @@ public class IndexController {
 	 */
 	@RequestMapping(value="/index")
 	public ModelAndView index(){
-		Period currentPeriod=periodService.findByCurrentPeriod(Period.FOOTBALL_SFC);
-		List<FootballMatch> footBallMatchList=footballMatchService.findPeriodMatchByPeriod(Period.FOOTBALL_SFC, currentPeriod==null?"":currentPeriod.getLotteryPeriod());
-		Map<String, List> model = new HashMap<String, List>();  
-		model.put("sfcMatchList", footBallMatchList);
+		List<Map> map = periodService.findUserTotalAmountList(null);
+		Map<String, List> model = new HashMap<String, List>(); 
+		model.put("map", map);
 		return new ModelAndView("index/index",model);
 	}
 	/**
@@ -54,136 +57,56 @@ public class IndexController {
 	 */
 	@RequestMapping(value="/")
 	public ModelAndView indexs(){
-		Period currentPeriod=periodService.findByCurrentPeriod(Period.FOOTBALL_SFC);
-		List<FootballMatch> footBallMatchList=footballMatchService.findPeriodMatchByPeriod(Period.FOOTBALL_SFC, currentPeriod==null?"":currentPeriod.getLotteryPeriod());
+		List<Map> map = periodService.findUserTotalAmountList(null);
 		Map<String, List> model = new HashMap<String, List>();  
-		model.put("sfcMatchList", footBallMatchList);
+		model.put("map", map);
 		return new ModelAndView("index/index",model);
 	}
 	/**
-	 * 跳转到竞彩足球胜平负页面
 	 * @return
 	 */
-	@RequestMapping(value="/jzspf")
-	public ModelAndView jingZuSpf(){
-		List<BetDate> betDateList = betDateService.findCurrentBetDate();
-		List<FootballMatch> footBallMatchList=footballMatchService.findMatchByBetDateAndType(FootballMatch.FOOTBALL_JCZQ_SFP_CODE);
-		Map<String, List> model = new HashMap<String, List>();  
-		model.put("spfMatchList", footBallMatchList);
-		model.put("betDateList", betDateList);
-		return new ModelAndView("caipiao/jz_spf_rq",model);
+	@RequestMapping(value="/wfjx")
+	public ModelAndView jingZuSpf(HttpServletRequest request){
+		String type=request.getParameter("type");
+		if("cqcss".equals(type)){
+			return new ModelAndView("caipiao/cqcsswfjx");
+		}else{
+		return new ModelAndView("caipiao/wfjx");
+		}
 	}
 	
-	/**
-	 * 跳转到胜负彩
-	 * @return
-	 */
-	@RequestMapping(value="/sfc",produces = {"text/html;charset=UTF-8"})
-	public ModelAndView sfc(){
-		//查找当前期期数信息
-		Period currentPeriod=periodService.findByCurrentPeriod(Period.FOOTBALL_SFC);
-		//查找历史期期数信息
-		List<Period> historyList=periodService.findByTopNhistory(Period.FOOTBALL_SFC, 5);
-		//查找预售期期数信息
-		List<Period> newList=periodService.findByTopNnew(Period.FOOTBALL_SFC, 2);
+	@RequestMapping(value = "/theWinningList")
+	public void theWinningList(HttpServletRequest request,HttpServletResponse response) {
 		
-		//查找当前期比赛信息
-//		List<FootballMatch> footBallMatchList=footballMatchService.findPeriodMatch(Period.FOOTBALL_SFC, currentPeriod==null?"":currentPeriod.getId());
-		
-		//封装ModelAndView
-		Map model = new HashMap();  
-		model.put("currentPeriod", currentPeriod);
-		model.put("historyList", historyList);
-		model.put("newList", newList);
-//		model.put("footBallMatchList", footBallMatchList);
-		return new ModelAndView("caipiao/sfc",model);
+		String date=request.getParameter("date");
+		List<Map> order = periodService.findUserTotalAmountList(date);
+		System.out.println("theWinningList:::"+order.size());
+
+		ObjectMapper mapper = new ObjectMapper(); // 转换器
+
+		// 测试01：对象--json
+		String json = "";
+		try {
+			json = mapper.writeValueAsString(order);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // 将对
+		try {
+			// 设置页面不缓存
+			response.setContentType("application/json");
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = null;
+			out = response.getWriter();
+			out.print(json);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	/**
-	 * 跳转到4场进球
-	 * @return
-	 */
-	@RequestMapping(value="/4cjq")
-	public ModelAndView fourcjq(){
-		//查找当前期期数信息
-		Period currentPeriod=periodService.findByCurrentPeriod(Period.FOOTBALL_FOURJQ);
-		//查找历史期期数信息
-		List<Period> historyList=periodService.findByTopNhistory(Period.FOOTBALL_FOURJQ, 5);
-		//查找预售期期数信息
-		List<Period> newList=periodService.findByTopNnew(Period.FOOTBALL_FOURJQ, 2);
-		
-		//查找当前期比赛信息
-//		List<FootballMatch> footBallMatchList=footballMatchService.findPeriodMatch(Period.FOOTBALL_FOURJQ, currentPeriod==null?"":currentPeriod.getId());
-		
-		//封装ModelAndView
-		Map model = new HashMap();  
-		model.put("currentPeriod", currentPeriod);
-		model.put("historyList", historyList);
-		model.put("newList", newList);
-//		model.put("footBallMatchList", footBallMatchList);
-		return new ModelAndView("caipiao/4cjq",model);
-	}
-	
-	/**
-	 * 跳转到任选9场
-	 * @return
-	 */
-	@RequestMapping(value="/rx9c")
-	public ModelAndView rx9c(){
-		//查找当前期期数信息
-		Period currentPeriod=periodService.findByCurrentPeriod(Period.FOOTBALL_RX9);
-		//查找历史期期数信息
-		List<Period> historyList=periodService.findByTopNhistory(Period.FOOTBALL_RX9, 5);
-		//查找预售期期数信息
-		List<Period> newList=periodService.findByTopNnew(Period.FOOTBALL_RX9, 2);
-		
-		//查找当前期比赛信息
-//		List<FootballMatch> footBallMatchList=footballMatchService.findPeriodMatch(Period.FOOTBALL_RX9, currentPeriod==null?"":currentPeriod.getId());
-		
-		//封装ModelAndView
-		Map model = new HashMap();  
-		model.put("currentPeriod", currentPeriod);
-		model.put("historyList", historyList);
-		model.put("newList", newList);
-//		model.put("footBallMatchList", footBallMatchList);
-		return new ModelAndView("caipiao/rx9",model);
-	}
-	
-	/**
-	 * 六场半全场
-	 * @return
-	 */
-	@RequestMapping(value="/6cbqc")
-	public ModelAndView sixcbqc(){
-		//查找当前期期数信息
-		Period currentPeriod=periodService.findByCurrentPeriod(Period.FOOTBALL_SIXCB);
-		//查找历史期期数信息
-		List<Period> historyList=periodService.findByTopNhistory(Period.FOOTBALL_SIXCB, 5);
-		//查找预售期期数信息
-		List<Period> newList=periodService.findByTopNnew(Period.FOOTBALL_SIXCB, 2);
-		
-		//查找当前期比赛信息
-//		List<FootballMatch> footBallMatchList=footballMatchService.findPeriodMatch(Period.FOOTBALL_SIXCB, currentPeriod==null?"":currentPeriod.getId());
-		
-		//封装ModelAndView
-		Map model = new HashMap();  
-		model.put("currentPeriod", currentPeriod);
-		model.put("historyList", historyList);
-		model.put("newList", newList);
-//		model.put("footBallMatchList", footBallMatchList);
-		return new ModelAndView("caipiao/6cbqc",model);
-	}
-	
-	/**
-	 * 根据彩票类型编码和彩票期数Id查找比赛信息列表
-	 * @param lotteryCode
-	 * @param period
-	 * @return
-	 */
-	@RequestMapping(value = "/{lotteryCode}/{period}",method = RequestMethod.GET)
-	public @ResponseBody List<FootballMatch> getFootballMatch(@PathVariable("lotteryCode") String lotteryCode,@PathVariable("period")String  period){
-		List<FootballMatch> footBallMatchList=footballMatchService.findPeriodMatchByPeriod(lotteryCode,period);
-		return footBallMatchList;
-	}
 	
 }

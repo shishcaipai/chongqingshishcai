@@ -15,6 +15,8 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
+	<link href="http://www.ib18.cn/res/css/index.css" rel="stylesheet"
+	type="text/css" />
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
 <title>时时彩投注确认支付页面</title>
@@ -22,15 +24,14 @@
 
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
-<jsp:include page="../banner.jsp"></jsp:include>
 <!--main-->
-<div class="main fn_clear user">
-<div class="wrap">
+<div class="banner" >
+<div style="margin:0 auto; width:996px; height:100px; border:1px solid #F00">
 <div class="order_page">
 <div class="oreder_title">
 <em>时时彩投注确认支付页面 </em>
 </div>
-<table width="100%" cellpadding="0" cellspacing="0">
+<table cellSpacing=0 cellPadding=0 border="0" border=0 class="page_tzjl">
 <tr>
 <td class="td1">投注号码</td>
 <td> <div class="tdback">

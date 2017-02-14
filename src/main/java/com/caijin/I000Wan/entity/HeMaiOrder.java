@@ -18,8 +18,8 @@ public class HeMaiOrder extends BaseEntity{
 	// 购买金额
 	private Float floatManay;
      //是否生效
-	private boolean isEffective;
-
+	private int effective=0;
+	private String orderNo;
 	private HeMaiOrderDetail orderDetail;
 	@Column(length = 10)
 	public Integer getSubGuaranteeSum() {
@@ -29,6 +29,15 @@ public class HeMaiOrder extends BaseEntity{
 	public void setSubGuaranteeSum(Integer subGuaranteeSum) {
 		this.subGuaranteeSum = subGuaranteeSum;
 	}
+	@Column(name = "order_no", length = 32)
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "member_id")
 	public MemberUser getMemberUser() {
@@ -47,12 +56,12 @@ public class HeMaiOrder extends BaseEntity{
 		this.floatManay = floatManay;
 	}
 	@Column(length = 10)
-	public boolean isEffective() {
-		return isEffective;
+	public int getEffective() {
+		return effective;
 	}
 
-	public void setEffective(boolean isEffective) {
-		this.isEffective = isEffective;
+	public void setEffective(int isEffective) {
+		this.effective = isEffective;
 	}
 	@ManyToOne
 	@JoinColumn(name = "hemai_id")

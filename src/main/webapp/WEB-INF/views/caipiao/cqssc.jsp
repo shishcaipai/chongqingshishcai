@@ -4,6 +4,7 @@
 <%
 	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,14 +15,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description" content="时时乐" />
 <meta name="keywords" content="时时乐" />
 
-<link href="<%=basePath%>static/css/commonEX.css" type="text/css"
-	rel="stylesheet">
+<%-- <link href="<%=basePath%>static/css/commonEX.css" type="text/css"
+	rel="stylesheet"> --%>
+	<link href="http://www.ib18.cn/res/css/commonEX.css" type="text/css" rel="stylesheet">
+	
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
-<link href="<%=basePath%>static/css/frequency.css" type="text/css"
-	rel="stylesheet">
+<%-- <link href="<%=basePath%>static/css/frequency.css" type="text/css"
+	rel="stylesheet"> --%>
+	<link href="http://www.ib18.cn/res/css/frequency.css" type="text/css" rel="stylesheet">
 <script src="<%=basePath%>static/js/Jquery_marquee_frequency.js"
 	type="text/javascript"></script>
+	
 <script src="<%=basePath%>static/js/zhs.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=basePath%>static/js/Method.js" type="text/javascript"  charset="utf-8"></script>
 <script src="<%=basePath%>static/js/Betting.js" type="text/javascript" charset="utf-8"></script>
@@ -38,8 +43,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<jsp:include page="../banner.jsp"></jsp:include>
-
 	<div id="test_con" style="display: none">
 		<div id="tab" class="tlh_denglu">
 			<div id="Div1" class="tlh_denglu">
@@ -58,13 +61,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
-
-	<!--头部开始-->
-
-
-
-
-	<!--头部结束-->
 
 	<div class="sitebar">
 
@@ -87,8 +83,6 @@ $(document).ready(function() {
 		 }
 	 }
 	 initPage();
-	
-	 
 });
 
   
@@ -118,12 +112,7 @@ $(document).ready(function() {
 				initCurrentPhase(data);
 				// 可选期号
 				initZhPhases(data);
-				//$('#tbshowtozhuexpect tr:eq(0) td:eq(0) input[type=checkbox]').trigger('click');
-				//$('#tbshowtozhuexpect tr:eq(1)').remove();
-			/* 	if ($('#tbshowtozhuexpect tr:eq(0) td:eq(0) input[type=checkbox]').attr('checked') != 'checked') {
-					$('#tbshowtozhuexpect tr:eq(0) td:eq(0) input[type=checkbox]').trigger('click');	
-				} */
-			SetTozhuExpect();
+			    SetTozhuExpect();
 			},
 			error : function(data) {
 			alert("服务器异常" + data);
@@ -135,11 +124,6 @@ $(document).ready(function() {
 	
 	function initZhPhases(data) {
 		var currentPhase = data.current.expect;
-	
-		//$('#tbshowtozhuexpect tr:eq(0) td:eq(0)').html(currentPhase + "期");
-		// $('#tbshowtozhuexpect tr:eq(0) td:eq(0) input[type=checkbox]').attr('checked', false);
-		
-		//$('#tbshowtozhuexpect tr:eq(0) td:eq(0) input[type=checkbox]').trigger('click');
 		$('#tbshowtozhuexpect tr').remove();
 	  for(var obj in data.left){
 		  if(obj==0){
@@ -1067,7 +1051,7 @@ function SetRemainTime() {
 											</b>
 											 -->
 												<input type="button" id="button_add" name="button_add"
-													class="button_add pointer" value="加入投注栏"
+													class="button_add pointer" 
 													style="display: inline-block; margin-left: 10px;" />
 											</div>
 										</td>
@@ -1130,9 +1114,9 @@ function SetRemainTime() {
 															currentPhase="currentPhase">20161213061</span>
 													</p>
 												</div> <input type="button" id="btn_SubmitZ" name="btn_SubmitZ"
-												value="立即投注">&nbsp; <input target="_blank"
+												>&nbsp; <input target="_blank"
 												type="button" id="btn_SubmitHM" name="btn_SubmitHM"
-												value="发起合买"><br>
+												><br>
 											<!--合买-->
 											</td>
 										</tr>
@@ -1553,7 +1537,6 @@ function SetRemainTime() {
 		<script type="text/javascript">
 $(document).ready(function() {
 	var lotteryTypeId = "1";
-	//drawNumber();
 	queryHistoryDrawNumbers();
 	zjxb();
 	function queryHistoryDrawNumbers() {
@@ -1566,20 +1549,20 @@ $(document).ready(function() {
 			},
 			success : function(data2) {
 				data2 = eval(data2 );
-				var firstPhase = data2.chongqingReturn[0].expect;
+				var firstPhase = data2.chongqingReturn[0].lotteryPeriod;
 				var lastPhase = $('#lastPhase').text();
 				if (firstPhase == lastPhase) {
 					// don't need to update
 				} else {
 					
-					$('#lastPhase').text(data2.chongqingReturn[0].expect);					
+					$('#lastPhase').text(data2.chongqingReturn[0].periodNumber);					
 					$('#qssj').text(data2.chongqingReturn[0].opentime);
-					$('#winnumber').text(data2.chongqingReturn[0].opencode);
+					$('#winnumber').text(data2.chongqingReturn[0].lotteryPeriod);
 					drawNumber();
 					
-					$('#CodeListTable > tbody > tr:eq(0)').find('.history_phase').text(data2.chongqingReturn[0].expect);
+					$('#CodeListTable > tbody > tr:eq(0)').find('.history_phase').text(data2.chongqingReturn[0].periodNumber);
 					$('#CodeListTable > tbody > tr:eq(0)').find('.history_date').text(data2.chongqingReturn[0].opentime.substring(10,16));
-					$('#CodeListTable > tbody > tr:eq(0)').find('.history_number').text(data2.chongqingReturn[0].opencode);
+					$('#CodeListTable > tbody > tr:eq(0)').find('.history_number').text(data2.chongqingReturn[0].lotteryPeriod);
 					var d = new Date(data2.chongqingReturn[0].opentime);
 					if (d && d.getHours()) {
 						$('#CodeListTable > tbody > tr:eq(0)').find('.history_date').text(d.getHours() + ":" + d.getMinutes());
@@ -1588,9 +1571,9 @@ $(document).ready(function() {
 					$('#CodeListTable > tbody > tr:gt(0)').each(function(i){
 						var tr = $(this);
 						var p = data2.chongqingReturn[i + 1];
-						tr.find('.history_phase').text(p.expect);
+						tr.find('.history_phase').text(p.periodNumber);
 						tr.find('.history_date').text(p.opentime.substring(10,16));
-						tr.find('.history_number').text(p.opencode);
+						tr.find('.history_number').text(p.lotteryPeriod);
 					});
 					
 				}
@@ -1621,7 +1604,7 @@ function drawNumber() {
 //中奖喜报
 function zjxb() {
 	$.ajax({
-		url : "待定",
+		url : "<%=basePath%>cqssc/winningrecord",
 		dataType : "json",
 		data : {
 			t : Math.random()
@@ -1632,7 +1615,7 @@ function zjxb() {
 				$("#newWinerMq>ul>li").remove();
 				for ( var index in data2) {
 					var vo = data2[index];
-					$("#newWinerMq>ul").append("<li><span>恭喜</span><span style='overflow: hidden;'>"+vo.username+"</span><span>喜中 <b>"+vo.prize+"</b> 元</span></li>");
+					$("#newWinerMq>ul").append("<li><span>恭喜</span><span style='overflow: hidden;'>"+vo.user+"</span><span>喜中 <b>"+vo.money+"</b> 元</span></li>");
 				}
 			
 			}
@@ -1799,15 +1782,6 @@ $(function() {
 			type="hidden" id="ZjCut" name="ZjCut" value="">
 	</form>
 
-
-
-
-
-
-
-
-
-
 	</div>
 	</div>
 
@@ -1834,9 +1808,6 @@ $(function() {
 				html = val;
 			}
 			$(this).html(html);
-			// tr_yl_5
-			// alert($(this).html());
-			// alert('parentId: ' + $(this).parent('tr').attr('id'));
 			
 		});
 			

@@ -1,5 +1,5 @@
 package com.caijin.I000Wan.util;
 
 public class StaticDefine {
-	public static final int PAGE_SIZE = 2;
+	public static final int PAGE_SIZE = 20;
 }

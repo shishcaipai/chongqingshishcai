@@ -16,4 +16,10 @@ public interface HeMaiOrderDao extends CommonDao<HeMaiOrder, String> {
 
 	@Query("select o from HeMaiOrder o")
 	List<HeMaiOrder> findAllHemaiOrders();
+	@Query(value="select sum(u.subGuaranteeSum) from HeMaiOrder u where u.orderDetail=?1 ")
+	Integer getHemaiOrderFenNum(HeMaiOrderDetail order);
+	@Query(value = "select o.* from hemai_order o  where  o.member_id = ?3 limit ?1,?2 ", nativeQuery = true)
+	List<HeMaiOrder> findAllOrderZuiHao(int i, int pageSize, String id);
+	@Query(value = "select count(o.id) from hemai_order o  where  o.member_id = ?1 ", nativeQuery = true)
+	Integer findOrderZuiHaoSize(String id);
 }

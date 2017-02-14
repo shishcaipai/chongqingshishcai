@@ -142,7 +142,7 @@ body {font-family:'微软雅黑','microsoft yahei','宋体',Arial; color:#555; f
 .banner .prize_now .list em span.name {font-size:16px; font-weight:bold;}
 .banner .prize_now .list em font {color:#f39800;}
 .banner .prize_now .list cite {float:left; padding-top:6px;}
-.banner .prize_now .list cite a {background:url(../images/btn.png) repeat-x 0 0; border:1px solid #50b4e6; height:22px; display:block; float:left; margin-right:10px; line-height:22px; padding:0 5px; color:#1f94ce;}
+.banner .prize_now .list cite a {background:url(../images/btn.png) repeat-x 0 0; border:1px solid #CD2626; height:22px; display:block; float:left; margin-right:10px; line-height:22px; padding:0 5px; color:#1f94ce;}
 .banner .prize_now .list cite a:hover {text-decoration:none;}
 .banner .prize_now .list cite a.tou {background:#8cc14c; color:#fff; border-color:#8cc14c;}
 .banner .prize_now .list cite a.tou:hover {background:#7db23d;}
@@ -153,6 +153,7 @@ body {font-family:'微软雅黑','microsoft yahei','宋体',Arial; color:#555; f
 
 .main {padding-top:30px;}
 .model_index {margin-bottom:30px;}
+.model_index {margin-left:130px;}
 .model_index .title {height:26px; border-bottom:2px solid #3b4043;}
 .model_index .title em {float:left; background-image:url(../images/icos.png); line-height:26px; display:block; background-repeat:no-repeat; height:26px; padding-left:26px; font-size:18px; width:210px;}
 .model_index .title em.c1 {background-position:1px -80px;}

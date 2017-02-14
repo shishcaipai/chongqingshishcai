@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%-- <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,11 +9,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<a href="<%=basePath%>cqssc/cqsscview">重庆时时彩</a>
     	<a href="<%=basePath%>4cjq">双色球</a>
         <a href="<%=basePath%>hemai/hemaiview">合买中心</a>
-        <a href="<%=basePath%>jzjqs">进球数</a>
-        <a href="<%=basePath%>jzbqc">半全场</a>
-        <a href="<%=basePath%>4cjq">四场进球</a>
+      <!--   <a href="<%=basePath%>jzjqs">进球数</a>--> 
+     <!--    <a href="<%=basePath%>jzbqc">半全场</a>--> 
+     <!--    <a href="<%=basePath%>4cjq">四场进球</a>--> 
         <a href="<%=basePath %>user/memberCenter">个人中心</a>
-        <a href="#" class="last">充值</a>
-        <em><a href="#">手机版</a></em>
+        <a href="<%=basePath %>recharge" class="last">充值</a>
     </div>
-</div>
+</div> --%>

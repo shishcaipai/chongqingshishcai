@@ -20,7 +20,6 @@ import com.caijin.I000Wan.entity.User;
 import com.caijin.I000Wan.service.MenuService;
 import com.caijin.I000Wan.service.RoleMenuService;
 import com.caijin.I000Wan.service.RoleService;
-import com.caijin.I000Wan.service.RoleUserService;
 import com.caijin.I000Wan.service.UserService;
 import com.caijin.I000Wan.util.Md5Util;
 
@@ -89,20 +88,16 @@ public class IndexAction {
 		if(list!=null){
 		Menu menu;
 		for (RoleMenu rm : list) {
-			System.out.println("--------菜单名::"+rm.getMenu().getMenu());
 			if (!map.containsKey(rm.getMenu().getPid())) {
 				menu = menuService.find(rm.getMenu().getPid());
 				menu.add(rm.getMenu());
 				map.put(menu.getId(), menu);
 				menulist.add(menu);
-				System.out.println("----存在--ss--菜单名::"+menu.getMenu());
 			}else{
-				System.out.println("----存在----菜单名::"+rm.getMenu().getMenu());
 				map.get(rm.getMenu().getPid()).add(rm.getMenu());
 			}
 		}
 		}
-		System.out.println("--------当前菜单长底::"+menulist.size());
 		model.addAttribute("menulist", menulist);
 		model.addAttribute("username", user.getUsername());
 		return "boss/index";

@@ -35,26 +35,26 @@ public class Order extends BaseEntity {
 	public final static int ORDER_SUCESS = 1;
 	public final static int WAIT_ORDER = 0;
 	public final static int ORDER_FAILUE = 2;
-	
-	public final static int PAY_STATUS_NO=0;//未支付
-	
-	public final static int PAY_STATUS_SUCESS=1;//支付成功
-	
-	public final static int PAY_STATUS_FAILUE=2;//支付失败
-	
-	public final static int PAY_STATUS_OFFTIME=3;//支付超时
+
+	public final static int PAY_STATUS_NO = 0;// 未支付
+
+	public final static int PAY_STATUS_SUCESS = 1;// 支付成功
+
+	public final static int PAY_STATUS_FAILUE = 2;// 支付失败
+
+	public final static int PAY_STATUS_OFFTIME = 3;// 支付超时
 
 	private String name;
-	
-	private String orderNo;//orderNo 
 
-	private Integer orderType;// 订单类型 1为订单充值 2为代购订单 3为合买类型订单 
+	private String orderNo;// orderNo
+
+	private Integer orderType;// 订单类型 1为订单充值 2为代购订单 3为合买类型订单
 
 	private Integer orderStatus;// 订单状态类型 1为下订单成功 2为下订单失败
 
 	private Integer payStatus;// 支付状态类型 0为未支付 1为支付成功 2为支付失败 3为支付超时
-	
-	private String orderId; //订单ID
+
+	private String orderId; // 订单ID
 
 	private Date orderTime;// 下订单时间
 
@@ -63,12 +63,17 @@ public class Order extends BaseEntity {
 	private List<Period> period;// 彩票期数
 
 	private Integer totalMoney;// 总金额
+
+	private Integer lotteryCount; // 彩票注数
+
+	private String lotteryType;// 彩票类型
+
+	private Integer isCut;
+
+	public float reTotalMoney;
 	
-	private Integer lotteryCount; //彩票注数
-	
-	private String lotteryType;//彩票类型
-	
-	private Integer  isCut;
+	 public int wprizeStatus=0; //返奖是否完成状态为0，1
+
 	@Column(length = 10)
 	public Integer getIsCut() {
 		return isCut;
@@ -86,8 +91,8 @@ public class Order extends BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-    @Column(name="order_no",length=32)
+
+	@Column(name = "order_no", length = 32)
 	public String getOrderNo() {
 		return orderNo;
 	}
@@ -123,7 +128,7 @@ public class Order extends BaseEntity {
 		this.payStatus = payStatus;
 	}
 
-	@Column(name="order_id",length=36)
+	@Column(name = "order_id", length = 36)
 	public String getOrderId() {
 		return orderId;
 	}
@@ -151,6 +156,14 @@ public class Order extends BaseEntity {
 	public void setMemberUser(MemberUser memberUser) {
 		this.memberUser = memberUser;
 	}
+	@Transient
+	public float getReTotalMoney() {
+		return reTotalMoney;
+	}
+
+	public void setReTotalMoney(float reTotalMoney) {
+		this.reTotalMoney = reTotalMoney;
+	}
 
 	@Transient
 	public List<Period> getPeriod() {
@@ -170,7 +183,7 @@ public class Order extends BaseEntity {
 		this.totalMoney = totalMoney;
 	}
 
-	@Column(name="lottery_count")
+	@Column(name = "lottery_count")
 	public Integer getLotteryCount() {
 		return lotteryCount;
 	}
@@ -179,7 +192,7 @@ public class Order extends BaseEntity {
 		this.lotteryCount = lotteryCount;
 	}
 
-	@Column(name="lottery_type")
+	@Column(name = "lottery_type")
 	public String getLotteryType() {
 		return lotteryType;
 	}
@@ -187,7 +200,13 @@ public class Order extends BaseEntity {
 	public void setLotteryType(String lotteryType) {
 		this.lotteryType = lotteryType;
 	}
-	
-	
+	@Column(length = 10)
+	public int getWprizeStatus() {
+		return wprizeStatus;
+	}
+
+	public void setWprizeStatus(int wprizeStatus) {
+		this.wprizeStatus = wprizeStatus;
+	}
 
 }

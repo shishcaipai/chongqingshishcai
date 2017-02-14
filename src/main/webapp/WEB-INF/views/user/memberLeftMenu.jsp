@@ -7,16 +7,107 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<!--左部导航-->
+<div class="account_left">
 
-<div class="user_menu">
+	<div class="user_left">
+		<div class="user_hot">
+			<b style="float: left; margin-top: 5px"><img
+				src="<%=basePath%>static/images/sc_38.jpg" /></b>我的账户
+		</div>
+		<div class="user_scond">
+			<div class="user_tub">
+				<b style="float: left; margin-right: 15px"><img
+					src="<%=basePath%>static/images/sc_40.jpg" /></b><span
+					onclick="javascript:location='<%=basePath%>user/memberCenter'">账户全览</span>
+			</div>
+			<div class="user_tub">
+				<b style="float: left; margin-right: 15px"><img
+					src="<%=basePath%>static/images/sc_41.jpg" /></b><span
+					onclick="javascript:location='<%=basePath%>recharge'">在线充值</span>
+			</div>
+			<div class="user_tub">
+				<b style="float: left; margin-right: 15px"><img
+					src="<%=basePath%>static/images/sc_42.jpg" /></b><span
+					onclick="javascript:location='<%=basePath%>money/apply'">用户提款</span>
+			</div>
+
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>user/personInfo'">账户资料</span>
+			</div>
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>user/resetPasswordInfo'">用户密码</span>
+			</div>
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>orderList'">中奖方案</span>
+			</div>
+			<c:choose>
+				<c:when
+					test="${sessionScope.memberUser != null&&sessionScope.memberUser.type==1}">
+					<div class="user_tub">
+						<span style="margin-left: 40px;"
+							onclick="javascript:location='<%=basePath%>dailimenu'">代理中心</span>
+					</div>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>betting_record'">投注记录</span>
+			</div>
+			<%-- <div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>zuihaoRecord'">追号记录</span>
+			</div> --%>
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>hemai_record'">合买记录</span>
+			</div>
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>myrecharge/list'">充值记录</span>
+			</div>
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>money/applyrecord/list'">提现记录</span>
+			</div>
+			<!-- <div class="user_tub">
+				<span style="margin-left: 40px;" onclick="">提款密码</span>
+			</div> -->
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>user/bankInfo'">绑定支付宝</span>
+			</div>
+			<%-- <c:choose>
+				<c:when
+					test="${sessionScope.memberUser != null&&sessionScope.memberUser.type==1}">
+					<div class="user_tub">
+						<span style="margin-left: 40px;"
+							onclick="javascript:location='<%=basePath%>user/bankInfo'">我的返点</span>
+					</div>
+					<div class="user_tub">
+						<span style="margin-left: 40px;"
+							onclick="javascript:location='<%=basePath%>user/bankInfo'">盈收统计</span>
+					</div>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose> --%>
+
+		</div>
+	</div>
+
+</div>
+<%-- <div class="user_menu">
 	<div class="baseinfo">
 		<dl class="info fn_clear">
-			<dt>
-				<img src="<%=basePath%>static/images/u1.jpg" />
-			</dt>
 			<dd>
 				<h4>
-					${sessionScope.memberUser.userName}
+					当前用户：${sessionScope.memberUser.userName}
 				</h4>
 				<p class="fn_clear">
 					<c:choose>
@@ -74,4 +165,4 @@
 			</dd>
 		</dl>
 	</div>
-</div>
+</div> --%>

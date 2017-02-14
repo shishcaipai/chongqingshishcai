@@ -23,5 +23,7 @@ public interface OrderDetailDao extends CommonDao<OrderDetail,String>{
 	
 	@Query(value="select count(*) from order_detail o inner join trade_order t on o.order_id = t.id where t.member_id = ?1",nativeQuery=true)
 	int findOrderDetailsSize(String id);
+	@Query(value="select o.* from order_detail o  inner join lottery_period t on o.order_no = t.orderid where t.lottery_period = ?1 and t.status=1  ",nativeQuery=true)
+	List<OrderDetail> findbyQIhao(String expect);
 
 }

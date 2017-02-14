@@ -12,5 +12,7 @@ public interface MemberUserDao extends MemberUserCustomDao,CommonDao<MemberUser,
 	
 	@Query(value="select u.* from member_user u where u.member_user_id=?1 ",nativeQuery=true)
 	MemberUser findUserById(Integer id);
+	@Query(value="select u.* from member_user u where u.pred_id=?1 ",nativeQuery=true)
+	MemberUser findByRegeisterID(String registerID);
 
 }

@@ -8,4 +8,6 @@ public interface OrderCustomDao {
 	List<Map> findOrderListByCondition(String userName,String realName,String telephone,
 			String orderType,String orderStatus,String payStatus,
 			String startDate,String endDate);
+	
+	List<Map> findUserTotalAmountList(String startDate);
 }

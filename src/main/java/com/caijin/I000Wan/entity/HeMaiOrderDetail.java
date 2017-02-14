@@ -13,6 +13,9 @@ import com.caijin.I000Wan.common.entity.BaseEntity;
 @Table(name = "hemai_order_detail")
 public class HeMaiOrderDetail extends BaseEntity {
 	private static final long serialVersionUID = 7485168642747519619L;
+	public static final int TYPE_EFFECTIVE_UN = 0;
+	public static final int TYPE_EFFECTIVE_SUCCESS = 1;
+	public static final int TYPE_EFFECTIVE_FAIL = 2;
 	private Order order;
 
 	private String hemaiId;
@@ -20,12 +23,12 @@ public class HeMaiOrderDetail extends BaseEntity {
 	private Integer fensum;
 	// 保底份数
 	private Integer minimumGuaranteeSum;
-	// 发起人购份数
+	// 发起认购份数
 	private Integer subGuaranteeSum;
 	// 发起人
 	private MemberUser memberUser;
 	// 是否生效
-	private boolean isEffective;
+	private int effective;
 
 	// 发起人购买金额
 	private Float floatManay;
@@ -81,11 +84,11 @@ public class HeMaiOrderDetail extends BaseEntity {
 		this.memberUser = memberUser;
 	}
 	@Column(length = 10)
-	public boolean isEffective() {
-		return isEffective;
+	public int getEffective() {
+		return effective;
 	}
-	public void setEffective(boolean isEffective) {
-		this.isEffective = isEffective;
+	public void setEffective(int isEffective) {
+		this.effective = isEffective;
 	}
 	@Column(length = 10)
 	public int getType() {

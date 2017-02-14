@@ -27,13 +27,6 @@ public class Period {
 
 	public final static Integer STATUS_AFTER = 2;// 预售期
 
-	public final static String FOOTBALL_SFC = "zc_sfc";// 足彩胜负彩
-
-	public final static String FOOTBALL_SIXCB = "zc_zc6";// 足彩六场半全场
-
-	public final static String FOOTBALL_FOURJQ = "zc_jq4";// 足彩四场进球
-
-	public final static String FOOTBALL_RX9 = "zc_rx9";// 任选九场
 	public final static String SHISHI_CAI_CHONGQING = "cqssc";
 
 	private Integer id;
@@ -43,15 +36,36 @@ public class Period {
 	private String lotteryPeriod;// 彩票期数
 
 	private Integer status;// 期数状态 如当前期、以往期、预售期
-	private String orderId; //订单号
-	
-	private Integer beisu; //倍数
+	private Integer winning=0;// 开奖状态 0,1,2
+	private String orderId; // 订单号
+
+	private Integer beisu; // 倍数
+	private  Integer money=0;//中奖金额
+
+
 	@Column(name = "beisu", length = 20)
 	public Integer getBeisu() {
 		return beisu;
 	}
+
 	public void setBeisu(Integer beisu) {
 		this.beisu = beisu;
+	}
+
+	public Integer getWinning() {
+		return winning;
+	}
+
+	public void setWinning(Integer winning) {
+		this.winning = winning;
+	}
+
+	public Integer getMoney() {
+		return money;
+	}
+
+	public void setMoney(Integer money) {
+		this.money = money;
 	}
 
 	/**
@@ -89,11 +103,12 @@ public class Period {
 	public String getLotteryPeriod() {
 		return lotteryPeriod;
 	}
+
 	@Column(name = "orderid", length = 64)
 	public String getOrderId() {
 		return orderId;
 	}
-	
+
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
@@ -136,5 +151,6 @@ public class Period {
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
+
 
 }

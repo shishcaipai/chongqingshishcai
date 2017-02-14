@@ -6,4 +6,5 @@ import java.util.Map;
 public interface SystemUserDao {
 
 	List<Map> findUserList(String username,String realName,String startDate,String endDate);
+	
 }

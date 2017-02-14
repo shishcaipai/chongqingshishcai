@@ -43,5 +43,10 @@ public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> 
 		result.setTotal(total);
 		return result;
 	}
+
+	@Override
+	public MemberUser findByRegeisterID(String registerID) {
+		return memberUserDao.findByRegeisterID(registerID);
+	}
 	
 }

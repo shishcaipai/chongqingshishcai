@@ -38,6 +38,11 @@ public class OrderDetailServiceImpl extends CommonServiceImpl<OrderDetail,String
 	public Integer findOrderDetailsSize(String id) {
 		return orderDetailDao.findOrderDetailsSize(id);
 	}
+
+	@Override
+	public List<OrderDetail> findbyQIhao(String expect) {
+		return orderDetailDao.findbyQIhao(expect);
+	}
 	
 	
 }

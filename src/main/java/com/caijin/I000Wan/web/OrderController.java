@@ -1,7 +1,5 @@
 package com.caijin.I000Wan.web;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,10 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,26 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.caijin.I000Wan.dto.JinZuChuanConfirmDTO;
-import com.caijin.I000Wan.dto.JqsConfirmDTO;
-import com.caijin.I000Wan.dto.LotteryConfirmInfoDTO;
-import com.caijin.I000Wan.entity.FootballMatch;
-import com.caijin.I000Wan.entity.HeMaiOrder;
-import com.caijin.I000Wan.entity.HeMaiOrderDetail;
 import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.OrderDetail;
 import com.caijin.I000Wan.entity.Period;
-import com.caijin.I000Wan.service.FootballMatchService;
 import com.caijin.I000Wan.service.MemberUserService;
 import com.caijin.I000Wan.service.OrderDetailService;
 import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
 import com.caijin.I000Wan.util.DateUtils;
 import com.caijin.I000Wan.util.GenerateOrderNoUtil;
-import com.caijin.I000Wan.util.StaticDefine;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 订单控制层
@@ -60,8 +46,6 @@ public class OrderController {
 	@Autowired
 	private PeriodService periodService;
 
-	@Autowired
-	private FootballMatchService footballMatchService;
 
 	@Autowired
 	private MemberUserService memberUserService;
@@ -78,29 +62,26 @@ public class OrderController {
 		if (memberUser == null) {
 			return "redirect:/user/login";
 		}
-		return "order/recharge";
+		return "user/recharge";
 	}
 
 	/**
-	 * 跳转到支付宝页面
+	 * 跳转到支付页面
 	 * 
 	 * @return
 	 */
 	@RequestMapping("/sscorder/alipay")
-	public String toAlipay(HttpServletRequest request) {
+	public String toAlipay(HttpServletRequest request,Model model) {
 		String tradeNo = request.getParameter("orderId");
 		String subject = request.getParameter("subject");
 		String totalMoney = request.getParameter("totalMoney");
-		System.out.println("---tradeNo--"+tradeNo+"---totalMoney--"+totalMoney);
 
-		String seller_email = "2088511221216065";// 卖家支付宝账号
 		MemberUser memberUser = (MemberUser) request.getSession().getAttribute(
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
 		if (memberUser == null) {
-
+			model.addAttribute("msg","用户超时");
 			return "redirect:/user/login";
 		}
-		System.out.println("---memberUser.getTotalScore()--"+memberUser.getTotalScore()+"--- memberUser.getAvailableScore()--"+ memberUser.getAvailableScore());
 		if ( memberUser.getAvailableScore() > Integer
 				.valueOf(totalMoney)) {
 			memberUser.setAvailableScore(memberUser.getAvailableScore()
@@ -108,39 +89,24 @@ public class OrderController {
 			
 			Order order = orderService.findOrderByOrderId(tradeNo);
 			if (order == null) {
+				model.addAttribute("msg","用户超时");
 				return "redirect:/user/login";
 			}
 			order.setPayStatus(Order.PAY_STATUS_SUCESS);
+			order.setOrderStatus(Order.ORDER_SUCESS);
 			memberUserService.update(memberUser);
 			orderService.update(order);
+			model.addAttribute("code",1);
+			model.addAttribute("msg","支付成功");
 			return "order/alipaysuccess";
 		} else {
-			return "order/alipay";
+			model.addAttribute("code",2);
+			model.addAttribute("msg","用户余额不足,请充值");
+			return "order/alipaysuccess";
 		}
 
 	}
 
-	/**
-	 * 支付宝服务器异步通知页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/alipay/notify")
-	public String alipayNotify() {
-
-		return "order/notify_url";
-	}
-
-	/**
-	 * 支付宝页面跳转同步通知页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/alipay/return")
-	public String alipayReturn() {
-
-		return "order/return_url";
-	}
 
 	/**
 	 * 充值
@@ -276,7 +242,7 @@ public class OrderController {
 							.getLeftChongQingShiShicai(DateUtils
 									.getCurrentChongQingShiShicai()));
 					model.put("sucess", false);
-					model.put("code", 2);
+					model.put("code", 4);
 					System.out.println("投注失败：：："
 							+ DateUtils.getCurrentChongQingShiShicai());
 					model.put("msg", "已过下注时间!");
@@ -329,7 +295,8 @@ public class OrderController {
 					order.setCreateDate(new Date());
 					order.setMemberUser(memberUser);
 					order.setName(name);
-					order.setOrderStatus(Order.HEMAI_BUY_ORDER);
+					order.setLotteryType(Period.SHISHI_CAI_CHONGQING);
+					order.setOrderStatus(Order.WAIT_ORDER);
 					order.setOrderTime(new Date());
 					order.setOrderType(Order.PROXY_BUY_ORDER);
 					order.setPayStatus(Order.PAY_STATUS_NO);
@@ -437,274 +404,7 @@ public class OrderController {
 		return "order/jczqOrderConfirm";
 	}
 
-	/**
-	 * 跳转到竞彩足球进球数订单确认页面
-	 * 
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/order/jczq/jqs/orderconfirm")
-	public String toJczqJqsOrderConfirm(HttpServletRequest request, Model model) {
-		String totalMoneyStr = (String) request.getParameter("totalMoney");
-		String lotteryCountStr = (String) request.getParameter("lotteryCount");// 倍数
-		String lotteryInfoListStr = (String) request
-				.getParameter("lotteryInfoList");
 
-		String[] selectedLotteryInfoArray = null;
-
-		List<JqsConfirmDTO> jqsConfirmList = new ArrayList<JqsConfirmDTO>();
-
-		if (lotteryInfoListStr != null && !"".equals(lotteryInfoListStr)) {
-			lotteryInfoListStr = lotteryInfoListStr.substring(0,
-					lotteryInfoListStr.length() - 1);
-			selectedLotteryInfoArray = lotteryInfoListStr.split(";");
-			if (selectedLotteryInfoArray != null
-					&& selectedLotteryInfoArray.length > 0) {
-				String[] lotteryInfoArray = null;
-				for (int i = 0; i < selectedLotteryInfoArray.length; i++) {
-
-					JqsConfirmDTO jqsConfirmDTO = new JqsConfirmDTO();
-					lotteryInfoArray = selectedLotteryInfoArray[i].split("_");
-					jqsConfirmDTO.setLotteryNo(lotteryInfoArray[0]);
-					jqsConfirmDTO.setLotteryDateStr(lotteryInfoArray[3]);
-					jqsConfirmDTO.setPeilv(lotteryInfoArray[2]);
-					jqsConfirmDTO.setGameNumber(lotteryInfoArray[4]);
-					String footballMatchId = lotteryInfoArray[1];
-					FootballMatch footBallMatch = footballMatchService
-							.findFootballMatchById(Integer
-									.parseInt(footballMatchId));
-					;
-					jqsConfirmDTO.setAwayTeam(footBallMatch == null ? ""
-							: footBallMatch.getAwaysxName());
-					jqsConfirmDTO.setHomeTeam(footBallMatch == null ? ""
-							: footBallMatch.getHomesxName());
-
-					jqsConfirmList.add(jqsConfirmDTO);
-				}
-
-			}
-		}
-
-		model.addAttribute("totalMoneyStr", totalMoneyStr);
-		model.addAttribute("lotteryCountStr", lotteryCountStr);
-		model.addAttribute("lotteryInfoListStr", lotteryInfoListStr);
-		model.addAttribute("jqsConfirmList", jqsConfirmList);
-
-		return "order/jczqJqsOrderConfirm";
-	}
-
-	/**
-	 * 跳转到竞彩足球半全场订单确认页面
-	 * 
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/order/jczq/bqc/orderconfirm")
-	public String toJczqbqcOrderConfirm(HttpServletRequest request, Model model) {
-		String totalMoneyStr = (String) request.getParameter("totalMoney");
-		String lotteryCountStr = (String) request.getParameter("lotteryCount");// 倍数
-		String lotteryInfoListStr = (String) request
-				.getParameter("lotteryInfoList");
-		String chuanArrayStr = (String) request.getParameter("chuanArray");
-
-		String[] selectedLotteryInfoArray = null;
-
-		List<JqsConfirmDTO> jqsConfirmList = new ArrayList<JqsConfirmDTO>();
-
-		if (!StringUtils.isBlank(lotteryInfoListStr)) {
-			lotteryInfoListStr = lotteryInfoListStr.substring(0,
-					lotteryInfoListStr.length() - 1);
-			selectedLotteryInfoArray = lotteryInfoListStr.split(";");
-			if (selectedLotteryInfoArray != null
-					&& selectedLotteryInfoArray.length > 0) {
-				String[] lotteryInfoArray = null;
-				for (int i = 0; i < selectedLotteryInfoArray.length; i++) {
-
-					JqsConfirmDTO jqsConfirmDTO = new JqsConfirmDTO();
-					lotteryInfoArray = selectedLotteryInfoArray[i].split("_");
-					jqsConfirmDTO.setLotteryNo(lotteryInfoArray[0]);
-					jqsConfirmDTO.setLotteryDateStr(lotteryInfoArray[3]);
-					jqsConfirmDTO.setPeilv(lotteryInfoArray[2]);
-					jqsConfirmDTO.setGameNumber(lotteryInfoArray[4]);
-					String footballMatchId = lotteryInfoArray[1];
-					FootballMatch footBallMatch = footballMatchService
-							.findFootballMatchById(Integer
-									.parseInt(footballMatchId));
-					;
-					jqsConfirmDTO.setAwayTeam(footBallMatch == null ? ""
-							: footBallMatch.getAwaysxName());
-					jqsConfirmDTO.setHomeTeam(footBallMatch == null ? ""
-							: footBallMatch.getHomesxName());
-
-					jqsConfirmList.add(jqsConfirmDTO);
-				}
-
-			}
-		}
-
-		String[] selectedChuanArray = null;
-		List<JinZuChuanConfirmDTO> chuanConfirmList = new ArrayList<JinZuChuanConfirmDTO>();
-		if (!StringUtils.isBlank(chuanArrayStr)) {
-			chuanArrayStr = chuanArrayStr.substring(0,
-					chuanArrayStr.length() - 1);
-			selectedChuanArray = chuanArrayStr.split(";");
-			for (String chuan : selectedChuanArray) {
-				JinZuChuanConfirmDTO chuanConfirmDTO = new JinZuChuanConfirmDTO();
-				chuanConfirmDTO.setBuyNumber(lotteryCountStr);
-				chuanConfirmDTO.setChuanType(chuan);
-				chuanConfirmList.add(chuanConfirmDTO);
-			}
-		}
-
-		model.addAttribute("totalMoneyStr", totalMoneyStr);
-		model.addAttribute("lotteryCountStr", lotteryCountStr);
-		model.addAttribute("lotteryInfoListStr", lotteryInfoListStr);
-		model.addAttribute("jqsConfirmList", jqsConfirmList);
-		model.addAttribute("chuanConfirmList", chuanConfirmList);
-
-		return "order/jczqBqcOrderConfirm";
-	}
-
-	/**
-	 * 竞彩足球半全场购买
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/order/jczq_bqc/ajax_save")
-	@ResponseBody
-	public Map jczqBqcOrderSave(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("sucess", false);// 默认为失败
-
-		MemberUser memberUser = (MemberUser) request.getSession().getAttribute(
-				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
-		try {
-			if (memberUser != null) {
-
-				String name = (String) request.getParameter("name");
-				String totalMoneyStr = (String) request
-						.getParameter("totalMoney");
-				String lotteryCountStr = (String) request
-						.getParameter("lotteryCount");
-				String lotteryInfoListStr = (String) request
-						.getParameter("lotteryInfoListStr");
-				String chuanConfirmListStr = (String) request
-						.getParameter("chuanConfirmListStr");
-
-				Integer totalMoney = 0;
-				Integer lotteryCount = 1;// 倍数
-				String lotteryType = "2串1";
-
-				if (!StringUtils.isBlank(chuanConfirmListStr)) {
-					lotteryType = chuanConfirmListStr;
-				}
-
-				if (!StringUtils.isBlank(lotteryCountStr)) {
-					lotteryCount = Integer.parseInt(lotteryCountStr);
-				}
-
-				if (!StringUtils.isBlank(totalMoneyStr)) {
-					totalMoney = Integer.parseInt(totalMoneyStr);
-				}
-				String[] selectedLotteryInfoArray = null;
-
-				if (!StringUtils.isBlank(lotteryInfoListStr)) {
-					lotteryInfoListStr = lotteryInfoListStr.substring(0,
-							lotteryInfoListStr.length() - 1);
-					selectedLotteryInfoArray = lotteryInfoListStr.split(";");
-
-					String orderId = GenerateOrderNoUtil.getOrderNumber();
-
-					name = "竞彩足球-半全场-" + totalMoneyStr + "元";
-
-					Order order = new Order();
-					order.setOrderId(orderId);
-					order.setCreateDate(new Date());
-					order.setMemberUser(memberUser);
-					order.setName(name);
-					order.setOrderStatus(Order.ORDER_SUCESS);
-					order.setOrderTime(new Date());
-					order.setOrderType(Order.PROXY_BUY_ORDER);
-					order.setPayStatus(Order.PAY_STATUS_NO);
-					order.setTotalMoney(totalMoney);
-					order.setUpdateDate(new Date());
-					order.setLotteryCount(lotteryCount);
-					order.setLotteryType(lotteryType);
-
-					orderService.save(order);
-
-					for (int i = 0; i < selectedLotteryInfoArray.length; i++) {
-						String[] lotteryArray = selectedLotteryInfoArray[i]
-								.split("_");
-						OrderDetail orderDetail = new OrderDetail();
-						orderDetail.setBuyCaiNumber(lotteryArray[0]);
-						orderDetail.setCreateDate(new Date());
-						orderDetail.setOrder(order);
-						orderDetail.setUpdateDate(new Date());
-
-						orderDetailService.save(orderDetail);
-					}
-
-					request.getSession().setAttribute("tradeOrder", order);
-
-					map.put("sucess", true);
-					map.put("msg", "下注成功!");
-				} else {
-					map.put("sucess", false);
-					map.put("msg", "选择参数错误，下注失败!");
-				}
-			} else {
-				map.put("sucess", false);
-				map.put("msg", "未登录!");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			map.put("sucess", false);
-			map.put("msg", "下注失败!");
-		}
-		return map;
-	}
-
-	/**
-	 * 支付成功以后调用
-	 */
-	public void updateOrderPayStatus(String orderId) {
-		Order order = orderService.findOrderByOrderId(orderId);
-		if (order.getPayStatus() != Order.PAY_STATUS_SUCESS) {
-			// 如果是充值操作则完成积分充值逻辑
-			if (order.getOrderType() == Order.RECHARGE_ORDER) {
-				MemberUser mu = order.getMemberUser();
-				mu.setAvailableScore(mu.getAvailableScore()
-						+ order.getTotalMoney());
-				mu.setTotalScore(mu.getTotalScore() + order.getTotalMoney());
-				memberUserService.update(mu);
-			}
-
-			// 更改订单支付状态
-			order.setPayStatus(Order.PAY_STATUS_SUCESS);
-			order.setUpdateDate(new Date());
-			orderService.update(order);
-		}
-	}
 	
-	@RequestMapping(value = "/betting_record")
-	public String bettingRecord(HttpServletRequest request,Model model) {
-		MemberUser user = (MemberUser)request.getSession().getAttribute("memberUser");
-		if (user == null) {
-			return "redirect:/user/login";
-		}
-		Integer pageNum = Integer.valueOf(request.getParameter("pageNum") == null ? "1" : request.getParameter("pageNum"));
-		Integer size = orderDetailService.findOrderDetailsSize(user.getId());
-		Integer pageSize = size%StaticDefine.PAGE_SIZE == 0 ? size/StaticDefine.PAGE_SIZE : size/StaticDefine.PAGE_SIZE + 1;
-		List<OrderDetail> orderDetails = orderDetailService.findAllOrderDetails((pageNum - 1) * StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE, user.getId());
-			
-		model.addAttribute("orderDetails", orderDetails);
-		model.addAttribute("size", size);
-		model.addAttribute("page", pageSize);
-		model.addAttribute("pageNum", pageNum);
-		return "order/bettingRecord";
-	}
 
 }

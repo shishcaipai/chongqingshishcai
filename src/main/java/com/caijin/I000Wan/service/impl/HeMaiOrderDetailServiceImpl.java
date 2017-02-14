@@ -22,6 +22,7 @@ public class HeMaiOrderDetailServiceImpl extends CommonServiceImpl<HeMaiOrderDet
 	public void setHeMaiOrderDetailDao(HeMaiOrderDetailDao heMaiOrderDao) {
 		super.setCommonDao(heMaiOrderDao);
 	}
+	@Override
 	public  HeMaiOrderDetail findOrderHemaiDetailByOrderId(Order order){
 		 return heMaiOrderDetailDao.findOrderHemaiDetailByOrderId(order);
 	 }

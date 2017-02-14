@@ -41,7 +41,18 @@ public class CustomBaseSqlDaoImpl {
 		}
 		return resultList;
 	}
-	
+	public int exceSql(String sql){
+		EntityManager em = this.emf.createEntityManager();
+		Query qry = em.createNativeQuery(sql);
+		int i=0;
+		try {
+		  i= qry.executeUpdate();
+		} catch (Exception e) {
+		}finally{
+			em.close();
+		}
+		return i;
+	}
 	public List<Map> querySqlObjects(String sql){
 		return this.querySqlObjects(sql, null, null);
 	}

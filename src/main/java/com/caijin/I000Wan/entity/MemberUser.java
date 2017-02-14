@@ -14,7 +14,8 @@ public class MemberUser extends BaseEntity {
 
 	private static final long serialVersionUID = -3497979616171964595L;
 	public static final String FRONT_MEMBER_LOGIN_SESSION = "memberUser";
-
+	public static final int TYPE_YUN = 0;
+	public static final int TYPE_DAILIREN = 1;
 	private String userName;
 	private String pwd;
 	private String realName;
@@ -35,6 +36,42 @@ public class MemberUser extends BaseEntity {
 	private float actionScore = 0;// 活动金额
 	private float frozenScore = 0;// 冻结金额
 	private String randomCode;// 账号验证邮件随机码(和session绑定)
+	private int type;
+	private String moneyPwd;
+	private String qq;
+	/**
+	 * 推荐人id
+	 */
+	private String commendMemberId;
+	/**
+	 * 生成推广唯一ID
+	 */
+	private String predId;
+	@Column(name = "money_pwd", length = 64)
+	public String getMoneyPwd() {
+		return moneyPwd;
+	}
+
+	public void setMoneyPwd(String moneyPwd) {
+		this.moneyPwd = moneyPwd;
+	}
+
+	@Column(name = "commend_member_id", length = 64)
+	public String getCommendMemberId() {
+		return commendMemberId;
+	}
+
+	public void setCommendMemberId(String commendMemberId) {
+		this.commendMemberId = commendMemberId;
+	}
+	@Column(name = "pred_id", length = 64)
+	public String getPredId() {
+		return predId;
+	}
+	
+	public void setPredId(String predId) {
+		this.predId = predId;
+	}
 
 	@Column(name = "user_name", length = 255)
 	public String getUserName() {
@@ -115,6 +152,15 @@ public class MemberUser extends BaseEntity {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	@Column(name = "type", length = 10)
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	@Override
@@ -211,6 +257,7 @@ public class MemberUser extends BaseEntity {
 	public void setActionScore(float actionScore) {
 		this.actionScore = actionScore;
 	}
+
 	@Column(name = "frozen_score")
 	public float getFrozenScore() {
 		return frozenScore;
@@ -219,5 +266,14 @@ public class MemberUser extends BaseEntity {
 	public void setFrozenScore(float frozenScore) {
 		this.frozenScore = frozenScore;
 	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
 
 }

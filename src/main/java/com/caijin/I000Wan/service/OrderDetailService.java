@@ -12,4 +12,7 @@ public interface OrderDetailService extends CommonService<OrderDetail,String>{
 	List<OrderDetail> findAllOrderDetails(Integer pageNum, int size, String id);
 	Integer findOrderDetailsSize(String id);
 
+	List<OrderDetail> findbyQIhao(String expect);
+
+
 }

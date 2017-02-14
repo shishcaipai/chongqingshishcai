@@ -1,6 +1,7 @@
 package com.caijin.I000Wan.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.caijin.I000Wan.common.service.CommonService;
 import com.caijin.I000Wan.entity.Period;
@@ -32,4 +33,20 @@ public interface PeriodService extends CommonService<Period,String>{
 	
 	Period findPeriodById(Integer id);
 	List<Period> findPeriodByOId(String oid);
+
+	List<Period> findbyQIhao(String expect);
+
+	boolean updatePeriodbyQIhaoAndOrderNo(String expect, String orderNo, int i,
+			int money);
+
+	float getMoneyPeriodByOId(String orderNo);
+
+	 List<Map> findUserTotalAmountList(String date);
+    /**
+     * 将到期的订单更改状态
+     * @param qihao
+     */
+	void updateUnPeriod(String qihao);
+
+	List<Period> findOrderByStatus(int waitOrder);
 }

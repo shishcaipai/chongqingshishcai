@@ -1,27 +1,41 @@
 function btnBuy(obj){
 	var id = $(obj).attr('id');
-	id += "num";
 	var num = $('#' + id).val();
 	var leftnum = obj.children[1].value;
 	if (parseInt(num) > parseInt(leftnum)) {
 		alert("购买份数不能大于剩余份数!");
 		return;
 	}
-	var type = obj.children[3].value;
-	
+	if(parseInt(num)<1){
+		alert("购买份数不能小于1!");
+		return;
+	}
+	var type = obj.children[0].value;
 	var data = {
 			 betId			      : obj.children[0].value,
 			 subscribeAmount      : num,
-			 subscribeMoney 	  : obj.children[2].value,
 			 t:Math.random()
 		 };
 	  $.ajax({
-		 url:"buyTogether/join",
+		 url:"../hemai/submithemaiorder",
 		 data:data,
 		 type:"post",
-		 success:function(){
-			 alert("购买成功");
-			 window.location.href = "together?type=" + type;
+		 success:function(data){
+			 if(data.code==1){
+			 alert(data.msg);
+			 window.location.href = "../hemai/hemaiview";
+			 }else if(data.code==3){
+				 alert(data.msg);
+				 window.location.href = "../user/login";
+				 }
+			 else if(data.code==4){
+				 alert(data.msg);
+				 window.location.href = "../recharge";
+				 }
+			 else{
+				 alert(data.msg);
+				 window.location.href = "../hemai/hemaiview";
+				 }
 		 },
 		 error:function(XMLHttpRequest) {
 			 var s = XMLHttpRequest.responseText;

@@ -11,17 +11,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=basePath %>static/css/jqueryui.css" type="text/css" rel="stylesheet" />
 <link href="<%=basePath %>static/css/style.css" type="text/css" rel="stylesheet" />
 <script src="<%=basePath %>static/js/commonUtil.js" type="text/javascript"></script>
+<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+	type="text/css" />
+<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+	type="text/css" />
 <title>1000万不是梦想！</title>
 </head>
 
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
-<jsp:include page="../banner.jsp"></jsp:include>
 <!--main-->
-<div class="main fn_clear user">
-	<div class="wrap">
-        <jsp:include page="memberLeftMenu.jsp"></jsp:include>
-        
+<div id="account">
+		<div class="account_left">
+			<jsp:include page="memberLeftMenu.jsp"></jsp:include>
+		</div>
+		<div class="account_right">
         <div class="userbox">
             <div class="modelu">
             	<div class="title"><em>绑定邮箱</em></div>

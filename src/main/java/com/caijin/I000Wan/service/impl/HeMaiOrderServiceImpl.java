@@ -21,10 +21,10 @@ public class HeMaiOrderServiceImpl extends CommonServiceImpl<HeMaiOrder,String> 
 	@Autowired
 	private HeMaiOrderDao heMaiOrderDao;
 	
-//	@Autowired
-//	public void setHeMaiOrderDao(HeMaiOrderDao heMaiOrderDao) {
-//		super.setCommonDao(heMaiOrderDao);
-//	}
+	@Autowired
+	public void setHeMaiOrderDao(HeMaiOrderDao heMaiOrderDao) {
+		super.setCommonDao(heMaiOrderDao);
+	}
 	public List<HeMaiOrder> findOrderHemaiByOrderId(HeMaiOrderDetail order){
 		return heMaiOrderDao.findOrderHemaiByOrderId(order);
 	}
@@ -32,5 +32,21 @@ public class HeMaiOrderServiceImpl extends CommonServiceImpl<HeMaiOrder,String> 
 	public List<HeMaiOrder> findAllHemaiOrders() {
 		return heMaiOrderDao.findAllHemaiOrders();
 	}
-	
+
+	@Override
+	public int getHemaiOrderFenNum(HeMaiOrderDetail order) {
+		System.out.println(heMaiOrderDao+"=============");
+		if(heMaiOrderDao.getHemaiOrderFenNum(order)==null){
+			return 0;
+		}
+		return heMaiOrderDao.getHemaiOrderFenNum(order);
+	}
+	@Override
+	public List<HeMaiOrder> findAllOrderZuiHao(int i, int pageSize, String id) {
+		return heMaiOrderDao.findAllOrderZuiHao(i,pageSize,id);
+	}
+	@Override
+	public Integer findOrderZuiHaoSize(String id) {
+		return heMaiOrderDao.findOrderZuiHaoSize(id);
+	}
 }

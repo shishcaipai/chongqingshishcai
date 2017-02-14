@@ -28,6 +28,8 @@ public class OrderDetail extends BaseEntity {
 
 	private String buyCaiNumber;// 购买的彩票号码
 	
+	private String orderNo;
+	
 	private String check_0;
 	private String check_1;
 	private String check_2;
@@ -43,9 +45,9 @@ public class OrderDetail extends BaseEntity {
 	public Order getOrder() {
 		return order;
 	}
-
 	public void setOrder(Order order) {
 		this.order = order;
+		this.orderNo=order.getOrderNo();
 	}
 
 	@Column(length = 200, name = "detail_name")
@@ -74,7 +76,14 @@ public class OrderDetail extends BaseEntity {
 	public void setBuyCaiNumber(String buyCaiNumber) {
 		this.buyCaiNumber = buyCaiNumber;
 	}
+	@Column(length = 100, name = "order_no")
+	public String getOrderNo() {
+		return orderNo;
+	}
 
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
 	public String getCheck_0() {
 		return check_0;
 	}
@@ -146,6 +155,8 @@ public class OrderDetail extends BaseEntity {
 	public void setCheck_8(String check_8) {
 		this.check_8 = check_8;
 	}
+
+	
 
 	
 }
