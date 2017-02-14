@@ -49,7 +49,7 @@
 					test="${sessionScope.memberUser != null&&sessionScope.memberUser.type==1}">
 					<div class="user_tub">
 						<span style="margin-left: 40px;"
-							onclick="javascript:location='<%=basePath%>dailimenu'">代理中心</span>
+							onclick="javascript:location='<%=basePath%>agent/agentcenter'">代理中心</span>
 					</div>
 				</c:when>
 				<c:otherwise>

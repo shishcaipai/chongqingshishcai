@@ -35,7 +35,7 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div id="account">
 		<div class="account_left">
-			<jsp:include page="dailimemberLeftMenu.jsp"></jsp:include>
+			<jsp:include page="agentMemberLeftMenu.jsp"></jsp:include>
 		</div>
 		<div class="account_right">
 			<div class="user_right">

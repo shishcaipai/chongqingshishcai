@@ -35,28 +35,17 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div id="account">
 		<div class="account_left">
-			<jsp:include page="dailimemberLeftMenu.jsp"></jsp:include>
+			<jsp:include page="agentMemberLeftMenu.jsp"></jsp:include>
 		</div>
 		<div class="account_right">
 			<div class="user_right">
 				<div class="p_yd01">
 					<div class="p_daohang">
-						<h2>会员消费列表</h2>
+						<h2>会员列表</h2>
 						<table cellspacing="0" cellpadding="0" border="0">
 							<tbody>
 								<tr>
-									<td height="28">会员</td>
-									<td align="left"><select id="agentID" name="SelAgentID">
-
-											<option value="4656">518168</option>
-
-											<option value="4658">cxju8881</option>
-
-											<option value="4790">17786282835</option>
-
-									</select></td>
-									<td align="center">&nbsp;&nbsp;<input class="cps_ny_a3"
-										name="btnSeach" type="button" value="搜索" id="btnSearch" /></td>
+									
 								</tr>
 							</tbody>
 						</table>
@@ -70,11 +59,12 @@
 								<thead>
 									<tr>
 										<th width="10%">序号</th>
-										<th width="20%">会员</th>
 										<th width="20%">注册时间</th>
-										<th width="20%">消费总额</th>
-										<th width="20%">返利总额</th>
-										<th width="10%">查看</th>
+										<th width="20%">成员</th>
+										<th width="20%">真实姓名</th>
+										<th width="10%">消费总额</th>
+										<th width="10%">手机</th>
+										<th width="10%">邮箱</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -86,32 +76,10 @@
 										<td>2016-12-19 14:29:40</td>
 										<td>0.0</td>
 										<td>10000.0</td>
-										<td><a href="incomeDetail2?userId=4656&single=1">查看</a>
+										<td>10000.0</td>
+										<td>10000.0</td>
 										</td>
 									</tr>
-
-
-									<tr>
-										<td style="text-align: center;">2</td>
-										<td>cxju8881</td>
-										<td>2016-12-21 11:46:51</td>
-										<td>1020.0</td>
-										<td>100000.0</td>
-										<td><a href="incomeDetail2?userId=4658&single=1">查看</a>
-										</td>
-									</tr>
-
-
-									<tr>
-										<td style="text-align: center;">3</td>
-										<td>17786282835</td>
-										<td>2017-01-13 18:46:02</td>
-										<td>17904.0</td>
-										<td>0.0</td>
-										<td><a href="incomeDetail2?userId=4790&single=1">查看</a>
-										</td>
-									</tr>
-
 								</tbody>
 								<TR>
 									<td colSpan=10>

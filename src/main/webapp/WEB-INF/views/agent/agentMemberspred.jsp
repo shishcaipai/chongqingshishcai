@@ -28,20 +28,20 @@
 	rel="stylesheet">
 <link href="http://www.80cb.cn/res/css/cps.css" type="text/css"
 	rel="stylesheet">
-<title>成员消费</title>
+<title>推广管理</title>
 </head>
 
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div id="account">
 		<div class="account_left">
-			<jsp:include page="dailimemberLeftMenu.jsp"></jsp:include>
+			<jsp:include page="agentMemberLeftMenu.jsp"></jsp:include>
 		</div>
 		<div class="account_right">
 			<div class="user_right">
 				<div class="p_yd01">
 					<div class="p_daohang">
-						<h2>会员列表</h2>
+						<h2>推广管理</h2>
 						<table cellspacing="0" cellpadding="0" border="0">
 							<tbody>
 								<tr>
@@ -59,12 +59,11 @@
 								<thead>
 									<tr>
 										<th width="10%">序号</th>
-										<th width="20%">注册时间</th>
 										<th width="20%">成员</th>
-										<th width="20%">真实姓名</th>
-										<th width="10%">消费总额</th>
-										<th width="10%">手机</th>
-										<th width="10%">邮箱</th>
+										<th width="20%">类别</th>
+										<th width="20%">今日新增客户</th>
+										<th width="20%">客户总数</th>
+										<th width="10%">操作</th>
 									</tr>
 								</thead>
 								<tbody>
