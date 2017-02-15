@@ -28,6 +28,8 @@ public class Period {
 	public final static Integer STATUS_AFTER = 2;// 开奖
 
 	public final static String SHISHI_CAI_CHONGQING = "cqssc";
+	
+	public final static String SHISHI_CAI_GUANGDONG11XUAN5 = "gd11x5";
 
 	private Integer id;
 

@@ -119,7 +119,7 @@
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">福彩3D</a></li>
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">排列三</a></li>
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">上海时时乐</a></li>
-						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">广东11选5</a></li>
+						<li class="sc_top_li"><a href="<%=basePath%>gdsyxw/gdsyxwview">广东11选5</a></li>
 						<li class="sc_top_li"><a href="<%=basePath%>wfjx">玩法介绍</a></li>
 					</ul>
 				</div>
