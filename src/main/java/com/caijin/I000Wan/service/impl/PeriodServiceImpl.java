@@ -80,13 +80,22 @@ public class PeriodServiceImpl extends CommonServiceImpl<Period, String>
 
 	@Override
 	public boolean updatePeriodbyQIhaoAndOrderNo(String expect, String orderNo,
-			int i, int money) {
+			int i, float money) {
 		Period period = periodDao.findPeriodbyQIhaoAndOrderNo(expect, orderNo);
 		period.setMoney(money * period.getBeisu());
 		period.setWinning(i);
 		period.setStatus(2);
 		save(period);
 		return true;
+	}
+
+	@Override
+	public int getPeriodUNStatusByOId(String orderId) {
+		try {
+			return periodDao.getPeriodUNStatusByOId(orderId);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	@Override

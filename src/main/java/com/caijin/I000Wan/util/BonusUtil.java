@@ -90,9 +90,8 @@ public class BonusUtil {
 	// lotteryBonusMode.setMyriabit(codes[0]);
 	// return lotteryBonusMode;
 	// }
-	public static int getLotteryHondleBonus(BonusMode mode, String openCode) {
+	public static float getLotteryHondleBonus(BonusMode mode, String openCode) {
 		String type = openCode.substring(1, 4);
-		System.out.println("typr::::"+type+"  end:::"+openCode.substring(5)+"-----"+mode.getMyriabit()+mode.getThousand()+mode.getHundredsplace()+mode.getDecade()+mode.getUnit());
 		String[] codes = openCode.substring(5).split(",");
 		LotteryBonusMode lmode = new LotteryBonusMode();
 		lmode.setType(type);
@@ -113,7 +112,7 @@ public class BonusUtil {
 			if (lmode.getUnit().equals(mode.getUnit())
 					&& lmode.getDecade().equals(mode.getDecade())
 					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
-				return 1000;
+				return 200;
 			}
 
 		} else if (lmode.getType().equals(type106)) {
@@ -145,7 +144,30 @@ public class BonusUtil {
 		} else if (lmode.getType().equals(type120)) {
 
 		} else if (lmode.getType().equals(type121)) {
-
+			float money=0;
+			lmode.setUnit(codes[4]);
+			lmode.setDecade(codes[3]);
+			lmode.setHundredsplace(codes[2]);
+			lmode.setThousand(codes[1]);
+			lmode.setMyriabit(codes[0]);
+			if(lmode.getUnit().indexOf(mode.getUnit())>0){
+				money=+20;
+			}
+			if(lmode.getDecade().indexOf(mode.getDecade())>0){
+				money=+20;
+			}
+			if(lmode.getHundredsplace().indexOf(mode.getHundredsplace())>0){
+				money=+20;
+			}
+			if(lmode.getThousand().indexOf(mode.getThousand())>0){
+				money=+20;
+			}
+			if(lmode.getMyriabit().indexOf(mode.getMyriabit())>0){
+				money=+20;
+			}
+			
+			return money;
+			
 		} else if (lmode.getType().equals(type124)) {
 
 		} else if (lmode.getType().equals(type125)) {
@@ -157,7 +179,7 @@ public class BonusUtil {
 			if (lmode.getMyriabit().equals(mode.getMyriabit())
 					&& lmode.getThousand().equals(mode.getThousand())
 					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
-				return 1000;
+				return 200;
 			}
 		} else if (lmode.getType().equals(type431)) {
 

@@ -301,7 +301,6 @@ trade.showTotalCount = function (){
 
 //表单验证
 trade.chkForm = function() {
-	alert("--------"+trade.submiting());
     if (trade.submiting) return !!alert("请不要重复提交！");
     if (fw.getId("agreement") && !fw.getId("agreement").checked) {
         return !!alert("同意《投注协议》才能投注！");

@@ -17,12 +17,15 @@
 					onclick="javascript:location='<%=basePath%>agent/agentcenter'">基本信息</span>
 		</div>
 		<div class="user_scond">
-			<div class="user_tub">
+			<c:choose>
+				<c:when
+					test="${sessionScope.memberUser != null&&sessionScope.memberUser.type==2}">
+					<div class="user_tub">
 				<b style="float: left; margin-right: 15px"><img
 					src="<%=basePath%>static/images/sc_40.jpg" /></b><span
 					onclick="javascript:location='<%=basePath%>agent/agentMembeSpred'">推广管理</span>
 			</div>
-			<div class="user_tub">
+					<div class="user_tub">
 				<b style="float: left; margin-right: 15px"><img
 					src="<%=basePath%>static/images/sc_41.jpg" /></b><span
 					onclick="javascript:location='<%=basePath%>agent/agentMembeIncomeDetail'">收入明细</span>
@@ -32,7 +35,10 @@
 					src="<%=basePath%>static/images/sc_42.jpg" /></b><span
 					onclick="javascript:location='<%=basePath%>agent/agentMembeMonthBaance'">月度结算表</span>
 			</div>
-
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
 			<div class="user_tub">
 				<span style="margin-left: 40px;"
 					onclick="javascript:location='<%=basePath%>agent/agentMembeSpredLink'">推广链接</span>

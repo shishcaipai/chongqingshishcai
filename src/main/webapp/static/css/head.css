@@ -1,0 +1,67 @@
+/* CSS Document */
+body{
+width:100%;
+margin:0 auto;
+font-size:12px;
+font-family:"宋体";
+color:#000;
+}
+
+dl,dt,dd,h1,h2,h3,h4,p,ul,li,ol,form{ margin:0; padding:0;}
+ul,li{ list-style:none;}
+
+em{font-style:normal; color:#c81e05;}
+a img{ border:none;}
+a{
+text-decoration:none;
+}
+
+/*头部*/
+.mainbody{ width:1000px; height:auto; margin:0 auto; padding:0; clear:both}
+/*头部样式*/
+.sc_top{ width:1000px; clear:both;}
+.sc_top_1{ width:1000px;}
+.sc_top_logo{ width:220px;float:left;}
+.sc_top_logo img{
+float:left;
+margin-top:10px;
+}
+.sc_top_pain{ width:220px; height:80px; background:url(../images/sc_3.jpg) no-repeat; float:left;}
+.sc_top_wen{ width:550px;float:right; height:80px; overflow:hidden;}
+.zc_top_newxt{ width: auto; height:15px; line-height:15px; text-align:right; float:right; margin:6px 0px; color:#bbb;}
+.zc_top_newxt a{ color:#049;}
+.zc_top_kefu{ width:217px; height:55px;; float:right}
+.sc_top_2{ width:1000px; height:41px; background:url(../images/dh1.jpg) repeat-x; overflow:hidden;}
+.sc_top_li{float:left;}
+.sc_top_li a{
+float:left;
+display:inline;
+height:36px;
+line-height:36px;
+padding:0 18px;
+font-weight:bold;
+color:#fff;
+}
+.sc_top_li a:hover{
+background:url(../images/dh2.jpg);
+}
+.sc_top_wen p{
+float:right;
+width:100%;
+text-align:right;
+height:20px;
+line-height:20px;
+color:#333;
+}
+.sc_top_wen p a{
+color:#333;
+}
+.sc_top_wen div{
+float:right;
+width:100%;
+margin-top:4px;
+}
+.sc_top_wen div img{
+float:right;
+}
+/*头部样式*/

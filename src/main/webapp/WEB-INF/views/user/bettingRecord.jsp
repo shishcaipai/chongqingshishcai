@@ -78,7 +78,7 @@
 										test="${order.orderStatus ==1}"> 成功 </c:if> <c:if
 										test="${order.orderStatus ==2}"> 失败</c:if> <c:if
 										test="${order.orderStatus ==3}"> 超时</c:if></td></td>
-									<td width="14%" align="center" valign="middle">${order.reTotalMoney }</td>
+									<td width="14%" align="center" valign="middle">${order.currentWPMoney }</td>
 									<td width="10%" align="center" valign="middle"><a href="#">查看</a></td>
 								</tr>
 							</c:forEach>

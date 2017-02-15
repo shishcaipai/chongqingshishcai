@@ -51,8 +51,8 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 				"memberUser");
 		if (memberUser == null) {
 			log.info("Interceptor：跳转到login页面！");
-			request.setAttribute("msg", "当前页面失效");
-			request.getRequestDispatcher("/user/login").forward(request,
+			request.setAttribute("msg", "登陆信息已失效，请重新登陆");
+			request.getRequestDispatcher("user/login").forward(request,
 					response);
 			return false;
 		} else

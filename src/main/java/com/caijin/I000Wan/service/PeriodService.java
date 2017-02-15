@@ -37,7 +37,7 @@ public interface PeriodService extends CommonService<Period,String>{
 	List<Period> findbyQIhao(String expect);
 
 	boolean updatePeriodbyQIhaoAndOrderNo(String expect, String orderNo, int i,
-			int money);
+			float money);
 
 	float getMoneyPeriodByOId(String orderNo);
 
@@ -49,4 +49,6 @@ public interface PeriodService extends CommonService<Period,String>{
 	void updateUnPeriod(String qihao);
 
 	List<Period> findOrderByStatus(int waitOrder);
+
+	int getPeriodUNStatusByOId(String orderId);
 }

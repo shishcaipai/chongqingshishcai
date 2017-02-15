@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +38,7 @@ import com.caijin.I000Wan.util.GenerateOrderNoUtil;
  */
 @Controller
 public class OrderController {
-
+	private final Logger log = LoggerFactory.getLogger(OrderController.class);
 	@Autowired
 	private OrderService orderService;
 
@@ -121,7 +123,7 @@ public class OrderController {
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
 		try {
 			if (memberUser != null) {
-				Integer totalMoney = 0;
+				float totalMoney = 0;
 				String totalMoneyStr = (String) request
 						.getParameter("totalMoney");
 
@@ -130,7 +132,7 @@ public class OrderController {
 				String orderId = GenerateOrderNoUtil.getOrderNumber();
 
 				Order order = new Order();
-				order.setOrderId(orderId);
+				order.setOrderNo(orderId);
 				order.setCreateDate(new Date());
 				order.setMemberUser(memberUser);
 				order.setName("订单充值");
@@ -198,7 +200,7 @@ public class OrderController {
 		try {
 			if (memberUser != null) {
 				memberUser=memberUserService.find(memberUser.getId());
-				Integer totalMoney = 0;
+				float totalMoney = 0;
 				// 投注名称
 				String name = (String) request.getParameter("playname");
 
@@ -290,7 +292,6 @@ public class OrderController {
 					}
 
 					Order order = new Order();
-					order.setOrderId(orderId);
 					order.setOrderNo(orderId);
 					order.setCreateDate(new Date());
 					order.setMemberUser(memberUser);

@@ -60,7 +60,7 @@
 								<td width="280" align="center" valign="middle"><c:if test="${order.orderType ==1}">订单充值</c:if> <c:if
 										test="${order.orderType ==3}"> 合买订单 </c:if> <c:if
 										test="${order.orderType ==2}"> 普通订单</c:if>&nbsp;|&nbsp;${order.orderNo }</td>
-								<td width="100" align="center" valign="middle">${order.reTotalMoney }</td>
+								<td width="100" align="center" valign="middle">${order.currentWPMoney }</td>
 								<td width="100" align="center" valign="middle">${order.totalMoney }</td>
 								<td align="center" valign="middle">--</td>
 								</td>

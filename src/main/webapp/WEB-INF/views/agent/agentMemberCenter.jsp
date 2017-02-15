@@ -14,14 +14,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/css/head.css" rel="stylesheet"
 	type="text/css" />
 <link href="<%=basePath%>static/css/jqueryui.css" type="text/css"
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<LINK href="http://www.ib18.cn/res/css/head.css" type=text/css
-	rel=stylesheet>
 <link href="http://www.ib18.cn/res/css/page.css" type="text/css"
 	rel="stylesheet">
 	<link href="http://www.80cb.cn/res/css/common.css" type="text/css"
@@ -49,45 +47,49 @@
 								style="color: #0099cc; font-weight: bold;">${memberUser.userName}</font>&nbsp;&nbsp;欢迎进入代理中心！
 						</p>
 						<p>
-							成员类别: <font id="loginuser" style="color: #ff0000;"> 代理商 </font>
+							成员类别: <font id="loginuser" style="color: #ff0000;"> <c:choose>
+				<c:when
+					test="${sessionScope.memberUser != null&&sessionScope.memberUser.type==2}">
+					代理商
+				</c:when>
+				<c:otherwise>
+				  代理人
+				</c:otherwise>
+			</c:choose> </font>
 						</p>
 					</li>
 					<li class="ylf_cps04">
 						<p>
-							今日收入:<span class="red" id="spanIncomeByDay">0.0</span><span
+							今日收入:<span class="red" id="spanIncomeByDay">${todayIncome}</span><span
 								class="Title12">元</span>
 						</p>
 						<p>|</p>
 						<p>
-							累计收入：<span class="red" id="spanIncome">10000.0</span><span
+							累计收入：<span class="red" id="spanIncome">${totalIncome}</span><span
 								class="Title12">元</span>
 						</p>
 					</li>
 					<li class="ylf_cps05">
 						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td>累计推广员人数:<span class="red" id="spanMemberCount">0</span><span
+								<td>累计推广员人数:<span class="red" id="spanMemberCount">${numTotalAllUser}</span><span
 									class="Title12">人</span></td>
-								<td>累计客户人数：<span class="red" id="spanMemberCount">
-
-										(个人)2 + (下级)0 = 2 </span><span class="Title12">人</span>
-								</td>
 							</tr>
 							<tr>
 								<td>今日新增客户数：<span class="red" id="spanMemberCountByDay">
-										(个人)0 + (下级)0 = 0 </span><span class="Title12">人</span>
+										${numTodayTotalUser}</span><span class="Title12">人</span>
 								</td>
-								<td>新增交易客户 <span class="red" id="spanMemberCountByDay">
-										(个人)0 + (下级)0 = 0 </span><span class="Title12">人</span>
+								<td>总共交易量 <span class="red" id="spanMemberCountByDay">
+										 ${numTradingTotalUser} </span><span class="Title12">人</span>
 								</td>
 							</tr>
 							<tr>
-								<td>新增客户交易量： <span class="red" id="spanMemberCountByDay">
-										(个人)0 + (下级)0 = 0.0 </span><span class="Title12">元</span>
+								<td>今日新增客户交易量： <span class="red" id="numTodayTradingTotalUser">
+										 ${totalTradingVolume}</span><span class="Title12">元</span>
 								</td>
 								<td>日交易量： <span class="red" id="spanMemberCountByDay">
 
-										0 </span><span class="Title12">元</span>
+										${dailyTradingVolume} </span><span class="Title12">元</span>
 								</td>
 							</tr>
 						</table>

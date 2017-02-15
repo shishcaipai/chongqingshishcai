@@ -15,14 +15,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description" content="时时乐" />
 <meta name="keywords" content="时时乐" />
 
-<%-- <link href="<%=basePath%>static/css/commonEX.css" type="text/css"
-	rel="stylesheet"> --%>
 	<link href="http://www.ib18.cn/res/css/commonEX.css" type="text/css" rel="stylesheet">
 	
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
-<%-- <link href="<%=basePath%>static/css/frequency.css" type="text/css"
-	rel="stylesheet"> --%>
 	<link href="http://www.ib18.cn/res/css/frequency.css" type="text/css" rel="stylesheet">
 <script src="<%=basePath%>static/js/Jquery_marquee_frequency.js"
 	type="text/javascript"></script>

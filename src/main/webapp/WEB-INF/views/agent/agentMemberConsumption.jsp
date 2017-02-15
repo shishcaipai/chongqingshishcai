@@ -14,14 +14,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/css/head.css" rel="stylesheet"
 	type="text/css" />
 <link href="<%=basePath%>static/css/jqueryui.css" type="text/css"
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<LINK href="http://www.ib18.cn/res/css/head.css" type=text/css
-	rel=stylesheet>
 <link href="http://www.ib18.cn/res/css/page.css" type="text/css"
 	rel="stylesheet">
 <link href="http://www.80cb.cn/res/css/common.css" type="text/css"
@@ -69,7 +67,6 @@
 								id="DataList" class="ylf_tg_bg">
 								<thead>
 									<tr>
-										<th width="10%">序号</th>
 										<th width="20%">会员</th>
 										<th width="20%">注册时间</th>
 										<th width="20%">消费总额</th>
@@ -79,38 +76,16 @@
 								</thead>
 								<tbody>
 
-
-									<tr>
-										<td style="text-align: center;">1</td>
-										<td>518168</td>
-										<td>2016-12-19 14:29:40</td>
-										<td>0.0</td>
-										<td>10000.0</td>
-										<td><a href="incomeDetail2?userId=4656&single=1">查看</a>
+<c:forEach var="user" items="${requestScope.memberUsers }">
+										<tr class="page_tzjl01" >
+										<td style="text-align: center;">${user.createdate }</td>
+										<td style="text-align: center;">${user.username }</td>
+										<td style="text-align: center;">${user.money }</td>
+										<td style="text-align: center;">${user.pmoney }</td>
+										<td style="text-align: center;"><a herf='${user.id }'>查看</a></td>
 										</td>
 									</tr>
-
-
-									<tr>
-										<td style="text-align: center;">2</td>
-										<td>cxju8881</td>
-										<td>2016-12-21 11:46:51</td>
-										<td>1020.0</td>
-										<td>100000.0</td>
-										<td><a href="incomeDetail2?userId=4658&single=1">查看</a>
-										</td>
-									</tr>
-
-
-									<tr>
-										<td style="text-align: center;">3</td>
-										<td>17786282835</td>
-										<td>2017-01-13 18:46:02</td>
-										<td>17904.0</td>
-										<td>0.0</td>
-										<td><a href="incomeDetail2?userId=4790&single=1">查看</a>
-										</td>
-									</tr>
+									</c:forEach>
 
 								</tbody>
 								<TR>
@@ -121,13 +96,13 @@
    <td align="center" class="page" id="show_page_div">页次:<b><font
 														color="red">${requestScope.pageNum}</font></b> /
 													${requestScope.page} &nbsp;&nbsp;共有:${requestScope.size} 条记录 <a
-													href="<%=basePath%>betting_record?type=0&pageNum=1">首页</a>
+													href="<%=basePath%>agent/agentMemberConsumption?type=0&pageNum=1">首页</a>
 													&nbsp;&nbsp;&nbsp;&nbsp; <a
-													href="<%=basePath%>betting_record?type=0&pageNum=${requestScope.pageNum == 1 ? 1 : requestScope.pageNum - 1}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													href="<%=basePath%>agent/agentMemberConsumption?type=0&pageNum=${requestScope.pageNum == 1 ? 1 : requestScope.pageNum - 1}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
 													<a
-													href="<%=basePath%>betting_record?type=0&pageNum=${requestScope.pageNum == requestScope.page ? requestScope.pageNum : requestScope.pageNum + 1}">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													href="<%=basePath%>agent/agentMemberConsumption?type=0&pageNum=${requestScope.pageNum == requestScope.page ? requestScope.pageNum : requestScope.pageNum + 1}">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
 													<a
-													href="<%=basePath%>betting_record?type=0&pageNum=${requestScope.page}">尾页</a>
+													href="<%=basePath%>agent/agentMemberConsumption?type=0&pageNum=${requestScope.page}">尾页</a>
 													&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;跳转:
 													 <select
 													name="pageNum"
@@ -152,7 +127,7 @@
 <script type="text/javascript">
 	function change(index) {
 		var type = $("#type").val();
-		window.location.href = "<%=basePath%>betting_record?type=" + type + "&pageNum=" + index;
+		window.location.href = "<%=basePath%>agent/agentMemberConsumption?type=" + type + "&pageNum=" + index;
 	}
 	function page(){
 		var html = "";

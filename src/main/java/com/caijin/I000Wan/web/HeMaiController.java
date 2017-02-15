@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +43,7 @@ import com.caijin.I000Wan.util.StaticDefine;
 @Controller
 @RequestMapping(value = "/hemai")
 public class HeMaiController {
-
+	private final Logger log = LoggerFactory.getLogger(HeMaiController.class);
 	@Autowired
 	private OrderService orderService;
 
@@ -70,12 +72,8 @@ public class HeMaiController {
 		List<HeMaiOrderDetail> heMaiOrders = heMaiOrderDetailService
 				.findAllHemaiOrderDetails((pageNum - 1)
 						* StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE);
-		System.out.println("------" + heMaiOrders);
 		if (null != heMaiOrders) {
-			System.out.println("------" + heMaiOrders.size());
 			for (int i = 0; i < heMaiOrders.size(); i++) {
-				System.out.println(heMaiService + "------"
-						+ heMaiOrders.get(i).getId());
 				int leftNum = heMaiService.getHemaiOrderFenNum(heMaiOrders
 						.get(i));
 				Integer buyNum = heMaiOrders.get(i).getSubGuaranteeSum()
@@ -109,7 +107,7 @@ public class HeMaiController {
 
 					return new ModelAndView("redirect:/user/login", model);
 				}
-				Integer totalMoney = 0;
+				float totalMoney = 0;
 				// 投注名称
 				String name = (String) request.getParameter("playname");
 
@@ -132,7 +130,7 @@ public class HeMaiController {
 				// 追号是否停
 				String ZjCut = (String) request.getParameter("ZjCut");
 				Integer lotteryCount = 1;
-				System.out.println("name:" + name + "::phase:" + phase
+				log.info("name:" + name + "::phase:" + phase
 						+ "::expectnum:" + expectnum + "::beishulistsuc:"
 						+ beishulistsuc + "::lotteryCode:" + lotteryCode
 						+ "::lotteryCountStr:" + lotteryCountStr + "::ZjCut:"
@@ -158,8 +156,6 @@ public class HeMaiController {
 									.getCurrentChongQingShiShicai()));
 					model.put("sucess", false);
 					model.put("code", 2);
-					System.out.println("投注失败：：："
-							+ DateUtils.getCurrentChongQingShiShicai());
 					model.put("msg", "已过下注时间!");
 					return new ModelAndView("redirect:/cqssc/cqsscview", model);
 				} else {
@@ -181,11 +177,7 @@ public class HeMaiController {
 						String[] sts = beishulistsuc.split("\\|");
 						String[] parsh = sts[0].split(",");
 						String[] beisus = sts[1].split(",");
-						System.out.println("beishulistsuc：：：" + beishulistsuc);
-						System.out.println("beishulistsuc：：：" + beishulistsuc);
 						for (int i = 0; i < parsh.length; i++) {
-							System.out.println("parsh：：：" + parsh[i]);
-							System.out.println("beisus：：：" + beisus[i]);
 							period = new Period();
 							period.setStatus(Period.STATUS_CURRENT);
 							period.setLotteryCode("cqssc");
@@ -205,13 +197,12 @@ public class HeMaiController {
 					}
 
 					Order order = new Order();
-					order.setOrderId(orderId);
 					order.setOrderNo(orderId);
 					order.setCreateDate(new Date());
 					order.setMemberUser(memberUser);
 					order.setName(name);
 					order.setLotteryType(Period.SHISHI_CAI_CHONGQING);
-					order.setOrderStatus(Order.WAIT_ORDER);
+					order.setOrderStatus(Order.ORDER_UN);
 					order.setOrderTime(new Date());
 					order.setOrderType(Order.HEMAI_BUY_ORDER);
 					order.setPayStatus(Order.PAY_STATUS_NO);
@@ -222,8 +213,7 @@ public class HeMaiController {
 					order.setIsCut(Integer.valueOf(ZjCut));
 					orderService.save(order);
 					String[] lotteryCodes = lotteryCode.split("\\$");
-					System.out.println(" lotteryCodes============="
-							+ lotteryCodes.length);
+					log.info(" lotteryCodes=============" + lotteryCodes.length);
 					OrderDetail orderDetail;
 					StringBuffer buffer = new StringBuffer();
 					for (int i = 0; i < lotteryCodes.length; i++) {
@@ -237,13 +227,18 @@ public class HeMaiController {
 						orderDetailService.save(orderDetail);
 					}
 					request.setAttribute("order", order);
+					model.put("sucess", true);
+					model.put("code", 1);
+					return new ModelAndView("caipiao/hemai", model);
 				}
 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		model.put("sucess", false);
+		model.put("code", 3);
+		model.put("msg", "下注失败，请重新下注");
 		return new ModelAndView("caipiao/hemai", model);
 	}
 
@@ -254,14 +249,12 @@ public class HeMaiController {
 	 * @return
 	 */
 	@RequestMapping(value = "/placeorder")
-	public ModelAndView placeAorde(HttpServletRequest request) {
+	public String placeAorde(HttpServletRequest request,Model model) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("code", 0);
 		String orderID = (String) request.getParameter("orderId");
 		// 份成
 		String totalNum = (String) request.getParameter("allnum");
@@ -276,39 +269,42 @@ public class HeMaiController {
 		String type = (String) request.getParameter("isopen");
 		Order order = orderService.findOrderByOrderId(orderID);
 		if (order == null) {
-			return new ModelAndView("redirect:/user/login");
+			return "redirect:/user/login";
 		}
 		if (order.getOrderStatus() == Order.ORDER_FAILUE) {
-			model.put("msg", "已过下单时效，请重新下单");
-			return new ModelAndView("redirect:/user/login", model);
+			model.addAttribute("msg", "已过下单时效，请重新下单");
+			return "redirect:/user/login";
 		}
 
 		List<Period> periods = periodService
-				.findPeriodByOId(order.getOrderId());
+				.findPeriodByOId(order.getOrderNo());
 		boolean bo = OrderUtils.getCurrentDate(
 				DateUtils.getCurrentChongQingShiShicai(), periods);
 		if (!bo) {
 			String msg = "订单已过期，请重新选择";
-			model.put("msg", msg);
-			model.put("code", 2);
-			return new ModelAndView("order/alipaysuccess", model);
+			model.addAttribute("msg", msg);
+			model.addAttribute("code", 2);
+			return "order/alipaysuccess";
 		}
 
 		MemberUser memberUser = (MemberUser) request.getSession().getAttribute(
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
 		if (memberUser == null) {
-
-			return new ModelAndView("redirect:/user/login", model);
+			String msg = "登陆信息已失效，请重新登陆";
+			model.addAttribute("msg", msg);
+			model.addAttribute("code", 2);
+			return "redirect:/user/login";
 		}
-		if (memberUser.getAvailableScore() > Integer.valueOf(order
-				.getTotalMoney())) {
+		int i = Integer.valueOf(null == bdNum ? "0" : bdNum);
+		int total = Integer.valueOf(totalNum);
+		int reNums = Integer.valueOf(reNum);
+		float money = Float.valueOf(order.getTotalMoney()) / total
+				* (total - reNums);
+		if (memberUser.getAvailableScore() > money) {
 			HeMaiOrderDetail heMaiOrderDetail = new HeMaiOrderDetail();
 			heMaiOrderDetail.setOrder(order);
 			heMaiOrderDetail.setDesc(dec);
-			heMaiOrderDetail.setHemaiId(order.getOrderId());
-			int i = Integer.valueOf(null == bdNum ? "0" : bdNum);
-			int total = Integer.valueOf(totalNum);
-			int reNums = Integer.valueOf(reNum);
+			heMaiOrderDetail.setHemaiId(order.getOrderNo());
 			if (i > 0) {
 				heMaiOrderDetail
 						.setEffective(HeMaiOrderDetail.TYPE_EFFECTIVE_UN);
@@ -317,24 +313,57 @@ public class HeMaiController {
 			heMaiOrderDetail.setSubGuaranteeSum(reNums);
 			heMaiOrderDetail.setMemberUser(memberUser);
 			heMaiOrderDetail.setFensum(total);
-			float money = Float.valueOf(order.getTotalMoney()) / total;
-			heMaiOrderDetail.setFloatManay(money * (total - reNums));
+			heMaiOrderDetail
+					.setFloatManay(Float.valueOf(order.getTotalMoney()));
 			heMaiOrderDetail.setType(Integer.valueOf(type));
 			heMaiOrderDetail.setCreateDate(new Date());
 			heMaiOrderDetailService.save(heMaiOrderDetail);
+			if (money > 0) {
+				HeMaiOrder hemaiOrder = new HeMaiOrder();
+				hemaiOrder.setCreateDate(new Date());
+				hemaiOrder.setMemberUser(memberUser);
+				hemaiOrder.setOrderNo(heMaiOrderDetail.getOrder().getOrderNo());
 
-			memberUser.setAvailableScore(memberUser.getAvailableScore()
-					- Integer.valueOf(order.getTotalMoney()));
-			memberUser.setActionScore(Integer.valueOf(order.getTotalMoney())
-					+ memberUser.getActionScore());
-			memberUserService.update(memberUser);
-			model.put("code", 1);
-			return new ModelAndView("order/alipaysuccess", model);
+				hemaiOrder.setFloatManay(money);
+				hemaiOrder.setSubGuaranteeSum(total - reNums);
+				if (reNums == 0) {
+					hemaiOrder
+							.setEffective(HeMaiOrderDetail.TYPE_EFFECTIVE_SUCCESS);
+				} else {
+					hemaiOrder.setEffective(HeMaiOrderDetail.TYPE_EFFECTIVE_UN);
+				}
+				hemaiOrder.setOrderDetail(heMaiOrderDetail);
+				order.setOrderType(Order.WAIT_ORDER);
+				heMaiService.save(hemaiOrder);
+				Order newOrder = new Order();
+				newOrder.setOtherId(hemaiOrder.getId());
+				newOrder.setMemberUser(memberUser);
+				newOrder.setOrderType(Order.HEMAI_IMP_BUY_ORDER);
+				newOrder.setOrderStatus(Order.ORDER_SUCESS);
+				newOrder.setPayStatus(Order.PAY_STATUS_SUCESS);
+				newOrder.setLotteryType(Period.SHISHI_CAI_CHONGQING);
+				newOrder.setCreateDate(new Date());
+				newOrder.setOrderTime(new Date());
+				newOrder.setName("合买订单");
+				newOrder.setTotalMoney(money);
+				orderService.save(newOrder);
+				memberUser.setAvailableScore(memberUser.getAvailableScore()
+						- money);
+				if (reNums == 0) {
+					order.setOrderType(Order.ORDER_SUCESS);
+					order.setPayStatus(Order.PAY_STATUS_SUCESS);
+				}
+				orderService.update(order);
+				memberUserService.update(memberUser);
+				
+			}
+			model.addAttribute("code", 1);
+			return "order/alipaysuccess";
 		} else {
 			String msg = "用户余额不足,请充值";
-			model.put("msg", msg);
-			model.put("code", 4);
-			return new ModelAndView("order/alipaysuccess", model);
+			model.addAttribute("msg", msg);
+			model.addAttribute("code", 4);
+			return "order/alipaysuccess";
 		}
 	}
 
@@ -365,7 +394,7 @@ public class HeMaiController {
 						.getUserName());
 				HeMaiOrderDetail detail = heMaiOrderDetailService.find(betId);
 				Order order = orderService.findOrderByOrderId(detail.getOrder()
-						.getOrderId());
+						.getOrderNo());
 				if (order.getOrderStatus() == Order.ORDER_FAILUE) {
 					msg = "订单已过期，请重新选择";
 					result.put("code", 2);
@@ -373,7 +402,7 @@ public class HeMaiController {
 					return result;
 				}
 				List<Period> periods = periodService.findPeriodByOId(detail
-						.getOrder().getOrderId());
+						.getOrder().getOrderNo());
 				boolean bo = OrderUtils.getCurrentDate(
 						DateUtils.getCurrentChongQingShiShicai(), periods);
 				if (!bo) {
@@ -402,6 +431,7 @@ public class HeMaiController {
 								.setEffective(HeMaiOrderDetail.TYPE_EFFECTIVE_UN);
 						hemaiOrder.setOrderDetail(detail);
 						heMaiService.save(hemaiOrder);
+						float money = a * Float.valueOf(subscribeAmount);
 						memberUser.setAvailableScore(memberUser
 								.getAvailableScore()
 								- a
@@ -414,17 +444,29 @@ public class HeMaiController {
 							order.setOrderStatus(Order.ORDER_SUCESS);
 							order.setPayStatus(Order.PAY_STATUS_SUCESS);
 							orderService.update(order);
-							MemberUser vUser = detail.getMemberUser();
-							//扣除当时锁定的钱
-							if (detail.getFensum()
-									- detail.getSubGuaranteeSum() > 0) {
-								vUser.setActionScore(vUser.getActionScore()
-										- ((Float.valueOf(order.getTotalMoney())) / Float
-												.valueOf(detail.getFensum()))
-										* (detail.getFensum() - detail
-												.getSubGuaranteeSum()));
-								memberUserService.update(vUser);
-							}
+							Order newOrder = new Order();
+							newOrder.setOtherId(hemaiOrder.getId());
+							newOrder.setMemberUser(memberUser);
+							newOrder.setOrderType(Order.HEMAI_IMP_BUY_ORDER);
+							newOrder.setOrderStatus(Order.ORDER_SUCESS);
+							newOrder.setPayStatus(Order.PAY_STATUS_SUCESS);
+							newOrder.setLotteryType(Period.SHISHI_CAI_CHONGQING);
+							newOrder.setCreateDate(new Date());
+							newOrder.setOrderTime(new Date());
+							newOrder.setName("合买订单");
+							newOrder.setTotalMoney(money);
+							orderService.save(newOrder);
+							// MemberUser vUser = detail.getMemberUser();
+							// //扣除当时锁定的钱
+							// if (detail.getFensum()
+							// - detail.getSubGuaranteeSum() > 0) {
+							// vUser.setActionScore(vUser.getActionScore()
+							// - ((Float.valueOf(order.getTotalMoney())) / Float
+							// .valueOf(detail.getFensum()))
+							// * (detail.getFensum() - detail
+							// .getSubGuaranteeSum()));
+							// memberUserService.update(vUser);
+							// }
 
 						}
 						msg = "购买成功";

@@ -9,17 +9,17 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class DateUtils {
-	
+
 	public static String getShangQiChongQingShiShicai() {
 		StringBuffer stringBuffer = new StringBuffer();
 		Calendar currentDate = Calendar.getInstance(TimeZone
 				.getTimeZone("GMT+08:00"));
 		int date = currentDate.get(Calendar.DAY_OF_MONTH);
 		int hours = currentDate.get(Calendar.HOUR_OF_DAY);
-		int month = currentDate.get(Calendar.MONTH)+1;
+		int month = currentDate.get(Calendar.MONTH) + 1;
 		int mis = currentDate.get(Calendar.MINUTE);
 		int years = currentDate.get(Calendar.YEAR);
-		System.out.println("date:"+date+"month:"+month);
+		System.out.println("date:" + date + "month:" + month);
 		if (hours >= 10) {
 			stringBuffer.append(years);
 			if (month < 10) {
@@ -33,21 +33,21 @@ public class DateUtils {
 			int end = 24;
 			if (hours < 22) {
 				end = end + (hours - 10) * 60 / 10;
-				end = end + (mis / 10)+1;
+				end = end + (mis / 10) + 1;
 			} else {
 				end = 97;
 				end = end + (hours - 22) * 60 / 5;
-				end = end + (mis / 5)+1;
+				end = end + (mis / 5) + 1;
 			}
 			if (end > 120) {
 				end = 120;
 			}
 			if (end < 10) {
 				stringBuffer.append("00");
-			} else if (10<=end&&end < 100) {
+			} else if (10 <= end && end < 100) {
 				stringBuffer.append("0");
 			}
-			stringBuffer.append(end-1);
+			stringBuffer.append(end - 1);
 			return stringBuffer.toString();
 		} else {
 			stringBuffer.append(years);
@@ -63,31 +63,30 @@ public class DateUtils {
 			if (hours < 2) {
 				end = end + hours * 60 / 5;
 				end = end + (mis / 5);
-			}else{
-				end=end+23;
+			} else {
+				end = end + 23;
 			}
 			if (end < 10) {
 				stringBuffer.append("00");
-			} else if (10<=end&&end < 100) {
+			} else if (10 <= end && end < 100) {
 				stringBuffer.append("0");
 			}
-			stringBuffer.append(end-1);
+			stringBuffer.append(end - 1);
 			return stringBuffer.toString();
 		}
 
 	}
-	
-	
+
 	public static String getCurrentChongQingShiShicai() {
 		StringBuffer stringBuffer = new StringBuffer();
 		Calendar currentDate = Calendar.getInstance(TimeZone
 				.getTimeZone("GMT+08:00"));
 		int date = currentDate.get(Calendar.DAY_OF_MONTH);
 		int hours = currentDate.get(Calendar.HOUR_OF_DAY);
-		int month = currentDate.get(Calendar.MONTH)+1;
+		int month = currentDate.get(Calendar.MONTH) + 1;
 		int mis = currentDate.get(Calendar.MINUTE);
 		int years = currentDate.get(Calendar.YEAR);
-		System.out.println("date:"+date+"month:"+month);
+		System.out.println("date:" + date + "month:" + month);
 		if (hours >= 10) {
 			stringBuffer.append(years);
 			if (month < 10) {
@@ -101,18 +100,18 @@ public class DateUtils {
 			int end = 24;
 			if (hours < 22) {
 				end = end + (hours - 10) * 60 / 10;
-				end = end + (mis / 10)+1;
+				end = end + (mis / 10) + 1;
 			} else {
 				end = 97;
 				end = end + (hours - 22) * 60 / 5;
-				end = end + (mis / 5)+1;
+				end = end + (mis / 5) + 1;
 			}
 			if (end > 120) {
 				end = 120;
 			}
 			if (end < 10) {
 				stringBuffer.append("00");
-			} else if (10<=end&&end < 100) {
+			} else if (10 <= end && end < 100) {
 				stringBuffer.append("0");
 			}
 			stringBuffer.append(end);
@@ -131,12 +130,12 @@ public class DateUtils {
 			if (hours < 2) {
 				end = end + hours * 60 / 5;
 				end = end + (mis / 5);
-			}else{
-				end=end+23;
+			} else {
+				end = end + 23;
 			}
 			if (end < 10) {
 				stringBuffer.append("00");
-			} else if (10<=end&&end < 100) {
+			} else if (10 <= end && end < 100) {
 				stringBuffer.append("0");
 			}
 			stringBuffer.append(end);
@@ -149,13 +148,13 @@ public class DateUtils {
 		int end = Integer.valueOf((String) current.substring(8));
 		String temp = "";
 		String str = current.substring(0, 8);
-		 List<String> list=new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		for (int i = end; i <= 120; i++) {
 			if (i < 10) {
 				temp = str + "00" + String.valueOf(i);
-			} else if (10<=i&&i < 100) {
+			} else if (10 <= i && i < 100) {
 				temp = str + "0" + String.valueOf(i);
-			} else if(i>=100){
+			} else if (i >= 100) {
 				temp = str + String.valueOf(i);
 			}
 			list.add(temp);
@@ -176,7 +175,7 @@ public class DateUtils {
 		if (0 <= hours && hours < 2) {
 			return (5 - mis % 5) * 60 - ms;
 		} else if (2 < hours && hours < 10) {
-			return ((10 - hours) * 60 - mis+10) * 60 - ms;
+			return ((10 - hours) * 60 - mis + 10) * 60 - ms;
 		} else if (10 <= hours && hours < 22) {
 			return (10 - mis % 10) * 60 - ms;
 		} else if (22 <= hours) {
@@ -197,6 +196,7 @@ public class DateUtils {
 		res = String.valueOf(ts);
 		return res;
 	}
+
 	/*
 	 * 将时间转换为时间戳
 	 */
@@ -215,10 +215,50 @@ public class DateUtils {
 	 */
 	public static String stampToDate(Date s) {
 		String res;
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-				"yyyy-MM-dd");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = s;
 		res = simpleDateFormat.format(date);
 		return res;
+	}
+
+	/**
+	 * 计算两个日期之间相差的天数
+	 * 
+	 * @param smdate
+	 *            较小的时间
+	 * @param bdate
+	 *            较大的时间
+	 * @return 相差天数
+	 * @throws ParseException
+	 */
+	public static int daysBetween(Date smdate, Date bdate)
+			throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		smdate = sdf.parse(sdf.format(smdate));
+		bdate = sdf.parse(sdf.format(bdate));
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(smdate);
+		long time1 = cal.getTimeInMillis();
+		cal.setTime(bdate);
+		long time2 = cal.getTimeInMillis();
+		long between_days = (time2 - time1) / (1000 * 3600 * 24);
+
+		return Integer.parseInt(String.valueOf(between_days));
+	}
+
+	/**
+	 * 字符串的日期格式的计算
+	 */
+	public static int daysBetween(String smdate, String bdate)
+			throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sdf.parse(smdate));
+		long time1 = cal.getTimeInMillis();
+		cal.setTime(sdf.parse(bdate));
+		long time2 = cal.getTimeInMillis();
+		long between_days = (time2 - time1) / (1000 * 3600 * 24);
+
+		return Integer.parseInt(String.valueOf(between_days));
 	}
 }

@@ -21,11 +21,11 @@ public class Period {
 
 	private static final long serialVersionUID = 7196198838990921150L;
 
-	public final static Integer STATUS_CURRENT = 1;// 当前期
+	public final static Integer STATUS_CURRENT = 1;// 下单状态
 
-	public final static Integer STATUS_BEFORE = 0;// 以往期
+	public final static Integer STATUS_BEFORE = 0;// 下单状态
 
-	public final static Integer STATUS_AFTER = 2;// 预售期
+	public final static Integer STATUS_AFTER = 2;// 开奖
 
 	public final static String SHISHI_CAI_CHONGQING = "cqssc";
 
@@ -35,12 +35,12 @@ public class Period {
 
 	private String lotteryPeriod;// 彩票期数
 
-	private Integer status;// 期数状态 如当前期、以往期、预售期
+	private Integer status;// 下单状态0 1，2
 	private Integer winning=0;// 开奖状态 0,1,2
 	private String orderId; // 订单号
 
 	private Integer beisu; // 倍数
-	private  Integer money=0;//中奖金额
+	private  float money=0;//中奖金额
 
 
 	@Column(name = "beisu", length = 20)
@@ -60,11 +60,11 @@ public class Period {
 		this.winning = winning;
 	}
 
-	public Integer getMoney() {
+	public float getMoney() {
 		return money;
 	}
 
-	public void setMoney(Integer money) {
+	public void setMoney(float money) {
 		this.money = money;
 	}
 
