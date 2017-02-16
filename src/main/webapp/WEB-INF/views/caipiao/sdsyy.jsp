@@ -12,21 +12,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script id="hz6d_send_acc"
-	src="http://accwww11.53kf.com/sendacc.jsp?cmd=ACC&amp;did=0&amp;sid=12&amp;company_id=72145634&amp;guest_id=10110341180015&amp;status=0&amp;guest_name=&amp;guest_ip=61.50.96.62&amp;guest_ip_info=%E5%8C%97%E4%BA%AC%E5%B8%82%5B%E8%81%94%E9%80%9A%5D&amp;from_page=http%3A%2F%2Fwww.ib18.cn%2Flogin&amp;talk_page=http%3A%2F%2Fwww.ib18.cn%2FlotteryType%3Fid%3D4&amp;kf_time=1487224693&amp;bto_id6d=-99&amp;time=1487224775298&amp;ucust_id=&amp;style=1&amp;is_mobile=n&amp;visitor_type=old&amp;is_uv=0&amp;browser=chrome&amp;os=macos&amp;is_revisit=1&amp;page_title=%E6%B1%9F%E8%A5%BF%E5%8D%81%E4%B8%80%E9%80%89%E4%BA%94"
+	src="http://accwww11.53kf.com/sendacc.jsp?cmd=ACC&amp;did=0&amp;sid=12&amp;company_id=72145634&amp;guest_id=10110341180015&amp;status=0&amp;guest_name=&amp;guest_ip=61.50.96.62&amp;guest_ip_info=%E5%8C%97%E4%BA%AC%E5%B8%82%5B%E8%81%94%E9%80%9A%5D&amp;from_page=http%3A%2F%2Fwww.ib18.cn%2Flogin&amp;talk_page=http%3A%2F%2Fwww.ib18.cn%2FlotteryType%3Fid%3D3&amp;kf_time=1487229469&amp;bto_id6d=-99&amp;time=1487230750992&amp;ucust_id=&amp;style=1&amp;is_mobile=n&amp;visitor_type=old&amp;is_uv=0&amp;browser=chrome&amp;os=macos&amp;is_revisit=1&amp;page_title=%E5%8D%81%E4%B8%80%E8%BF%90%E8%B4%AD%E4%B9%B0-%7C%E7%BD%91%E4%B8%8A%E8%B4%AD%E5%BD%A9%7C-%7C%E9%AB%98%E9%A2%91%E5%BD%A9%E8%B4%AD%E4%B9%B0%7C-%7C%E6%8A%95%E6%B3%A8%7C-%7C%E5%90%88%E4%B9%B0%7C-"
 	charset="utf-8"></script>
 <script id="ivt_script"
-	src="http://www11.53kf.com/kf_ivt_new.php?arg=10145634&amp;style=1&amp;isonline=0&amp;kfonline=0&amp;lang=zh-cn&amp;resize=yes&amp;charset=gbk&amp;kflist=off&amp;kf=&amp;zdkf_type=1&amp;referer=http%3A%2F%2Fwww.ib18.cn%2FlotteryType%3Fid%3D4&amp;keyword=http%3A%2F%2Fwww.ib18.cn%2Flogin&amp;tpl_name=crystal_blue&amp;tpl_width=702&amp;tpl_height=470&amp;uid=2f95a1abb0e75d6a4d882bced9700bfb&amp;0.3019898522179574"
+	src="http://www11.53kf.com/kf_ivt_new.php?arg=10145634&amp;style=1&amp;isonline=0&amp;kfonline=0&amp;lang=zh-cn&amp;resize=yes&amp;charset=gbk&amp;kflist=off&amp;kf=&amp;zdkf_type=1&amp;referer=http%3A%2F%2Fwww.ib18.cn%2FlotteryType%3Fid%3D3&amp;keyword=http%3A%2F%2Fwww.ib18.cn%2Flogin&amp;tpl_name=crystal_blue&amp;tpl_width=702&amp;tpl_height=470&amp;uid=4526c1ee568c16485018caed0f05a3ab&amp;0.7052899159025401"
 	charset="utf-8"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
 
-<title>江西11选5</title>
+<title>十一运购买-|网上购彩|-|高频彩购买|-|投注|-|合买|-</title>
 <meta name="description" content="十一运">
 <meta name="keywords" content="十一运">
 <link href="http://www.ib18.cn/res/css/commonEX.css" type="text/css"
 	rel="stylesheet">
 <script src="//tb.53kf.com/code/code/10145634/1"></script>
 <script type="text/javascript"
-	src="http://www.ib18.cn/res/js/jquery-1.7.2.min.js"></script>
+	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
 <link href="http://www.ib18.cn/res/css/frequency.css" type="text/css"
 	rel="stylesheet">
 <script src="<%=basePath%>static/js/Jquery_marquee_frequency.js"
@@ -39,7 +39,56 @@
 <script src="<%=basePath%>static/js/loading.js"
 	type="text/javascript"></script>
 <script src="<%=basePath%>static/js/public.vbs"></script>
-
+<script type="text/javascript">
+//判断浏览器ie6创建的div样式和非ie6创建的div样式
+//创建div
+function showid(idname){
+var isIE = (document.all) ? true : false;
+var isIE6 = isIE && ([/MSIE (\d)\.0/i.exec(navigator.userAgent)][0][1] == 6);
+var newbox=document.getElementById(idname);
+newbox.style.zIndex="9999";
+newbox.style.display="block"
+newbox.style.position = !isIE6 ? "fixed" : "absolute";
+newbox.style.top =newbox.style.left = "50%";
+newbox.style.marginTop = - newbox.offsetHeight / 2 + "px";
+newbox.style.marginLeft = - newbox.offsetWidth / 2 + "px";  
+var layer=document.createElement("div");
+layer.id="layer";
+layer.style.width=layer.style.height="100%";
+layer.style.position= !isIE6 ? "fixed" : "absolute";
+layer.style.top=layer.style.left=0;
+layer.style.backgroundColor="#fff";
+layer.style.zIndex="9998";
+layer.style.opacity="0.6";
+document.body.appendChild(layer);
+var sel=document.getElementsByTagName("select");
+for(var i=0;i<sel.length;i++){        
+sel[i].style.visibility="hidden";
+}
+function layer_iestyle(){      
+layer.style.width=Math.max(document.documentElement.scrollWidth, document.documentElement.clientWidth)
++ "px";
+layer.style.height= Math.max(document.documentElement.scrollHeight, document.documentElement.clientHeight) +
+"px";
+}
+function newbox_iestyle(){      
+newbox.style.marginTop = document.documentElement.scrollTop - newbox.offsetHeight / 2 + "px";
+newbox.style.marginLeft = document.documentElement.scrollLeft - newbox.offsetWidth / 2 + "px";
+}
+if(isIE){layer.style.filter ="alpha(opacity=60)";}
+if(isIE6){  
+layer_iestyle()
+newbox_iestyle();
+window.attachEvent("onscroll",function(){                              
+newbox_iestyle();
+})
+window.attachEvent("onresize",layer_iestyle)          
+}  
+layer.onclick=function(){newbox.style.display="none";layer.style.display="none";for(var i=0;i<sel.length;i++){
+sel[i].style.visibility="visible";
+}}
+}
+</script>
 
 </head>
 <body>
@@ -111,7 +160,7 @@
 					iseditable="1">请问有什么可以帮您？</span>
 			</div>
 			<div class="Lelem" type="img"
-				onclick="onliner_zdfq=2;hz6d_is_exist(&quot;window.open(%22http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26language%3Dzh-cn%26charset%3Dgbk%26username%3D%26userinfo%3D%26introurl%3D%26lyurl%3D%26lytype%3D0%26copartner%3D%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D4%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26brief%3D%26logo%3D%26question%3D%26uid%3D2f95a1abb0e75d6a4d882bced9700bfb%26tfrom%3D2%22%2C%22_blank%22%2C%22height%3D473%2Cwidth%3D703%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno%22)&quot;);hidden_ivt();;"
+				onclick="onliner_zdfq=2;hz6d_is_exist(&quot;window.open(%22http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26language%3Dzh-cn%26charset%3Dgbk%26username%3D%26userinfo%3D%26introurl%3D%26lyurl%3D%26lytype%3D0%26copartner%3D%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D3%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26brief%3D%26logo%3D%26question%3D%26uid%3D4526c1ee568c16485018caed0f05a3ab%26tfrom%3D2%22%2C%22_blank%22%2C%22height%3D473%2Cwidth%3D703%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno%22)&quot;);hidden_ivt();;"
 				style="display: block; cursor: pointer; position: absolute; top: 199px; left: 162px; z-index: 10008; width: 118px; height: 37px;">
 				<img style="width: 118px; height: 37px;"
 					src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/click_btn/clickbtn_10.png">
@@ -143,21 +192,21 @@
 			style="position: absolute; z-index: 7998; width: 0px; height: 0px; top: 0px; left: 0px;"
 			frameborder="0"></iframe>
 		<div id="iconDivMain1"
-			style="z-index: 10085; left: 1316px; top: 301px; width: 123px; height: 302px; overflow: hidden; position: absolute;">
+			style="z-index: 10085; left: 1316px; top: 300px; width: 123px; height: 302px; overflow: hidden; position: absolute;">
 			<div class="Lelem" id="KFLOGO"
 				style="width: 123px; height: 302px; position: relative; z-index: 10000; cursor: pointer;"
 				undefined="" maxwidth="400" maxheight="400" minwidth="100"
 				minheight="100">
 				<div class="Lelem"
 					style="left: 0px; top: 0px; width: 108px; height: 122px; display: block; position: absolute; z-index: 10001; cursor: pointer;"
-					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D4%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D2f95a1abb0e75d6a4d882bced9700bfb#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
+					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D3%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D4526c1ee568c16485018caed0f05a3ab#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
 					type="img">
 					<img style="width: 108px; height: 122px;"
 						src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/click_btn/clickbtn_4.png">
 				</div>
 				<div class="Lelem"
 					style="left: 0px; top: 0px; width: 121px; height: 298px; display: block; position: absolute; z-index: 10002; cursor: pointer;"
-					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D4%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D2f95a1abb0e75d6a4d882bced9700bfb#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
+					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D3%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D4526c1ee568c16485018caed0f05a3ab#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
 					type="img"
 					eld_img="http://www11.53kf.com/img/upload/10145634/zdypic/icon_off_16831479344987.gif">
 					<img style="width: 121px; height: 298px;"
@@ -170,7 +219,7 @@
 						src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/close_btn/closebtn_0.png">
 				</div>
 				<div class="Lelem" type="img"
-					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D4%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D2f95a1abb0e75d6a4d882bced9700bfb#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
+					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D3%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D4526c1ee568c16485018caed0f05a3ab#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
 					style="display: block; cursor: pointer; position: absolute; top: 102px; left: 5px; z-index: 10004; width: 110px; height: 35px;">
 					<img
 						src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/click_btn/clickbtn_203.png"
@@ -199,7 +248,7 @@
 	</div>
 	<!--头部开始-->
 
-	<link href="<%=basePath%>static/css/head.css" rel="stylesheet"
+	<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
 		type="text/css">
 	<link rel="shortcut icon"
 		href="<%=basePath%>static/images/favicon.new.ico">
@@ -208,10 +257,7 @@
 
 	<script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
 		type="text/javascript"></script>
-	<script type="text/javascript">
-	
-</script>
-	<jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
 	<script>
   var ctx = "http://www.ib18.cn";
   getLotteryTypes();	
@@ -269,7 +315,7 @@ var InterValObj;
 var isError = false;
 $(document).ready(function() { 
 	 // var starttime = $("#dateEnd").html().replace(/-/g, "/");
-	 /* var starttime = '2017/02/16 14:07:00';
+	 /* var starttime = '2017/02/16 15:23:30';
 	 var startmm = parseInt(new Date(starttime).getTime());
 	 var nowmm = parseInt(new Date().getTime()); */
 	 // SysSecond = (startmm - nowmm)/1000; //这里获取倒计时的起始时间 (秒)
@@ -288,7 +334,7 @@ $(document).ready(function() {
 
 
 	function initPage() {
-		var lotteryTypeId = "4";
+		var lotteryTypeId = "3";
 		$.ajax({
 			url : "http://www.ib18.cn/lotteryType/getLotteryInfo",
 			dataType : "text",
@@ -400,20 +446,20 @@ function SetRemainTime() {
 </script>
 		<ul class="yh_tz01">
 			<li class="yh_tz02"><img
-				src="http://www.ib18.cn/res/img/11x5.png" width="57" height="57"></li>
+				src="http://www.ib18.cn/res/img/11y.png" width="57" height="57"></li>
 			<li class="yh_tz03">
 				<div>
-					<h2>江西11选5</h2>
+					<h2>山东十一运</h2>
 				</div>
 				<div>
 					每天78期,每10分钟一期<br> <span id="kjsj"></span>
 				</div>
 			</li>
 			<li class="yh_tz04">
-				<div id="dateEnd" style="display: none">2017-02-16 14:07:00</div>
+				<div id="dateEnd" style="display: none">2017-02-16 15:23:30</div>
 				<div class="yh_tz05">
 					<span id="activeexpectshow">第<font color="#FF3300"><b><span
-								id="buyExpectShow"><span id="headCurrentPhase"></span>${current}</span></b></font>期
+								id="buyExpectShow"><span id="headCurrentPhase">${current}</span></span></b></font>期
 					</span><br>
 				</div>
 				<div class="xxxx_01">
@@ -440,6 +486,7 @@ function SetRemainTime() {
 				</tbody>
 			</table>
 		</div>
+
 
 		<div class="Betting">
 			<table class="t_tz15" cellpadding="0" cellspacing="0" border="0">
@@ -481,14 +528,16 @@ function SetRemainTime() {
 					<tr>
 						<td class="adtd06">
 							<div class="touzhu_kuang">
+
 								<!--任选复式 开始-->
 								<table id="numtb" cellspacing="0" cellpadding="0" width="100%"
 									border="0" class="numtbTable" style="display: table;">
 									<tbody>
 										<tr>
 											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>号码<br> <br> <font
-												color="#2255aa" id="div_yl_1">遗漏</font></td>
+												width="62"><br>号码<br>
+											<br>
+											<font color="#2255aa" id="div_yl_1">遗漏</font></td>
 											<td class="line_b1" style="padding-left: 5px">
 												<table border="0">
 													<tbody>
@@ -510,18 +559,18 @@ function SetRemainTime() {
 																<span class="pointer">奇</span> <span class="pointer">偶</span>
 																<span class="pointer">清</span></td>
 														</tr>
-														<tr id="tr_yl_2">
+														<tr id="tr_yl_1">
 															<td class="yl_1">1</td>
 															<td class="yl_1">0</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">1</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">3</td>
 															<td class="yl_1">2</td>
+															<td class="yl_1">3</td>
 															<td class="yl_1">1</td>
 															<td class="yl_1">0</td>
-															<td class="yl_1">3</td>
 															<td class="yl_1">0</td>
+															<td class="yl_1">4</td>
+															<td class="yl_1">0</td>
+															<td class="yl_1">0</td>
+															<td class="yl_1">1</td>
 															<td colspan="2">&nbsp;</td>
 														</tr>
 													</tbody>
@@ -542,7 +591,7 @@ function SetRemainTime() {
                                         <tbody>
                                 			<tr>
 												<td width="70" height="25"><b>单式上传:</b></td>
-											    <td width="309"><IFRAME id=ProPic name=ProPic src="upload.asp" frameBorder=0  width="100%" scrolling=no height=24></IFRAME></td>
+												<td width="309"><IFRAME id=ProPic name=ProPic src="upload.asp" frameBorder=0  width="100%" scrolling=no height=24></IFRAME></td>
                                 			</tr>
                                         </tbody>
                                         </table>-->
@@ -551,7 +600,8 @@ function SetRemainTime() {
 										<tr>
 											<td class="geshi">【提醒】直接在下面框中输入或粘贴投注内容，最多输入400注。<a
 												id="gsexplain" href="/Trade/syy/Xml/dg/c1.txt"
-												style="color: #06c" target="_blank"> <!-- 查看标准格式样本 -->
+												style="color: #06c" target="_blank">
+													<!-- 查看标准格式样本 -->
 											</a><br>
 												<table cellpadding="0 " width="100%" border="0">
 													<tbody>
@@ -576,7 +626,7 @@ function SetRemainTime() {
 									<tbody>
 										<tr>
 											<td class="line_b1 cs_042" style="background: none;"
-												align="center" valign="top" width="62"><br>胆码<br></td>
+												align="center" valign="top" width="62"><br>胆码<br>&nbsp;</td>
 											<td>
 												<table style="margin-left: 5px;">
 													<tbody>
@@ -662,8 +712,9 @@ function SetRemainTime() {
 									<tbody>
 										<tr>
 											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>第一位<br> <br> <font
-												color="#2255aa" id="div_yl_1">遗漏</font></td>
+												width="62"><br>第一位<br>
+											<br>
+											<font color="#2255aa" id="div_yl_1">遗漏</font></td>
 											<td class="line_b1" style="padding-left: 5px">
 												<table border="0">
 													<tbody>
@@ -685,18 +736,18 @@ function SetRemainTime() {
 																<span class="pointer">奇</span> <span class="pointer">偶</span>
 																<span class="pointer">清</span></td>
 														</tr>
-														<tr id="tr_yl_3">
-															<td class="yl_1"><font color="red">23</font></td>
-															<td class="yl_1">4</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">12</td>
+														<tr id="tr_yl_4">
 															<td class="yl_1">1</td>
-															<td class="yl_1"><font color="red">27</font></td>
-															<td class="yl_1">10</td>
-															<td class="yl_1">5</td>
+															<td class="yl_1"><font color="red">29</font></td>
 															<td class="yl_1">11</td>
+															<td class="yl_1">6</td>
 															<td class="yl_1">3</td>
+															<td class="yl_1">0</td>
+															<td class="yl_1"><font color="red">32</font></td>
+															<td class="yl_1"><font color="red">22</font></td>
 															<td class="yl_1">9</td>
+															<td class="yl_1">7</td>
+															<td class="yl_1">10</td>
 															<td colspan="2">&nbsp;</td>
 														</tr>
 													</tbody>
@@ -705,8 +756,9 @@ function SetRemainTime() {
 										</tr>
 										<tr>
 											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>第二位<br> <br> <font
-												color="#2255aa" id="div_yl_1">遗漏</font></td>
+												width="62"><br>第二位<br>
+											<br>
+											<font color="#2255aa" id="div_yl_1">遗漏</font></td>
 											<td class="line_b1" style="padding-left: 5px">
 												<table border="0">
 													<tbody>
@@ -728,18 +780,18 @@ function SetRemainTime() {
 																<span class="pointer">奇</span> <span class="pointer">偶</span>
 																<span class="pointer">清</span></td>
 														</tr>
-														<tr id="tr_yl_1">
-															<td class="yl_1">1</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">12</td>
+														<tr id="tr_yl_2">
+															<td class="yl_1"><font color="red">31</font></td>
+															<td class="yl_1"><font color="red">22</font></td>
+															<td class="yl_1">8</td>
 															<td class="yl_1">5</td>
-															<td class="yl_1">9</td>
-															<td class="yl_1">3</td>
-															<td class="yl_1"><font color="red">37</font></td>
+															<td class="yl_1">1</td>
 															<td class="yl_1">7</td>
+															<td class="yl_1">0</td>
+															<td class="yl_1">4</td>
 															<td class="yl_1">2</td>
-															<td class="yl_1">10</td>
-															<td class="yl_1">16</td>
+															<td class="yl_1">12</td>
+															<td class="yl_1">3</td>
 															<td colspan="2">&nbsp;</td>
 														</tr>
 													</tbody>
@@ -748,8 +800,9 @@ function SetRemainTime() {
 										</tr>
 										<tr>
 											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>第三位<br> <br> <font
-												color="#2255aa" id="div_yl_1">遗漏</font></td>
+												width="62"><br>第三位<br>
+											<br>
+											<font color="#2255aa" id="div_yl_1">遗漏</font></td>
 											<td class="line_b1" style="padding-left: 5px">
 												<table border="0">
 													<tbody>
@@ -771,18 +824,18 @@ function SetRemainTime() {
 																<span class="pointer">奇</span> <span class="pointer">偶</span>
 																<span class="pointer">清</span></td>
 														</tr>
-														<tr id="tr_yl_4">
-															<td class="yl_1">2</td>
-															<td class="yl_1">5</td>
-															<td class="yl_1">7</td>
-															<td class="yl_1"><font color="red">30</font></td>
-															<td class="yl_1">16</td>
-															<td class="yl_1"><font color="red">20</font></td>
-															<td class="yl_1">4</td>
-															<td class="yl_1">1</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">11</td>
+														<tr id="tr_yl_3">
 															<td class="yl_1">6</td>
+															<td class="yl_1">18</td>
+															<td class="yl_1">4</td>
+															<td class="yl_1">3</td>
+															<td class="yl_1"><font color="red">22</font></td>
+															<td class="yl_1">8</td>
+															<td class="yl_1">2</td>
+															<td class="yl_1">7</td>
+															<td class="yl_1"><font color="red">32</font></td>
+															<td class="yl_1">0</td>
+															<td class="yl_1">1</td>
 															<td colspan="2">&nbsp;</td>
 														</tr>
 													</tbody>
@@ -792,7 +845,9 @@ function SetRemainTime() {
 									</tbody>
 								</table>
 								<!--三行号码 结束-->
+
 							</div>
+
 							<table border="0" cellspacing="0" cellpadding="0" class="t_tz18">
 								<tbody>
 									<tr>
@@ -865,25 +920,24 @@ function SetRemainTime() {
 															class="bold red2">0</span>元，期数：<span id="expectnumshow"
 															class="bold red2">1</span>，总金额：<font color="red">￥</font><span
 															id="moneyshow3" class="bold red2">0</span>元 <span
-															id="lotteryTypeId" style="display: none;">4</span> <span
+															id="lotteryTypeId" style="display: none;">3</span> <span
 															id="phase" style="display: none;"
-															currentphase="currentPhase">17021631</span>
+															currentphase="currentPhase">17021641</span>
 													</p>
 												</div> <input type="button" id="btn_SubmitZ" name="btn_SubmitZ"
 												value="&nbsp;&nbsp;">&nbsp; <input type="button"
 												id="btn_SubmitHM" name="btn_SubmitHM" value="&nbsp;&nbsp;"><br>
-												<!--合买--> <!--<table width="0" border="0">
+											<!--合买--> <!--<table width="0" border="0">
   <tr>
     <td valign="middle"><input type="checkbox" checked="checked" name="confirmxy"></td>
     <td valign="middle">我已阅读了<a style="color:#555;" id="userxieyi" href="/../../help/hmxy.asp" class="Black">《用户合买代购协议》</a>并同意其中条款</td>
   </tr>
-</table>
--->
+</table>-->
+
 											</td>
 										</tr>
 									</tbody>
 								</table>
-
 								<table class="t_tz20" border="0" cellpadding="0" cellspacing="0">
 									<tbody>
 										<tr>
@@ -970,8 +1024,6 @@ function SetRemainTime() {
 													</div>
 												</div>
 												<style>
-												
-												
 .btab {
 	clear: both;
 	font-weight: 100;
@@ -1201,15 +1253,11 @@ function SetRemainTime() {
 													</div>
 												</div>
 
-
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-
-
-
 
 						</td>
 					</tr>
@@ -1232,10 +1280,10 @@ function SetRemainTime() {
 		_index=_tab.index(this);
 		$(this).addClass('tabin_01').siblings().removeClass('tabin_01');
 		_con.filter(':visible').stop(true,true).fadeOut(200,function(){
-			_con.eq(_index).fadeIn(200)
-		})
+			_con.eq(_index).fadeIn(200);
+		});
 	});
-})
+});
 </script>
 		<!-- 历史开奖中奖排行 -->
 
@@ -1297,14 +1345,14 @@ function SetRemainTime() {
 			type="text/javascript"></script>
 		<script type="text/javascript">
 $(document).ready(function() {
-	var lotteryTypeId = "4";
+	var lotteryTypeId = "3";
 	queryHistoryDrawNumbers();
 	drawNumber();
 	zjxb();
 	
 	function queryHistoryDrawNumbers() {
 		$.ajax({
-			url : "<%=basePath%>jxssc/jxsschistroy",
+			url : "<%=basePath%>sdsyy/sdsyyhistroy",
 			dataType : "json",
 			data : {
 				"lotteryTypeId" : lotteryTypeId,
@@ -1312,28 +1360,28 @@ $(document).ready(function() {
 			},
 			success : function(data2) {
 				data2 = eval(data2);
-				var firstPhase = data2.jxsscReturn[0].periodNumber;
+				var firstPhase = data2.sdsyyReturn[0].periodNumber;
 				var lastPhase = $('#lastPhase').text();
 				if (firstPhase == lastPhase) {
 					// don't need to update
 				} else {
-					$('#lastPhase').text(data2.jxsscReturn[0].periodNumber);					
-					$('#qssj').text(data2.jxsscReturn[0].opentime);
-					$('#winnumber').text(data2.jxsscReturn[0].lotteryPeriod);
+					$('#lastPhase').text(data2.sdsyyReturn[0].periodNumber);					
+					$('#qssj').text(data2.sdsyyReturn[0].opentime);
+					$('#winnumber').text(data2.sdsyyReturn[0].lotteryPeriod);
 					
 			    	drawNumber();
 			    	
-					$('#CodeListTable > tbody > tr:eq(0)').find('.history_phase').text(data2.jxsscReturn[0].periodNumber);
-					$('#CodeListTable > tbody > tr:eq(0)').find('.history_date').text(data2.jxsscReturn[0].opentime.substring(10,16));
-					$('#CodeListTable > tbody > tr:eq(0)').find('.history_number').text(data2.jxsscReturn[0].lotteryPeriod);
-					var d = new Date(data2.jxsscReturn[0].opentime);
+					$('#CodeListTable > tbody > tr:eq(0)').find('.history_phase').text(data2.sdsyyReturn[0].periodNumber);
+					$('#CodeListTable > tbody > tr:eq(0)').find('.history_date').text(data2.sdsyyReturn[0].opentime.substring(10,16));
+					$('#CodeListTable > tbody > tr:eq(0)').find('.history_number').text(data2.sdsyyReturn[0].lotteryPeriod);
+					var d = new Date(data2.sdsyyReturn[0].opentime);
 					if (d && d.getHours()) {
 						$('#CodeListTable > tbody > tr:eq(0)').find('.history_date').text(d.getHours() + ":" + d.getMinutes());
 					}
 					
 					$('#CodeListTable > tbody > tr:gt(0)').each(function(i){
 						var tr = $(this);
-						var p = data2.jxsscReturn[i + 1];
+						var p = data2.sdsyyReturn[i + 1];
 						tr.find('.history_phase').text(p.periodNumber);
 						tr.find('.history_date').text(p.opentime.substring(10,16));
 						tr.find('.history_number').text(p.lotteryPeriod);
@@ -1391,7 +1439,7 @@ function today() {
 	var oldContent = $("#tab_box_02").html();
 	$("#tab_box_02").html('加载中...');
 	
-	var lotteryTypeId = "4";
+	var lotteryTypeId = "3";
 	$.ajax({
 		url : "http://www.ib18.cn/lotteryType/getTodayTopPrize",
 		dataType : "json",
@@ -1444,7 +1492,7 @@ $(function() {
 </script>
 		<div class="yhzt_y01">
 			<ul class="yhzt_y02">
-				<li class="yhzt_y02_bt"><h2 style="margin-left: 35px;">江西11选5
+				<li class="yhzt_y02_bt"><h2 style="margin-left: 35px;">山东十一运
 						历史开奖</h2></li>
 				<li class="yhzt_y02_nr">
 					<ul class="yhzt_y03">
@@ -1469,52 +1517,52 @@ $(function() {
 						<tbody>
 
 							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021629</span>&nbsp;
+								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021637</span>&nbsp;
 								</td>
 								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">13:51</span></font></td>
+										class="history_date">15:07</span></font></td>
 								<td class="yhzt_y04_02"><span class="history_number">
-										03&nbsp;&nbsp;02&nbsp;&nbsp;09&nbsp;&nbsp;11&nbsp;&nbsp;05 </span></td>
+										06&nbsp;&nbsp;07&nbsp;&nbsp;10&nbsp;&nbsp;02&nbsp;&nbsp;09 </span></td>
 							</tr>
 
 
 							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021628</span>&nbsp;
+								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021636</span>&nbsp;
 								</td>
 								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">13:41</span></font></td>
+										class="history_date">14:56</span></font></td>
 								<td class="yhzt_y04_02"><span class="history_number">
-										05&nbsp;&nbsp;01&nbsp;&nbsp;08&nbsp;&nbsp;04&nbsp;&nbsp;02 </span></td>
+										01&nbsp;&nbsp;05&nbsp;&nbsp;11&nbsp;&nbsp;07&nbsp;&nbsp;06 </span></td>
 							</tr>
 
 
 							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021627</span>&nbsp;
+								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021635</span>&nbsp;
 								</td>
 								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">13:31</span></font></td>
+										class="history_date">14:47</span></font></td>
 								<td class="yhzt_y04_02"><span class="history_number">
-										05&nbsp;&nbsp;09&nbsp;&nbsp;01&nbsp;&nbsp;03&nbsp;&nbsp;07 </span></td>
+										06&nbsp;&nbsp;09&nbsp;&nbsp;07&nbsp;&nbsp;03&nbsp;&nbsp;02 </span></td>
 							</tr>
 
 
 							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021626</span>&nbsp;
+								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021634</span>&nbsp;
 								</td>
 								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">13:21</span></font></td>
+										class="history_date">14:37</span></font></td>
 								<td class="yhzt_y04_02"><span class="history_number">
-										10&nbsp;&nbsp;06&nbsp;&nbsp;08&nbsp;&nbsp;03&nbsp;&nbsp;02 </span></td>
+										05&nbsp;&nbsp;11&nbsp;&nbsp;04&nbsp;&nbsp;07&nbsp;&nbsp;06 </span></td>
 							</tr>
 
 
 							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021625</span>&nbsp;
+								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">17021633</span>&nbsp;
 								</td>
 								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">13:11</span></font></td>
+										class="history_date">14:27</span></font></td>
 								<td class="yhzt_y04_02"><span class="history_number">
-										02&nbsp;&nbsp;09&nbsp;&nbsp;07&nbsp;&nbsp;03&nbsp;&nbsp;06 </span></td>
+										05&nbsp;&nbsp;08&nbsp;&nbsp;03&nbsp;&nbsp;09&nbsp;&nbsp;02 </span></td>
 							</tr>
 
 						</tbody>
@@ -1546,7 +1594,7 @@ $(function() {
 	</div>
 	<form id="formh8" name="formh8" method="post" target="_blank">
 		<input type="hidden" id="expectlistsuc1" name="expectlistsuc1"
-			value="17021631"> <input type="hidden" id="beishulistsuc1"
+			value="17021641"> <input type="hidden" id="beishulistsuc1"
 			name="beishulistsuc1" value="1"> <input type="hidden"
 			id="expectlistsuc2" name="expectlistsuc2"> <input
 			type="hidden" id="beishulistsuc2" name="beishulistsuc2"> <input
@@ -1568,6 +1616,8 @@ $(function() {
 			type="hidden" id="zhushunum" name="zhushunum" value=""> <input
 			type="hidden" id="ZjCut" name="ZjCut" value="">
 	</form>
+
+
 	<div class="clear"></div>
 	<!--底部-->
 
@@ -1626,10 +1676,10 @@ $(function() {
 		
 		var arr = new Array();
 		arr[5] = 'ge';
-		arr[3] = 'wan';
-		arr[4] = 'bai';
-		arr[1] = 'qian';
-		arr[2] = 'all';
+		arr[4] = 'wan';
+		arr[3] = 'bai';
+		arr[2] = 'qian';
+		arr[1] = 'all';
 		arr[0] = '';
 		for (var i = 1; i <= 4; i++) {
 			var t = i;
@@ -1653,9 +1703,10 @@ $(function() {
 		}		
 	}
 	
-	var omitValue = '{"all":{"0":"36419","11":"0","1":"1","2":"0","3":"0","4":"1","5":"0","6":"3","7":"2","8":"1","9":"0","10":"3"},"bai":{"0":"36419","11":"6","1":"2","2":"5","3":"7","4":"30","5":"16","6":"20","7":"4","8":"1","9":"0","10":"11"},"ge":{"0":"36419","11":"21","1":"10","2":"1","3":"5","4":"11","5":"0","6":"4","7":"2","8":"18","9":"15","10":"12"},"qian":{"0":"36419","11":"16","1":"1","2":"0","3":"12","4":"5","5":"9","6":"3","7":"37","8":"7","9":"2","10":"10"},"shi":{"0":"36419","11":"0","1":"13","2":"25","3":"2","4":"1","5":"38","6":"7","7":"12","8":"6","9":"17","10":"5"},"wan":{"0":"36419","11":"9","1":"23","2":"4","3":"0","4":"12","5":"1","6":"27","7":"10","8":"5","9":"11","10":"3"}}';
+	var omitValue = '{"all":{"0":"36449","11":"1","1":"1","2":"0","3":"2","4":"3","5":"1","6":"0","7":"0","8":"4","9":"0","10":"0"},"bai":{"0":"36449","11":"1","1":"6","2":"18","3":"4","4":"3","5":"22","6":"8","7":"2","8":"7","9":"32","10":"0"},"ge":{"0":"36449","11":"7","1":"12","2":"2","3":"10","4":"11","5":"6","6":"1","7":"22","8":"9","9":"0","10":"17"},"qian":{"0":"36449","11":"3","1":"31","2":"22","3":"8","4":"5","5":"1","6":"7","7":"0","8":"4","9":"2","10":"12"},"shi":{"0":"36449","11":"45","1":"33","2":"0","3":"2","4":"12","5":"16","6":"6","7":"1","8":"8","9":"4","10":"11"},"wan":{"0":"36449","11":"10","1":"1","2":"29","3":"11","4":"6","5":"3","6":"0","7":"32","8":"22","9":"9","10":"7"}}';
 	updateOmitValue(omitValue);
 </script>
+
 
 
 	<script id="hz6d_flp_jquery"

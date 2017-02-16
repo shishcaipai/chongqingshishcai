@@ -29,9 +29,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Lazy(false)
-@Component("JXSSC")
-public class JiangXiShiShiCaiTask {
-	private static String url = "http://t.apiplus.cn/newly.do?code=jx11x5&format=json";
+@Component("SDSYY")
+public class ShanDongShiYiYunTask {
+	private static String url = "http://t.apiplus.cn/newly.do?code=sd11x5&format=json";
 
 	@Autowired
 	private LetteryPeriodService periodService;
@@ -44,7 +44,7 @@ public class JiangXiShiShiCaiTask {
 	@Autowired
 	private OrderDetailService orderDetailService;
 
-	@Scheduled(cron = "0 0/10 *  * * ? ")
+	@Scheduled(cron = "0 0/1 *  * * ? ")
 	public void job1() {
 		System.out.println("任务进行中。。。");
 		ChongQingReturnBean bean = getShiShiCaipiaohistory();
