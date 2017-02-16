@@ -221,7 +221,7 @@ public class DateUtils {
 		int mis = currentDate.get(Calendar.MINUTE);
 		int ms = currentDate.get(Calendar.SECOND);
 		System.out.println("mis:::" + mis + "::ms::" + ms);
-		return (10 - mis % 10) * 60 + ms;
+		return (9 - mis % 10) * 60 + ms;
 	}
 	
 	public static List<String> getLeftGuangDongShiYiXuanWu(String current) {
