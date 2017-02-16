@@ -42,9 +42,9 @@
 							<tr>
 								<td style="font-size: 14px; font-weight: bold; color: #666">你好，<em>${memberUser.userName}</em>&nbsp;欢迎登陆用户中心！
 								</td>
-								<td style="color: #666">冻结资金:<b style="color: #dc0000;">￥${memberUser.totalScore - memberUser.availableScore}</b></td>
-								<td style="color: #666">今日购彩:<b style="color: #dc0000;">￥${memberUser.totalScore}</b></td>
-								<td style="color: #666">今日中奖:<b style="color: #dc0000;">￥${memberUser.totalScore}</b></td>
+								<td style="color: #666">冻结资金:<b style="color: #dc0000;">￥${memberUser.frozenScore}</b></td>
+								<td style="color: #666">今日购彩:<b style="color: #dc0000;">￥${oMomey}</b></td>
+								<td style="color: #666">今日中奖:<b style="color: #dc0000;">￥${reMomey}</b></td>
 							</tr>
 
 							<tr>
@@ -114,10 +114,21 @@
 								<td>${order.orderTime }</td>
 								<td><c:if test="${order.orderType ==1}">订单充值</c:if> <c:if
 										test="${order.orderType ==2}"> 彩票订单 </c:if> <c:if
-										test="${order.orderType ==3}"> 合买彩票订单</c:if></td>
+										test="${order.orderType ==3}"> 合买方案</c:if>
+										<c:if
+										test="${order.orderType ==4}"> 合买订单</c:if>
+										<c:if
+										test="${order.orderType ==5}"> 网站订单</c:if>
+										</td>
 								<td>${order.totalMoney }</td>
-								<td><c:if test="${order.orderStatus ==0}">未知</c:if> <c:if
-										test="${order.orderStatus ==1}"> 成功 </c:if> <c:if
+								<td><c:if test="${order.orderStatus ==0}">未知
+								
+								</c:if> <c:if
+										test="${order.orderStatus ==1}"> 成功
+										<c:if test="${order.orderStatus ==0}">未知</c:if>
+										 </c:if>
+										
+										 <c:if
 										test="${order.orderStatus ==2}"> 失败</c:if> <c:if
 										test="${order.orderStatus ==3}"> 超时</c:if></td>
 								<td>--</td>

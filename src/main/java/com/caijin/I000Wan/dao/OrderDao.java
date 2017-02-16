@@ -46,10 +46,10 @@ public interface OrderDao extends OrderCustomDao, CommonDao<Order, String> {
 	@Query(value = "select  o.* from trade_order o left join lottery_period t on o.order_no = t.orderid where t.winning = 1 order by o.create_date desc limit 0,10 ", nativeQuery = true)
 	public List<Order> findbyWinning();
 
-	@Query(value = "select count(o.id) from trade_order o left join lottery_period t on o.order_no = t.orderid where  t.winning=1 and o.member_id = ?1 ", nativeQuery = true)
+	@Query(value = "select count(o.id) from trade_order o where (o.order_type=2 or o.order_type=4) and   (o.wprize_status=2 or o.wprize_status=1) and o.member_id = ?1 ", nativeQuery = true)
 	public int findOrderZhongjiaoSize(String id);
 
-	@Query(value = "select o.* from trade_order o left join lottery_period t on o.order_no = t.orderid where  t.winning=1 and o.member_id = ?3 order by o.create_date desc limit ?1,?2 ", nativeQuery = true)
+	@Query(value = "select o.* from trade_order o where (o.order_type=2 or o.order_type=4) and   (o.wprize_status=2 or o.wprize_status=1) and o.member_id = ?3 order by o.create_date desc limit ?1,?2 ", nativeQuery = true)
 	public List<Order> findAllOrdersZhongjiao(int i, int pageSize, String id);
 
 	@Query(value = "select count(o.id) from trade_order o  where o.order_type=2  and o.member_id = ?1 ", nativeQuery = true)
@@ -93,5 +93,11 @@ public interface OrderDao extends OrderCustomDao, CommonDao<Order, String> {
 	
 	@Query(value="select count(mu.id) from member_user mu  where mu.commend_member_id =?1 ",nativeQuery = true)
 	public int findCountMemberByAgentUserId(String id);
+	
+	
+	@Query(value="select sum(mu.total_money) from trade_order mu  where mu.member_id =?1 and TO_DAYS(mu.create_date) = TO_DAYS(NOW()) ",nativeQuery = true)
+	public float getTodayBuyMomey(String id);
+	@Query(value="select sum(mu.current_wp_money) from trade_order mu  where mu.member_id =?1 and TO_DAYS(mu.create_date) = TO_DAYS(NOW()) ",nativeQuery = true)
+	public float getTodayZhongjiaoMomey(String id);
 
 }

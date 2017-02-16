@@ -59,6 +59,9 @@ public class Order extends BaseEntity {
 	public final static int WPRIS_STATUS_PORTION = 1;// 部分中奖
 
 	public final static int WPRIS_STATUS_ALL = 2;// 全部中奖
+	
+	public final static int WPRIS_STATUS_WI = 3;// 未中奖
+	public final static int WPRIS_STATUS_PWI = 4;// 部分不中奖
 
 	public final static int CASHBACKSTATUS_NO = 0;// 订单返现状态
 	public final static int CASHBACKSTATUS_PORTION = 1;
@@ -68,11 +71,11 @@ public class Order extends BaseEntity {
 
 	private String orderNo;// orderNo
 
-	private Integer orderType;// 订单类型 1为订单充值 2为代购订单 3为合买类型订单
+	private int orderType=0;// 订单类型 1为订单充值 2为代购订单 3为合买类型订单
 
-	private Integer orderStatus;// 订单状态类型 1为下订单成功 2为下订单失败
+	private int orderStatus=0;// 订单状态类型 1为下订单成功 2为下订单失败
 
-	private Integer payStatus;// 支付状态类型 0为未支付 1为支付成功 2为支付失败 3为支付超时
+	private int payStatus=0;// 支付状态类型 0为未支付 1为支付成功 2为支付失败 3为支付超时
 
 	private String otherId; // 其他关联id 当订单为1，4，5，6时关联的其他对像
 
@@ -82,13 +85,13 @@ public class Order extends BaseEntity {
 
 	private List<Period> period;// 彩票期数
 
-	private Float totalMoney;// 订单购买总金额
+	private float totalMoney = 0;// 订单购买总金额
 
-	private Integer lotteryCount; // 彩票注数
+	private int lotteryCount=0; // 彩票注数
 
 	private String lotteryType;// 彩票类型
 
-	private Integer isCut;
+	private int isCut=0;
 
 	public float currentWPMoney;// 当前中奖金额
 
@@ -97,11 +100,11 @@ public class Order extends BaseEntity {
 	public int cashBackStatus = 0;// 返现是否完成0，1，2
 
 	@Column(length = 10)
-	public Integer getIsCut() {
+	public int getIsCut() {
 		return isCut;
 	}
 
-	public void setIsCut(Integer isCut) {
+	public void setIsCut(int isCut) {
 		this.isCut = isCut;
 	}
 
@@ -124,29 +127,29 @@ public class Order extends BaseEntity {
 	}
 
 	@Column(precision = 1, name = "order_type")
-	public Integer getOrderType() {
+	public int getOrderType() {
 		return orderType;
 	}
 
-	public void setOrderType(Integer orderType) {
+	public void setOrderType(int orderType) {
 		this.orderType = orderType;
 	}
 
 	@Column(precision = 1, name = "order_status")
-	public Integer getOrderStatus() {
+	public int getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(Integer orderStatus) {
+	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
 	@Column(precision = 1, name = "pay_status")
-	public Integer getPayStatus() {
+	public int getPayStatus() {
 		return payStatus;
 	}
 
-	public void setPayStatus(Integer payStatus) {
+	public void setPayStatus(int payStatus) {
 		this.payStatus = payStatus;
 	}
 
@@ -198,20 +201,20 @@ public class Order extends BaseEntity {
 	}
 
 	@Column(precision = 10, name = "total_money")
-	public Float getTotalMoney() {
+	public float getTotalMoney() {
 		return totalMoney;
 	}
 
-	public void setTotalMoney(Float totalMoney) {
+	public void setTotalMoney(float totalMoney) {
 		this.totalMoney = totalMoney;
 	}
 
 	@Column(name = "lottery_count")
-	public Integer getLotteryCount() {
+	public int getLotteryCount() {
 		return lotteryCount;
 	}
 
-	public void setLotteryCount(Integer lotteryCount) {
+	public void setLotteryCount(int lotteryCount) {
 		this.lotteryCount = lotteryCount;
 	}
 

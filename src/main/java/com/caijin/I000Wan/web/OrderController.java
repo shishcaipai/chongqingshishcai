@@ -48,7 +48,6 @@ public class OrderController {
 	@Autowired
 	private PeriodService periodService;
 
-
 	@Autowired
 	private MemberUserService memberUserService;
 
@@ -73,7 +72,7 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping("/sscorder/alipay")
-	public String toAlipay(HttpServletRequest request,Model model) {
+	public String toAlipay(HttpServletRequest request, Model model) {
 		String tradeNo = request.getParameter("orderId");
 		String subject = request.getParameter("subject");
 		String totalMoney = request.getParameter("totalMoney");
@@ -81,34 +80,38 @@ public class OrderController {
 		MemberUser memberUser = (MemberUser) request.getSession().getAttribute(
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
 		if (memberUser == null) {
-			model.addAttribute("msg","用户超时");
+			model.addAttribute("msg", "用户超时");
 			return "redirect:/user/login";
 		}
-		if ( memberUser.getAvailableScore() > Integer
-				.valueOf(totalMoney)) {
-			memberUser.setAvailableScore(memberUser.getAvailableScore()
-					- Integer.valueOf(totalMoney));
-			
-			Order order = orderService.findOrderByOrderId(tradeNo);
-			if (order == null) {
-				model.addAttribute("msg","用户超时");
-				return "redirect:/user/login";
+		try {
+			if (memberUser.getAvailableScore() > Integer.valueOf(totalMoney)) {
+				memberUser.setAvailableScore(memberUser.getAvailableScore()
+						- Integer.valueOf(totalMoney));
+
+				Order order = orderService.findOrderByOrderId(tradeNo);
+				if (order == null) {
+					model.addAttribute("msg", "用户超时");
+					return "redirect:/user/login";
+				}
+				order.setPayStatus(Order.PAY_STATUS_SUCESS);
+				order.setOrderStatus(Order.ORDER_SUCESS);
+				memberUserService.update(memberUser);
+				orderService.update(order);
+				model.addAttribute("code", 1);
+				model.addAttribute("msg", "支付成功");
+				return "order/alipaysuccess";
+			} else {
+				model.addAttribute("code", 2);
+				model.addAttribute("msg", "用户余额不足,请充值");
+				return "order/alipaysuccess";
 			}
-			order.setPayStatus(Order.PAY_STATUS_SUCESS);
-			order.setOrderStatus(Order.ORDER_SUCESS);
-			memberUserService.update(memberUser);
-			orderService.update(order);
-			model.addAttribute("code",1);
-			model.addAttribute("msg","支付成功");
-			return "order/alipaysuccess";
-		} else {
-			model.addAttribute("code",2);
-			model.addAttribute("msg","用户余额不足,请充值");
-			return "order/alipaysuccess";
+		} catch (Exception e) {
+
 		}
-
+		model.addAttribute("code", 2);
+		model.addAttribute("msg", "订单出错，请重新下单");
+		return "order/alipaysuccess";
 	}
-
 
 	/**
 	 * 充值
@@ -199,12 +202,16 @@ public class OrderController {
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
 		try {
 			if (memberUser != null) {
-				memberUser=memberUserService.find(memberUser.getId());
+				memberUser = memberUserService.find(memberUser.getId());
 				float totalMoney = 0;
 				// 投注名称
 				String name = (String) request.getParameter("playname");
-
-				name = URLDecoder.decode(name);
+				   name=new String(name.getBytes("ISO-8859-1"), "utf-8");
+//				name = URLDecoder.decode(name);
+				log.info("彩票名称::::" + name);
+				log.info("彩票名称::::"
+						+ new String(name.getBytes("ISO-8859-1"), "utf-8"));
+				log.info("彩票名称::::" + new String(name.getBytes(), "GBK"));
 				// 投注期号
 				String phase = (String) request.getParameter("phase");
 				// 当前期数
@@ -404,8 +411,5 @@ public class OrderController {
 
 		return "order/jczqOrderConfirm";
 	}
-
-
-	
 
 }

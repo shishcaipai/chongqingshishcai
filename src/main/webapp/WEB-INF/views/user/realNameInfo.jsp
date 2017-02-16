@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	type="text/css" />
 <link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
 	type="text/css" />
-<title>1000万不是梦想！</title>
+<title>好运相随！</title>
 </head>
 
 <body>
@@ -111,7 +111,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	memberUser["userName"]=$("#userName").val().trim();
 			memberUser["identityCard"]=$("#identityCard").val().trim();
 			memberUser["realName"]=$("#realName").val().trim();
-
 		//保存
 		$.ajax({
 			url : '<%=basePath %>user/saveRealNameInfo',

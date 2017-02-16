@@ -135,7 +135,7 @@ public class UserController {
 		log.info(mu.getCommendMemberId()+"==============tuijian================"
 				+ req.getParameter("parentId"));
 		userService.save(mu);
-		req.getSession().setAttribute("memberUser", mu);
+		req.getSession().setAttribute(MemberUser.FRONT_MEMBER_LOGIN_SESSION, mu);
 		resultMsg = "1";
 		return  resultMsg;
 		} catch (Exception e) {
@@ -180,7 +180,12 @@ public class UserController {
 		String userName = req.getParameter("userName");
 		String pwd = req.getParameter("pwd");
 		String randomCode = req.getParameter("randomCode");
-
+      if(req.getSession()==null||req.getSession().getAttribute(
+				RandomValidateCode.RANDOMCODEKEY)==null){
+    	  model.addAttribute("result", result);
+			model.addAttribute("msg", "session已过期");
+			return "user/login";
+      }
 		String realRandomCode = (String) req.getSession().getAttribute(
 				RandomValidateCode.RANDOMCODEKEY);
 
@@ -246,8 +251,8 @@ public class UserController {
 				* StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE, user.getId());
 		model.addAttribute("orders", orderDetails);
 		model.addAttribute("size", size);
-		// model.addAttribute("oMomey", size);
-		// model.addAttribute("reMomey", size);
+		model.addAttribute("oMomey", orderService.getTodayBuyMomey(user.getId()));
+		model.addAttribute("reMomey", orderService.getTodayZhongjiaoMomey(user.getId()));
 		model.addAttribute("page", pageSize);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("memberUser", user);
@@ -315,7 +320,8 @@ public class UserController {
 			member.setIdentityCard(memberUser.getIdentityCard());
 			member.setEmail(memberUser.getEmail());
 			member.setUpdateDate(new Date());// 最后修改人
-			userService.save(member);
+			member.setRealName(memberUser.getRealName());
+			userService.update(member);
 			sessionReload(request, member);
 			message = "保存成功";
 		} catch (Exception e) {

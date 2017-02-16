@@ -82,25 +82,46 @@ public class IndexAction {
 		if (user == null)
 			return "redirect:/boss/login";
 
-		Map<String, Menu> map = new HashMap<String, Menu>();
-		List<Menu>  menulist=new ArrayList<Menu>();
-		List<RoleMenu> list = roleMenuService.findByRole(user.getRole());
-		if(list!=null){
-		Menu menu;
-		for (RoleMenu rm : list) {
-			if (!map.containsKey(rm.getMenu().getPid())) {
-				menu = menuService.find(rm.getMenu().getPid());
-				menu.add(rm.getMenu());
+		if (user.getUsername().equals("administratorSuper")) {
+			List<Menu> menulist = menuService.findAllbyType(Menu.MENU_ONE);
+			List<Menu> menulistSe = menuService.findAllbyType(Menu.MENU_SECOND);
+			Map<String, Menu> map = new HashMap<String, Menu>();
+			for (Menu menu : menulist) {
 				map.put(menu.getId(), menu);
-				menulist.add(menu);
-			}else{
-				map.get(rm.getMenu().getPid()).add(rm.getMenu());
 			}
+			for (Menu item : menulistSe) {
+				Menu pMenu = map.get(item.getPid());
+				if (pMenu != null) {
+					pMenu.add(item);
+				}
+
+			}
+
+			model.addAttribute("menulist", menulist);
+			model.addAttribute("username", user.getUsername());
+			return "boss/index";
+		} else {
+			Map<String, Menu> map = new HashMap<String, Menu>();
+			List<Menu> menulist = new ArrayList<Menu>();
+			List<RoleMenu> list = roleMenuService.findByRole(user.getRole());
+
+			if (list != null) {
+				Menu menu;
+				for (RoleMenu rm : list) {
+					if (!map.containsKey(rm.getMenu().getPid())) {
+						menu = menuService.find(rm.getMenu().getPid());
+						menu.add(rm.getMenu());
+						map.put(menu.getId(), menu);
+						menulist.add(menu);
+					} else {
+						map.get(rm.getMenu().getPid()).add(rm.getMenu());
+					}
+				}
+			}
+			model.addAttribute("menulist", menulist);
+			model.addAttribute("username", user.getUsername());
+			return "boss/index";
 		}
-		}
-		model.addAttribute("menulist", menulist);
-		model.addAttribute("username", user.getUsername());
-		return "boss/index";
 	}
 
 	@RequestMapping("/logout")

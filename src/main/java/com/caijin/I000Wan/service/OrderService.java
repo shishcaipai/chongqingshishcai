@@ -84,4 +84,10 @@ public interface OrderService extends CommonService<Order, String> {
 
 	List<Map> findMemberStaticIncomeByAgentUserId(int i, int pageSize, String id);
 
+	float getTodayBuyMomey(String id);
+
+	float getTodayZhongjiaoMomey(String id);
+
+//	void updateOrderByOrderNo(String orderNo, String status);
+
 }

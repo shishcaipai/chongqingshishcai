@@ -160,12 +160,13 @@
 		    	alert("联系地址不能为空");
 				 return false;;	
 			}
+		    alert($("#realname").val());
 	    	var memberUser={};
 	    	memberUser["userName"]=$("#userName").val();
 			memberUser["sex"]=$("#sex").val();
 			memberUser["birthday"]=$("#birthday").val();
 			memberUser["identityCard"]= $("#cardNo").val();
-			memberUser["realname"]= $("#realname").val();
+			memberUser["realName"]= $("#realname").val();
 			memberUser["address"]= $("#address").val();
 			memberUser["telephone"]= $("#telephone").val();
 			memberUser["email"]= $("#email").val();

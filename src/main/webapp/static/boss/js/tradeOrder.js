@@ -22,23 +22,32 @@ $(function() {
 		pagination : true,//分页
 		rownumbers : true,//行数
 		columns:[[
-	              {field:'name',title:'订单名称',width:90,align:'center'},  
-		            {field:'order_id',title:'订单ID',width:90,align:'center'},
+	              {field:'name',title:'玩法',width:90,align:'center'},  
+		            {field:'order_no',title:'订单ID',width:90,align:'center'},
 		            {field:'total_money',title:'订单金额',width:90,align:'center'},
 		            {field:'order_type',title:'订单类型',width:90,align:'center',
 		            	formatter:function (value){
 		            		  if(value == 1){
 		            		    return '充值订单';
-		            		  }else{
-		            		    return '代购订单';
+		            		  }else if(value == 2){
+		            		    return '彩票订单';
+		            		  }else if(value == 3){
+		            		    return '合买发起方案';
+		            		  }else if(value == 4){
+		            		    return '合买订单';
+		            		  }else if(value == 5){
+		            		    return '网站返款';
+		            		  }else if(value == 6){
+		            		    return '提现订单';
 		            		  }
+		            		  
 		            	}
 		            },
 					{field:'order_status',title:'订单状态',width:90,align:'center',
 		            	formatter:function (value){
 		            		  if(value == 1){
 		            		    return '下单成功';
-		            		  }else{
+		            		  }else {
 		            		    return '下单失败';
 		            		  }
 		            	}
@@ -53,6 +62,17 @@ $(function() {
 		            		    return '支付失败';
 		            		  }else{
 		            		    return '支付超时';
+		            		  }
+		            	}
+		            },
+		            {field:'wprize_status',title:'是否中奖',width:90,align:'center',
+		            	formatter:function (value){
+		            		  if(value == 0){
+		            		    return '未中奖';
+		            		  }else if(value == 1){
+		            		    return '追号中奖';
+		            		  }else if(value == 2){
+		            		    return '中奖';
 		            		  }
 		            	}
 		            },
@@ -99,3 +119,72 @@ function clearSearchForm(){
 	$("#checkEndTime").val("");
 	searchOrder();
 }
+
+function closeOrderUserDialog(){
+	$('#dlg').window('close');
+	$('#orderForm').form('clear');
+}
+
+/**
+ * 弹出修改页面
+ * @param str
+ * @returns
+ */
+function updateOrderUserDialog(){
+	var selectedRows=$("#mydatagrid").datagrid('getSelections');
+	if(selectedRows.length!=1){
+		$.messager.alert('系统提示','请选择一条要编辑的数据！');
+		return;
+	}
+	var row=selectedRows[0];
+	$("#dlg").dialog("open").dialog("setTitle","订单信息");
+	$("#orderForm").form("load",row);
+	$.ajax({
+		url:'../../boss/order/order_detail',//url调用Action方法
+		data: { orderNo: $("#order_no").val()} ,
+		success : function(result) {
+			var obj = eval(result); 
+			         var html="";
+				   for(var i=0;i<obj.length;i++){  
+				       html+="<tr><td>投注内容：</td><td><input type='text' id='num' name='num' value='"+obj[i].buyCaiNumber+"'  title='"+obj[i].id+"' /></td></tr>";
+				   } 
+				   $("#order_phrase").html(html) 
+			$("#update").show();
+		}    
+	});
+	$("#update").show();
+}
+
+/**
+ * 修改信息提交
+ */
+function updateOrder(){
+	var  obj=$("input[name='num']");
+	var orders =  new Array(); 
+	for(var i=0;i<obj.length;i++){
+		var order = {};
+		order["num"]=obj.val();
+		order["id"]=obj.attr("title");
+		
+		orders[i]=order;
+	}
+	var  senOrder={};
+	senOrder["orders"]=JSON.stringify(orders);
+	senOrder["orderNo"]=$("#order_no").val();
+	senOrder["wprizeStatus"]=$("#wprize_status").val();
+	//保存
+	$.ajax({
+		url : '../../boss/order/updateNum',
+		data:senOrder,
+		type:'post',
+		dataType:'text',
+		success : function(result) {
+			$.messager.show({ title : '提示', msg : result });
+			closeOrderUserDialog();
+			clearSearchForm();
+			$('#mydatagrid').datagrid("reload");
+		}    
+	});
+}
+
+

@@ -66,8 +66,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</tr>
 			<td>手机号：</td>
 			<td><input type="text" id="telephone" name="telephone"/></td>
-			<td>支付宝账号：</td>
-			<td><input type="text" id="bankCode" name="bank_code"/></td>
+			<td>用户类型：</td>
+			<td><select type="text" id="type" name="type">
+			<option value ="0">会员</option>
+			<option value ="1">代理人</option>
+			</select></</td> 
 		<tr>
 			<td colspan="4" align="right">
 	       	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="add" onClick="saveMemberUser()">提交</a>&nbsp;&nbsp;

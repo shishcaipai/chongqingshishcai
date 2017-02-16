@@ -52,8 +52,12 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 		if (memberUser == null) {
 			log.info("Interceptor：跳转到login页面！");
 			request.setAttribute("msg", "登陆信息已失效，请重新登陆");
-			request.getRequestDispatcher("user/login").forward(request,
-					response);
+			String path = request.getContextPath();
+			String basePath = request.getScheme() + "://"
+					+ request.getServerName() + ":" + request.getServerPort()
+					+ path + "/";
+			response.sendRedirect(basePath+"user/login");//.forward(request,
+//					response);
 			return false;
 		} else
 			return true;

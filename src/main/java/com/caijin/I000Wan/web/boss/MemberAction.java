@@ -100,7 +100,11 @@ public class MemberAction {
 				user.setRealName(request.getParameter("realName"));
 				user.setTelephone(request.getParameter("telephone"));
 				user.setIdentityCard(request.getParameter("identityCard"));
-				user.setBankCode(request.getParameter("bankCode"));
+				try{
+				user.setType(Integer.valueOf(request.getParameter("type")));
+				}catch(Exception e){
+					user.setType(0);
+				}
 				memberUserService.update(user);
 			}
 			msg = "修改成功";

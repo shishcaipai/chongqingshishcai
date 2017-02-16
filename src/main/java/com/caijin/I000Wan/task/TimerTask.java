@@ -94,18 +94,26 @@ public class TimerTask {
 			String orderId;
 			Order order;
 			while (keys.hasNext()) {
-				 orderId=keys.next();
+				orderId = keys.next();
 				float money = pdService.getMoneyPeriodByOId(orderId);
-				if(pdService.getPeriodUNStatusByOId(orderId)==0){
-					 order=map.get(orderId);
-					 order.setWprizeStatus(Order.WPRIS_STATUS_ALL);
-					 order.setCurrentWPMoney(order.getCurrentWPMoney()+money);
-					 orderService.update(order);
-				}else{
-					 order=map.get(orderId);
-					 order.setWprizeStatus(Order.WPRIS_STATUS_PORTION);
-					 order.setCurrentWPMoney(order.getCurrentWPMoney()+money);
-					 orderService.update(order);
+				if (pdService.getPeriodUNStatusByOId(orderId) == 0) {
+					order = map.get(orderId);
+					if (money > 0) {
+						order.setWprizeStatus(Order.WPRIS_STATUS_ALL);
+					} else {
+						order.setWprizeStatus(Order.WPRIS_STATUS_WI);
+					}
+					order.setCurrentWPMoney(order.getCurrentWPMoney() + money);
+					orderService.update(order);
+				} else {
+					order = map.get(orderId);
+					if (money > 0) {
+						order.setWprizeStatus(Order.WPRIS_STATUS_PORTION);
+					} else {
+						order.setWprizeStatus(Order.WPRIS_STATUS_PWI);
+					}
+					order.setCurrentWPMoney(order.getCurrentWPMoney() + money);
+					orderService.update(order);
 				}
 			}
 		}

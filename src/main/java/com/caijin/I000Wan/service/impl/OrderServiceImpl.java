@@ -171,8 +171,7 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 	}
 
 	@Override
-	public List<Map> findMemberByAgentUserId(int i,
-			int pageSize, String id) {
+	public List<Map> findMemberByAgentUserId(int i, int pageSize, String id) {
 		return orderDaoImpl.findMemberByAgentUserId(i, pageSize, id);
 	}
 
@@ -184,7 +183,33 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 	@Override
 	public List<Map> findMemberStaticIncomeByAgentUserId(int i, int pageSize,
 			String id) {
-		return orderDaoImpl.findMemberStaticIncomeByAgentUserId(i, pageSize, id);
+		return orderDaoImpl
+				.findMemberStaticIncomeByAgentUserId(i, pageSize, id);
 	}
+
+	@Override
+	public float getTodayBuyMomey(String id) {
+		try {
+			return orderDao.getTodayBuyMomey(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public float getTodayZhongjiaoMomey(String id) {
+		try {
+			return orderDao.getTodayZhongjiaoMomey(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+//	@Override
+//	public void updateOrderByOrderNo(String orderNo, String status) {
+//		   orderDaoImpl.updateCaiNUmByID(orderNo, status);
+//	}
 
 }

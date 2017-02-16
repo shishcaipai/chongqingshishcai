@@ -25,13 +25,20 @@
 			              {field:'user_name',title:'用户名',width:90,align:'center'},  
 				            {field:'real_name',title:'真实名',width:90,align:'center'},
 				            {field:'email',title:'邮箱',width:90,align:'center'},
-				            {field:'address',title:'地址',width:90,align:'center'},
-							{field:'city',title:'城市',width:90,align:'center'},
+							{field:'type',title:'类别',width:90,align:'center',formatter: function(value,row,index){
+								var time = row.type;
+								if(time ==1){
+									return "代理人";
+								}else if(time ==0){
+									return "会员";
+								}
+						}},
 							{field:'telephone',title:'手机号码',width:90,align:'center'},
 							{field:'identity_card',title:'身份证',width:90,align:'center'},
 							{field:'bank_code',title:'支付宝账号',width:90,align:'center'},
 							{field:'total_score',title:'总积分',width:90,align:'center'},
 							{field:'available_score',title:'可用积分',width:90,align:'center'},
+							  {field:'address',title:'地址',width:90,align:'center'},
 							{field:'create_date',title:'创建时间',width:100,align:'center',
 								formatter: function(value,row,index){
 									var time = row.create_date;
@@ -119,15 +126,6 @@
 			 $.messager.show({ title : '提示', msg :'手机号格式不正确！'}); 
 			 return;
 		}
-		if($("#bankCode").val().trim()==''){
-			 $.messager.show({ title : '提示', msg :'支付宝账号不能为空！'}); 
-			 return;
-		}
-		if(!validateEmail($("#bankCode").val().trim())
-			&&!checkPhone($("#bankCode").val().trim())){
-			 $.messager.show({ title : '提示', msg :'请输入支付宝账号（手机号/邮箱地址）！'}); 
-			 return;
-		}
 		
 		var memberUser = {};
 		memberUser["userName"]=$("#userName").val();
@@ -135,6 +133,7 @@
 		memberUser["telephone"]=$("#telephone").val();
 		memberUser["identityCard"]=$("#identityCard").val();
 		memberUser["bankCode"]=$("#bankCode").val();
+		memberUser["type"]=$("#type").val();
 		//保存
 		$.ajax({
 			url : '../../boss/member/updateMemberUser',

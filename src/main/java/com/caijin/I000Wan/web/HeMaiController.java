@@ -110,8 +110,14 @@ public class HeMaiController {
 				float totalMoney = 0;
 				// 投注名称
 				String name = (String) request.getParameter("playname");
-
-				name = URLDecoder.decode(name);
+                 name=new String(name.getBytes("ISO-8859-1"), "utf-8");
+//				name = URLDecoder.decode(name);
+				log.info("彩票名称::::" + name);
+				log.info("彩票名称::::"
+						+ new String(name.getBytes("ISO-8859-1"), "utf-8"));
+				log.info("彩票名称::::"
+						+ new String(name.getBytes(), "utf-8"));
+				log.info("彩票名称::::" + new String(name.getBytes(), "GBK"));
 				// 投注期号
 				String phase = (String) request.getParameter("phase");
 				// 当前期数
@@ -130,12 +136,12 @@ public class HeMaiController {
 				// 追号是否停
 				String ZjCut = (String) request.getParameter("ZjCut");
 				Integer lotteryCount = 1;
-				log.info("name:" + name + "::phase:" + phase
-						+ "::expectnum:" + expectnum + "::beishulistsuc:"
-						+ beishulistsuc + "::lotteryCode:" + lotteryCode
-						+ "::lotteryCountStr:" + lotteryCountStr + "::ZjCut:"
-						+ ZjCut + "::lotteryTypeId:" + "::lotteryType:"
-						+ "::ZjCut:" + ZjCut);
+				log.info("name:" + name + "::phase:" + phase + "::expectnum:"
+						+ expectnum + "::beishulistsuc:" + beishulistsuc
+						+ "::lotteryCode:" + lotteryCode + "::lotteryCountStr:"
+						+ lotteryCountStr + "::ZjCut:" + ZjCut
+						+ "::lotteryTypeId:" + "::lotteryType:" + "::ZjCut:"
+						+ ZjCut);
 				if (expectnum != null && !expectnum.equals("")) {
 					lotteryCount = Integer.parseInt(expectnum);
 				}
@@ -210,7 +216,11 @@ public class HeMaiController {
 					order.setTotalMoney(totalMoney);
 					order.setUpdateDate(new Date());
 					order.setLotteryCount(lotteryCount);
-					order.setIsCut(Integer.valueOf(ZjCut));
+					try {
+						order.setIsCut(Integer.valueOf(ZjCut));
+					} catch (Exception e) {
+						order.setIsCut(0);
+					}
 					orderService.save(order);
 					String[] lotteryCodes = lotteryCode.split("\\$");
 					log.info(" lotteryCodes=============" + lotteryCodes.length);
@@ -238,7 +248,7 @@ public class HeMaiController {
 		}
 		model.put("sucess", false);
 		model.put("code", 3);
-		model.put("msg", "下注失败，请重新下注");
+		model.put("msg", "数据有误，下注失败，请重新下注");
 		return new ModelAndView("caipiao/hemai", model);
 	}
 
@@ -295,12 +305,32 @@ public class HeMaiController {
 			model.addAttribute("code", 2);
 			return "redirect:/user/login";
 		}
-		int i = Integer.valueOf(null == bdNum ? "0" : bdNum);
-		int total = Integer.valueOf(totalNum);
-		int reNums = Integer.valueOf(reNum);
-		float money = Float.valueOf(order.getTotalMoney()) / total
+		int i=0;
+		try{
+		 i = Integer.valueOf(null == bdNum ? "0" : bdNum);
+		}catch(Exception e){
+			
+		}
+		int total=0;
+		try{
+			total= Integer.valueOf(totalNum);
+		}catch(Exception e){
+			
+		}
+		int reNums=0;;
+		try{
+			reNums= Integer.valueOf(reNum);
+		}catch(Exception e){
+			
+		}
+		float money =0;
+				try{
+				money=	Float.valueOf(order.getTotalMoney()) / total
 				* (total - reNums);
-		if (memberUser.getAvailableScore() > money) {
+				}catch(Exception e){
+					
+				}
+		if (memberUser.getAvailableScore() >= money) {
 			HeMaiOrderDetail heMaiOrderDetail = new HeMaiOrderDetail();
 			heMaiOrderDetail.setOrder(order);
 			heMaiOrderDetail.setDesc(dec);
@@ -315,7 +345,11 @@ public class HeMaiController {
 			heMaiOrderDetail.setFensum(total);
 			heMaiOrderDetail
 					.setFloatManay(Float.valueOf(order.getTotalMoney()));
+			try{
 			heMaiOrderDetail.setType(Integer.valueOf(type));
+			}catch(Exception e){
+				heMaiOrderDetail.setType(0);
+			}
 			heMaiOrderDetail.setCreateDate(new Date());
 			heMaiOrderDetailService.save(heMaiOrderDetail);
 			if (money > 0) {

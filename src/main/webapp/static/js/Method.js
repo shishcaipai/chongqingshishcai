@@ -2960,7 +2960,7 @@ if($("#btDiv").is(":hidden"))
 		if (checkType=="zg") {
 				 var  data={
 					    totalMoney:allmoney,//投注总金额
-					    playname:encodeURI(playname),//投注名称
+					    playname:playname,//投注名称
 						codes:codes,//投注彩票代码
 						expectnum:expectnum,//投注彩票期数
 						zhushunum: $("#zhushushow2").text(),//投注数
@@ -2973,7 +2973,6 @@ if($("#btDiv").is(":hidden"))
 						t : Math.random()
 					};
 					var form = '<form action="../order/ajax_save" method="post" id="tmpForm2">';
-					
 					for (var name in data) {
 					var val = eval('data.' + name);
 					form += '<input type="text" name="' + name + '" value="' + val + '">';
@@ -2984,7 +2983,7 @@ if($("#btDiv").is(":hidden"))
 		} else {
 			 var  _data={
 					    totalMoney:allmoney,//投注总金额
-					    playname:encodeURI(playname),//投注名称
+					    playname:playname,//投注名称
 						codes:codes,//投注彩票代码
 						expectnum:expectnum,//投注彩票期数
 						zhushunum: $("#zhushushow2").text(),//投注数
@@ -3006,7 +3005,6 @@ if($("#btDiv").is(":hidden"))
 
 function buyTogetherSubmit(data) {
 	var form = '<form action="../hemai/order" method="post" id="tmpForm">';
-	
 	for (var name in data) {
 	var val = eval('data.' + name);
 	form += '<input type="text" name="' + name + '" value="' + val + '">';

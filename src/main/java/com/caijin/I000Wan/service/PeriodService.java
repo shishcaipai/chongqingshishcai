@@ -46,7 +46,7 @@ public interface PeriodService extends CommonService<Period,String>{
      * 将到期的订单更改状态
      * @param qihao
      */
-	void updateUnPeriod(String qihao);
+//	void updateUnPeriod(String qihao);
 
 	List<Period> findOrderByStatus(int waitOrder);
 

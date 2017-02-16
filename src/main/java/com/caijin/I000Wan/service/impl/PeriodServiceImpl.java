@@ -114,13 +114,13 @@ public class PeriodServiceImpl extends CommonServiceImpl<Period, String>
 		return orderDaoImpl.findUserTotalAmountList(date);
 	}
 
-	@Override
-	public void updateUnPeriod(String qihao) {
-		List<Period> list=periodDao.findbyQIhao(qihao);
-		for (Period period :list){
-		orderDaoImpl.updateOrderByQihao(period.getOrderId(),period.getLotteryPeriod());
-		}
-	}
+//	@Override
+//	public void updateUnPeriod(String qihao) {
+//		List<Period> list=periodDao.findbyQIhao(qihao);
+//		for (Period period :list){
+//		orderDaoImpl.updateOrderByQihao(period.getOrderId(),period.getLotteryPeriod());
+//		}
+//	}
 
 	@Override
 	public List<Period> findOrderByStatus(int waitOrder) {

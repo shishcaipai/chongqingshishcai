@@ -80,8 +80,6 @@
 </div>
 </div>
 <!--main end -->
-
-<jsp:include page="../footer.jsp"></jsp:include>
 <div class="opacity">
 <div class="dialog">
 <div class="diatitle">
@@ -90,35 +88,13 @@
 <div class="diabox"> 提示信息 </div>
 </div>
 </div>
+
 <script type="text/javascript">
    function toBuy(){
         var name="时时彩";
         var totalMoney="${totalMoneyStr}";
         var orderId="${orderId}"
-       /*  $.ajax({  
-		        type : "post",  
-		        url : "${pageContext.request.contextPath}/order/jczq/ajax_save",  
-		        dataType:"json",  
-		        data:{
-		           "name":name,
-		           "totalMoney":totalMoney,
-		           "lotteryCount":lotteryCount,
-		           "orderId":selectType
-		        },
-		        success : function(data) {
-		           if(data.sucess){
-		                var orderId=data.orderId; */
 		            	window.location.href="${pageContext.request.contextPath}/sscorder/alipay?name="+name+"&totalMoney="+totalMoney+"&orderId="+orderId;
-		         /*   }else{
-		                if(data.msg == "未登录!"){
-		                  alert("请先登录，然后再进行选购!");
-		                  window.location.href="${pageContext.request.contextPath}/user/login";
-		                }else{
-		                  alert("支付失败！");
-		                }
-		           }
-		        }  
-		    }); */
     }
 </script>
 </body>

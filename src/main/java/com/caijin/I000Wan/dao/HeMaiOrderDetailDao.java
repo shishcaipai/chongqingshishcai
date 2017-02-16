@@ -13,7 +13,7 @@ public interface HeMaiOrderDetailDao extends CommonDao<HeMaiOrderDetail,String>{
 	@Query("select o from HeMaiOrderDetail o where o.order = ?1 ")
 	HeMaiOrderDetail findOrderHemaiDetailByOrderId(Order order);
 	
-	@Query(value="select o.* from hemai_order_detail o limit ?1,?2 ",nativeQuery=true)
+	@Query(value="select o.* from hemai_order_detail o order by o.create_date desc limit ?1,?2 ",nativeQuery=true)
 	List<HeMaiOrderDetail> findAllHemaiOrderDetails(Integer pageNum, int size);
 	
 	@Query("select count(o) from HeMaiOrderDetail o")
