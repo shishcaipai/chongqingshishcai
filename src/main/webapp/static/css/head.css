@@ -1,98 +1,67 @@
-@charset "utf-8";
+/* CSS Document */
+body{
+width:100%;
+margin:0 auto;
+font-size:12px;
+font-family:"宋体";
+color:#000;
+}
 
-/*
-@Description:蜂鸟 个人中心 公共头部 公共底部
-@author: zhuzp caizx
-@update: 2012-08-22
-*/
+dl,dt,dd,h1,h2,h3,h4,p,ul,li,ol,form{ margin:0; padding:0;}
+ul,li{ list-style:none;}
 
-/* reset */
-body,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,th,td,p,blockquote,pre,form,fieldset,legend,input,button,textarea,hr {margin:0;padding:0;}
-body {font:12px/1.5 Arial; color:#333;}
-select,input,button {vertical-align:middle;font-size:100%;}
-ul,ol {list-style:none;}
-fieldset,img {border:0;}
-em {font-style:normal;}
-.clearfix:after {content:"."; display: block; visibility: hidden; clear: both; height:0; font-size:0}
-.clearfix {*zoom:1}
+em{font-style:normal; color:#c81e05;}
+a img{ border:none;}
+a{
+text-decoration:none;
+}
 
-/* public-header-background-image */
-.top-bar-box,.other-link-list i,.indiviual-logo,.search-btn,.menu li,.person .link i,.message-prompts-box .tip-top,.message-prompts-box .close-box{ background-image: url(../images/public-header-bg.png)}
-.foot .beian,.foot .baidu{background-image:url(http://icon.fengniao.com/index/images/bg.png);}
-
-/* global */
-body{_background-image:url(about:blank); _background-attachment: fixed;}
-.top-bar,.header{ margin:0 auto; width: 980px;}
-
-/* top-bar */
-.top-bar-box{position:fixed; left:0; top:0; _position:absolute; _bottom:auto; _top: expression(documentElement.scrollTop); width:100%; z-index:999; height: 31px;color:#999}
-.top-bar{ position: relative;*zoom:1;z-index:1000}
-.top-bar a{ color:#999; text-decoration: none}
-.top-bar a:hover{ text-decoration: underline; color:#f60}
-
-.login{ margin-top: 5px;float: right;}
-.login a{margin:0 5px;}
-.login span{ color:#444}
-
-.other-link-list{position: absolute; top:2px; padding-top: 3px; width: 85px; z-index:1000}
-.cur{border:1px solid #e1e1e1; background: #fafafa}
-
-.other-link-list li{height: 26px; line-height: 26px; overflow: hidden}
-.other-link-list a{ padding:0 5px; }
-.other-link-list li a{display: block;height: 26px;overflow: hidden}
-.other-link-list li a:hover{ background: #eeeeee; text-decoration: none}
-.other-link-list a.parent-link:hover{background: none;text-decoration: none}
-.other-link-list i{ position: absolute; right: 7px; top:10px;width:8px; height:4px ; background-position: -174px -45px; overflow: hidden;}
-.other-link-list ul{margin-top:5px; display: none}
-
-.cur ul{display: block;}
-.cur i{background-position: -174px -36px}
-.cur a.parent-link{ color:#f60} 
-
-/* header */
-.header-box{position:relative; *zoom:1; height: 56px; padding-top:31px; background: #fafafa; border-top:1px solid #ebebeb; border-bottom:1px solid #bfd2e1; z-index:100;}
-.header{ position: relative; height: 56px; z-index:10;zoom:1}
-.indiviual-logo{ float:left;margin-left:1px;width:104px; height: 56px; background-position:0 -170px; display: block; text-indent: -9999em;}
-
-.menu{ margin:26px 0 0 30px}
-.menu,.menu li{ float: left; display: inline;}
-.menu li{padding:0 13px; background-position:-183px -87px; background-repeat: no-repeat; }
-.menu .first{ background: none}
-
-.menu a{ font: 400 14px/16px "Microsoft YaHei"; text-decoration: none; color:#333; display: block;}
-.menu .current a{font: 400 14px/16px "Microsoft YaHei";  color:#27699d;}
-
-.person{margin-top:20px; float: right}
-.person li{ position: relative; margin-left: 7px; float: left; display: inline;*zoom:1; z-index:10}
-.person li a.link{display: inline-block;padding: 5px 9px 5px;height: 16px;line-height: 16px;outline: none; text-decoration: none; color:#666; vertical-align: middle}
-.person .link i{ margin-left: 4px;width: 5px; height: 3px; display:inline-block; vertical-align: middle; background-position: -175px -53px; overflow: hidden}
-.person .current a.link{ position:relative;padding: 4px 8px 5px; color:#26689b; border:1px solid #bcd4e7; border-bottom:0 none; background: #fff;z-index:10}
-.person .current .layer-topmenu-list{ display: block;}
-
-.layer-topmenu-list{ position: absolute; left:-100px; top:25px;_top:26px; z-index:3;padding:8px 2px 5px 2px; border:1px solid #bcd4e7; background: #fff; display: none}
-.layer-topmenu-list li{margin:0; width: 145px; height: 25px; line-height: 25px; overflow: hidden; text-indent: 8px; float: none; display: block;}
-.layer-topmenu-list a{ text-decoration: none; display: block; color:#666}
-.layer-topmenu-list a:hover{ background: #f4f4f4;}
-
-.person li.feedback a.link:hover,.person li.feedbacked a.link,.person li.help a.link:hover,.person li.helped a.link{padding: 4px 8px 3px;border:1px solid #bcd4e7; color:#26689b; background: #deeaf4;}
-
-/* message-prompts-box 消息提示框 */
-.message-prompts-box{ position: absolute; top: 88px;_top:expression(eval(88));left:50%; margin-left:330px;z-index:99;_width:140px;_overflow: visible;padding:2px; border:1px solid #a1bbcf; background: #fff}
-.message-prompts-box .tip-top{ position: absolute; left:18px; top: -8px; width:14px; height:8px; overflow: hidden; display: block; background-position:-153px -32px;}
-.message-prompts-box .close-box{ position: absolute; right: 10px; top: 7px; width:7px; height:7px; display: block; background-position:-153px -49px ; cursor: pointer;}
-.message-prompts{ padding-top: 18px;}
-.message-prompts li{ padding:0 10px; height: 25px; line-height: 25px; white-space: nowrap; color:#666;overflow: hidden;zoom:1}
-.message-prompts li.current{ background:#f4f4f4; cursor: pointer; }
-.message-prompts a{ padding-left: 10px; text-decoration: none; color:#26689b;}
-.message-prompts a:hover{ text-decoration: underline;}
-.fixed{ position: fixed; _position: absolute; top: 30px;left:50%; margin-left:330px;_top:expression(eval(document.documentElement.scrollTop+30));}
-
-/* 个人中心公共底部 foot */
-.foot{width:980px; margin:0 auto; border:1px solid #e0e0e0; border-top:5px solid #e0e0e0; background:#f8f8f8; padding:10px 0 14px; line-height:23px; text-align:center; color:#999;}
-.foot a{margin:0 12px; color:#333; text-decoration:none;}
-.foot a:hover{color:#f60; text-decoration:underline;}
-.foot .copyright{padding:10px 0 0;}
-.foot .copyright img{vertical-align:middle;}
-.foot .cnet{display:inline-block; width:23px; height:23px; margin-right:10px; background-position:-374px -59px;}
-.foot .beian{display:inline-block; vertical-align:middle; width:28px; height:33px; margin:0 0 0 10px; background-position:-307px -120px;}
-.foot .baidu{display:inline-block; vertical-align:middle; width:29px; height:36px;  margin:0 0 0 6px;background-position:-336px -119px;}
+/*头部*/
+.mainbody{ width:1000px; height:auto; margin:0 auto; padding:0; clear:both}
+/*头部样式*/
+.sc_top{ width:1000px; clear:both;}
+.sc_top_1{ width:1000px;}
+.sc_top_logo{ width:220px;float:left;}
+.sc_top_logo img{
+float:left;
+margin-top:10px;
+}
+.sc_top_pain{ width:220px; height:80px; background:url(../images/sc_3.jpg) no-repeat; float:left;}
+.sc_top_wen{ width:550px;float:right; height:80px; overflow:hidden;}
+.zc_top_newxt{ width: auto; height:15px; line-height:15px; text-align:right; float:right; margin:6px 0px; color:#bbb;}
+.zc_top_newxt a{ color:#049;}
+.zc_top_kefu{ width:217px; height:55px;; float:right}
+.sc_top_2{ width:1000px; height:41px; background:url(../images/dh1.jpg) repeat-x; overflow:hidden;}
+.sc_top_li{float:left;}
+.sc_top_li a{
+float:left;
+display:inline;
+height:36px;
+line-height:36px;
+padding:0 18px;
+font-weight:bold;
+color:#fff;
+}
+.sc_top_li a:hover{
+background:url(../images/dh2.jpg);
+}
+.sc_top_wen p{
+float:right;
+width:100%;
+text-align:right;
+height:20px;
+line-height:20px;
+color:#333;
+}
+.sc_top_wen p a{
+color:#333;
+}
+.sc_top_wen div{
+float:right;
+width:100%;
+margin-top:4px;
+}
+.sc_top_wen div img{
+float:right;
+}
+/*头部样式*/

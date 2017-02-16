@@ -24,11 +24,11 @@ public class ApplyRecord extends BaseEntity{
 
 	private static final long serialVersionUID = -1508799697461386872L;
 	
-	public final static Integer AUDIT_SUCESS=0;//审核通过
+	public final static Integer AUDIT_SUCESS=1;//审核通过
 	
-	public final static Integer AUDIT_FAILUE=1;//审核失败
+	public final static Integer AUDIT_FAILUE=2;//审核失败
 	
-	public final static Integer UN_AUDIT=2;//未审核
+	public final static Integer UN_AUDIT=0;//未审核
 	
 	private Bank bank;//申请银行
 	
@@ -42,7 +42,7 @@ public class ApplyRecord extends BaseEntity{
 	
 	private MemberUser memberUser;//提款申请人
 	
-	private Integer applyMoney;//提款金额
+	private float applyMoney;//提款金额
 	
 	private Integer auditStatus;//审批状态
 	
@@ -107,11 +107,11 @@ public class ApplyRecord extends BaseEntity{
 	}
 
 	@Column(name="apply_money")
-	public Integer getApplyMoney() {
+	public float getApplyMoney() {
 		return applyMoney;
 	}
 
-	public void setApplyMoney(Integer applyMoney) {
+	public void setApplyMoney(float applyMoney) {
 		this.applyMoney = applyMoney;
 	}
 

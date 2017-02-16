@@ -355,6 +355,7 @@ function ZG_HM_PLAN_Even()
 	});
 	/*合买 按钮 事件*/
 	$("#btn_SubmitHM").click(function(){
+		
 		checkData("hm");
 	});
 	/*计划倍投 按钮 事件*/

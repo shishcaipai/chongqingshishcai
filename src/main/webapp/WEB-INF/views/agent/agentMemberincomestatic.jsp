@@ -39,158 +39,125 @@
 		</div>
 		<div class="account_right">
 			<div class="user_right">
-		<div class="p_yd01">
+				<div class="p_yd01">
 
-	<div class="p_daohang">
-		<ul>
-			<li style="float:left;"><b>盈收统计</b></li>
-			<li style="float:right;">
-			<form action="my_income">
-				<input type="hidden" name="from" value="input" />
-				<input type="hidden" name="selectType" value="" />
-				交易时间：
-				<input name="startDate" value="2017-02-01" style="width: 100px" class="Wdate" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" />
-				-
-				<input name="endDate" value="2017-02-13" style="width: 100px" class="Wdate" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" />
-				<input type="submit" value="统计" style="cursor: pointer;" />
-				<input type="submit" value="明细" style="cursor: pointer;" onclick="selectTypeMx()" />
-			</form>
-			</li>
-		</ul>
-	</div>
-	
-	<div class="p_nr">
-	<!--明细-->
-	
-	
-	<table class="zhmx" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-			<td>
-			
-				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="zhmx_nr01">
-				  <tr>					
-					<td width="100" align="center" valign="middle">用户名</td>
-					<td width="100" align="center" valign="middle">用户类型</td>
-					<td width="100" align="center" valign="middle">上级</td>
-					<td width="100" align="center" valign="middle">充值金额</td>
-					<td width="100" align="center" valign="middle">赠送金额</td>
-					<td width="100" align="center" valign="middle">提款金额</td>
-					<td width="100" align="center" valign="middle">当前余额</td>
-					<td width="100" align="center" valign="middle">盈利金额</td>
-				  </tr>
-				</table>
-				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="page_tzjl02">
-                  
-			      <tr>
-					<td width="100" align="center" valign="middle">
-					17786282835
-					</td>
-					<td width="100" align="center" valign="middle">
-					普通用户
-					</td>
-					<td width="100" align="center" valign="middle">
-					518168
-					</td>
-					<td width="100" align="center" valign="middle">
-						-
-					</td>
-					<td width="100" align="center" valign="middle">
-						-
-					</td>
-					<td width="100" align="center" valign="middle">
-						-
-					</td>
-					<td width="100" align="center" valign="middle">
-						
-							-
-						
-						
-					</td>
-					<td width="100" align="center" valign="middle">
-						
-							-
-						
-						
-						
-					</td>
-				  </tr>
-                  
-			      <tr>
-					<td width="100" align="center" valign="middle">
-					cxju8881
-					</td>
-					<td width="100" align="center" valign="middle">
-					普通用户
-					</td>
-					<td width="100" align="center" valign="middle">
-					518168
-					</td>
-					<td width="100" align="center" valign="middle">
-						-
-					</td>
-					<td width="100" align="center" valign="middle">
-						-
-					</td>
-					<td width="100" align="center" valign="middle">
-						-
-					</td>
-					<td width="100" align="center" valign="middle">
-						
-						
-							4
-						
-					</td>
-					<td width="100" align="center" valign="middle">
-						
-						
-						
-							<b style="color: #fff;background: #f8b551;">-4</b>
-						
-					</td>
-				  </tr>
-                  
-				</table>
-			
-			
-			</td>
-		  </tr>
-			<TR>
-				<td colSpan=10>
-					<table class="hm_page" border="0" cellpadding="0" cellspacing="0" width="100%" style=" height:36px;font-weight: bold;">
-						<tbody>
-						<tr>
-							<td align="center">
-								充值总额：<span style="color: red">0</span>元
-							</td>
-							<td align="center">
-								赠送总额：<span style="color: red">0</span>元
-							</td>
-							<td align="center">
-								提款总额：<span style="color: red">0</span>元
-							</td>
-							<td align="center">
-								总余额：<span style="color: red">4</span>元
-							</td>
-							<td align="center">
-								盈收总计：<span style="color: red">-4</span>元
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</td>
-			</TR>
-		</table>
-	
-	<!--账户明细-->
-</div>
+					<div class="p_daohang">
+						<ul>
+							<li style="float: left;"><b>盈收统计</b></li>
+							<li style="float: right;">
+								<!-- <form action="my_income">
+									<input type="hidden" name="from" value="input" /> <input
+										type="hidden" name="selectType" value="" /> 交易时间： <input
+										name="startDate" value="2017-02-01" style="width: 100px"
+										class="Wdate" readonly="readonly"
+										onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" />
+									- <input name="endDate" value="2017-02-13" style="width: 100px"
+										class="Wdate" readonly="readonly"
+										onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" />
+									<input type="submit" value="统计" style="cursor: pointer;" /> <input
+										type="submit" value="明细" style="cursor: pointer;"
+										onclick="selectTypeMx()" />
+								</form> -->
+							</li>
+						</ul>
+					</div>
+
+					<div class="p_nr">
+						<!--明细-->
+
+
+						<table class="zhmx" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td>
+
+									<table width="100%" border="0" cellspacing="0" cellpadding="0"
+										class="zhmx_nr01">
+										<tr>
+											<td width="100" align="center" valign="middle">用户名</td>
+											<td width="100" align="center" valign="middle">用户类型</td>
+											<td width="100" align="center" valign="middle">充值金额</td>
+											<td width="100" align="center" valign="middle">赠送金额</td>
+											<td width="100" align="center" valign="middle">提款金额</td>
+											<td width="100" align="center" valign="middle">当前余额</td>
+											<td width="100" align="center" valign="middle">盈利金额</td>
+										</tr>
+									</table>
+									<table width="100%" border="0" cellspacing="0" cellpadding="0"
+										class="page_tzjl02">
+										<c:forEach var="user" items="${requestScope.memberUsers }">
+											<td width="100" align="center" valign="middle">
+												${user.username }</td>
+											<td width="100" align="center" valign="middle">
+												 <c:choose>
+				              <c:when test="${user.type==1}">
+					                 代理人
+				                 </c:when>
+				<c:otherwise>
+				 会员
+				</c:otherwise>
+			</c:choose>
+												</td>
+											<td width="100" align="center" valign="middle">
+												${user.available }</td>
+											<td width="100" align="center" valign="middle">
+												${user.actionScore }</td>
+											<td width="100" align="center" valign="middle">
+												${user.applyMoney }</td>
+											<td width="100" align="center" valign="middle">
+												${user.totalActionScore+user.totalActionScore+totalactionScore }</td>
+											<td width="100" align="center" valign="middle">
+												${user.totalScore+user.applyMoney -user.available}</td>
+											</tr>
+
+										</c:forEach>
+
+									</table>
+
+
+								</td>
+							</tr>
+							<TR>
+								<TR>
+									<td colSpan=10>
+										<table class="hm_page" border="0" cellpadding="0" cellspacing="0" width="100%" style=" height:36px;">
+  <tbody>
+  <tr>
+   <td align="center" class="page" id="show_page_div">页次:<b><font
+														color="red">${requestScope.pageNum}</font></b> /
+													${requestScope.page} &nbsp;&nbsp;共有:${requestScope.size} 条记录 <a
+													href="<%=basePath%>agent/agentMembeIncomeStatic?type=0&pageNum=1">首页</a>
+													&nbsp;&nbsp;&nbsp;&nbsp; <a
+													href="<%=basePath%>agent/agentMembeIncomeStatic?type=0&pageNum=${requestScope.pageNum == 1 ? 1 : requestScope.pageNum - 1}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													<a
+													href="<%=basePath%>agent/agentMembeIncomeStatic?type=0&pageNum=${requestScope.pageNum == requestScope.page ? requestScope.pageNum : requestScope.pageNum + 1}">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													<a
+													href="<%=basePath%>agent/agentMembeIncomeStatic?type=0&pageNum=${requestScope.page}">尾页</a>
+													&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;跳转:
+													 <select
+													name="pageNum"
+													onchange='javascript:change(this.options[this.options.selectedIndex].value)'
+													id="page">
+														<option value="1" selected>1</option>
+												</select> &nbsp;&nbsp;
+												</td>
+  </tr>
+  </tbody></table>
+									</td>
+								</TR>
+							</TR>
+						</table>
+
+						<!--账户明细-->
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!--main end -->
+		<!--main end -->
 <script type="text/javascript">
 	function change(index) {
 		var type = $("#type").val();
-		window.location.href = "<%=basePath%>betting_record?type=" + type + "&pageNum=" + index;
+		window.location.href = "<%=basePath%>agent/agentMembeIncomeStatic?type=" + type + "&pageNum=" + index;
 	}
 	function page(){
 		var html = "";
@@ -209,6 +176,7 @@
 	}
 	page();
 </script>
+	<!--main end -->
 	<jsp:include page="../footer.jsp"></jsp:include>
 	<div class="opacity">
 		<div class="dialog">

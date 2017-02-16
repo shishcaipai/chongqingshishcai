@@ -54,6 +54,13 @@ public interface PeriodDao extends CommonDao<Period,String>{
 	float getMoneyPeriodByOId(String orderNo);
 	@Query("select p from Period p  where p.winning=0 and p.lotteryPeriod<=?1")
 	List<Period> getUNPeriod(String qihao);
-	@Query(value = "select t.* from lottery_period t  inner join trade_order o on o.order_id = t.orderid where o.order_status = ?1 and (o.order_type=2 or o.order_type=3) order by o.create_date desc ", nativeQuery = true)
+	@Query(value = "select t.* from lottery_period t  inner join trade_order o on o.order_on = t.orderid where o.order_status = ?1 and (o.order_type=2 or o.order_type=3) order by o.create_date desc ", nativeQuery = true)
 	List<Period> findOrderByStatus(int waitOrder);
+	/**
+	 * 还没有开奖的期号
+	 * @param orderId
+	 * @return
+	 */
+	@Query("select count(p.id) from Period p  where p.orderId=?1  and  p.status=1 ")
+	int getPeriodUNStatusByOId(String orderId);
 }

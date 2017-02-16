@@ -50,7 +50,7 @@
 				<c:otherwise>
 					<div class="order_page">
 						<div class="oreder_title">
-							<em>购买失败</em>
+							<em>购买失败${code}</em>
 						</div>
 						<table width="100%" cellpadding="0" cellspacing="0">
 							<tr>

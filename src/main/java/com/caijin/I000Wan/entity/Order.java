@@ -27,14 +27,24 @@ import com.caijin.I000Wan.common.entity.BaseEntity;
 public class Order extends BaseEntity {
 
 	private static final long serialVersionUID = 7485168642747519619L;
-
+	// 充值订单
 	public final static int RECHARGE_ORDER = 1;
-
+	// 代购彩票订单
 	public final static int PROXY_BUY_ORDER = 2;
+	// 发起合购彩票订单
 	public final static int HEMAI_BUY_ORDER = 3;
+	// 合购彩票子订单
+	public final static int HEMAI_IMP_BUY_ORDER = 4;
+	// 返奖订单
+	public final static int AWARD_ORDER = 5;
+	// 提现订单
+	public final static int DEPOSIT_ORDER = 6;
+
 	public final static int ORDER_SUCESS = 1;
 	public final static int WAIT_ORDER = 0;
 	public final static int ORDER_FAILUE = 2;
+	// 订单还没确认
+	public final static int ORDER_UN = -1;
 
 	public final static int PAY_STATUS_NO = 0;// 未支付
 
@@ -43,6 +53,16 @@ public class Order extends BaseEntity {
 	public final static int PAY_STATUS_FAILUE = 2;// 支付失败
 
 	public final static int PAY_STATUS_OFFTIME = 3;// 支付超时
+
+	public final static int WPRISE_STATUS_NO = 0;// 待计算奖
+
+	public final static int WPRIS_STATUS_PORTION = 1;// 部分中奖
+
+	public final static int WPRIS_STATUS_ALL = 2;// 全部中奖
+
+	public final static int CASHBACKSTATUS_NO = 0;// 订单返现状态
+	public final static int CASHBACKSTATUS_PORTION = 1;
+	public final static int CASHBACKSTATUS_ALL = 2;
 
 	private String name;
 
@@ -54,7 +74,7 @@ public class Order extends BaseEntity {
 
 	private Integer payStatus;// 支付状态类型 0为未支付 1为支付成功 2为支付失败 3为支付超时
 
-	private String orderId; // 订单ID
+	private String otherId; // 其他关联id 当订单为1，4，5，6时关联的其他对像
 
 	private Date orderTime;// 下订单时间
 
@@ -62,7 +82,7 @@ public class Order extends BaseEntity {
 
 	private List<Period> period;// 彩票期数
 
-	private Integer totalMoney;// 总金额
+	private Float totalMoney;// 订单购买总金额
 
 	private Integer lotteryCount; // 彩票注数
 
@@ -70,9 +90,11 @@ public class Order extends BaseEntity {
 
 	private Integer isCut;
 
-	public float reTotalMoney;
-	
-	 public int wprizeStatus=0; //返奖是否完成状态为0，1
+	public float currentWPMoney;// 当前中奖金额
+
+	public int wprizeStatus = 0; // 中奖计算是否完成状态为0，1，2
+
+	public int cashBackStatus = 0;// 返现是否完成0，1，2
 
 	@Column(length = 10)
 	public Integer getIsCut() {
@@ -128,19 +150,19 @@ public class Order extends BaseEntity {
 		this.payStatus = payStatus;
 	}
 
-	@Column(name = "order_id", length = 36)
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
-
 	@Column(name = "order_time")
 	@Temporal(TemporalType.DATE)
 	public Date getOrderTime() {
 		return orderTime;
+	}
+
+	@Column(name = "other_id", length = 36)
+	public String getOtherId() {
+		return otherId;
+	}
+
+	public void setOtherId(String otherId) {
+		this.otherId = otherId;
 	}
 
 	public void setOrderTime(Date orderTime) {
@@ -156,13 +178,14 @@ public class Order extends BaseEntity {
 	public void setMemberUser(MemberUser memberUser) {
 		this.memberUser = memberUser;
 	}
-	@Transient
-	public float getReTotalMoney() {
-		return reTotalMoney;
+
+	@Column(precision = 10, name = "current_wp_money")
+	public float getCurrentWPMoney() {
+		return currentWPMoney;
 	}
 
-	public void setReTotalMoney(float reTotalMoney) {
-		this.reTotalMoney = reTotalMoney;
+	public void setCurrentWPMoney(float currentWPMoney) {
+		this.currentWPMoney = currentWPMoney;
 	}
 
 	@Transient
@@ -175,11 +198,11 @@ public class Order extends BaseEntity {
 	}
 
 	@Column(precision = 10, name = "total_money")
-	public Integer getTotalMoney() {
+	public Float getTotalMoney() {
 		return totalMoney;
 	}
 
-	public void setTotalMoney(Integer totalMoney) {
+	public void setTotalMoney(Float totalMoney) {
 		this.totalMoney = totalMoney;
 	}
 
@@ -200,6 +223,7 @@ public class Order extends BaseEntity {
 	public void setLotteryType(String lotteryType) {
 		this.lotteryType = lotteryType;
 	}
+
 	@Column(length = 10)
 	public int getWprizeStatus() {
 		return wprizeStatus;

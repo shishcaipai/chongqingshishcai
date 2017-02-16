@@ -2951,16 +2951,13 @@ if($("#btDiv").is(":hidden"))
 	if(confirm("请确认您的投注信息\n\r\n\r玩法："+playname+"\n\r期数：共"+expectnum+"期\n\r金额："+allmoney+"元"))
 	{
 		$("#btn_SubmitZ,#btn_SubmitHM,#btn_SubmitPath").attr("disabled",true);
+		
 		var ZjCut=0;
 		if ($("#ZjStop").attr("checked"))
 		{
 			ZjCut=1;
 		}
 		if (checkType=="zg") {
-//			 $.ajax({
-//				   type: "POST",
-//				   url: "../order/sfc/ajax_save",
-//				   dataType : "json",
 				 var  data={
 					    totalMoney:allmoney,//投注总金额
 					    playname:encodeURI(playname),//投注名称
@@ -2984,50 +2981,7 @@ if($("#btDiv").is(":hidden"))
 					form += '</form>';
 					$('body').append(form);
 					$('#tmpForm2').submit();
-//					success:function(data) {
-//						alert("success"+data);
-//						try {
-//							data = eval(data);
-//						} catch (e) {
-//							alert('会话超时，请重新登陆');
-//							window.location = '';
-//						}
-//						alert("success2"+data.sucess+"=="+data.code);
-//						if (data && data.sucess && data.code == 1) {
-//							if(confirm("投注成功！\n是否立即支付？")) {
-//								window.open("../order/sfc/orderconfirm?orderId=" + data.tradeOrder, "_blank");
-//							}
-//						}else if (data && !data.sucess && data.code == -1) {
-//							if(confirm("投注失败！\n立即前往登陆？")) {
-//								alert("-----");
-//								window.location = '../user/login'
-//								//window.open("http://localhost:8080/caipiao100/user/login", "_blank");
-//							}
-//						}else if (data && !data.sucess && data.code == 2) {
-//							if(confirm("投注失败！\n重新投注？")) {
-//								window.location = '';
-//							}
-//						}
-//						$("#btn_SubmitZ,#btn_SubmitHM,#btn_SubmitPath").attr("disabled",false);
-//						
-//					},
-//					error:function(XMLHttpRequest, textStatus, errorThrown) {
-//						alert("error"+data);
-//						var s = XMLHttpRequest.responseText;
-//						if (s == '') {
-//							window.location = '';
-//						}
-//						var errorJson = JSON.parse(s);
-//						if (errorJson.message == "用户可用余额不足") {
-//							window.location = "myAccount?type=pay";
-//						}
-//						$("#btn_SubmitZ,#btn_SubmitHM,#btn_SubmitPath").attr("disabled",false);
-//						s = eval("(" + s + ")");
-//						alert(s.message);
-//					}
-//			   });
 		} else {
-			alert("合买");
 			 var  _data={
 					    totalMoney:allmoney,//投注总金额
 					    playname:encodeURI(playname),//投注名称

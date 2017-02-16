@@ -14,14 +14,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/css/head.css" rel="stylesheet"
 	type="text/css" />
 <link href="<%=basePath%>static/css/jqueryui.css" type="text/css"
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<LINK href="http://www.ib18.cn/res/css/head.css" type=text/css
-	rel=stylesheet>
 <link href="http://www.ib18.cn/res/css/page.css" type="text/css"
 	rel="stylesheet">
 <link href="http://www.80cb.cn/res/css/common.css" type="text/css"
@@ -68,8 +66,9 @@
 								</thead>
 								<tbody>
 
-
-									<tr>
+                  <c:forEach var="member" items="${requestScope.spredMember }">
+							<tr>
+							<tr>
 										<td style="text-align: center;">1</td>
 										<td>518168</td>
 										<td>2016-12-19 14:29:40</td>
@@ -79,6 +78,7 @@
 										<td>10000.0</td>
 										</td>
 									</tr>
+						</c:forEach>
 								</tbody>
 								<TR>
 									<td colSpan=10>
@@ -88,13 +88,13 @@
    <td align="center" class="page" id="show_page_div">页次:<b><font
 														color="red">${requestScope.pageNum}</font></b> /
 													${requestScope.page} &nbsp;&nbsp;共有:${requestScope.size} 条记录 <a
-													href="<%=basePath%>betting_record?type=0&pageNum=1">首页</a>
+													href="<%=basePath%>agent/agentMembeSpred?type=0&pageNum=1">首页</a>
 													&nbsp;&nbsp;&nbsp;&nbsp; <a
-													href="<%=basePath%>betting_record?type=0&pageNum=${requestScope.pageNum == 1 ? 1 : requestScope.pageNum - 1}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													href="<%=basePath%>agent/agentMembeSpred?type=0&pageNum=${requestScope.pageNum == 1 ? 1 : requestScope.pageNum - 1}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
 													<a
-													href="<%=basePath%>betting_record?type=0&pageNum=${requestScope.pageNum == requestScope.page ? requestScope.pageNum : requestScope.pageNum + 1}">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+													href="<%=basePath%>agent/agentMembeSpred?type=0&pageNum=${requestScope.pageNum == requestScope.page ? requestScope.pageNum : requestScope.pageNum + 1}">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
 													<a
-													href="<%=basePath%>betting_record?type=0&pageNum=${requestScope.page}">尾页</a>
+													href="<%=basePath%>agent/agentMembeSpred?type=0&pageNum=${requestScope.page}">尾页</a>
 													&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;跳转:
 													 <select
 													name="pageNum"
@@ -119,7 +119,7 @@
 <script type="text/javascript">
 	function change(index) {
 		var type = $("#type").val();
-		window.location.href = "<%=basePath%>betting_record?type=" + type + "&pageNum=" + index;
+		window.location.href = "<%=basePath%>agent/agentMembeSpred?type=" + type + "&pageNum=" + index;
 	}
 	function page(){
 		var html = "";

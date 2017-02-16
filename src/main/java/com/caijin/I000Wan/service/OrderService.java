@@ -58,7 +58,30 @@ public interface OrderService extends CommonService<Order, String> {
 
 	List<Order> findOrderByStatus(int waitOrder);
 
-//	List<Map> findHeiMaiDetail(int pageNum, int pageSize, String memberid);
-//
-//	int findHeiMaiDetailCount(String memberid);
+	/**
+	 * 当日金额
+	 * 
+	 * @return
+	 */
+	float getTodayMoney(String memberUserID);
+
+	/**
+	 * 平台总返金额
+	 * 
+	 * @return
+	 */
+	float getPlatformAllMoney(String memberUserID);
+
+	//计算代理人下的所有交易金额
+	float getAllTradingAllPredUser(String id);
+
+	float getTodayTradingAllPredUser(String id);
+
+	List<Map> findMemberByAgentUserId(
+			int i, int pageSize, String id);
+
+	int findCountMemberByAgentUserId(String id);
+
+	List<Map> findMemberStaticIncomeByAgentUserId(int i, int pageSize, String id);
+
 }

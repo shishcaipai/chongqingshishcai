@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,17 +19,19 @@ import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.OrderDetail;
 import com.caijin.I000Wan.service.OrderService;
+import com.caijin.I000Wan.web.AgentController;
 
 @Component
 @Transactional
 public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 		implements OrderService {
-
+	private final Logger log = LoggerFactory.getLogger(AgentController.class);
 	@Autowired
 	private OrderDao orderDao;
-	
+
 	@Resource(name = "orderDaoImpl")
 	private OrderDaoImpl orderDaoImpl;
+
 	@Autowired
 	public void setOrderDao(OrderDao orderDao) {
 		super.setCommonDao(orderDao);
@@ -88,7 +92,7 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 
 	@Override
 	public List<Order> findAllOrders(int pageNum, int pageSize, String id) {
-		return orderDao.findAllOrders(pageNum,pageSize,id);
+		return orderDao.findAllOrders(pageNum, pageSize, id);
 	}
 
 	@Override
@@ -98,7 +102,7 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 
 	@Override
 	public List<Order> findAllOrdersZhongjiao(int i, int pageSize, String id) {
-		return orderDao.findAllOrdersZhongjiao(i,pageSize,id);
+		return orderDao.findAllOrdersZhongjiao(i, pageSize, id);
 	}
 
 	@Override
@@ -108,7 +112,7 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 
 	@Override
 	public List<Order> findAllOrderTouZhu(int i, int pageSize, String id) {
-		return orderDao.findAllOrderTouZhu(i,pageSize,id);
+		return orderDao.findAllOrderTouZhu(i, pageSize, id);
 	}
 
 	@Override
@@ -126,15 +130,61 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 		return orderDao.findOrderByStatus(waitOrder);
 	}
 
-//	@Override
-//	public List<Map> findHeiMaiDetail(int pageNum, int pageSize, String memberid) {
-//		// TODO Auto-generated method stub
-//		return orderDaoImpl.findHeiMaiDetail(pageNum,pageSize,memberid);
-//	}
-//
-//	@Override
-//	public int findHeiMaiDetailCount(String memberid) {
-//		return orderDaoImpl.findHeiMaiDetailCount(memberid);
-//	}
+	@Override
+	public float getTodayMoney(String memberUserID) {
+		try {
+			return orderDao.sumOrderByTodayOrderType(memberUserID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public float getPlatformAllMoney(String memberUserID) {
+		try {
+			return orderDao.getPlatformAllMoney(memberUserID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public float getAllTradingAllPredUser(String id) {
+		try {
+			return orderDao.getAllTradingAllPredUser(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public float getTodayTradingAllPredUser(String id) {
+		try {
+			return orderDao.getTodayAllTradingAllPredUser(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public List<Map> findMemberByAgentUserId(int i,
+			int pageSize, String id) {
+		return orderDaoImpl.findMemberByAgentUserId(i, pageSize, id);
+	}
+
+	@Override
+	public int findCountMemberByAgentUserId(String id) {
+		return orderDao.findCountMemberByAgentUserId(id);
+	}
+
+	@Override
+	public List<Map> findMemberStaticIncomeByAgentUserId(int i, int pageSize,
+			String id) {
+		return orderDaoImpl.findMemberStaticIncomeByAgentUserId(i, pageSize, id);
+	}
 
 }

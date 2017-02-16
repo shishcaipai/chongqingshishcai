@@ -15,7 +15,7 @@ public class OrderUtils {
 		for (Period per : orderids) {
 			int end2 = Integer.valueOf((String) per.getLotteryPeriod().substring(8));
 			String date2 =  per.getLotteryPeriod().substring(0, 8);
-			if (!date.equals(date2)) {
+			if (Float.valueOf(date)<Float.valueOf(date2)) {
 				return false;
 			}
 			if(end<end2){

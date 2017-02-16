@@ -14,8 +14,8 @@ public class MemberUser extends BaseEntity {
 
 	private static final long serialVersionUID = -3497979616171964595L;
 	public static final String FRONT_MEMBER_LOGIN_SESSION = "memberUser";
-	public static final int TYPE_YUN = 0;
-	public static final int TYPE_DAILIREN = 1;
+	public static final int GENERAL_TYPE = 0;
+	public static final int AGENT_TYPE = 1;
 	private String userName;
 	private String pwd;
 	private String realName;

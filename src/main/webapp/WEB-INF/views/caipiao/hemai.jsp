@@ -78,14 +78,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			} );
 		$("#btn_submit").click(function(){
-			alert("from 提交");
 			$("#Form1").submit();
 		});
 	});
 
 </script>
 <jsp:include page="../header.jsp"></jsp:include>
-<jsp:include page="../banner.jsp"></jsp:include>
 <!--头部结束-->
 
 <div class="q_main" style="width:1000px; margin:0 auto; clear:both; margin-top:6px;">
@@ -136,9 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  <tr>
 				<td colspan="5" style="border-right:none; height:40px; color:#333;">
 				是否公开：<input name="isopen" type="radio" value="1" checked="checked"/> 方案公开 
-				<input name="isopen" type="radio" value="0"/> 跟单后公开
-				<input name="isopen" type="radio" value="2"/> 完全保密
-				
+				<input name="isopen" type="radio" value="0"/> 跟单后公开<input name="isopen" type="radio" value="2"/> 完全保密
 				</td>
 			  </tr>
 			</tbody>
@@ -146,7 +142,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	  </td>
     </tr>
-
 	  <tr>
 		<td class="listtable_t">方案宣传描述</td>
 		<td colspan="2" class="listtable_c" style="padding:10px 0 10px 10px;">
@@ -167,13 +162,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
   </tbody></table>
 
-  <input name="orderId"  value="${order.orderId}" type="hidden">
+  <input name="orderId"  value="${order.orderNo}" type="hidden">
 </form>
-<!--底部包含文件-->
-<!--底部包含文件开始-->
-<div >
-  <div class="left"></div>
-</div>
 </div>
 <!--底部-->
 <jsp:include page="../footer.jsp"></jsp:include>

@@ -36,6 +36,7 @@ public class CustomBaseSqlDaoImpl {
 		try {
 			resultList=s.list();
 		} catch (Exception e) {
+			e.printStackTrace();
 		}finally{
 			em.close();
 		}

@@ -19,7 +19,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <link href="<%=basePath%>static/css/register.css" rel="stylesheet">
-<link href="<%=basePath%>static/css/head.css" rel="stylesheet">
+<link href="<%=basePath%>static/css/header.css" rel="stylesheet">
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
 </head>

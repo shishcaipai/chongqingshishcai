@@ -581,11 +581,11 @@ public class UserController {
 				/ StaticDefine.PAGE_SIZE : size / StaticDefine.PAGE_SIZE + 1;
 		List<Order> orders = orderService.findAllOrderTouZhu((pageNum - 1)
 				* StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE, user.getId());
-		if (orders != null)
-			for (Order order : orders) {
-				order.reTotalMoney = periodService.getMoneyPeriodByOId(order
-						.getOrderNo());
-			}
+//		if (orders != null)
+//			for (Order order : orders) {
+//				order.reTotalMoney = periodService.getMoneyPeriodByOId(order
+//						.getOrderNo());
+//			}
 
 		model.addAttribute("orderDetails", orders);
 		model.addAttribute("size", size);
@@ -610,11 +610,6 @@ public class UserController {
 		List<Order> orderDetails = orderService.findAllOrdersZhongjiao(
 				(pageNum - 1) * StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE,
 				user.getId());
-		if (orderDetails != null)
-			for (Order order : orderDetails) {
-				order.reTotalMoney = periodService.getMoneyPeriodByOId(order
-						.getOrderNo());
-			}
 
 		model.addAttribute("orders",
 				orderDetails == null ? new ArrayList<Order>() : orderDetails);

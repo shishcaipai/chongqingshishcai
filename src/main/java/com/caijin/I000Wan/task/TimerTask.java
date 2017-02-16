@@ -6,8 +6,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -28,11 +33,13 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Lazy(false)
+@Lazy(true)
 @Component("taskJob")
 public class TimerTask {
+	private final Logger log = LoggerFactory.getLogger(OrderTimerTask.class);
 	private static String url = "http://f.apiplus.cn/cqssc-10.json?t="
 			+ System.currentTimeMillis();
+	public final static int MAX_MONEY = 200;
 
 	@Autowired
 	private LetteryPeriodService periodService;
@@ -41,38 +48,66 @@ public class TimerTask {
 	private OrderService orderService;
 	@Autowired
 	private PeriodService pdService;
-	
+
 	@Autowired
 	private OrderDetailService orderDetailService;
 
-	@Scheduled(cron = "0 0/3 *  * * ? ")
+	@Scheduled(cron = "0 0/4 *  * * ? ")
 	public void job1() {
-		System.out.println("任务进行中。。。");
+		Map<String, Order> map = new HashMap<String, Order>();// 存当前订单号
+		log.info("计算中奖任务启动。。。");
 		ChongQingReturnBean bean = getShiShiCaipiaohistory();
-		if(bean!=null){
-		List<ChongQingReturnData> list = bean.getData();
-		LotteryPeriod letteryPeriod;
-		for (ChongQingReturnData data : list) {
-			letteryPeriod = new LotteryPeriod();
-			letteryPeriod.setLotteryCode(bean.getCode());
-			letteryPeriod.setLotteryPeriod(data.getOpencode());
-			letteryPeriod.setOpentime(data.getOpentime());
-			letteryPeriod.setOpentimestamp(data.getOpentimestamp());
-			letteryPeriod.setPeriodNumber(data.getExpect());
-			letteryPeriod.setStatus(1);
-			periodService.save(letteryPeriod);
-			List<OrderDetail> orderList = orderDetailService.findbyQIhao(data.getExpect());
-			if(orderList!=null)
-			for(OrderDetail order:orderList){
-				String caiNumber=order.getBuyCaiNumber();
-		        int money=BonusUtil.getLotteryHondleBonus(BonusUtil.getBonusNumber(data.getOpencode()), caiNumber);
-		       if(money>0){
-		    	pdService.updatePeriodbyQIhaoAndOrderNo(data.getExpect(),order.getOrderNo(),1,money);
-		       }else{
-		    	pdService.updatePeriodbyQIhaoAndOrderNo(data.getExpect(),order.getOrderNo(),2,money);  
-		       }
+		if (bean != null) {
+			List<ChongQingReturnData> list = bean.getData();
+			LotteryPeriod letteryPeriod;
+			for (ChongQingReturnData data : list) {
+				letteryPeriod = new LotteryPeriod();
+				letteryPeriod.setLotteryCode(bean.getCode());
+				letteryPeriod.setLotteryPeriod(data.getOpencode());
+				letteryPeriod.setOpentime(data.getOpentime());
+				letteryPeriod.setOpentimestamp(data.getOpentimestamp());
+				letteryPeriod.setPeriodNumber(data.getExpect());
+				letteryPeriod.setStatus(1);
+				periodService.save(letteryPeriod);
+				List<OrderDetail> orderList = orderDetailService
+						.findbyQIhao(data.getExpect());
+				if (orderList != null)
+					for (OrderDetail order : orderList) {
+						String caiNumber = order.getBuyCaiNumber();
+						// 计算得到中奖金额
+						float money = BonusUtil.getLotteryHondleBonus(
+								BonusUtil.getBonusNumber(data.getOpencode()),
+								caiNumber);
+						if (money > 0) {
+							pdService.updatePeriodbyQIhaoAndOrderNo(
+									data.getExpect(), order.getOrderNo(), 1,
+									money);
+						} else {
+							pdService.updatePeriodbyQIhaoAndOrderNo(
+									data.getExpect(), order.getOrderNo(), 2,
+									money);
+						}
+						map.put(order.getOrder().getOrderNo(), order.getOrder());
+					}
 			}
-		}
+			Iterator<String> keys = map.keySet().iterator();
+			String orderId;
+			Order order;
+			while (keys.hasNext()) {
+				 orderId=keys.next();
+				float money = pdService.getMoneyPeriodByOId(orderId);
+				if(pdService.getPeriodUNStatusByOId(orderId)==0){
+					 order=map.get(orderId);
+					 order.setWprizeStatus(Order.WPRIS_STATUS_ALL);
+					 order.setCurrentWPMoney(order.getCurrentWPMoney()+money);
+					 orderService.update(order);
+				}else{
+					 order=map.get(orderId);
+					 order.setWprizeStatus(Order.WPRIS_STATUS_PORTION);
+					 order.setCurrentWPMoney(order.getCurrentWPMoney()+money);
+					 orderService.update(order);
+				}
+			}
 		}
 	}
 

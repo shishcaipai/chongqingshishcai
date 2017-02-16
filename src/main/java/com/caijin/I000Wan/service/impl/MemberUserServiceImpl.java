@@ -48,5 +48,36 @@ public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> 
 	public MemberUser findByRegeisterID(String registerID) {
 		return memberUserDao.findByRegeisterID(registerID);
 	}
+
+	@Override
+	public List<MemberUser> findMemberByAgentUserId(int i, int pageSize,
+			String id) {
+		return memberUserDao.findMemberByAgentUserId(i,pageSize,id);
+	}
+
+	@Override
+	public Integer findCountMemberByAgentUserId(String id) {
+		return memberUserDao.findCountMemberByAgentUserId(id);
+	}
+
+	@Override
+	public Integer getAllPredUser(String id) {
+		return memberUserDao.findCountMemberByAgentUserId(id);
+	}
+
+	@Override
+	public Integer getAllTodayPredUser(String id) {
+		return memberUserDao.getAllTodayPredUserCount(id);
+	}
+
+	@Override
+	public Integer getAllTodayActivePredUser(String id) {
+		return memberUserDao.getAllTodayActivePredUserCount(id);
+	}
+	@Override
+	public Integer getAllActivePredUser(String id) {
+		return memberUserDao.getAllActivePredUserCount(id);
+	}
+	
 	
 }

@@ -37,12 +37,6 @@
 <script src="<%=basePath%>static/js/buyTogether.js"
 	type="text/javascript"></script>
 <script src="<%=basePath%>static/js/jquery.js" type="text/javascript"></script>
-<!-- <script>
-	function gopage(obj) {
-		window.location.href = "sInfo1.asp?page=" + obj.value + "&classid="
-				+ 401;
-	}
-</script> -->
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
