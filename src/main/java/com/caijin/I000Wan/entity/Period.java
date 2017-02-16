@@ -30,6 +30,10 @@ public class Period {
 	public final static String SHISHI_CAI_CHONGQING = "cqssc";
 	
 	public final static String SHISHI_CAI_GUANGDONG11XUAN5 = "gd11x5";
+	
+	public final static String SHISHI_CAI_JIANGXI = "jx11x5";
+	
+	public final static String SHISHI_CAI_SHANDONG = "sd11x5";
 
 	private Integer id;
 
