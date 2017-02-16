@@ -113,7 +113,7 @@
 							</c:otherwise>
 						</c:choose>
 						<li class="sc_top_li"><a href="<%=basePath%>cqssc/cqsscview">重庆时时彩</a></li>
-						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">江西时时彩</a></li>
+						<li class="sc_top_li"><a href="<%=basePath%>jxssc/jxsscview">江西时时彩</a></li>
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">山东十一运</a></li>
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">江西11选5</a></li>
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">福彩3D</a></li>
