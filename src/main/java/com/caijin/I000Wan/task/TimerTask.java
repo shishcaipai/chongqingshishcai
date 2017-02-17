@@ -33,7 +33,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Lazy(true)
+@Lazy(false)
 @Component("taskJob")
 public class TimerTask {
 	private final Logger log = LoggerFactory.getLogger(OrderTimerTask.class);
@@ -52,7 +52,7 @@ public class TimerTask {
 	@Autowired
 	private OrderDetailService orderDetailService;
 
-	@Scheduled(cron = "0 0/4 *  * * ? ")
+	@Scheduled(cron = "0 0/5 *  * * ? ")
 	public void job1() {
 		Map<String, Order> map = new HashMap<String, Order>();// 存当前订单号
 		log.info("计算中奖任务启动。。。");

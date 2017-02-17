@@ -92,10 +92,11 @@
 									<a href="<%=basePath%>user/loginout"><em>[安全退出]</em></a>
 								</p>
 							</div>
-							<div>
-								<a id="qq" target="_blank"> <img
-									src="http://www.ib18.cn/res/img/kefu.jpg" style="float: right;">
-								</a>
+							<div style="text-align:center;margin-top: 25px;">
+								<a target="_blank"
+									href="http://wpa.qq.com/msgrd?v=3&uin=212395988&site=qq&menu=yes"><img
+									border="0" src="http://wpa.qq.com/pa?p=2:212395988:41"
+									alt="点击这里给我发消息" title="点击这里给我发消息" style="float: right;" /></a>
 							</div>
 						</div>
 					</div>
@@ -119,7 +120,8 @@
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">福彩3D</a></li>
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">排列三</a></li>
 						<li class="sc_top_li"><a href="javascript:alert('暂停销售')">上海时时乐</a></li>
-						<li class="sc_top_li"><a href="<%=basePath%>gdsyxw/gdsyxwview">广东11选5</a></li>
+						<li class="sc_top_li"><a
+							href="<%=basePath%>gdsyxw/gdsyxwview">广东11选5</a></li>
 						<li class="sc_top_li"><a href="<%=basePath%>wfjx">玩法介绍</a></li>
 					</ul>
 				</div>

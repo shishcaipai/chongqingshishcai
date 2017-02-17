@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td>手机号：</td>
 			<td><input type="text" id="telephone" name="telephone"/></td>
 			<td>用户类型：</td>
-			<td><select type="text" id="type" name="type">
+			<td><select  id="type" name="type">
 			<option value ="0">会员</option>
 			<option value ="1">代理人</option>
 			</select></</td> 

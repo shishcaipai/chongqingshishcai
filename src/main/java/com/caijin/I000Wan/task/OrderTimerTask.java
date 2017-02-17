@@ -26,7 +26,7 @@ import com.caijin.I000Wan.util.DateUtils;
 import com.caijin.I000Wan.util.OrderUtils;
 import com.caijin.I000Wan.web.AgentController;
 
-@Lazy(true)
+@Lazy(false)
 @Component("taskOrderJob")
 public class OrderTimerTask {
 	private final Logger log = LoggerFactory.getLogger(OrderTimerTask.class);

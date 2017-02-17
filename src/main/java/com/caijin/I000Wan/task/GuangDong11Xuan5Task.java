@@ -28,7 +28,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Lazy(false)
+@Lazy(true)
 @Component("GDSYXW")
 public class GuangDong11Xuan5Task {
 	private static String url = "http://t.apiplus.cn/newly.do?code=gd11x5&format=json";

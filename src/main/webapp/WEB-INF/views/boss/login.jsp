@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>1000万后台管理</title>
+<title>鸿运彩票管理</title>
 <%@ include file="../common/commonInclude.jsp"%>
 <%@ include file="../common/bootsrapInclude.jsp"%>
 </head>

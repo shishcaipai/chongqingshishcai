@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class RandomValidateCode {
 	public static final String RANDOMCODEKEY = "RANDOMVALIDATECODEKEY";// 放到session中的key
 	private Random random = new Random();
-	private String randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";// 随机产生的字符串
+	private String randString = "0123456789";// 随机产生的字符串
 
 	private int width = 80;// 图片宽
 	private int height = 26;// 图片高
