@@ -1815,13 +1815,5 @@ $(function() {
 </script>
 
 	<jsp:include page="../footer.jsp"></jsp:include>
-	<div class="opacity">
-		<div class="dialog">
-			<div class="diatitle">
-				<em>提示</em>
-			</div>
-			<div class="diabox">提示信息</div>
-		</div>
-	</div>
 </body>
 </html>

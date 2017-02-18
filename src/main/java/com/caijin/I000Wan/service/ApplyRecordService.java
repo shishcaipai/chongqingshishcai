@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.caijin.I000Wan.common.service.CommonService;
 import com.caijin.I000Wan.entity.ApplyRecord;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 
 public interface ApplyRecordService extends CommonService<ApplyRecord,String>{
 
@@ -24,8 +26,11 @@ public interface ApplyRecordService extends CommonService<ApplyRecord,String>{
 	 */
 	List<ApplyRecord> getApplyRecordList(String userId,String startDate,String endDate);
 	
-	List<Map> findApplyRecordListByCondition(String realName,String idCardNo,
+	Result findApplyRecordListByCondition(PageModel pageModel,String realName,String idCardNo,
 			String userName,String auditStatus,
 			String applystartDate,String applyendDate,String startDate,String endDate);
+
+	void clear();
+
 	
 }

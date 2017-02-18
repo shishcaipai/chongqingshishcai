@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<%=basePath %>static/css/jqueryui.css" type="text/css" rel="stylesheet" />
 <link href="<%=basePath %>static/css/style.css" type="text/css" rel="stylesheet" />
-<title>1000万-用户注册成功</title>
+<title>鸿运彩票网</title>
 </head>
 
 <body class="bg1">

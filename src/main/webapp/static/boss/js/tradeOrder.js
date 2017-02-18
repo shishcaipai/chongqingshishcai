@@ -144,10 +144,11 @@ function updateOrderUserDialog(){
 		data: { orderNo: $("#order_no").val()} ,
 		success : function(result) {
 			var obj = eval(result); 
-			         var html="";
+			         var html="<table>";
 				   for(var i=0;i<obj.length;i++){  
-				       html+="<tr><td>投注内容：</td><td><input type='text' id='num' name='num' value='"+obj[i].buyCaiNumber+"'  title='"+obj[i].id+"' /></td></tr>";
+				       html+="<tr><td colspan='6' align='right'>投注内容：</td><td colspan='40' align='left'><input type='text' id='num' name='num' value='"+obj[i].buyCaiNumber+"'  title='"+obj[i].id+"' /></td></tr>";
 				   } 
+				   html+="</table>";
 				   $("#order_phrase").html(html) 
 			$("#update").show();
 		}    

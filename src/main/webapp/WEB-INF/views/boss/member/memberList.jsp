@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 引入Jquery -->
 <script type="text/javascript"	src="<%=basePath%>/static/js/jquery-1.7.2.min.js" charset="utf-8"></script>
 <script src="<%=basePath%>static/js/commonUtil.js" type="text/javascript"></script>
-<script src="<%=basePath%>static/boss/js/memberUser.js" type="text/javascript"></script>
+<script src="<%=basePath%>static/boss/js/memberUser.js?id=2" type="text/javascript"></script>
 <%@ include file="../../common/easyUiInclude.jsp"%>
 
 </head>
@@ -45,8 +45,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="javascript:searchMemberUser()" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a>
 		<!-- <a href="javascript:addMemberUserDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a> -->
 		<a href="javascript:updateMemberUserDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
-		<a href="javascript:deleteMemberUser()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
-		<a href="javascript:clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">清空</a>
+		<a href="javascript:resetPwdMemberUser()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">重置用户密码</a>
+		<!-- <a href="javascript:clearSearchForm()" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">清空</a> -->
 	</div>
 </div>
 
@@ -61,8 +61,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>	
 			<td>真实名：</td>
 			<td><input  type="text" id="realName" name="real_name"/></td>
-			<td>身份证号码：</td>
-			<td><input type="text" id="identityCard" name="identity_card"/></td>
+			<td>支付宝：</td>
+			<td><input type="text" id="bankCode" name="bank_code"/></td>
 		</tr>
 			<td>手机号：</td>
 			<td><input type="text" id="telephone" name="telephone"/></td>
@@ -83,7 +83,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</table>
 	</form>
 </div>
-
+<div id="dlg_pwd" class="easyui-window" data-options="modal:true,iconCls:'icon-save',closed:'true'">  
+	<form method="post" id="memberUserForm1" name="memberUserForm1">
+	<input type="hidden" id="id1" name="id" />
+	<table>
+		<tr>
+			<td>用户名：</td>
+			<td><input  type="text" name="user_name" id="userName1" readonly="readonly"/></td>
+		</tr>
+		<tr>	
+			<td>网站密码：</td>
+			<td><a href="javascript:resetPwdMemberUserDialog()" class="easyui-linkbutton"  >重置</a></td> 
+			<td>提现密码：</td>
+			<td><a href="javascript:resetApplyPwdMemberUserDialog()" class="easyui-linkbutton"  >重置</a></td>
+		</tr>
+		<tr>
+			<td colspan="4" align="right">
+	       	<a href="javascript:closePwdMemberUserDialog()" class="easyui-linkbutton" iconCls="icon-cancel" >关闭</a>
+	     	</td>
+		</tr>
+		<tr>
+		</tr>
+	</table>
+	</form>
+</div>
 	<table id="memberUserDataGrid" ></table>
    
 </body>

@@ -12,14 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.caijin.I000Wan.entity.Article;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.Period;
+import com.caijin.I000Wan.service.ArticleService;
 import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -39,28 +42,31 @@ public class IndexController {
 	
 	@Autowired
 	private  OrderService orderService;
+	@Autowired
+	private ArticleService articleService;
   
 	/**
 	 * 跳转到首页
 	 * @return
 	 */
 	@RequestMapping(value="/index")
-	public ModelAndView index(){
+	public ModelAndView index(HttpServletRequest request,Model model){
 		List<Map> map = periodService.findUserTotalAmountList(null);
-		Map<String, List> model = new HashMap<String, List>(); 
-		model.put("map", map);
-		return new ModelAndView("index/index",model);
+		model.addAttribute("notice", articleService.findByType(Article.NOTICE));
+		model.addAttribute("zixian", articleService.findByType(Article.CAIPIAOZIXUN));
+		model.addAttribute("map", map);
+		return new ModelAndView("index/index");
 	}
 	/**
 	 * 跳转到首页
 	 * @return
 	 */
 	@RequestMapping(value="/")
-	public ModelAndView indexs(){
+	public ModelAndView indexs(HttpServletRequest request,Model model){
 		List<Map> map = periodService.findUserTotalAmountList(null);
-		Map<String, List> model = new HashMap<String, List>();  
-		model.put("map", map);
-		return new ModelAndView("index/index",model);
+		model.addAttribute("notice", articleService.findByType(Article.NOTICE));
+		model.addAttribute("zixian", articleService.findByType(Article.CAIPIAOZIXUN));
+		return new ModelAndView("index/index");
 	}
 	/**
 	 * @return

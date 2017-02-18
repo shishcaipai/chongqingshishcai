@@ -213,8 +213,6 @@
 		}
 		window.setInterval("reinitIframe()", 200);
 	</script>
-	<!--底部-->
-	<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>
 </html>

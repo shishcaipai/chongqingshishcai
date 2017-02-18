@@ -13,6 +13,7 @@ import javax.persistence.Query;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CustomBaseSqlDaoImpl {
@@ -23,6 +24,7 @@ public class CustomBaseSqlDaoImpl {
 	
 	public List<Map> querySqlObjects(String sql,Integer currentPage,Integer rowsInPage){
 		EntityManager em = this.emf.createEntityManager();
+	
 		Query qry = em.createNativeQuery(sql);
 		SQLQuery s = qry.unwrap(SQLQuery.class);
 		if (currentPage!=null&&rowsInPage!=null) {//判断是否有分页

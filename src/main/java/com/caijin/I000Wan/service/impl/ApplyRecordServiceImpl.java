@@ -11,6 +11,8 @@ import com.caijin.I000Wan.common.service.impl.CommonServiceImpl;
 import com.caijin.I000Wan.dao.ApplyRecordDao;
 import com.caijin.I000Wan.entity.ApplyRecord;
 import com.caijin.I000Wan.service.ApplyRecordService;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 
 @Component
 @Transactional
@@ -44,11 +46,18 @@ public class ApplyRecordServiceImpl extends CommonServiceImpl<ApplyRecord,String
 		return applyRecordDao.getApplyRecordList(userId, startDate, endDate);
 	}
 	
-	public List<Map> findApplyRecordListByCondition(String realName,String idCardNo,
+	public Result findApplyRecordListByCondition(PageModel pageMode,String realName,String idCardNo,
 			String userName,String auditStatus,
 			String applystartDate,String applyendDate,String startDate,String endDate){
-		return applyRecordDao.findApplyRecordListByCondition(realName,idCardNo,
+		return applyRecordDao.findApplyRecordListByCondition(pageMode,realName,idCardNo,
 				userName,auditStatus,applystartDate,applyendDate,startDate,endDate);
 	}
+
+	@Override
+	public void clear() {
+		applyRecordDao.clear();
+		
+	}
+
 	
 }

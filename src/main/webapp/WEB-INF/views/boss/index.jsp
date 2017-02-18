@@ -14,7 +14,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>1000万后台系统</title>
+<title>鸿运彩票后台管理系统</title>
 <link href="<%=basePath%>static/boss/css/default.css" rel="stylesheet"
 	type="text/css" />
 <link rel="stylesheet" type="text/css"
@@ -35,7 +35,7 @@
     		   <%Menu menu;
     		   for(int i=0;i<list.size();i++){
     			   menu=list.get(i);
-    			   System.out.println("这是在页面上的输出："+menu.getMenuPath()+"::"+menu.getMenuPath());
+    			 //  System.out.println("这是在页面上的输出："+menu.getMenuPath()+"::"+menu.getMenuPath());
     			   %>  
     			   <%=menu.getMenuPath()%>: [{
     	               "menuid": "<%=i%>",
@@ -45,8 +45,8 @@
     	                         <%Menu mu;
      	                        for(int a=0;a<menu.getList().size();a++){
      	                      	 mu=menu.getList().get(a);
-     	                      	System.out.println(menu.getMenuPath()+"::"+menu.getMenuPath()+"这是在页面上的输出："+mu.getMenuPath()+"::"+mu.getMenuPath());
-     	                        %>
+/*      	                      	System.out.println(menu.getMenuPath()+"::"+menu.getMenuPath()+"这是在页面上的输出："+mu.getMenuPath()+"::"+mu.getMenuPath());
+ */     	                        %>
     	                         {
     	                        "menuid": "<%=i%><%=a%>",
     	                        "menuname": "<%=mu.getMenu()%>",
@@ -56,7 +56,7 @@
     	     	     			  
     	     	    			   <%}}%>
     	     	                         ]
-    	           }] <% if(i==list.size()-1) {}else{%>, 
+    	         }] <% if(i==list.size()-1) {}else{%>, 
     			  
     			   <%}}%>
                        };

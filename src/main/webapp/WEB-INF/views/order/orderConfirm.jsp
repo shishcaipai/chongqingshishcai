@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<%=basePath%>static/css/jqueryui.css" type="text/css" rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css" rel="stylesheet" />
-<title>购买确认</title>
+<title>鸿运彩票</title>
 </head>
  
 <body>
@@ -70,7 +70,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--main end -->
  
- <jsp:include page="../footer.jsp"></jsp:include>
 <div class="opacity">
 	<div class="dialog">
     	<div class="diatitle"><em>提示</em></div>

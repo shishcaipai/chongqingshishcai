@@ -6,6 +6,8 @@ import java.util.Map;
 import com.caijin.I000Wan.common.service.CommonService;
 import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 
 public interface OrderService extends CommonService<Order, String> {
 
@@ -17,10 +19,9 @@ public interface OrderService extends CommonService<Order, String> {
 	 */
 	List<Order> getMyRechargeList(String userId);
 
-	List<Map> findOrderListByCondition(String userName, String realName,
+	Result findOrderListByCondition(PageModel pageModel,String userName, String realName,
 			String telephone, String orderType, String orderStatus,
 			String payStatus, String startDate, String endDate);
-
 	Order findOrderByOrderId(String orderId);
 
 	Order findOrder(String orderId, Integer payStatus);
@@ -88,6 +89,7 @@ public interface OrderService extends CommonService<Order, String> {
 
 	float getTodayZhongjiaoMomey(String id);
 
-//	void updateOrderByOrderNo(String orderNo, String status);
+	void clear();
+
 
 }

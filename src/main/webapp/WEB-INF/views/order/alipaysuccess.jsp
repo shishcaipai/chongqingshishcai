@@ -15,7 +15,7 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<title>购买成功</title>
+<title>鸿运彩票</title>
 </head>
 
 <body>
@@ -76,7 +76,6 @@
 	</div>
 	<!--main end -->
 
-	<jsp:include page="../footer.jsp"></jsp:include>
 	<div class="opacity">
 		<div class="dialog">
 			<div class="diatitle">

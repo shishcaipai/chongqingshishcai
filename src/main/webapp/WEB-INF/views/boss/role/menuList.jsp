@@ -112,7 +112,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 <script type="text/javascript">
 $("#menu_type").change(function(){
-	alert($("#menu_type").val());
 	if($("#menu_type").val()==1){
 		 $("#fu_caidan").hide();
 	}else{
@@ -129,7 +128,6 @@ function newMenu(){
 }
 
 function saveMenu(){
-	alert("-----");
     var menu = $("#menu").val();
     var menuPath = $("#menuPath").val();
     

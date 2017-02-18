@@ -42,6 +42,10 @@
 			</div>
 			<div class="user_tub">
 				<span style="margin-left: 40px;"
+					onclick="javascript:location='<%=basePath%>user/resetapplyPasswordInfo'">提现密码</span>
+			</div>
+			<div class="user_tub">
+				<span style="margin-left: 40px;"
 					onclick="javascript:location='<%=basePath%>orderList'">中奖方案</span>
 			</div>
 			<c:choose>

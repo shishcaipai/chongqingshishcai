@@ -87,31 +87,34 @@
 	<div id="dlg" class="easyui-window"
 		data-options="modal:true,iconCls:'icon-save',closed:'true'">
 		<form method="post" id="orderForm" name="orderForm">
-			<input type="hidden" id="order_no" name="order_no" />
 			<table>
-				<div>
-					<tr>
-						<td >订单号：</td>
-						<td><input type="text" name="order_no" id="order_no"
-							readonly="readonly" /></td>
-						<td >中奖：</td>
-						<td><select type="text" id="wprize_status"
-							name="wprize_status">
-								<option value="0">未中奖</option>
-								<option value="1">追号中奖</option>
-								<option value="2">中奖</option>
-						</select></</td>
-					</tr>
-					<td></</td>
-				</div>
-				<div id="order_phrase"></div>
 				<tr>
-					<td colspan="4" align="right"><a href="javascript:void(0)"
+					<td colspan="6" align="right">订单号：</td>
+					<td colspan="40" align="left"><input type="text"
+						name="order_no" id="order_no" readonly="readonly" style="overflow: visible;"/></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="6" align="right">中奖：</td>
+					<td colspan="40"><select type="text" id="wprize_status"
+						name="wprize_status">
+							<option value="0">未中奖</option>
+							<option value="1">追号中奖</option>
+							<option value="2">中奖</option>
+					</select></</td>
+				</tr>
+				<tr>
+					<td colspan="46" align="left"><div id="order_phrase"></div></td>
+				</tr>
+				<tr>
+					<td colspan="6" align="right"></td>
+					<td colspan="40" align="left"><a href="javascript:void(0)"
 						class="easyui-linkbutton" iconCls="icon-ok" id="update"
 						onClick="updateOrder()">保存</a>&nbsp;&nbsp; <a
 						href="javascript:closeOrderUserDialog()" class="easyui-linkbutton"
 						iconCls="icon-cancel">关闭</a></td>
-						<td></td>
+					<td></td>
 				</tr>
 				<tr>
 				</tr>

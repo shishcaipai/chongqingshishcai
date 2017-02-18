@@ -104,7 +104,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	function deleRecord(){
-		alert("deleRecord");
 		$.ajax({
 			url : '../../boss/record/deleteAll',
 			type:'post',

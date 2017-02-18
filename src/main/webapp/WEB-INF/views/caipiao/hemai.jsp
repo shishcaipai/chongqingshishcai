@@ -165,7 +165,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <input name="orderId"  value="${order.orderNo}" type="hidden">
 </form>
 </div>
-<!--底部-->
-<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

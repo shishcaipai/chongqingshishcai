@@ -19,6 +19,8 @@ import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.OrderDetail;
 import com.caijin.I000Wan.service.OrderService;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 import com.caijin.I000Wan.web.AgentController;
 
 @Component
@@ -47,10 +49,10 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 		return orderDao.getMyRechargeList(userId);
 	}
 
-	public List<Map> findOrderListByCondition(String userName, String realName,
+	public Result findOrderListByCondition(PageModel pageModel,String userName, String realName,
 			String telephone, String orderType, String orderStatus,
 			String payStatus, String startDate, String endDate) {
-		return orderDao.findOrderListByCondition(userName, realName, telephone,
+		return orderDao.findOrderListByCondition(pageModel,userName, realName, telephone,
 				orderType, orderStatus, payStatus, startDate, endDate);
 	}
 
@@ -207,9 +209,11 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 		}
 	}
 
-//	@Override
-//	public void updateOrderByOrderNo(String orderNo, String status) {
-//		   orderDaoImpl.updateCaiNUmByID(orderNo, status);
-//	}
+	@Override
+	public void clear() {
+		orderDaoImpl.clear();
+		
+	}
+
 
 }

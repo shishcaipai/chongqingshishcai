@@ -27,6 +27,7 @@ import com.caijin.I000Wan.util.DataGridModel;
 import com.caijin.I000Wan.util.Mum;
 import com.caijin.I000Wan.util.PageModel;
 import com.caijin.I000Wan.util.Result;
+import com.caijin.I000Wan.util.StaticDefine;
 import com.caijin.I000Wan.web.OrderController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -44,13 +45,14 @@ public class OrderAction {
 
 	@RequestMapping("/order/list")
 	public String orderList() {
-
+		
 		return "boss/order/list";
 	}
 
 	@RequestMapping("/order/ajax_list")
 	@ResponseBody
-	public List<Map> findOrderList(HttpServletRequest request) {
+	public Result findOrderList(DataGridModel dgm,
+			HttpServletRequest request, PageModel pageModel) {
 		String userName = request.getParameter("userName");
 		String realName = request.getParameter("realName");
 		String telephone = request.getParameter("telephone");
@@ -59,31 +61,11 @@ public class OrderAction {
 		String payStatus = request.getParameter("payStatus");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-
-		List<Map> orderList = orderService.findOrderListByCondition(userName,
+		pageModel = new PageModel(dgm.getPage(), dgm.getRows(), null);
+		Result  result = orderService.findOrderListByCondition(pageModel,userName,
 				realName, telephone, orderType, orderStatus, payStatus,
 				startDate, endDate);
-		// StringBuffer buffer;
-		// for (Map map : orderList) {
-		// try {
-		// List<OrderDetail> details = orderDetailService
-		// .findOrderDetailByOrderId((String) map.get("order_no"));
-		//
-		// buffer = new StringBuffer();
-		// for (OrderDetail detail : details) {
-		// if (buffer.length() > 0) {
-		// buffer.append("\\$");
-		// }
-		// buffer.append(detail.getBuyCaiNumber());
-		//
-		// }
-		// map.put("details", buffer.toString());
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		// }
-
-		return orderList;
+		return result;
 	}
 
 	@RequestMapping("/order/order_detail")
@@ -157,6 +139,7 @@ public class OrderAction {
 			Order order = orderService.findOrderByOrderId(orderNo);
 			order.setWprizeStatus(wprizeStatus);
 			orderService.update(order);
+			orderService.clear();
 			log.info(i + "----------" + length);
 		} catch (Exception e) {
 			e.printStackTrace();

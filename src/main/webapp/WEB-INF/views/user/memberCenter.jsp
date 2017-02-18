@@ -227,7 +227,6 @@
 	</div>
 	<!--main end -->
 
-	<jsp:include page="../footer.jsp"></jsp:include>
 	<div class="opacity">
 		<div class="dialog">
 			<div class="diatitle">

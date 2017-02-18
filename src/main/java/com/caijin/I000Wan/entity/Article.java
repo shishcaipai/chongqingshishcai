@@ -9,7 +9,6 @@ import com.caijin.I000Wan.common.entity.BaseEntity;
 
 /**
  * 消息文章表
- * @author jeff
  * @since 2014-06-17
  */
 @Entity
@@ -20,11 +19,8 @@ public class Article extends BaseEntity{
 	
 	public static final Integer NOTICE=0;//公告
 	
-	public static final Integer SAISHI=1;//赛事
+	public static final Integer CAIPIAOZIXUN=1;//公告
 	
-	public static final Integer NEWHELP=2;//新手
-	
-	public static final Integer CAIPIAOZIXUN=3;//彩票资讯
 	
 	public static final Integer HEMAIHELP=4;//合买指引
 	

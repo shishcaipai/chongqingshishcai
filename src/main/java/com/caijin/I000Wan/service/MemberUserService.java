@@ -32,4 +32,6 @@ public interface MemberUserService extends CommonService<MemberUser, String> {
 
 	Integer getAllActivePredUser(String id);
 
+	void clear();
+
 }

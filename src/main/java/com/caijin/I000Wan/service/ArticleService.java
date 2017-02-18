@@ -8,4 +8,6 @@ import com.caijin.I000Wan.entity.Article;
 public interface ArticleService extends CommonService<Article,String>{
 
 	List<Article> findByType(Integer type);
+
+	List<Article> findByAllType();
 }

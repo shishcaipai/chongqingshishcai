@@ -79,8 +79,8 @@
 									<td style="text-align: center;">${record.applyName }</td>
 									<td style="text-align: center;">${record.idCardNo }</td>
 									<td style="text-align: center;"><c:choose>
-											<c:when test="${record.auditStatus == 2 }">未审核 </c:when>
-											<c:when test="${record.auditStatus == 1 }">审核失败 </c:when>
+											<c:when test="${record.auditStatus == 0 }">未审核 </c:when>
+											<c:when test="${record.auditStatus == 2 }">审核失败 </c:when>
 											<c:otherwise>审核通过</c:otherwise>
 										</c:choose></td>
 									<td style="text-align: center;">${record.bankName }</td>
@@ -101,7 +101,6 @@
 		</div>
 	</div>
 	<!--main end -->
-	<jsp:include page="../footer.jsp"></jsp:include>
 
 	<div class="opacity">
 		<div class="dialog">

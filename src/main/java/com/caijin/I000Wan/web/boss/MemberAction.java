@@ -22,6 +22,7 @@ import com.caijin.I000Wan.service.ChongZhiRecordService;
 import com.caijin.I000Wan.service.MemberUserService;
 import com.caijin.I000Wan.service.UserService;
 import com.caijin.I000Wan.util.DataGridModel;
+import com.caijin.I000Wan.util.Md5Util;
 import com.caijin.I000Wan.util.PageModel;
 import com.caijin.I000Wan.util.Result;
 
@@ -81,7 +82,7 @@ public class MemberAction {
 	}
 
 	/**
-	 * 新增
+	 * 修改
 	 * 
 	 * @param memberUser
 	 * @param request
@@ -89,7 +90,7 @@ public class MemberAction {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/member/updateMemberUser", method = RequestMethod.POST)
-	public void saveBasItemInfo(HttpServletRequest request,
+	public void updateBasItemInfo(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String msg = "";
 		try {
@@ -99,13 +100,14 @@ public class MemberAction {
 				user.setUpdateDate(new Date());
 				user.setRealName(request.getParameter("realName"));
 				user.setTelephone(request.getParameter("telephone"));
-				user.setIdentityCard(request.getParameter("identityCard"));
+				user.setIdentityCard(request.getParameter("bankCode"));
 				try{
 				user.setType(Integer.valueOf(request.getParameter("type")));
 				}catch(Exception e){
 					user.setType(0);
 				}
 				memberUserService.update(user);
+				memberUserService.clear();
 			}
 			msg = "修改成功";
 		} catch (Exception e) {
@@ -113,7 +115,58 @@ public class MemberAction {
 		}
 		renderText(response, msg);
 	}
-
+	/**
+	 * 修改网站密码
+	 * 
+	 * @param memberUser
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/member/resetPwdMemberUser", method = RequestMethod.POST)
+	public void resetPwdMemberUser(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String msg = "";
+		try {
+			if (request.getParameter("id") != null) {
+				MemberUser user = memberUserService.find(request.getParameter("id"));
+				user.setUpdateDate(new Date());
+				user.setPwd(Md5Util.generatePassword("111111"));
+				memberUserService.update(user);
+				memberUserService.clear();
+			}
+			msg = "重置网站密码成功";
+		} catch (Exception e) {
+			msg = "重置网站密码失败";
+		}
+		renderText(response, msg);
+	}
+	/**
+	 * 修改提款密码
+	 * 
+	 * @param memberUser
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/member/resetApplyPwdMemberUser", method = RequestMethod.POST)
+	public void resetApplyPwdMemberUser(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String msg = "";
+		try {
+			if (request.getParameter("id") != null) {
+				MemberUser user = memberUserService.find(request.getParameter("id"));
+				user.setUpdateDate(new Date());
+				user.setMoneyPwd(Md5Util.generatePassword("888888"));
+				memberUserService.update(user);
+				memberUserService.clear();
+			}
+			msg = "重置提款密码成功";
+		} catch (Exception e) {
+			msg = "重置提款密码失败";
+		}
+		renderText(response, msg);
+	}
 	/**
 	 * 新增
 	 * 
@@ -157,6 +210,7 @@ public class MemberAction {
 					user.setCreateDate(new Date());
 					user.setUpdateDate(new Date());
 					memberUserService.update(user);
+					memberUserService.clear();
 					ChongZhiRecord record = new ChongZhiRecord();
 					record.setUser(sysUser);
 					record.setMemberUser(user);

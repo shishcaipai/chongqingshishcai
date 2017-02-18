@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>鸿运彩票管理</title>
+<title>鸿运彩票后台管理</title>
 <%@ include file="../common/commonInclude.jsp"%>
 <%@ include file="../common/bootsrapInclude.jsp"%>
 </head>
@@ -12,7 +12,7 @@
 	<div class="container" style="margin-top: 100px">
 		<form action="${pageContext.request.contextPath}/boss/dologin" method="post" class="well"
 			style="width: 220px; margin: 0px auto;">
-			<h3>1000万后台管理</h3>
+			<h3>鸿运彩票后台管理</h3>
 			<c:if test="${requestScope.error != null }">
 			  <div class="control-group ">
 				<div class="alert alert-error span2">

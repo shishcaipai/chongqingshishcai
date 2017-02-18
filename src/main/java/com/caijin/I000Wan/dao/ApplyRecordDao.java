@@ -30,5 +30,6 @@ public interface ApplyRecordDao  extends ApplyRecordCustomDao,CommonDao<ApplyRec
 	 */
 	@Query("select r from ApplyRecord r where r.memberUser.id= ?1 and r.createDate >= ?2 and r.createDate<= ?3 ")
 	public List<ApplyRecord> getApplyRecordList(String userId,String startDate,String endDate);
+
 	
 }

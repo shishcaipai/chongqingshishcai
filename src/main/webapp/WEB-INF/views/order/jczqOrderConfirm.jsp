@@ -19,7 +19,7 @@
 	type="text/css" />
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
-<title>时时彩投注确认支付页面</title>
+<title>鸿运彩票</title>
 </head>
 
 <body>

@@ -1,5 +1,6 @@
 package com.caijin.I000Wan.web;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.caijin.I000Wan.entity.HeMaiOrder;
 import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
+import com.caijin.I000Wan.enu.Bank;
 import com.caijin.I000Wan.interceptor.CommonInterceptor;
 import com.caijin.I000Wan.service.HeMaiOrderService;
 import com.caijin.I000Wan.service.MemberUserService;
@@ -68,13 +70,13 @@ public class UserController {
 		if (req.getAttribute("regeisterID") != null) {
 			String registerID = (String) req.getAttribute("regeisterID");
 			try {
-			MemberUser user = userService.findByRegeisterID(registerID);
-			if (user == null) {
-				return "404";
-			} else {
-				model.addAttribute("parentId", user.getId());
-				return "user/register";
-			}
+				MemberUser user = userService.findByRegeisterID(registerID);
+				if (user == null) {
+					return "404";
+				} else {
+					model.addAttribute("parentId", user.getId());
+					return "user/register";
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -108,39 +110,41 @@ public class UserController {
 			MemberUser member = userService.findByUserName(userName);// 得到要激活的帐户
 			if (member != null) {
 				resultMsg = "2";
-				return  resultMsg;
+				return resultMsg;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
-		// 保存加密后的密码
-		pwd = Md5Util.generatePassword(pwd);
+			// 保存加密后的密码
+			pwd = Md5Util.generatePassword(pwd);
 
-		MemberUser mu = new MemberUser();
-		mu.setUserName(userName);
-		mu.setCreateDate(new Date());
-		mu.setUpdateDate(new Date());
-		mu.setPwd(pwd);
-		mu.setSex(sex);
-		mu.setRealName(realName);
-		mu.setCommendMemberId(parentId);
-		mu.setMoneyPwd(Md5Util.generatePassword(withdrawPassword));
-		mu.setType(Integer.valueOf(userType));
-		mu.setTelephone(mobile);
-		mu.setEmail(email);
-		mu.setQq(qq);
-		mu.setTotalScore(0);
-		mu.setAvailableScore(0);
-		log.info(mu.getCommendMemberId()+"==============tuijian================"
-				+ req.getParameter("parentId"));
-		userService.save(mu);
-		req.getSession().setAttribute(MemberUser.FRONT_MEMBER_LOGIN_SESSION, mu);
-		resultMsg = "1";
-		return  resultMsg;
+			MemberUser mu = new MemberUser();
+			mu.setUserName(userName);
+			mu.setCreateDate(new Date());
+			mu.setUpdateDate(new Date());
+			mu.setPwd(pwd);
+			mu.setSex(sex);
+			mu.setRealName(realName);
+			mu.setCommendMemberId(parentId);
+			mu.setMoneyPwd(Md5Util.generatePassword(withdrawPassword));
+			mu.setType(Integer.valueOf(userType));
+			mu.setTelephone(mobile);
+			mu.setEmail(email);
+			mu.setQq(qq);
+			mu.setTotalScore(0);
+			mu.setAvailableScore(0);
+			log.info(mu.getCommendMemberId()
+					+ "==============tuijian================"
+					+ req.getParameter("parentId"));
+			userService.save(mu);
+			req.getSession().setAttribute(
+					MemberUser.FRONT_MEMBER_LOGIN_SESSION, mu);
+			resultMsg = "1";
+			return resultMsg;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return  "3";
+			return "3";
 		}
 	}
 
@@ -178,14 +182,23 @@ public class UserController {
 		MemberUser mu = null;
 
 		String userName = req.getParameter("userName");
+		if (userName != null) {
+			try {
+				userName = new String(userName.getBytes("ISO-8859-1"), "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+
 		String pwd = req.getParameter("pwd");
 		String randomCode = req.getParameter("randomCode");
-      if(req.getSession()==null||req.getSession().getAttribute(
-				RandomValidateCode.RANDOMCODEKEY)==null){
-    	  model.addAttribute("result", result);
+		if (req.getSession() == null
+				|| req.getSession().getAttribute(
+						RandomValidateCode.RANDOMCODEKEY) == null) {
+			model.addAttribute("result", result);
 			model.addAttribute("msg", "session已过期");
 			return "user/login";
-      }
+		}
 		String realRandomCode = (String) req.getSession().getAttribute(
 				RandomValidateCode.RANDOMCODEKEY);
 
@@ -251,8 +264,10 @@ public class UserController {
 				* StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE, user.getId());
 		model.addAttribute("orders", orderDetails);
 		model.addAttribute("size", size);
-		model.addAttribute("oMomey", orderService.getTodayBuyMomey(user.getId()));
-		model.addAttribute("reMomey", orderService.getTodayZhongjiaoMomey(user.getId()));
+		model.addAttribute("oMomey",
+				orderService.getTodayBuyMomey(user.getId()));
+		model.addAttribute("reMomey",
+				orderService.getTodayZhongjiaoMomey(user.getId()));
 		model.addAttribute("page", pageSize);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("memberUser", user);
@@ -272,7 +287,7 @@ public class UserController {
 		MemberUser member = userService.findByUserName(userName);// 得到要激活的帐户
 		// 校验验证码是否和注册时发送的一致，以此设置是否激活该帐户
 		member.setActivated(GenerateLinkUtils.verifyCheckcode(member, request));
-		userService.save(member);
+		userService.update(member);
 
 		sessionReload(request, member);
 		Map model = new HashMap();
@@ -346,7 +361,7 @@ public class UserController {
 			member.setRealName(memberUser.getRealName());
 			member.setIdentityCard(memberUser.getIdentityCard());
 			member.setUpdateDate(new Date());// 最后修改人
-			userService.save(member);
+			userService.update(member);
 			sessionReload(request, member);
 			message = "保存成功";
 		} catch (Exception e) {
@@ -371,9 +386,10 @@ public class UserController {
 			if (!Md5Util.validatePassword(member.getPwd(), memberUser.getPwd())) {
 				message = "网站登录密码不正确，请重新输入";
 			} else {
+				member.setBankName(Bank.ZFB.name());
 				member.setBankCode(memberUser.getBankCode());
 				member.setUpdateDate(new Date());// 最后修改人
-				userService.save(member);
+				userService.update(member);
 				sessionReload(request, member);
 				message = "支付宝账号保存成功";
 			}
@@ -456,6 +472,24 @@ public class UserController {
 	}
 
 	/**
+	 * 跳转修改密码页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/user/resetapplyPasswordInfo")
+	public String resetApplyPasswordInfo(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if (session == null) {
+			return "redirect:/user/login";
+		}
+		MemberUser member = (MemberUser) session.getAttribute("memberUser");
+		// 取保存后的新数据
+		Map model = new HashMap();
+		model.put("memberUser", member);
+		return "user/reapplyrecordpasswordInfo";
+	}
+
+	/**
 	 * 跳转安全中心页面
 	 * 
 	 * @return
@@ -502,25 +536,65 @@ public class UserController {
 			HttpServletRequest request, HttpServletResponse response) {
 		MemberUser user = (MemberUser) request.getSession().getAttribute(
 				"memberUser");
+		
 		String password = request.getParameter("password");
 		String message = "重置密码出错";
 		try {
+			user = userService.find(user.getId());
+			if(user!=null){
 			if (!Md5Util.validatePassword(user.getPwd(), password)) {
 				message = "当前密码不正确，请重新输入";
 			} else {
 				String resetPassword = request.getParameter("resetPassword");
 				user.setPwd(Md5Util.generatePassword(resetPassword));
 				user.setUpdateDate(new Date());// 最后修改人
-				userService.save(user);
+				userService.update(user);
 				sessionReload(request, user);
 				message = "重置密码成功";
+			}
+			}else {
+				message = "登陆息已失效，请重新登陆";
 			}
 		} catch (Exception e) {
 			message = "重置密码出错:" + e.getMessage();
 		}
 		return message;
 	}
-
+	/**
+	 * 提款密码重置提交
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/user/resetApplyPassword", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String resetApplyPassword(MemberUser memberUser,
+			HttpServletRequest request, HttpServletResponse response) {
+		MemberUser user = (MemberUser) request.getSession().getAttribute(
+				"memberUser");
+		
+		String password = request.getParameter("password");
+		String message = "重置密码出错";
+		try {
+			user = userService.find(user.getId());
+			if(user!=null){
+			if (!Md5Util.validatePassword(user.getMoneyPwd(), password)) {
+				message = "当前密码不正确，请重新输入";
+			} else {
+				String resetPassword = request.getParameter("resetPassword");
+				user.setMoneyPwd(Md5Util.generatePassword(resetPassword));
+				user.setUpdateDate(new Date());// 最后修改人
+				userService.update(user);
+				sessionReload(request, user);
+				message = "重置密码成功";
+			}
+			}else {
+				message = "登陆息已失效，请重新登陆";
+			}
+		} catch (Exception e) {
+			message = "重置密码出错:" + e.getMessage();
+		}
+		return message;
+	}
 	/**
 	 * 绑定手机号码
 	 * 
@@ -536,7 +610,7 @@ public class UserController {
 			MemberUser member = userService.findByUserName(userName);
 			member.setTelephone(telephone);
 			member.setUpdateDate(new Date());// 最后修改时间
-			userService.save(member);
+			userService.update(member);
 			sessionReload(request, member);
 			message = "保存手机号成功";
 		} catch (Exception e) {
@@ -587,11 +661,11 @@ public class UserController {
 				/ StaticDefine.PAGE_SIZE : size / StaticDefine.PAGE_SIZE + 1;
 		List<Order> orders = orderService.findAllOrderTouZhu((pageNum - 1)
 				* StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE, user.getId());
-//		if (orders != null)
-//			for (Order order : orders) {
-//				order.reTotalMoney = periodService.getMoneyPeriodByOId(order
-//						.getOrderNo());
-//			}
+		// if (orders != null)
+		// for (Order order : orders) {
+		// order.reTotalMoney = periodService.getMoneyPeriodByOId(order
+		// .getOrderNo());
+		// }
 
 		model.addAttribute("orderDetails", orders);
 		model.addAttribute("size", size);

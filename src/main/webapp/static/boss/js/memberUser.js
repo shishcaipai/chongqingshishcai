@@ -36,8 +36,8 @@
 							{field:'telephone',title:'手机号码',width:90,align:'center'},
 							{field:'identity_card',title:'身份证',width:90,align:'center'},
 							{field:'bank_code',title:'支付宝账号',width:90,align:'center'},
-							{field:'total_score',title:'总积分',width:90,align:'center'},
-							{field:'available_score',title:'可用积分',width:90,align:'center'},
+							{field:'total_score',title:'总金额',width:90,align:'center'},
+							{field:'available_score',title:'可用金额',width:90,align:'center'},
 							  {field:'address',title:'地址',width:90,align:'center'},
 							{field:'create_date',title:'创建时间',width:100,align:'center',
 								formatter: function(value,row,index){
@@ -106,33 +106,32 @@
 			 $.messager.show({ title : '提示', msg :'真实姓名不能为空！'});
 			 return;
 		}
-		if(!checkChineseName($("#realName").val().trim())){
-			 $.messager.show({ title : '提示', msg :'中文姓名格式不正确！'});
-			 return;
+//		if(!checkChineseName($("#realName").val().trim())){
+//			 $.messager.show({ title : '提示', msg :'中文姓名格式不正确！'});
+//			 return;
+//		}
+//		if($("#bankCode").val().trim()==''){
+//	    	 $.messager.show({ title : '提示', msg :'身份证号码不能为空！'});
+//			 return;
+//		}
+//		if(!isCardNo($("#identityCard").val().trim())){
+//			 $.messager.show({ title : '提示', msg :'身份证输入不合法！'}); 
+//			 return;  
+//		}
+		if($("#telephone").val().trim()!=''){
+			if(!checkPhone($("#telephone").val().trim())){
+				 $.messager.show({ title : '提示', msg :'手机号格式不正确！'}); 
+				 return;
+			}
 		}
-		if($("#identityCard").val().trim()==''){
-	    	 $.messager.show({ title : '提示', msg :'身份证号码不能为空！'});
-			 return;
-		}
-		if(!isCardNo($("#identityCard").val().trim())){
-			 $.messager.show({ title : '提示', msg :'身份证输入不合法！'}); 
-			 return;  
-		}
-		if($("#telephone").val().trim()==''){
-			 $.messager.show({ title : '提示', msg :'手机号不能为空！'}); 
-			 return;
-		}
-		if(!checkPhone($("#telephone").val().trim())){
-			 $.messager.show({ title : '提示', msg :'手机号格式不正确！'}); 
-			 return;
-		}
+		
 		
 		var memberUser = {};
 		memberUser["userName"]=$("#userName").val();
 		memberUser["realName"]=$("#realName").val();
 		memberUser["telephone"]=$("#telephone").val();
-		memberUser["identityCard"]=$("#identityCard").val();
 		memberUser["bankCode"]=$("#bankCode").val();
+		memberUser["id"]=$("#id").val();
 		memberUser["type"]=$("#type").val();
 		//保存
 		$.ajax({
@@ -148,4 +147,69 @@
 			}    
 		});
 	}
-	
+	/**
+	 * 弹出重置密码页面
+	 * @param str
+	 * @returns
+	 */
+	function resetPwdMemberUser(){
+		var selectedRows=$("#memberUserDataGrid").datagrid('getSelections');
+		if(selectedRows.length!=1){
+			$.messager.alert('系统提示','请选择一条要编辑的数据！');
+			return;
+		}
+		var row=selectedRows[0];
+		$("#dlg_pwd").dialog("open").dialog("setTitle","重置用户密码");
+		$("#memberUserForm1").form("load",row);
+	}
+	/**
+	 * 重置用户密码信息信息提交
+	 */
+	function resetPwdMemberUserDialog(){
+		if($("#id1").val().trim()==''){
+			$.messager.show({ title : '提示', msg :'请选择用户！'});  
+			return;
+		}
+		var memberUser = {};
+		memberUser["id"]=$("#id1").val();
+		//保存
+		$.ajax({
+			url : '../../boss/member/resetPwdMemberUser',
+			data:memberUser,
+			type:'post',
+			dataType:'text',
+			success : function(result) {
+				$.messager.show({ title : '提示', msg : result });
+				closePwdMemberUserDialog();
+				$('#memberUserDataGrid').datagrid("reload");
+			}    
+		});
+	}
+	/**
+	 * 重置用户密码信息信息提交
+	 */
+	function resetApplyPwdMemberUserDialog(){
+		if($("#id1").val().trim()==''){
+			$.messager.show({ title : '提示', msg :'请选择用户！'});  
+			return;
+		}
+		var memberUser = {};
+		memberUser["id"]=$("#id1").val();
+		//保存
+		$.ajax({
+			url : '../../boss/member/resetApplyPwdMemberUser',
+			data:memberUser,
+			type:'post',
+			dataType:'text',
+			success : function(result) {
+				$.messager.show({ title : '提示', msg : result });
+				closePwdMemberUserDialog();
+				clearSearchForm();
+				$('#memberUserDataGrid').datagrid("reload");
+			}    
+		});
+	}
+	function closePwdMemberUserDialog(){
+		$('#dlg_pwd').window('close');
+		$('#memberUserForm').form('clear');
+	}

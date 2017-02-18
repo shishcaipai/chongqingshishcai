@@ -323,7 +323,7 @@ function check_from(form_name) {
 			url : "../user/doregister",
 			success : function(res) {
 				if ("1" == res) {
-					alert("注册成功，初始提款密码为888888，请及时修改！");
+					alert("注册成功！提款密码默认888888，请及时修改。");
 					window.location.href = "../user/login";
 				} else if ("2" == res) {
 					alert("用户名已占用，请选择其他用户名！");

@@ -27,7 +27,12 @@ public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> 
 	}
 
 	public MemberUser findByUserName(String userName){
+		try{
 		return memberUserDao.findByUserName(userName);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return new MemberUser();
 	}
 	
 	public List<Map> findMemberList(String userName,String realName,String mobile,String startDate,String endDate){
@@ -36,12 +41,7 @@ public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> 
 
 	@Override
 	public Result getMemberUserAll(PageModel pageModel,String userName,String realName,String mobile,String startDate,String endDate) {
-		Result<Map> result = new Result<Map>();
-		List<Map> list =  memberUserDao.getMemberUserAll(pageModel,userName, realName, mobile, startDate, endDate);
-		int total =  memberUserDao.getMemberUserAllCount(pageModel,userName, realName, mobile, startDate, endDate);
-		result.setRows(list);
-		result.setTotal(total);
-		return result;
+		return  memberUserDao.getMemberUserAll(pageModel,userName, realName, mobile, startDate, endDate);
 	}
 
 	@Override
@@ -77,6 +77,12 @@ public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> 
 	@Override
 	public Integer getAllActivePredUser(String id) {
 		return memberUserDao.getAllActivePredUserCount(id);
+	}
+
+	@Override
+	public void clear() {
+		memberUserDao.clear();
+		
 	}
 	
 	

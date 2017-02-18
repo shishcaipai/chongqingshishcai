@@ -255,9 +255,12 @@
 							</div>
 							<ul>
 
+								
+									  <c:forEach var="art" items="${requestScope.notice }">
 								<li class="sc_gglist"><em>[公告]</em> <a
-									href="#" target="_blank"
-									title="01月01日 彩金赠送比例">暂无公告</a></li>
+									href="<%=basePath %>article/article?id=${art.id }" target="_blank"
+									title="${art.title }">${art.title }</a></li>
+								</c:forEach>
 							</ul>
 						</div>
 						<!--分析-->
@@ -268,17 +271,14 @@
 								<b style="float: left; margin: 12px 0px 0px 30px;"></b>分析推荐
 							</div>
 							<ul>
-
-
-								<li
+                          <c:forEach var="art" items="${requestScope.zixian }">
+									<li
 									style="width: 500px; height: 22px; overflow: hidden; line-height: 22px; margin: 6px;">
-
-									<em>[资讯]</em> <a href="#"
-									target="_blank" title="2元机选换来1011万大奖 89后美女求信息保密"
-									style="color: #333;">暂无最新资讯</a>
+									<em>[资讯]</em> <a href="<%=basePath %>article/article?id=${art.id }"
+									target="_blank" title="${art.title }"
+									style="color: #333;">${art.title }</a>
 								</li>
-
-
+								</c:forEach>
 
 							</ul>
 						</div>
@@ -314,13 +314,13 @@
 								</c:forEach>
 							</ul>
 						</div>
-						<div id="tab_box_02" style="display: none">
+						<!-- <div id="tab_box_02" style="display: none">
 							<ul class="xc_grzjph02">
 								<li><span class="yh_phb_01">&nbsp;</span> <span
 									class="yh_phb_02">***瓦上</span> <span class="yh_phb_03"><b>151986</b>&nbsp;元</span>
 								</li>
 							</ul>
-						</div>
+						</div> -->
 					</div>
 
 					<!--热门彩种-->

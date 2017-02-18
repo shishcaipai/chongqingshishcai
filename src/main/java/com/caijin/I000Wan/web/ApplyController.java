@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.enu.Bank;
 import com.caijin.I000Wan.service.ApplyRecordService;
 import com.caijin.I000Wan.service.MemberUserService;
+import com.caijin.I000Wan.util.Md5Util;
 
 /**
  * 提款申请Action
@@ -30,7 +33,7 @@ import com.caijin.I000Wan.service.MemberUserService;
 @Controller
 @RequestMapping("/money")
 public class ApplyController {
-
+	private final Logger log = LoggerFactory.getLogger(ApplyController.class);
 	@Autowired
 	private ApplyRecordService applyRecordService;
 	@Autowired
@@ -72,8 +75,8 @@ public class ApplyController {
 		try {
 			MemberUser user = memberUserService.find(mu.getId());
 			mu = user;
-		request.getSession().setAttribute(
-					MemberUser.FRONT_MEMBER_LOGIN_SESSION,mu);
+			request.getSession().setAttribute(
+					MemberUser.FRONT_MEMBER_LOGIN_SESSION, mu);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "redirect:/user/login";
@@ -104,7 +107,7 @@ public class ApplyController {
 		String bankCode = request.getParameter("bankCode");
 		String idCardNo = request.getParameter("idCardNo");
 		String applyName = request.getParameter("applyName");
-
+		String withdrawPassword = request.getParameter("withdrawPassword");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sucess", false);
 
@@ -116,43 +119,52 @@ public class ApplyController {
 				try {
 					MemberUser user = memberUserService.find(mu.getId());
 					mu = user;
-				request.getSession().setAttribute(
-							MemberUser.FRONT_MEMBER_LOGIN_SESSION,mu);
+					request.getSession().setAttribute(
+							MemberUser.FRONT_MEMBER_LOGIN_SESSION, mu);
 				} catch (Exception e) {
 					e.printStackTrace();
 					map.put("msg", "提款申请失败，用户信息已失效请重新登陆！");
 					return map;
 				}
-				System.out.println("可用余额:"+mu.getAvailableScore());
-				if (mu.getAvailableScore() < new Integer(applyMoneyStr)) {
-					map.put("msg", "你没有这么多的可用余额！");
+				log.info("可用余额:" + mu.getAvailableScore());
+				log.info("密码:" +  Md5Util.generatePassword(withdrawPassword));
+				log.info("密码:" +  mu.getMoneyPwd());
+				if (withdrawPassword != null
+						&& Md5Util.generatePassword(withdrawPassword).equals(
+								mu.getMoneyPwd())) {
+					if (mu.getAvailableScore() < new Integer(applyMoneyStr)) {
+						map.put("msg", "可用余额不足！");
+					} else {
+						ApplyRecord applyRecord = new ApplyRecord();
+						applyRecord.setBankNo(bamkCardNo);
+						applyRecord.setApplyMoney(new Integer(applyMoneyStr));
+						applyRecord.setCreateDate(new Date());
+						applyRecord.setBank(bank);
+						applyRecord.setBankName(bank == null ? "" : bank
+								.getName());
+						applyRecord.setApplyName(applyName);
+						applyRecord.setAuditStatus(ApplyRecord.UN_AUDIT);// 未审核
+						applyRecord.setIdCardNo(idCardNo);
+						applyRecord.setMemberUser(mu);
+
+						mu.setAvailableScore(mu.getAvailableScore()
+								- new Integer(applyMoneyStr));
+						mu.setActionScore(mu.getActionScore()
+								+ new Integer(applyMoneyStr));
+						memberUserService.update(mu);
+
+						applyRecordService.save(applyRecord);
+
+						map.put("sucess", true);
+						map.put("msg", "提款申请成功！");
+					}
+
 				} else {
-					ApplyRecord applyRecord = new ApplyRecord();
-					applyRecord.setBankNo(bamkCardNo);
-					applyRecord.setApplyMoney(new Integer(applyMoneyStr));
-					applyRecord.setCreateDate(new Date());
-					applyRecord.setBank(bank);
-					applyRecord.setBankName(bank == null ? "" : bank.getName());
-					applyRecord.setApplyName(applyName);
-					applyRecord.setAuditStatus(ApplyRecord.UN_AUDIT);// 未审核
-					applyRecord.setIdCardNo(idCardNo);
-					applyRecord.setMemberUser(mu);
-
-					mu.setAvailableScore(mu.getAvailableScore()
-							- new Integer(applyMoneyStr));
-					mu.setActionScore(mu.getActionScore()
-							+ new Integer(applyMoneyStr));
-					memberUserService.update(mu);
-
-					applyRecordService.save(applyRecord);
-
-					map.put("sucess", true);
-					map.put("msg", "提款申请成功！");
+					map.put("msg", "提款申请失败，提款密码验证错误！");
 				}
 			} else {
-				map.put("msg", "请先登录！");
+				map.put("msg", "提款申请失败，用户信息已失效请重新登陆！");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("msg", "提款申请失败，请重新登陆并检查你的资料信息！");
