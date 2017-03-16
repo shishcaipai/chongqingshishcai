@@ -17,7 +17,7 @@
 	rel="stylesheet" />
 <link href="http://www.ib18.cn/res/css/index.css" rel="stylesheet"
 	type="text/css" />
-<script src="http://www.ib18.cn/res/js/jquery-1.7.2.min.js"
+<script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
 	type="text/javascript"></script>
 <META content="MSHTML 6.00.2900.6058" name=GENERATOR>
 <style type="text/css">

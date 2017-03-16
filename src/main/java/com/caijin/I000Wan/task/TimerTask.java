@@ -51,7 +51,9 @@ public class TimerTask {
 
 	@Autowired
 	private OrderDetailService orderDetailService;
-
+  /**
+   * 中奖任务计算
+   */
 	@Scheduled(cron = "0 0/5 *  * * ? ")
 	public void job1() {
 		Map<String, Order> map = new HashMap<String, Order>();// 存当前订单号

@@ -18,7 +18,7 @@ public class HeMaiOrder extends BaseEntity{
 	// 购买金额
 	private Float floatManay;
      //是否生效
-	private int effective=0;
+	private int status=0;
 	private String orderNo;
 	private HeMaiOrderDetail orderDetail;
 	@Column(length = 10)
@@ -56,12 +56,12 @@ public class HeMaiOrder extends BaseEntity{
 		this.floatManay = floatManay;
 	}
 	@Column(length = 10)
-	public int getEffective() {
-		return effective;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setEffective(int isEffective) {
-		this.effective = isEffective;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	@ManyToOne
 	@JoinColumn(name = "hemai_id")

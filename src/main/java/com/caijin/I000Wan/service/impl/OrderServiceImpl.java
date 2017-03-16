@@ -49,11 +49,13 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 		return orderDao.getMyRechargeList(userId);
 	}
 
-	public Result findOrderListByCondition(PageModel pageModel,String userName, String realName,
-			String telephone, String orderType, String orderStatus,
-			String payStatus, String startDate, String endDate) {
-		return orderDao.findOrderListByCondition(pageModel,userName, realName, telephone,
-				orderType, orderStatus, payStatus, startDate, endDate);
+	public Result findOrderListByCondition(PageModel pageModel,
+			String userName, String realName, String telephone,
+			String orderType, String orderStatus, String payStatus,
+			String startDate, String endDate) {
+		return orderDao.findOrderListByCondition(pageModel, userName, realName,
+				telephone, orderType, orderStatus, payStatus, startDate,
+				endDate);
 	}
 
 	public Order findOrderByOrderId(String orderId) {
@@ -212,8 +214,22 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 	@Override
 	public void clear() {
 		orderDaoImpl.clear();
-		
+
 	}
 
+	@Override
+	public  List<Order> findOrderByTypeAndOtherId(int hemaiImpBuyOrder, String id) {
+		return orderDao.findOrderByTypeAndOtherId(hemaiImpBuyOrder, id);
+	}
+
+	@Override
+	public void updateByOrderNo(String orderNo, int orderSucess) {
+		orderDaoImpl.updateByOrderNo(orderNo,orderSucess);
+		orderDaoImpl.clear();
+	}
+	public Order findOrderByTypeAndOrderId(int orderType, String orderNo){
+		return orderDao.findOrderByTypeAndOrderId(orderType,orderNo);
+	}
+	
 
 }

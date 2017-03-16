@@ -1,6 +1,5 @@
 package com.caijin.I000Wan.web;
 
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,10 +22,13 @@ import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.OrderDetail;
 import com.caijin.I000Wan.entity.Period;
+import com.caijin.I000Wan.service.HeMaiOrderDetailService;
+import com.caijin.I000Wan.service.HeMaiOrderService;
 import com.caijin.I000Wan.service.MemberUserService;
 import com.caijin.I000Wan.service.OrderDetailService;
 import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
+import com.caijin.I000Wan.service.UserService;
 import com.caijin.I000Wan.util.DateUtils;
 import com.caijin.I000Wan.util.GenerateOrderNoUtil;
 
@@ -50,6 +52,12 @@ public class OrderController {
 
 	@Autowired
 	private MemberUserService memberUserService;
+
+	@Autowired
+	private HeMaiOrderDetailService heMaiOrderDetailService;
+
+	@Autowired
+	private HeMaiOrderService heMaiService;
 
 	/**
 	 * 跳转到充值页面
@@ -79,6 +87,13 @@ public class OrderController {
 
 		MemberUser memberUser = (MemberUser) request.getSession().getAttribute(
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
+		try {
+			memberUser = memberUserService.find(memberUser.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "用户超时");
+			return "redirect:/user/login";
+		}
 		if (memberUser == null) {
 			model.addAttribute("msg", "用户超时");
 			return "redirect:/user/login";
@@ -93,10 +108,23 @@ public class OrderController {
 					model.addAttribute("msg", "用户超时");
 					return "redirect:/user/login";
 				}
+				if (order.PAY_STATUS_SUCESS == order.getPayStatus()) {
+					model.addAttribute("msg", "请不要重复支付");
+					return "order/alipaysuccess";
+				}
 				order.setPayStatus(Order.PAY_STATUS_SUCESS);
 				order.setOrderStatus(Order.ORDER_SUCESS);
 				memberUserService.update(memberUser);
 				orderService.update(order);
+				if (order.getIsZhuiHao() == 0) {
+					int i = periodService.updatePeriodStatusByOId(
+							order.getOrderNo(), Period.STATUS_CURRENT,
+							Period.SHISHI_CAI_CHONGQING);
+				} else {
+					int i = periodService.updatePeriodStatusByOId(
+							order.getOrderNo(), Period.STATUS_BEFORE,
+							Period.SHISHI_CAI_CHONGQING);
+				}
 				model.addAttribute("code", 1);
 				model.addAttribute("msg", "支付成功");
 				return "order/alipaysuccess";
@@ -148,18 +176,17 @@ public class OrderController {
 
 				orderService.save(order);
 
-				OrderDetail orderDetail = new OrderDetail();
-				orderDetail.setCreateDate(new Date());
-				orderDetail.setOrder(order);
-				orderDetail.setUpdateDate(new Date());
-
-				orderDetailService.save(orderDetail);
-
+				// OrderDetail orderDetail = new OrderDetail();
+				// orderDetail.setCreateDate(new Date());
+				// orderDetail.setOrder(order);
+				// orderDetail.setUpdateDate(new Date());
+				//
+				// orderDetailService.save(orderDetail);
 				request.getSession().setAttribute("tradeOrder", order);
 
 				map.put("orderId", order.getId());
 				map.put("sucess", true);
-				map.put("msg", "下注成功!");
+				map.put("msg", "充值成功!");
 			} else {
 				map.put("sucess", false);
 				map.put("msg", "未登录!");
@@ -206,8 +233,8 @@ public class OrderController {
 				float totalMoney = 0;
 				// 投注名称
 				String name = (String) request.getParameter("playname");
-				   name=new String(name.getBytes("ISO-8859-1"), "utf-8");
-//				name = URLDecoder.decode(name);
+				name = new String(name.getBytes("ISO-8859-1"), "utf-8");
+				// name = URLDecoder.decode(name);
 				log.info("彩票名称::::" + name);
 				log.info("彩票名称::::"
 						+ new String(name.getBytes("ISO-8859-1"), "utf-8"));
@@ -229,6 +256,8 @@ public class OrderController {
 						.getParameter("zhushunum");
 				// 追号是否停
 				String ZjCut = (String) request.getParameter("ZjCut");
+				// 追号是否停
+				String IsZhuihao = (String) request.getParameter("IsZhuihao");
 				// 投注彩票类型代码
 				Integer lotteryCount = 1;
 				if (expectnum != null && !expectnum.equals("")) {
@@ -262,12 +291,12 @@ public class OrderController {
 					Period period;
 					if (null == beishulistsuc || beishulistsuc.equals("")) {
 						period = new Period();
-						period.setStatus(Period.STATUS_CURRENT);
 						period.setLotteryCode("cqssc");
 						period.setLotteryPeriod(phase);
 						period.setCreateDate(new Date());
 						period.setOrderId(orderId);
 						period.setBeisu(1);
+						period.setStatus(Period.STATUS_AFTER);
 						periodService.save(period);
 						periods.add(period);
 						bufferperiods.append("<br>" + phase + "<br>1");
@@ -281,12 +310,12 @@ public class OrderController {
 							System.out.println("parsh：：：" + parsh[i]);
 							System.out.println("beisus：：：" + beisus[i]);
 							period = new Period();
-							period.setStatus(Period.STATUS_CURRENT);
 							period.setLotteryCode("cqssc");
 							period.setLotteryPeriod(parsh[i]);
 							period.setCreateDate(new Date());
 							period.setOrderId(orderId);
 							period.setBeisu(Integer.valueOf(beisus[i]));
+							period.setStatus(Period.STATUS_AFTER);
 							periodService.save(period);
 							periods.add(period);
 							bufferperiods.append("<br>" + parsh[i] + "|"
@@ -313,6 +342,7 @@ public class OrderController {
 					order.setUpdateDate(new Date());
 					order.setLotteryCount(lotteryCount);
 					order.setIsCut(Integer.valueOf(ZjCut));
+					order.setIsZhuiHao(Integer.valueOf(IsZhuihao));
 					orderService.save(order);
 					String[] lotteryCodes = lotteryCode.split("\\$");
 					OrderDetail orderDetail;

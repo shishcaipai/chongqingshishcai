@@ -101,7 +101,7 @@
 											<fmt:formatNumber
 												value="${(order.fensum - order.subGuaranteeSum) * 100 / order.fensum }"
 												pattern="##.##" minFractionDigits="2" />% + <fmt:formatNumber
-												value="${( order.subGuaranteeSum - order.otherBuyNum) * 100 / order.fensum }"
+												value="${( order.fensum - order.otherBuyNum) * 100 / order.fensum }"
 												pattern="##.##" minFractionDigits="2" />% </td>
 									<td>${order.otherBuyNum }</td>
 
@@ -114,13 +114,18 @@
 										</c:when>
 										<c:otherwise>
 											<c:choose>
-												<c:when test="${1 == order.effective}">
+												<c:when test="${1 == order.status}">
 													<td class="new_hemai_srk"><span
 														style="margin-left: 20px">-</span></td>
 													<td class="new_hemai_an"><span
 														style="margin-left: 25px">成功</span></td>
 												</c:when>
 												<c:otherwise>
+												<c:if test="${order.order.orderStatus ==4}"><td class="new_hemai_srk"><span
+														style="margin-left: 20px">-</span></td>
+													<td class="new_hemai_an"><span
+														style="margin-left: 25px">订单取消</span></td></c:if>
+														<c:if test="${order.order.orderStatus ==0}">
 													<td class="new_hemai_srk"><input name="buynum"
 														type="text" class="rec_text" id="${order.id}" value="0" />
 													</td>
@@ -132,6 +137,7 @@
 															value="${order.otherBuyNum }" /> <input type="hidden"
 															value="${order.otherBuyNum }" /> 购买
 													</a></td>
+													</c:if>
 												</c:otherwise>
 											</c:choose>
 										</c:otherwise>

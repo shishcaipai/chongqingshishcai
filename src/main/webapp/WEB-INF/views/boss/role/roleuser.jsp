@@ -149,7 +149,6 @@ $(function() {
 				return;
 			}
 			var row = selectedRows[0];
-			alert(row.username);
 			$("#userName").val(row.username);
 			$("#userid").val(row.id);
 			$("#dlg").dialog("open").dialog("setTitle", "分配角色");

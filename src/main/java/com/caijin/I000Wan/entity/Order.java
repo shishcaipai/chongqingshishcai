@@ -53,13 +53,14 @@ public class Order extends BaseEntity {
 	public final static int PAY_STATUS_FAILUE = 2;// 支付失败
 
 	public final static int PAY_STATUS_OFFTIME = 3;// 支付超时
+	public final static int PAY_STATUS_FANXIAN = 4;// 订单取消，返回金额
 
 	public final static int WPRISE_STATUS_NO = 0;// 待计算奖
 
 	public final static int WPRIS_STATUS_PORTION = 1;// 部分中奖
 
 	public final static int WPRIS_STATUS_ALL = 2;// 全部中奖
-	
+
 	public final static int WPRIS_STATUS_WI = 3;// 未中奖
 	public final static int WPRIS_STATUS_PWI = 4;// 部分不中奖
 
@@ -71,11 +72,11 @@ public class Order extends BaseEntity {
 
 	private String orderNo;// orderNo
 
-	private int orderType=0;// 订单类型 1为订单充值 2为代购订单 3为合买类型订单
+	private int orderType = 0;// 订单类型 1为订单充值 2为代购订单 3为合买类型订单
 
-	private int orderStatus=0;// 订单状态类型 1为下订单成功 2为下订单失败
+	private int orderStatus = 0;// 订单状态类型 1为下订单成功 2为下订单失败
 
-	private int payStatus=0;// 支付状态类型 0为未支付 1为支付成功 2为支付失败 3为支付超时
+	private int payStatus = 0;// 支付状态类型 0为未支付 1为支付成功 2为支付失败 3为支付超时
 
 	private String otherId; // 其他关联id 当订单为1，4，5，6时关联的其他对像
 
@@ -87,17 +88,28 @@ public class Order extends BaseEntity {
 
 	private float totalMoney = 0;// 订单购买总金额
 
-	private int lotteryCount=0; // 彩票注数
+	private int lotteryCount = 0; // 彩票注数
 
 	private String lotteryType;// 彩票类型
 
-	private int isCut=0;
+	private int isCut = 0;
+	private int isZhuiHao = 0;
 
 	public float currentWPMoney;// 当前中奖金额
 
 	public int wprizeStatus = 0; // 中奖计算是否完成状态为0，1，2
 
 	public int cashBackStatus = 0;// 返现是否完成0，1，2
+
+	public String content="";
+	@Column(length = 200)
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	@Column(length = 10)
 	public int getIsCut() {
@@ -106,6 +118,14 @@ public class Order extends BaseEntity {
 
 	public void setIsCut(int isCut) {
 		this.isCut = isCut;
+	}
+
+	public int getIsZhuiHao() {
+		return isZhuiHao;
+	}
+
+	public void setIsZhuiHao(int isZhuiHao) {
+		this.isZhuiHao = isZhuiHao;
 	}
 
 	@Column(length = 200)

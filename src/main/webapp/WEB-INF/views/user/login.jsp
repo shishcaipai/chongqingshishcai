@@ -17,11 +17,11 @@
 	content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
 <title>会员登录</title>
 
-<link href="http://www.ib18.cn/res/css/denglu.css" rel="stylesheet"
+<link href="<%=basePath%>static/css/denglu.css" rel="stylesheet"
 	type="text/css"></link>
 <script src="<%=basePath%>static/js/commonUtil.js"
 	type="text/javascript"></script>
-	<script src="<%=basePath%>static/js//jquery-1.7.2.min.js" type="text/javascript"></script>
+	<script src="<%=basePath%>static/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 
 <style>
 .ssssssss {
@@ -40,7 +40,7 @@
 <div style="margin: 10px auto 0;width: 1000px;">
 		<div style="float: right;">
 			<div id="need_login" style="display:block;">
-				<span style="color: #666;">您好！欢迎来到好运来！</span>
+				<span style="color: #666;">您好！欢迎来到鸿运彩票网！</span>
 				<a class="ssssssss">登录</a>&nbsp;|
 				<a class="ssssssss">免费注册</a>&nbsp;|
                 <a class="ssssssss">反馈建议</a>&nbsp;|

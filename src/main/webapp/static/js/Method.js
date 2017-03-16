@@ -2412,10 +2412,7 @@ function show_money()
 	var beishulistsuc1 = $("#beishulistsuc1").val();
 	var beishulistsuc2 = $("#beishulistsuc2").val();
 	var beishulistsuc3 = $("#beishulistsuc3").val();
-	//var beishulistsuc4 = $("#beishulistsuc4").val();//2013-1-24
 	
-	//var expectlistsuc=JoinExpect(expectlistsuc1,expectlistsuc2,expectlistsuc3,expectlistsuc4);
-	//var beishulistsuc=JoinBeishu(beishulistsuc1,beishulistsuc2,beishulistsuc3,beishulistsuc4);
 	var expectlistsuc=JoinExpect(expectlistsuc1,expectlistsuc2,expectlistsuc3);
 	var beishulistsuc=JoinBeishu(beishulistsuc1,beishulistsuc2,beishulistsuc3);
 	
@@ -2953,9 +2950,13 @@ if($("#btDiv").is(":hidden"))
 		$("#btn_SubmitZ,#btn_SubmitHM,#btn_SubmitPath").attr("disabled",true);
 		
 		var ZjCut=0;
-		if ($("#ZjStop").attr("checked"))
+		if ($("#ZjStop").attr("checked")=='checked')
 		{
 			ZjCut=1;
+		}
+		var  Zhuihao=0;
+		if($("#IsZhuihao").attr("checked")=='checked'){
+			Zhuihao=1;
 		}
 		if (checkType=="zg") {
 				 var  data={
@@ -2967,6 +2968,7 @@ if($("#btDiv").is(":hidden"))
 						expectlistsuc:expectlistsuc, //投注彩票期数list
 						beishulistsuc:beishulistsuc,//投注彩票倍数list
 						ZjCut:ZjCut,//是否追号停止
+						IsZhuihao:Zhuihao,//是否追号
 						lotteryTypeId:lotteryTypeId,//彩种类型ID
 						lotteryType:"cqssc",//彩种类型代码
 						phase:phase,//当前期号
@@ -2990,6 +2992,7 @@ if($("#btDiv").is(":hidden"))
 						expectlistsuc:expectlistsuc, //投注彩票期数list
 						beishulistsuc:beishulistsuc,//投注彩票倍数list
 						ZjCut:ZjCut,//是否追号停止
+						IsZhuihao:Zhuihao,//是否追号
 						lotteryTypeId:lotteryTypeId,//彩种类型ID
 						lotteryType:"cqssc",//彩种类型代码
 						phase:phase,//当前期号

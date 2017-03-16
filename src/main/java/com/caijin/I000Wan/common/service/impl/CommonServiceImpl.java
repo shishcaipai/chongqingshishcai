@@ -48,7 +48,6 @@ public abstract class CommonServiceImpl<E,ID extends Serializable> implements Co
 	}
 
 	public E save(E entity) {
-	  System.out.println(" commonDao-是否为空---"+commonDao);
 		return commonDao.save(entity);
 	}
 

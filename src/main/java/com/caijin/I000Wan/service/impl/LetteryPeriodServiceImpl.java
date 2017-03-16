@@ -45,6 +45,11 @@ public class LetteryPeriodServiceImpl extends CommonServiceImpl<LotteryPeriod,St
 	public LotteryPeriod findByTopPeriod() {
 		return lotteryPeriodDao.findByTopPeriod();
 	}
+
+	@Override
+	public LotteryPeriod findByPeriod(String lotteryCode, String periodNumber) {
+		return lotteryPeriodDao.findByPeriod(periodNumber,lotteryCode);
+	}
 	
 
 }

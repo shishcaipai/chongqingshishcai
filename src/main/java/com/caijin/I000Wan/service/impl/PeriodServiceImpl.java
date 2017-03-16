@@ -84,7 +84,6 @@ public class PeriodServiceImpl extends CommonServiceImpl<Period, String>
 		Period period = periodDao.findPeriodbyQIhaoAndOrderNo(expect, orderNo);
 		period.setMoney(money * period.getBeisu());
 		period.setWinning(i);
-		period.setStatus(2);
 		save(period);
 		return true;
 	}
@@ -114,17 +113,33 @@ public class PeriodServiceImpl extends CommonServiceImpl<Period, String>
 		return orderDaoImpl.findUserTotalAmountList(date);
 	}
 
-//	@Override
-//	public void updateUnPeriod(String qihao) {
-//		List<Period> list=periodDao.findbyQIhao(qihao);
-//		for (Period period :list){
-//		orderDaoImpl.updateOrderByQihao(period.getOrderId(),period.getLotteryPeriod());
-//		}
-//	}
-
 	@Override
 	public List<Period> findOrderByStatus(int waitOrder) {
 		return periodDao.findOrderByStatus(waitOrder);
+	}
+
+	@Override
+	public int updatePeriodStatusByOId(String orderNo, int status,
+			String lotteryCode) {
+		return periodDao.updatePeriodStatusByOId(orderNo, status, lotteryCode);
+	}
+
+	@Override
+	public int updatePeriodStatusByOIdAndPrase(String orderNo, int status,
+			String lotteryCode, String parse) {
+		return periodDao.updatePeriodStatusByOIdAndParse(orderNo, status,
+				lotteryCode, parse);
+	}
+
+	@Override
+	public List<Period> findbyQIhao(String shangQinhao, Integer statusBefore) {
+		return periodDao.findbyQIhao(shangQinhao,statusBefore);
+	}
+
+	@Override
+	public List<Period> findPeriodByOIdAndStatus(String orderNo,
+			Integer winningCurrent) {
+		return periodDao.findPeriodByOIdAndStatus(orderNo,winningCurrent);
 	}
 
 }

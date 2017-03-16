@@ -20,30 +20,30 @@ public class HeMaiOrderDetail extends BaseEntity {
 
 	private String hemaiId;
 	// 分成份数
-	private Integer fensum;
+	private int fensum=0;
 	// 保底份数
-	private Integer minimumGuaranteeSum;
+	private int minimumGuaranteeSum=0;
 	// 发起认购份数
-	private Integer subGuaranteeSum;
+	private int subGuaranteeSum=0;
 	// 发起人
 	private MemberUser memberUser;
 	// 是否生效
-	private int effective;
+	private int status;
 
 	// 发起人购买金额
-	private Float floatManay;
+	private float floatManay;
 	
 	private int type;// 1 方案公开 2 跟单后公开 3 完全保密
 	// 描述
 	private String desc;
 	
 	@Transient
-	private Integer otherBuyNum;
+	private int otherBuyNum;
 	@Column(length = 100)
-	public Float getFloatManay() {
+	public float getFloatManay() {
 		return floatManay;
 	}
-	public void setFloatManay(Float floatManay) {
+	public void setFloatManay(float floatManay) {
 		this.floatManay = floatManay;
 	}
 	@ManyToOne
@@ -55,24 +55,24 @@ public class HeMaiOrderDetail extends BaseEntity {
 		this.order = order;
 	}
 	@Column(length = 10)
-	public Integer getFensum() {
+	public int getFensum() {
 		return fensum;
 	}
-	public void setFensum(Integer fensum) {
+	public void setFensum(int fensum) {
 		this.fensum = fensum;
 	}
 	@Column(length = 10)
-	public Integer getMinimumGuaranteeSum() {
+	public int getMinimumGuaranteeSum() {
 		return minimumGuaranteeSum;
 	}
-	public void setMinimumGuaranteeSum(Integer minimumGuaranteeSum) {
+	public void setMinimumGuaranteeSum(int minimumGuaranteeSum) {
 		this.minimumGuaranteeSum = minimumGuaranteeSum;
 	}
 	@Column(length = 10)
-	public Integer getSubGuaranteeSum() {
+	public int getSubGuaranteeSum() {
 		return subGuaranteeSum;
 	}
-	public void setSubGuaranteeSum(Integer subGuaranteeSum) {
+	public void setSubGuaranteeSum(int subGuaranteeSum) {
 		this.subGuaranteeSum = subGuaranteeSum;
 	}
 	@ManyToOne
@@ -84,11 +84,11 @@ public class HeMaiOrderDetail extends BaseEntity {
 		this.memberUser = memberUser;
 	}
 	@Column(length = 10)
-	public int getEffective() {
-		return effective;
+	public int getStatus() {
+		return status;
 	}
-	public void setEffective(int isEffective) {
-		this.effective = isEffective;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	@Column(length = 10)
 	public int getType() {

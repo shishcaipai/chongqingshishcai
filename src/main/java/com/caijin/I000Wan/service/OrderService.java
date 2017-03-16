@@ -91,5 +91,10 @@ public interface OrderService extends CommonService<Order, String> {
 
 	void clear();
 
+	List<Order> findOrderByTypeAndOtherId(int orderType, String id);
+
+	void updateByOrderNo(String orderNo, int orderSucess);
+
+	 Order findOrderByTypeAndOrderId(int orderType, String orderNo);
 
 }

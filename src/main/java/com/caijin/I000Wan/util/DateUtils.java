@@ -10,72 +10,72 @@ import java.util.TimeZone;
 
 public class DateUtils {
 
-	public static String getShangQiChongQingShiShicai() {
-		StringBuffer stringBuffer = new StringBuffer();
-		Calendar currentDate = Calendar.getInstance(TimeZone
-				.getTimeZone("GMT+08:00"));
-		int date = currentDate.get(Calendar.DAY_OF_MONTH);
-		int hours = currentDate.get(Calendar.HOUR_OF_DAY);
-		int month = currentDate.get(Calendar.MONTH) + 1;
-		int mis = currentDate.get(Calendar.MINUTE);
-		int years = currentDate.get(Calendar.YEAR);
-		System.out.println("date:" + date + "month:" + month);
-		if (hours >= 10) {
-			stringBuffer.append(years);
-			if (month < 10) {
-				stringBuffer.append("0");
-			}
-			stringBuffer.append(month);
-			if (date < 10) {
-				stringBuffer.append("0");
-			}
-			stringBuffer.append(date);
-			int end = 24;
-			if (hours < 22) {
-				end = end + (hours - 10) * 60 / 10;
-				end = end + (mis / 10) + 1;
-			} else {
-				end = 97;
-				end = end + (hours - 22) * 60 / 5;
-				end = end + (mis / 5) + 1;
-			}
-			if (end > 120) {
-				end = 120;
-			}
-			if (end < 10) {
-				stringBuffer.append("00");
-			} else if (10 <= end && end < 100) {
-				stringBuffer.append("0");
-			}
-			stringBuffer.append(end - 1);
-			return stringBuffer.toString();
-		} else {
-			stringBuffer.append(years);
-			if (month < 10) {
-				stringBuffer.append("0");
-			}
-			stringBuffer.append(month);
-			if (date < 10) {
-				stringBuffer.append("0");
-			}
-			stringBuffer.append(date);
-			int end = 1;
-			if (hours < 2) {
-				end = end + hours * 60 / 5;
-				end = end + (mis / 5);
-			} else {
-				end = end + 23;
-			}
-			if (end < 10) {
-				stringBuffer.append("00");
-			} else if (10 <= end && end < 100) {
-				stringBuffer.append("0");
-			}
-			stringBuffer.append(end - 1);
-			return stringBuffer.toString();
-		}
-
-	}
+	// public static String getShangQiChongQingShiShicai() {
+	// StringBuffer stringBuffer = new StringBuffer();
+	// Calendar currentDate = Calendar.getInstance(TimeZone
+	// .getTimeZone("GMT+08:00"));
+	// int date = currentDate.get(Calendar.DAY_OF_MONTH);
+	// int hours = currentDate.get(Calendar.HOUR_OF_DAY);
+	// int month = currentDate.get(Calendar.MONTH) + 1;
+	// int mis = currentDate.get(Calendar.MINUTE);
+	// int years = currentDate.get(Calendar.YEAR);
+	// System.out.println("date:" + date + "month:" + month);
+	// if (hours >= 10) {
+	// stringBuffer.append(years);
+	// if (month < 10) {
+	// stringBuffer.append("0");
+	// }
+	// stringBuffer.append(month);
+	// if (date < 10) {
+	// stringBuffer.append("0");
+	// }
+	// stringBuffer.append(date);
+	// int end = 24;
+	// if (hours < 22) {
+	// end = end + (hours - 10) * 60 / 10;
+	// end = end + (mis / 10) + 1;
+	// } else {
+	// end = 97;
+	// end = end + (hours - 22) * 60 / 5;
+	// end = end + (mis / 5) + 1;
+	// }
+	// if (end > 120) {
+	// end = 120;
+	// }
+	// if (end < 10) {
+	// stringBuffer.append("00");
+	// } else if (10 <= end && end < 100) {
+	// stringBuffer.append("0");
+	// }
+	// stringBuffer.append(end - 1);
+	// return stringBuffer.toString();
+	// } else {
+	// stringBuffer.append(years);
+	// if (month < 10) {
+	// stringBuffer.append("0");
+	// }
+	// stringBuffer.append(month);
+	// if (date < 10) {
+	// stringBuffer.append("0");
+	// }
+	// stringBuffer.append(date);
+	// int end = 1;
+	// if (hours < 2) {
+	// end = end + hours * 60 / 5;
+	// end = end + (mis / 5);
+	// } else {
+	// end = end + 23;
+	// }
+	// if (end < 10) {
+	// stringBuffer.append("00");
+	// } else if (10 <= end && end < 100) {
+	// stringBuffer.append("0");
+	// }
+	// stringBuffer.append(end - 1);
+	// return stringBuffer.toString();
+	// }
+	//
+	// }
 
 	public static String getCurrentChongQingShiShicai() {
 		StringBuffer stringBuffer = new StringBuffer();
@@ -86,7 +86,6 @@ public class DateUtils {
 		int month = currentDate.get(Calendar.MONTH) + 1;
 		int mis = currentDate.get(Calendar.MINUTE);
 		int years = currentDate.get(Calendar.YEAR);
-		System.out.println("date:" + date + "month:" + month);
 		if (hours >= 10) {
 			stringBuffer.append(years);
 			if (month < 10) {
@@ -162,6 +161,49 @@ public class DateUtils {
 		return list;
 	}
 
+	public static String getLeftShangyiqiChongQingShiShicai(String current) {
+		int end = Integer.valueOf((String) current.substring(8));
+		String temp = "";
+		String str = current.substring(0, 8);
+		int ed = (end - 1);
+		if (ed == 0) {
+			StringBuffer stringBuffer = new StringBuffer();
+			Calendar currentDate = Calendar.getInstance(TimeZone
+					.getTimeZone("GMT+08:00"));
+			int date = currentDate.get(Calendar.DAY_OF_MONTH);
+			int month = currentDate.get(Calendar.MONTH) + 1;
+			int years = currentDate.get(Calendar.YEAR);
+			date = date - 1;
+			currentDate.add(Calendar.DAY_OF_MONTH, -1);
+			date = currentDate.get(Calendar.DAY_OF_MONTH);
+			month = currentDate.get(Calendar.MONTH) + 1;
+			years = currentDate.get(Calendar.YEAR);
+
+			str = years + "";
+			if (month < 10) {
+				str += "0";
+			} else {
+				str += month;
+			}
+			if (date <= 10) {
+				str += "0";
+			} else {
+				str += date;
+			}
+
+		} else {
+			if (ed < 10) {
+				str = str + "00" + ed;
+			} else if (10 <= ed && ed < 100) {
+				str = str + "0" + ed;
+			} else {
+				str = str + "0" + ed;
+			}
+
+		}
+		return str;
+	}
+
 	public static int getLeftMisecond() {
 		Calendar currentDate = Calendar.getInstance(TimeZone
 				.getTimeZone("GMT+08:00"));
@@ -171,7 +213,6 @@ public class DateUtils {
 		int mis = currentDate.get(Calendar.MINUTE);
 		int years = currentDate.get(Calendar.YEAR);
 		int ms = currentDate.get(Calendar.SECOND);
-		System.out.println("mis:::" + mis + "::ms::" + ms);
 		if (0 <= hours && hours < 2) {
 			return (5 - mis % 5) * 60 - ms;
 		} else if (2 < hours && hours < 10) {
@@ -184,6 +225,34 @@ public class DateUtils {
 		return mis;
 	}
 
+	public static String getLeftEndDate(String pharsh) {
+		Calendar currentDate = Calendar.getInstance(TimeZone
+				.getTimeZone("GMT+08:00"));
+		int date = currentDate.get(Calendar.DAY_OF_MONTH);
+		int month = currentDate.get(Calendar.MONTH);
+		int years = currentDate.get(Calendar.YEAR);
+
+		int end = Integer.valueOf((String) pharsh.substring(8));
+		if (end < 24) {
+			currentDate.set(years, month, date, 5 * end / 60, 5 * end % 60);
+		}
+		if (end >= 24 && end < 97) {
+			end = end - 24;
+			currentDate.set(years, month, date, 10 * end / 60 + 10,
+					10 * end % 60);
+		}
+		if (end >= 97) {
+			end = end - 97;
+			currentDate
+					.set(years, month, date, 5 * end / 60 + 22, 5 * end % 60);
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.util.Date dates = currentDate.getTime();
+		String str = sdf.format(dates);
+		return str;
+
+	}
+
 	public static String getCurrentGuangDongShiYiYun() {
 		StringBuffer stringBuffer = new StringBuffer();
 		Calendar currentDate = Calendar.getInstance(TimeZone
@@ -193,7 +262,6 @@ public class DateUtils {
 		int month = currentDate.get(Calendar.MONTH) + 1;
 		int mis = currentDate.get(Calendar.MINUTE);
 		int years = currentDate.get(Calendar.YEAR);
-		System.out.println("date:" + date + "month:" + month);
 		stringBuffer.append(years % 1000);
 		if (month < 10) {
 			stringBuffer.append("0");
@@ -207,8 +275,8 @@ public class DateUtils {
 		int end = 1 + num;
 		if (end < 0) {
 			stringBuffer.append("00");
-			end=1;
-		} else if (0 < end&&end < 10) {
+			end = 1;
+		} else if (0 < end && end < 10) {
 			stringBuffer.append("0");
 		}
 		stringBuffer.append(end);
@@ -221,7 +289,6 @@ public class DateUtils {
 				.getTimeZone("GMT+08:00"));
 		int mis = currentDate.get(Calendar.MINUTE);
 		int ms = currentDate.get(Calendar.SECOND);
-		System.out.println("mis:::" + mis + "::ms::" + ms);
 		return (9 - mis % 10) * 60 + ms;
 	}
 
@@ -238,19 +305,18 @@ public class DateUtils {
 		}
 		return list;
 	}
-	
-	//~~~~~~~~~~~~jiangxi shi shi cai
+
+	// ~~~~~~~~~~~~jiangxi shi shi cai
 	public static String getCurrentJiangXiShiShiCai() {
 		StringBuffer stringBuffer = new StringBuffer();
 		Calendar currentDate = Calendar.getInstance(TimeZone
 				.getTimeZone("GMT+08:00"));
 		int date = currentDate.get(Calendar.DAY_OF_MONTH);
 		int hours = currentDate.get(Calendar.HOUR_OF_DAY);
-		int month = currentDate.get(Calendar.MONTH)+1;
+		int month = currentDate.get(Calendar.MONTH) + 1;
 		int mis = currentDate.get(Calendar.MINUTE);
 		int years = currentDate.get(Calendar.YEAR);
-		System.out.println("date:"+date+"month:"+month);
-		stringBuffer.append(years%1000);
+		stringBuffer.append(years % 1000);
 		if (month < 10) {
 			stringBuffer.append("0");
 		}
@@ -263,13 +329,64 @@ public class DateUtils {
 		int end = 1 + num;
 		if (end < 10) {
 			stringBuffer.append("0");
-		} 
+		}
 		stringBuffer.append(end);
 		return stringBuffer.toString();
 
 	}
-	
+
 	public static int getJiangXiShiShiCaiLeftMisecond() {
+		Calendar currentDate = Calendar.getInstance(TimeZone
+				.getTimeZone("GMT+08:00"));
+		int mis = currentDate.get(Calendar.MINUTE);
+		int ms = currentDate.get(Calendar.SECOND);
+		return (9 - mis % 10) * 60 + ms;
+	}
+
+	public static List<String> getLeftJiangXiShiShiCai(String current) {
+		int end = Integer.valueOf(current);
+		int biggest = end / 100 * 100 + 78;
+		int temp;
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < 5; i++) {
+			temp = end + i + 1;
+			if (temp <= biggest) {
+				list.add(temp + "");
+			}
+		}
+		return list;
+	}
+
+	// ~~~~~~~~~~~~Shandong shi yi yun
+	public static String getCurrentShanDongShiYiYun() {
+		StringBuffer stringBuffer = new StringBuffer();
+		Calendar currentDate = Calendar.getInstance(TimeZone
+				.getTimeZone("GMT+08:00"));
+		int date = currentDate.get(Calendar.DAY_OF_MONTH);
+		int hours = currentDate.get(Calendar.HOUR_OF_DAY);
+		int month = currentDate.get(Calendar.MONTH) + 1;
+		int mis = currentDate.get(Calendar.MINUTE);
+		int years = currentDate.get(Calendar.YEAR);
+		stringBuffer.append(years % 1000);
+		if (month < 10) {
+			stringBuffer.append("0");
+		}
+		stringBuffer.append(month);
+		if (date < 10) {
+			stringBuffer.append("0");
+		}
+		stringBuffer.append(date);
+		int num = ((hours - 9) * 60 + mis) / 10;
+		int end = 1 + num;
+		if (end < 10) {
+			stringBuffer.append("0");
+		}
+		stringBuffer.append(end);
+		return stringBuffer.toString();
+
+	}
+
+	public static int getShanDongShiYiYunLeftMisecond() {
 		Calendar currentDate = Calendar.getInstance(TimeZone
 				.getTimeZone("GMT+08:00"));
 		int mis = currentDate.get(Calendar.MINUTE);
@@ -277,68 +394,15 @@ public class DateUtils {
 		System.out.println("mis:::" + mis + "::ms::" + ms);
 		return (9 - mis % 10) * 60 + ms;
 	}
-	
-	public static List<String> getLeftJiangXiShiShiCai(String current) {
-		int end = Integer.valueOf(current);
-		int biggest = end / 100 * 100 + 78;
-		int temp;
-		 List<String> list=new ArrayList<String>();
-		for (int i = 0; i < 5; i++) {
-			temp = end + i +1;
-			if(temp <= biggest) {
-				list.add(temp + "");
-			}
-		}
-		return list;
-	}
-	
-	//~~~~~~~~~~~~Shandong shi yi yun
-		public static String getCurrentShanDongShiYiYun() {
-			StringBuffer stringBuffer = new StringBuffer();
-			Calendar currentDate = Calendar.getInstance(TimeZone
-					.getTimeZone("GMT+08:00"));
-			int date = currentDate.get(Calendar.DAY_OF_MONTH);
-			int hours = currentDate.get(Calendar.HOUR_OF_DAY);
-			int month = currentDate.get(Calendar.MONTH)+1;
-			int mis = currentDate.get(Calendar.MINUTE);
-			int years = currentDate.get(Calendar.YEAR);
-			System.out.println("date:"+date+"month:"+month);
-			stringBuffer.append(years%1000);
-			if (month < 10) {
-				stringBuffer.append("0");
-			}
-			stringBuffer.append(month);
-			if (date < 10) {
-				stringBuffer.append("0");
-			}
-			stringBuffer.append(date);
-			int num = ((hours - 9) * 60 + mis) / 10;
-			int end = 1 + num;
-			if (end < 10) {
-				stringBuffer.append("0");
-			} 
-			stringBuffer.append(end);
-			return stringBuffer.toString();
 
-		}
-		
-		public static int getShanDongShiYiYunLeftMisecond() {
-			Calendar currentDate = Calendar.getInstance(TimeZone
-					.getTimeZone("GMT+08:00"));
-			int mis = currentDate.get(Calendar.MINUTE);
-			int ms = currentDate.get(Calendar.SECOND);
-			System.out.println("mis:::" + mis + "::ms::" + ms);
-			return (9 - mis % 10) * 60 + ms;
-		}
-	
 	public static List<String> getLeftShanDongShiYiYun(String current) {
 		int end = Integer.valueOf(current);
 		int biggest = end / 100 * 100 + 78;
 		int temp;
-		 List<String> list=new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		for (int i = 0; i < 5; i++) {
-			temp = end + i +1;
-			if(temp <= biggest) {
+			temp = end + i + 1;
+			if (temp <= biggest) {
 				list.add(temp + "");
 			}
 		}

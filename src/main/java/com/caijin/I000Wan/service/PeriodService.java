@@ -42,13 +42,15 @@ public interface PeriodService extends CommonService<Period,String>{
 	float getMoneyPeriodByOId(String orderNo);
 
 	 List<Map> findUserTotalAmountList(String date);
-    /**
-     * 将到期的订单更改状态
-     * @param qihao
-     */
-//	void updateUnPeriod(String qihao);
 
 	List<Period> findOrderByStatus(int waitOrder);
 
 	int getPeriodUNStatusByOId(String orderId);
+
+	int updatePeriodStatusByOId(String orderNo, int status, String lotteryCode);
+	int updatePeriodStatusByOIdAndPrase(String orderNo, int status, String lotteryCode,String prase);
+
+	List<Period> findbyQIhao(String shangQinhao, Integer statusBefore);
+
+	List<Period> findPeriodByOIdAndStatus(String orderNo, Integer winningCurrent);
 }

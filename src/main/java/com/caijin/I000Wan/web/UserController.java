@@ -22,11 +22,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.caijin.I000Wan.entity.HeMaiOrder;
+import com.caijin.I000Wan.entity.HeMaiOrderDetail;
+import com.caijin.I000Wan.entity.LotteryPeriod;
 import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
+import com.caijin.I000Wan.entity.OrderDetail;
+import com.caijin.I000Wan.entity.Period;
 import com.caijin.I000Wan.enu.Bank;
 import com.caijin.I000Wan.interceptor.CommonInterceptor;
+import com.caijin.I000Wan.service.HeMaiOrderDetailService;
 import com.caijin.I000Wan.service.HeMaiOrderService;
+import com.caijin.I000Wan.service.LetteryPeriodService;
 import com.caijin.I000Wan.service.MemberUserService;
 import com.caijin.I000Wan.service.OrderDetailService;
 import com.caijin.I000Wan.service.OrderService;
@@ -41,7 +47,6 @@ import com.caijin.I000Wan.util.StaticDefine;
 /**
  * 用户Action
  * 
- * @author jeff
  * @since 2014-07-14
  */
 @Controller
@@ -57,6 +62,11 @@ public class UserController {
 	private PeriodService periodService;
 	@Autowired
 	private HeMaiOrderService heMaiOrderService;
+	@Autowired
+	private HeMaiOrderDetailService heMaiOrderDetailService;
+
+	@Autowired
+	private LetteryPeriodService letteryPeriodService;
 
 	/**
 	 * 注册 先查找是否为推广链接
@@ -536,23 +546,24 @@ public class UserController {
 			HttpServletRequest request, HttpServletResponse response) {
 		MemberUser user = (MemberUser) request.getSession().getAttribute(
 				"memberUser");
-		
+
 		String password = request.getParameter("password");
 		String message = "重置密码出错";
 		try {
 			user = userService.find(user.getId());
-			if(user!=null){
-			if (!Md5Util.validatePassword(user.getPwd(), password)) {
-				message = "当前密码不正确，请重新输入";
+			if (user != null) {
+				if (!Md5Util.validatePassword(user.getPwd(), password)) {
+					message = "当前密码不正确，请重新输入";
+				} else {
+					String resetPassword = request
+							.getParameter("resetPassword");
+					user.setPwd(Md5Util.generatePassword(resetPassword));
+					user.setUpdateDate(new Date());// 最后修改人
+					userService.update(user);
+					sessionReload(request, user);
+					message = "重置密码成功";
+				}
 			} else {
-				String resetPassword = request.getParameter("resetPassword");
-				user.setPwd(Md5Util.generatePassword(resetPassword));
-				user.setUpdateDate(new Date());// 最后修改人
-				userService.update(user);
-				sessionReload(request, user);
-				message = "重置密码成功";
-			}
-			}else {
 				message = "登陆息已失效，请重新登陆";
 			}
 		} catch (Exception e) {
@@ -560,6 +571,7 @@ public class UserController {
 		}
 		return message;
 	}
+
 	/**
 	 * 提款密码重置提交
 	 * 
@@ -571,23 +583,24 @@ public class UserController {
 			HttpServletRequest request, HttpServletResponse response) {
 		MemberUser user = (MemberUser) request.getSession().getAttribute(
 				"memberUser");
-		
+
 		String password = request.getParameter("password");
 		String message = "重置密码出错";
 		try {
 			user = userService.find(user.getId());
-			if(user!=null){
-			if (!Md5Util.validatePassword(user.getMoneyPwd(), password)) {
-				message = "当前密码不正确，请重新输入";
+			if (user != null) {
+				if (!Md5Util.validatePassword(user.getMoneyPwd(), password)) {
+					message = "当前密码不正确，请重新输入";
+				} else {
+					String resetPassword = request
+							.getParameter("resetPassword");
+					user.setMoneyPwd(Md5Util.generatePassword(resetPassword));
+					user.setUpdateDate(new Date());// 最后修改人
+					userService.update(user);
+					sessionReload(request, user);
+					message = "重置密码成功";
+				}
 			} else {
-				String resetPassword = request.getParameter("resetPassword");
-				user.setMoneyPwd(Md5Util.generatePassword(resetPassword));
-				user.setUpdateDate(new Date());// 最后修改人
-				userService.update(user);
-				sessionReload(request, user);
-				message = "重置密码成功";
-			}
-			}else {
 				message = "登陆息已失效，请重新登陆";
 			}
 		} catch (Exception e) {
@@ -595,6 +608,7 @@ public class UserController {
 		}
 		return message;
 	}
+
 	/**
 	 * 绑定手机号码
 	 * 
@@ -830,5 +844,88 @@ public class UserController {
 	@RequestMapping(value = "/dailimembeIncomeStatic")
 	public String dailimembeincomestatic(HttpServletRequest request, Model model) {
 		return "user/dailiMemberincomestatic";
+	}
+
+	/**
+	 * 订单详情
+	 * 
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/user/orderdetail")
+	public String orderDetail(HttpServletRequest request, Model model) {
+		String orderId = (String) request.getParameter("orderId");
+		Order order = orderService.findOrderByOrderId(orderId);
+		if (order.getOrderType() == Order.HEMAI_BUY_ORDER
+				|| order.getOrderType() == Order.PROXY_BUY_ORDER) {
+			List<Period> list = periodService.findPeriodByOId(orderId);
+			if (list != null) {
+				model.addAttribute("pNum", list.size());
+			} else {
+				model.addAttribute("pNum", 0);
+			}
+			for (Period period : list) {
+				LotteryPeriod lperiod = letteryPeriodService.findByPeriod(
+						Period.SHISHI_CAI_CHONGQING, period.getLetterPharse());
+				if (lperiod != null) {
+					period.setLetterPharse(lperiod.getPeriodNumber());
+				}
+			}
+			order.setPeriod(list);
+			List<OrderDetail> details = orderDetailService
+					.findOrderDetailByOrderId(order);
+			model.addAttribute("details", details);
+
+		}
+		if (order.getPeriod() != null && !order.getPeriod().isEmpty()) {
+			if (Period.SHISHI_CAI_CHONGQING.equals(order.getPeriod().get(0)
+					.getLotteryCode())) {
+				model.addAttribute("caipiaotype", "重庆时时彩");
+			}
+			model.addAttribute("parsh", order.getPeriod().get(0)
+					.getLotteryPeriod());
+			model.addAttribute(
+					"endDate",
+					DateUtils.getLeftEndDate(order.getPeriod().get(0)
+							.getLotteryPeriod()));
+		}
+		model.addAttribute("order", order);
+		model.addAttribute("chexiao", false);
+		if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
+			HeMaiOrderDetail heDetail = heMaiOrderDetailService
+					.findOrderHemaiDetailByOrderId(order);
+			model.addAttribute("heDetail", heDetail);
+			List<HeMaiOrder> list = heMaiOrderService
+					.findOrderHemaiByOrderId(heDetail);
+			model.addAttribute("hemaiorders", list);
+			model.addAttribute("size", (list.size()));
+			int leftNum = heMaiOrderService.getHemaiOrderFenNum(heDetail);
+			model.addAttribute("leftNum", leftNum);
+			MemberUser user = (MemberUser) request.getSession().getAttribute(
+					MemberUser.FRONT_MEMBER_LOGIN_SESSION);
+			if (user != null
+					&& heDetail.getMemberUser().getUserName()
+							.equals(user.getUserName())
+					&& order.getOrderStatus() == Order.WAIT_ORDER) {
+				model.addAttribute("chexiao", true);
+			}
+			return "user/details";
+		}
+		if (order.getOrderType() == Order.HEMAI_IMP_BUY_ORDER) {
+			Order parentOrder = orderService.findOrderByOrderId(order
+					.getOtherId());
+			parentOrder.setPeriod(periodService.findPeriodByOId(order
+					.getOtherId()));
+			model.addAttribute("order", order);
+			HeMaiOrderDetail heDetail = heMaiOrderDetailService
+					.findOrderHemaiDetailByOrderId(parentOrder);
+			model.addAttribute("heDetail", heDetail);
+			HeMaiOrder hemaiOrder = heMaiOrderService.find(order.getOrderNo());
+			model.addAttribute("hemaiorder", hemaiOrder);
+			return "user/details";
+		}
+
+		return "user/orderdetail";
 	}
 }

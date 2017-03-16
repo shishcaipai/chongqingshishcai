@@ -276,7 +276,7 @@
 					}
 					
 					closeOrderUserDialog();
-					$('#mydatagrid').datagrid({ url:"<%=basePath%>boss/applyrecord/ajax_list",queryParams:{pageNumber:1,pageSize:20	},method:"post"});
+					$('#mydatagrid').datagrid("reload");
 				}    
 			});
 

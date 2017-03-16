@@ -75,7 +75,7 @@
 									<td width="15%" align="center" valign="middle">${order.createDate }</td>
 									<td width="5%" align="center" valign="middle">${order.zhongjiao }</td>
 									<td width="14%" align="center" valign="middle">${order.money }</td>
-									<td width="10%" align="center" valign="middle"><a href="#">查看</a></td>
+									<td width="10%" align="center" valign="middle"><a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a></td>
 								</tr>
 							</c:forEach>
   

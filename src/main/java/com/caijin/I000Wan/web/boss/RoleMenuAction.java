@@ -88,7 +88,7 @@ public class RoleMenuAction {
 			String menu_type = request.getParameter("menu_type");
 			String fmenuId = request.getParameter("menu_first_name");
 			String path = request.getParameter("menuPath");
-			System.out.println("----------------------test");
+			 menuName=new String(menuName.getBytes("ISO-8859-1"),"utf-8");
 			int type = 1;
 			try {
 				type = Integer.valueOf(menu_type);

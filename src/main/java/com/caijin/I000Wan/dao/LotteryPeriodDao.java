@@ -30,6 +30,8 @@ public interface LotteryPeriodDao extends CommonDao<LotteryPeriod,String>{
 	List<LotteryPeriod> findByTopNhistory(String lotteryCode,int n);
 	@Query(value="select p.* from history_period p order by p.opentimestamp desc limit 0,1 ",nativeQuery=true)
 	LotteryPeriod findByTopPeriod();
+	@Query("select p from LotteryPeriod p where p.periodNumber= ?1 and p.lotteryCode=?2")
+	LotteryPeriod findByPeriod(String periodNumber, String lotteryCode);
 	
 	
 }

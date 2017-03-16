@@ -23,33 +23,6 @@ textarea {
 	<script src="<%=basePath%>static/boss/article/js/sample.js"></script>
 	<link rel="stylesheet" href="<%=basePath%>static/boss/article/css/samples.css">
 	<link rel="stylesheet" href="<%=basePath%>static/boss/article/toolbarconfigurator/lib/codemirror/neo.css">
-<script>
-	function  article(){
-		var  article={};
-		article["title"]=$("#title").val();
-		article["anthor"]=$("#anthor").val();
-		article["type"]=$("#type").val();
-		article["content"]=$("#editor").text();
-		article["source"]=$("#source").val();
-		//保存
-		$.ajax({
-			url : '<%=basePath%>boss/article/ajax_save',
-			data:article,
-			type:'post',
-			dataType:'json',
-			success : function(result) {
-				if(result.sucess){
-					alert("保存成功")
-					document.location.href='<%=basePath%>boss/article/ardicleList';
-				}else{
-					alert("保存失败")
-				}
-			}    
-		});
-		
-	}
-	
-</script>
 </head>
 <body>
 	
@@ -77,10 +50,12 @@ textarea {
 		<tr>
 		<td></td>
 			<td  style="text-align:center;margin:100px auto;solid #000;width:960px;" >
-			<div id="editor" >
+			<!-- <div id="editor" >
 					<h1>Hello world!</h1>
 					<p>I'm an instance of <a href="http://ckeditor.com">CKEditor</a>.</p>
-				</div></td>
+				</div> -->
+				<textarea cols="80" id="editor" name="editor" rows="20">这里是默认值，修改文本的内容是放在这里。html需要进行HTMLEncode编码</textarea>   
+				</td>
 		</tr>
 		<tr>
 		<td></td>
@@ -88,7 +63,33 @@ textarea {
 		</tr>
 		</table>
 <script>
-	initSample();
+var editor = CKEDITOR.replace('editor');  
+	 initSample(); 
+	function  article(){
+		var  article={};
+		article["title"]=$("#title").val();
+		article["anthor"]=$("#anthor").val();
+		article["type"]=$("#type").val();
+		article["content"]=editor.document.getBody().getHtml();
+		article["source"]=$("#source").val();
+		//保存
+		$.ajax({
+			url : '<%=basePath%>boss/article/ajax_save',
+			data:article,
+			type:'post',
+			dataType:'json',
+			success : function(result) {
+				if(result.sucess){
+					alert("保存成功")
+					document.location.href='<%=basePath%>boss/article/ardicleList';
+				}else{
+					alert("保存失败")
+				}
+			}    
+		});
+		
+	}
+	
 </script>
 </body>
 </html>

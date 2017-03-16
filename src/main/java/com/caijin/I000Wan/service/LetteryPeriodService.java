@@ -14,6 +14,14 @@ public interface LetteryPeriodService extends CommonService<LotteryPeriod,String
 	 */
 	LotteryPeriod findByCurrentPeriod(String lotteryCode);
 	
+	
+	/**
+	 * 根据彩票编码查询当前期数
+	 * @param lotteryCode
+	 * @return
+	 */
+	LotteryPeriod findByPeriod(String lotteryCode,String periodNumber);
+	
 	/**
 	 * 根据彩票编码查找历史的前N期期数数据
 	 * @param lotteryCode

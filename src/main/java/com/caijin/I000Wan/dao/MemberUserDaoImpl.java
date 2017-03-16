@@ -5,6 +5,9 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Session;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.caijin.I000Wan.common.dao.CustomBaseSqlDaoImpl;
 import com.caijin.I000Wan.util.PageModel;
 import com.caijin.I000Wan.util.Result;
@@ -87,16 +90,23 @@ public class MemberUserDaoImpl extends CustomBaseSqlDaoImpl implements
 		return sql;
 	}
 
+	@Transactional
 	@Override
 	public void clear() {
-		EntityManager em = this.emf.createEntityManager();
-
+		 EntityManager em = this.emf.createEntityManager();
+		
+		
 		try {
-			em.clear();
+			 Session session = em.unwrap(Session.class);
+			session.getTransaction().begin();
+			session.clear();
+			em.flush();
+			session.getTransaction().commit();;
+			emf.getCache().evictAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			em.close();
+			 em.close();
 		}
 	}
 }

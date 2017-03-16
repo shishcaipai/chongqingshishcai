@@ -44,6 +44,7 @@ public class ApplyRecordAction {
 		String applyendDate = request.getParameter("applyendDate");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
+		applyRecordService.clear();
 		Result result = applyRecordService.findApplyRecordListByCondition(
 				pageModel, realName, idCardNo, userName, auditStatus,
 				applystartDate, applyendDate, startDate, endDate);
@@ -60,7 +61,6 @@ public class ApplyRecordAction {
 			ApplyRecord applyRecord = applyRecordService.find(id);
 			applyRecord.setAuditStatus(Integer.valueOf(status));
 			applyRecordService.update(applyRecord);
-			applyRecordService.clear();
 			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -126,14 +126,13 @@
 				return;
 			}
 			var row = selectedRows[0];
-			alert(row.id);
 			$.ajax({
 				url : '<%=basePath%>/boss/article/deleRecord',
 				type : 'post',
 				data : {
 					id : row.id
 				},
-				dataType : 'text',
+				dataType : 'json',
 				success : function(result) {
 					if(result.sucess){
 						alert("操作成功");

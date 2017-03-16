@@ -5,9 +5,11 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.caijin.I000Wan.common.dao.CustomBaseSqlDaoImpl;
 import com.caijin.I000Wan.entity.HeMaiOrderDetail;
@@ -115,16 +117,23 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 	//
 	// }
 
+	@Transactional
 	@Override
 	public void clear() {
-		EntityManager em = this.emf.createEntityManager();
-
+		 EntityManager em = this.emf.createEntityManager();
+		
+		
 		try {
-			em.clear();
+			 Session session = em.unwrap(Session.class);
+			session.getTransaction().begin();
+			session.clear();
+			em.flush();
+			session.getTransaction().commit();;
+			emf.getCache().evictAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			em.close();
+			 em.close();
 		}
 	}
 
@@ -185,5 +194,16 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 						payStatus, startDate, endDate), pageModel.getPage(),
 				pageModel.getRows()));
 		return result;
+	}
+
+	public void updateByOrderNo(String orderNo, int orderSucess) {
+		 String sql = "update trade_order set order_status="+orderSucess+" where order_no='"
+				+ orderNo + "' or other_id='"
+					+ orderNo + "'";
+//		 String sql2 = "update trade_order set order_status="+orderSucess+" where other_id='"
+//					+ orderNo + "'";
+		this.exceSql(sql);
+//		this.exceSql(sql2);
+		
 	}
 }

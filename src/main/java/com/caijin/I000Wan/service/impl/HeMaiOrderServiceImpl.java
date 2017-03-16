@@ -1,6 +1,7 @@
 package com.caijin.I000Wan.service.impl;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,11 +36,11 @@ public class HeMaiOrderServiceImpl extends CommonServiceImpl<HeMaiOrder,String> 
 
 	@Override
 	public int getHemaiOrderFenNum(HeMaiOrderDetail order) {
-		System.out.println(heMaiOrderDao+"=============");
-		if(heMaiOrderDao.getHemaiOrderFenNum(order)==null){
-			return 0;
-		}
+		try{
 		return heMaiOrderDao.getHemaiOrderFenNum(order);
+		}catch(Exception e){
+			
+		}return 0;
 	}
 	@Override
 	public List<HeMaiOrder> findAllOrderZuiHao(int i, int pageSize, String id) {

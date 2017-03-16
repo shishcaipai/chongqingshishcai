@@ -17,12 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caijin.I000Wan.entity.ChongZhiRecord;
 import com.caijin.I000Wan.entity.MemberUser;
+import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.User;
 import com.caijin.I000Wan.service.ChongZhiRecordService;
 import com.caijin.I000Wan.service.MemberUserService;
+import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.UserService;
 import com.caijin.I000Wan.util.DataGridModel;
+import com.caijin.I000Wan.util.GenerateOrderNoUtil;
 import com.caijin.I000Wan.util.Md5Util;
+import com.caijin.I000Wan.util.OrderUtils;
 import com.caijin.I000Wan.util.PageModel;
 import com.caijin.I000Wan.util.Result;
 
@@ -34,6 +38,8 @@ public class MemberAction {
 	private MemberUserService memberUserService;
 	@Autowired
 	private ChongZhiRecordService chongZhiRecordService;
+	@Autowired
+	private OrderService orderService;
 	
 	@Autowired
 	private UserService userService;
@@ -205,12 +211,12 @@ public class MemberAction {
 					user.setActionScore(user.getActionScore() + actionScore);
 					user.setAvailableScore(user.getAvailableScore()
 							+ availableScore);
-					user.setTotalScore(user.getTotalScore() + availableScore
-							+ availableScore);
+					user.setTotalScore(user.getActionScore() + user.getAvailableScore());
 					user.setCreateDate(new Date());
 					user.setUpdateDate(new Date());
 					memberUserService.update(user);
 					memberUserService.clear();
+					
 					ChongZhiRecord record = new ChongZhiRecord();
 					record.setUser(sysUser);
 					record.setMemberUser(user);
@@ -219,6 +225,17 @@ public class MemberAction {
 					record.setAvailableScore(availableScore);
 					record.setActionScore(actionScore);
 					chongZhiRecordService.save(record);
+					//保存一条充值订单记录
+					Order  order=new Order();
+					order.setOrderNo(GenerateOrderNoUtil.getOrderNumber());
+					order.setName("充值订单");
+					order.setCreateDate(new Date());
+					order.setOrderType(Order.RECHARGE_ORDER);
+					order.setTotalMoney(availableScore);
+					order.setOtherId(record.getId());
+					order.setMemberUser(user);
+					order.setOrderStatus(Order.ORDER_SUCESS);
+					orderService.save(order);
 				}
 				msg = "修改成功";
 			} catch (Exception e) {

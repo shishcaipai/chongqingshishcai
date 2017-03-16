@@ -22,8 +22,8 @@
 	rel="stylesheet" />
 <LINK href="http://www.ib18.cn/res/css/head.css" type=text/css
 	rel=stylesheet>
-	<link href="http://www.ib18.cn/res/css/page.css" type="text/css"
-		rel="stylesheet">
+<link href="http://www.ib18.cn/res/css/page.css" type="text/css"
+	rel="stylesheet">
 <title>个人中心</title>
 </head>
 
@@ -114,24 +114,17 @@
 								<td>${order.orderTime }</td>
 								<td><c:if test="${order.orderType ==1}">订单充值</c:if> <c:if
 										test="${order.orderType ==2}"> 彩票订单 </c:if> <c:if
-										test="${order.orderType ==3}"> 合买方案</c:if>
-										<c:if
-										test="${order.orderType ==4}"> 合买订单</c:if>
-										<c:if
-										test="${order.orderType ==5}"> 网站订单</c:if>
-										</td>
+										test="${order.orderType ==3}"> 合买方案</c:if> <c:if
+										test="${order.orderType ==4}"> 合买订单</c:if> <c:if
+										test="${order.orderType ==5}"> 返现充值订单</c:if></td>
 								<td>${order.totalMoney }</td>
-								<td><c:if test="${order.orderStatus ==0}">未知
-								
-								</c:if> <c:if
-										test="${order.orderStatus ==1}"> 成功
-										<c:if test="${order.orderStatus ==0}">未知</c:if>
-										 </c:if>
-										
-										 <c:if
+								<td><c:if test="${order.orderStatus ==0}">下单待确认</c:if> <c:if
+										test="${order.orderStatus ==1}"> 成功</c:if> <c:if
+										test="${order.orderStatus ==-1}">待支付</c:if> <c:if
 										test="${order.orderStatus ==2}"> 失败</c:if> <c:if
-										test="${order.orderStatus ==3}"> 超时</c:if></td>
-								<td>--</td>
+										test="${order.orderStatus ==3}"> 超时</c:if> <c:if
+										test="${order.orderStatus ==4}">订单取消</c:if></td>
+								<td>${order.content}</td>
 								</td>
 							</tr>
 						</c:forEach>
@@ -243,8 +236,16 @@
 		}
 		function page() {
 			var html = "";
-			var data = ${requestScope.page};
-			var currentPage = ${requestScope.pageNum};
+			var data = $
+			{
+				requestScope.page
+			}
+			;
+			var currentPage = $
+			{
+				requestScope.pageNum
+			}
+			;
 			for (var i = 0; i < data; i++) {
 				var index = i + 1;
 				if (currentPage == index) {

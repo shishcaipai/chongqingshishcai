@@ -108,11 +108,13 @@ public class BonusUtil {
 			lmode.setHundredsplace(codes[2]);
 			lmode.setThousand(codes[1]);
 			lmode.setMyriabit(codes[0]);
-			System.out.print(lmode.getUnit()+"---"+mode.getUnit()+"  00000   "+lmode.getDecade()+"     ===="+mode.getDecade());
+			System.out.print(lmode.getUnit() + "---" + mode.getUnit()
+					+ "  00000   " + lmode.getDecade() + "     ===="
+					+ mode.getDecade());
 			if (lmode.getUnit().equals(mode.getUnit())
 					&& lmode.getDecade().equals(mode.getDecade())
 					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
-				return 200;
+				return 1800;
 			}
 
 		} else if (lmode.getType().equals(type106)) {
@@ -130,6 +132,19 @@ public class BonusUtil {
 		} else if (lmode.getType().equals(type112)) {
 
 		} else if (lmode.getType().equals(type113)) {
+			lmode.setUnit(codes[4]);
+			lmode.setDecade(codes[3]);
+			lmode.setHundredsplace(codes[2]);
+			lmode.setThousand(codes[1]);
+			lmode.setMyriabit(codes[0]);
+			System.out.print(lmode.getUnit() + "---" + mode.getUnit()
+					+ "  00000   " + lmode.getDecade() + "     ===="
+					+ mode.getDecade());
+			if (lmode.getUnit().equals(mode.getUnit())
+					&& lmode.getDecade().equals(mode.getDecade())
+					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
+				return 1800;
+			}
 
 		} else if (lmode.getType().equals(type114)) {
 
@@ -141,33 +156,59 @@ public class BonusUtil {
 
 		} else if (lmode.getType().equals(type119)) {
 
+			float money = 0;
+			for (String code : codes) {
+				if (code.indexOf(mode.getUnit()) != -1) {
+					money += 6.6;
+				}
+				if (code.indexOf(mode.getDecade()) != -1) {
+					money += 6.6;
+				}
+				if (code.indexOf(mode.getHundredsplace()) != -1) {
+					money += 6.6;
+				}
+			}
+			return money;
 		} else if (lmode.getType().equals(type120)) {
+			float money = 0;
+			for (String code : codes) {
+				if (code.indexOf(mode.getMyriabit()) != -1) {
+					money += 6.6;
+				}
+				if (code.indexOf(mode.getThousand()) != -1) {
+					money += 6.6;
+				}
+				if (code.indexOf(mode.getHundredsplace()) != -1) {
+					money += 6.6;
+				}
+			}
+			return money;
 
 		} else if (lmode.getType().equals(type121)) {
-			float money=0;
+			float money = 0;
 			lmode.setUnit(codes[4]);
 			lmode.setDecade(codes[3]);
 			lmode.setHundredsplace(codes[2]);
 			lmode.setThousand(codes[1]);
 			lmode.setMyriabit(codes[0]);
-			if(lmode.getUnit().indexOf(mode.getUnit())>0){
-				money=+20;
+			if (lmode.getUnit().indexOf(mode.getUnit()) != -1) {
+				money = +18;
 			}
-			if(lmode.getDecade().indexOf(mode.getDecade())>0){
-				money=+20;
+			if (lmode.getDecade().indexOf(mode.getDecade()) != -1) {
+				money = +18;
 			}
-			if(lmode.getHundredsplace().indexOf(mode.getHundredsplace())>0){
-				money=+20;
+			if (lmode.getHundredsplace().indexOf(mode.getHundredsplace()) != -1) {
+				money = +18;
 			}
-			if(lmode.getThousand().indexOf(mode.getThousand())>0){
-				money=+20;
+			if (lmode.getThousand().indexOf(mode.getThousand()) != -1) {
+				money = +18;
 			}
-			if(lmode.getMyriabit().indexOf(mode.getMyriabit())>0){
-				money=+20;
+			if (lmode.getMyriabit().indexOf(mode.getMyriabit()) != -1) {
+				money = +18;
 			}
-			
+
 			return money;
-			
+
 		} else if (lmode.getType().equals(type124)) {
 
 		} else if (lmode.getType().equals(type125)) {
@@ -179,7 +220,7 @@ public class BonusUtil {
 			if (lmode.getMyriabit().equals(mode.getMyriabit())
 					&& lmode.getThousand().equals(mode.getThousand())
 					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
-				return 200;
+				return 1800;
 			}
 		} else if (lmode.getType().equals(type431)) {
 
@@ -194,6 +235,17 @@ public class BonusUtil {
 		} else if (lmode.getType().equals(type706)) {
 
 		} else if (lmode.getType().equals(type708)) {
+			float money = 0;
+			int hezhi = Integer.valueOf(mode.getMyriabit())
+					+ Integer.valueOf(mode.getThousand())
+					+ Integer.valueOf(mode.getHundredsplace());
+			for (String code : codes) {
+				if (Integer.valueOf(code) == hezhi) {
+					money += 1800;
+				}
+			}
+
+			return money;
 
 		} else if (lmode.getType().equals(type433)) {
 
@@ -222,6 +274,16 @@ public class BonusUtil {
 		} else if (lmode.getType().equals(type420)) {
 
 		} else if (lmode.getType().equals(type421)) {
+			lmode.setUnit(codes[4]);
+			lmode.setDecade(codes[3]);
+			lmode.setHundredsplace(codes[2]);
+			lmode.setThousand(codes[1]);
+			lmode.setMyriabit(codes[0]);
+			if (lmode.getMyriabit().equals(mode.getMyriabit())
+					&& lmode.getThousand().equals(mode.getThousand())
+					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
+				return 1800;
+			}
 
 		} else if (lmode.getType().equals(type426)) {
 
@@ -232,6 +294,18 @@ public class BonusUtil {
 		} else if (lmode.getType().equals(type319)) {
 
 		} else if (lmode.getType().equals(type304)) {
+
+			float money = 0;
+			int hezhi = Integer.valueOf(mode.getHundredsplace())
+					+ Integer.valueOf(mode.getUnit())
+					+ Integer.valueOf(mode.getDecade());
+			for (String code : codes) {
+				if (Integer.valueOf(code) == hezhi) {
+					money += 1800;
+				}
+			}
+
+			return money;
 
 		} else if (lmode.getType().equals(type432)) {
 

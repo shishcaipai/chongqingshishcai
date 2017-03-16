@@ -6,7 +6,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/css/head.css" rel="stylesheet"
 	type="text/css">
 
 <div class="top">
@@ -56,7 +56,7 @@
 				<div class="sc_top">
 					<div class="sc_top_1">
 						<div class="sc_top_logo">
-							<img src="http://www.ib18.cn/res/img/sc_50.jpg">
+							<img src="<%=basePath%>static/images/sc_50.jpg">
 						</div>
 						<!-- <div class="sc_top_pain"></div> -->
 						<div class="sc_top_wen">

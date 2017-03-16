@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 彩票期数实体
@@ -21,18 +24,24 @@ public class Period {
 
 	private static final long serialVersionUID = 7196198838990921150L;
 
-	public final static Integer STATUS_CURRENT = 1;// 下单状态
+	public final static Integer STATUS_CURRENT = 1;// 已投注状态状态
 
-	public final static Integer STATUS_BEFORE = 0;// 下单状态
+	public final static Integer STATUS_BEFORE = 0;// 待投注状态状态
 
-	public final static Integer STATUS_AFTER = 2;// 开奖
+	public final static Integer STATUS_AFTER = 2;// 待支付状态
+
+	public final static Integer WINNING_CURRENT = 1;// 中奖状态
+
+	public final static Integer winning_BEFORE = 0;// 待状态状态
+
+	public final static Integer winning_AFTER = 2;// 未中状态
 
 	public final static String SHISHI_CAI_CHONGQING = "cqssc";
-	
+
 	public final static String SHISHI_CAI_GUANGDONG11XUAN5 = "gd11x5";
-	
+
 	public final static String SHISHI_CAI_JIANGXI = "jx11x5";
-	
+
 	public final static String SHISHI_CAI_SHANDONG = "sd11x5";
 
 	private Integer id;
@@ -41,13 +50,24 @@ public class Period {
 
 	private String lotteryPeriod;// 彩票期数
 
-	private Integer status;// 下单状态0 1，2
-	private Integer winning=0;// 开奖状态 0,1,2
+	private Integer status;// 投注状态0 1，2
+	private Integer winning = 0;// 开奖状态 0,1,2
 	private String orderId; // 订单号
 
 	private Integer beisu; // 倍数
-	private  float money=0;//中奖金额
+	private float money = 0;// 中奖金额
 
+	private String letterPharse;
+
+	@Transactional
+	@Transient
+	public String getLetterPharse() {
+		return letterPharse;
+	}
+
+	public void setLetterPharse(String letterPharse) {
+		this.letterPharse = letterPharse;
+	}
 
 	@Column(name = "beisu", length = 20)
 	public Integer getBeisu() {
@@ -157,6 +177,5 @@ public class Period {
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-
 
 }
