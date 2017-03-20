@@ -23,29 +23,33 @@
 	rel="stylesheet" />
 <link href="http://www.ib18.cn/res/css/page.css" type="text/css"
 	rel="stylesheet">
-	<script type="text/javascript"
-		src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript">
+<script type="text/javascript"
+	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>static/js/Method.js"></script>
+<script type="text/javascript">
 		function chexiao() {
 			var  orderNO = $("#orderNo").val();
 			//保存
 			$.ajax({
 				url : '<%=basePath%>hemai/chexiao',
-				data : {orderId:orderNO},
-				type : 'post',
-				dataType : 'json',
-				success : function(result) {
-					if (result.code ==1) {
-						alert("操作成功");
-					} else {
-						alert("撤销失败");
-					}
-
+			data : {
+				orderId : orderNO
+			},
+			type : 'post',
+			dataType : 'json',
+			success : function(result) {
+				if (result.code == 1) {
+					alert("操作成功");
+				} else {
+					alert("撤销失败");
 				}
-			});
 
-		}
-	</script>
+			}
+		});
+
+	}
+</script>
 </HEAD>
 <BODY>
 	<jsp:include page="../header.jsp"></jsp:include>
@@ -149,7 +153,8 @@
 									<td></td>
 									<td class="tc_tzxq_nr">投注期号:
 										<div style="float: right">
-										<input id="orderNo" name="orderNo" type="hidden" value="${order.orderNo}"></input>
+											<input id="orderNo" name="orderNo" type="hidden"
+												value="${order.orderNo}"></input>
 											<c:if test="${chexiao ==true}">
 												<a href="javascript:void(0);" onclick="chexiao()"> 一键撤单</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:if>
@@ -303,6 +308,6 @@
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 </html>

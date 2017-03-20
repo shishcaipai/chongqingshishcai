@@ -24,6 +24,10 @@
 	rel=stylesheet>
 <link href="http://www.ib18.cn/res/css/page.css" type="text/css"
 	rel="stylesheet">
+	<script type="text/javascript"
+	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>static/js/Method.js"></script>
 <title>个人中心</title>
 </head>
 
@@ -77,11 +81,19 @@
 
 						<c:if test="${order.orderType ==2}">
 							<tr>
-								<td style="font-size: 14px; font-weight: bold; color: #666">投注内容：
+								<td class="tc_tzxq_nr">方案内容:<br /> <textarea
+										style="display: block;" class="cy_hm_12" cols="40" rows="4"
+										readonly="readonly">
 									<c:forEach var="orderDetail" items="${requestScope.details}">
-                                           ${orderDetail.buyCaiNumber}<br />
+                                           ${orderDetail.buyCaiNumber};
 									</c:forEach>
+									
+								
+								</textarea>
 								</td>
+							</tr>
+
+							</td>
 							</tr>
 
 							<c:forEach var="period" items="${requestScope.order.period}">

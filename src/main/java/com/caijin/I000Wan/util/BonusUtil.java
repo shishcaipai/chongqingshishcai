@@ -108,13 +108,10 @@ public class BonusUtil {
 			lmode.setHundredsplace(codes[2]);
 			lmode.setThousand(codes[1]);
 			lmode.setMyriabit(codes[0]);
-			System.out.print(lmode.getUnit() + "---" + mode.getUnit()
-					+ "  00000   " + lmode.getDecade() + "     ===="
-					+ mode.getDecade());
 			if (lmode.getUnit().equals(mode.getUnit())
 					&& lmode.getDecade().equals(mode.getDecade())
 					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
-				return 1800;
+				return WFPublic.getpalyJj(type105);
 			}
 
 		} else if (lmode.getType().equals(type106)) {
@@ -137,13 +134,10 @@ public class BonusUtil {
 			lmode.setHundredsplace(codes[2]);
 			lmode.setThousand(codes[1]);
 			lmode.setMyriabit(codes[0]);
-			System.out.print(lmode.getUnit() + "---" + mode.getUnit()
-					+ "  00000   " + lmode.getDecade() + "     ===="
-					+ mode.getDecade());
 			if (lmode.getUnit().equals(mode.getUnit())
 					&& lmode.getDecade().equals(mode.getDecade())
 					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
-				return 1800;
+				return WFPublic.getpalyJj(type113);
 			}
 
 		} else if (lmode.getType().equals(type114)) {
@@ -220,7 +214,7 @@ public class BonusUtil {
 			if (lmode.getMyriabit().equals(mode.getMyriabit())
 					&& lmode.getThousand().equals(mode.getThousand())
 					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
-				return 1800;
+				return WFPublic.getpalyJj(type125);
 			}
 		} else if (lmode.getType().equals(type431)) {
 
@@ -241,7 +235,7 @@ public class BonusUtil {
 					+ Integer.valueOf(mode.getHundredsplace());
 			for (String code : codes) {
 				if (Integer.valueOf(code) == hezhi) {
-					money += 1800;
+					money += WFPublic.getpalyJj(type708);
 				}
 			}
 
@@ -282,7 +276,7 @@ public class BonusUtil {
 			if (lmode.getMyriabit().equals(mode.getMyriabit())
 					&& lmode.getThousand().equals(mode.getThousand())
 					&& lmode.getHundredsplace().equals(mode.getHundredsplace())) {
-				return 1800;
+				return WFPublic.getpalyJj(type421);
 			}
 
 		} else if (lmode.getType().equals(type426)) {
@@ -301,7 +295,7 @@ public class BonusUtil {
 					+ Integer.valueOf(mode.getDecade());
 			for (String code : codes) {
 				if (Integer.valueOf(code) == hezhi) {
-					money += 1800;
+					money += WFPublic.getpalyJj(type304);
 				}
 			}
 

@@ -98,7 +98,7 @@
 					return;
 				}
 				if (baodiCount > divideCount) {
-					alert("保底不能大于总份数");
+					alert(divideCount+"保底不能大于总份数"+baodiCount);
 					return;
 				}
 				$("#Form1").submit();

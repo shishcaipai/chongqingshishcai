@@ -43,12 +43,9 @@
 			<version>1.7.4</version>
 		</dependency>
 
-		
-		<!-- <dependency>
-			<groupId>org.springside</groupId>
-			<artifactId>springside-core</artifactId>
-			<version>4.1.0.GA</version>
-		</dependency> -->
+
+		<!-- <dependency> <groupId>org.springside</groupId> <artifactId>springside-core</artifactId> 
+			<version>4.1.0.GA</version> </dependency> -->
 		<!-- apache commons -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -295,8 +292,12 @@
 			<artifactId>xml-apis</artifactId>
 			<version>1.0.b2</version>
 		</dependency>
-		
 
+		<dependency>
+			<groupId>cn.edu.hfut.dmic.webcollector</groupId>
+			<artifactId>WebCollector</artifactId>
+			<version>2.09</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -43,6 +43,7 @@ import com.caijin.I000Wan.util.GenerateLinkUtils;
 import com.caijin.I000Wan.util.Md5Util;
 import com.caijin.I000Wan.util.RandomValidateCode;
 import com.caijin.I000Wan.util.StaticDefine;
+import com.caijin.I000Wan.util.WFPublic;
 
 /**
  * 用户Action
@@ -777,7 +778,6 @@ public class UserController {
 		List<HeMaiOrder> orders = heMaiOrderService.findAllOrderZuiHao(
 				(pageNum - 1) * StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE,
 				user.getId());
-		System.out.println("-------订单长度" + orders.size());
 		model.addAttribute("orders", orders);
 		model.addAttribute("size", size);
 		model.addAttribute("page", pageSize);
@@ -875,6 +875,15 @@ public class UserController {
 			order.setPeriod(list);
 			List<OrderDetail> details = orderDetailService
 					.findOrderDetailByOrderId(order);
+			for (OrderDetail detail : details) {
+				detail.setBuyCaiNumber("["
+						+ WFPublic.getpalynamebyid(detail.getBuyCaiNumber()
+								.substring(1, 4))
+						+ "]"
+						+ detail.getBuyCaiNumber().substring(5,
+								detail.getBuyCaiNumber().length()));
+			}
+
 			model.addAttribute("details", details);
 
 		}
