@@ -27,7 +27,7 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 			String payStatus, String startDate, String endDate) {
 		String sql = "select torder.order_no,torder.name,torder.order_type,torder.total_money,"
 				+ "torder.order_status,torder.pay_status,torder.create_date,"
-				+ "mu.user_name,mu.real_name,mu.address,mu.telephone, torder.wprize_status "
+				+ "mu.user_name,mu.real_name,mu.address,mu.telephone, torder.wprize_status, torder.auto_prizes "
 				+ "from trade_order torder,member_user mu where 1=1 and torder.member_id=mu.id ";
 
 		if (userName != null && !userName.equals("")) {
@@ -142,7 +142,7 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 			String startDate, String endDate) {
 		String sql = "select torder.order_no,torder.name,torder.order_type,torder.total_money,"
 				+ "torder.order_status,torder.pay_status,torder.create_date,"
-				+ "mu.user_name,mu.real_name,mu.address,mu.telephone, torder.wprize_status "
+				+ "mu.user_name,mu.real_name,mu.address,mu.telephone, torder.wprize_status, torder.auto_prizes "
 				+ "from trade_order torder,member_user mu where 1=1 and torder.member_id=mu.id ";
 
 		if (userName != null && !userName.equals("")) {

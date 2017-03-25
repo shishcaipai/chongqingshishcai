@@ -21,6 +21,11 @@ $(function() {
 		} ] ], 
 		pagination : true,//分页
 		rownumbers : true,//行数
+//		onClickCell:function(rowIndex, field, value){
+//			if('auto_prizes' == field) {
+//				updateOrderAutoPrizes(rowIndex);
+//			}
+//		},
 		columns:[[
 	              {field:'name',title:'玩法',width:90,align:'center'},  
 		            {field:'order_no',title:'订单ID',width:90,align:'center'},
@@ -80,13 +85,29 @@ $(function() {
 					{field:'real_name',title:'下单人名称',width:90,align:'center'},
 					{field:'address',title:'地址',width:90,align:'center'},
 					{field:'telephone',title:'电话',width:90,align:'center'},
-					{field:'create_date',title:'订单时间',width:100,align:'center',
+					{field:'create_date',title:'订单时间',width:140,align:'center',
 						formatter: function(value,row,index){
 							var time = row.create_date;
 							if(time !=""){
 								return formatTime(time);
 							}
 					}},
+					{field:'auto_prizes',title:'自动发奖',width:90,align:'center',
+		            	formatter: function(value,row,index){
+		            		var result = '';
+		            		if(true == value) {
+		            			result = '是';
+		            		} else {
+		            			result = '否';
+		            		}
+		            	     return '<a style="color:blue" href="javascript:updateOrderAutoPrizes(' + index +')">'+result+'</a>';
+		            }},
+		            
+//          		  if(value == 0){
+//          		    return '否';
+//          		  }else if(value == 1){
+//          		    return '是';
+//          		  }
 		      ]]
 	});	
 });
@@ -183,6 +204,28 @@ function updateOrder(){
 			$.messager.show({ title : '提示', msg : result });
 			closeOrderUserDialog();
 			clearSearchForm();
+			$('#mydatagrid').datagrid("reload");
+		}    
+	});
+}
+
+/**
+ * 修改信息提交
+ */
+function updateOrderAutoPrizes(rowIndex){
+	$('#mydatagrid').datagrid('selectRow',rowIndex);  //指定行选中
+    var currentRow =$("#mydatagrid").datagrid("getSelected");
+    var  senOrder={};
+	senOrder["orderNo"]=currentRow.order_no;
+	senOrder["autoPrizes"]=currentRow.auto_prizes;
+	//保存
+	$.ajax({
+		url : '../../boss/order/updateAutoPrizes',
+		data:senOrder,
+		type:'post',
+		dataType:'text',
+		success : function(result) {
+			$.messager.show({ title : '提示', msg : result });
 			$('#mydatagrid').datagrid("reload");
 		}    
 	});
