@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.caijin.I000Wan.common.entity.BaseEntity;
+import com.caijin.I000Wan.util.ConstantUtil;
 
 /**
  * 订单表
@@ -101,7 +102,30 @@ public class Order extends BaseEntity {
 
 	public int cashBackStatus = 0;// 返现是否完成0，1，2
 
-	public String content="";
+	public String content = "";
+
+	public boolean autoPrizes = ConstantUtil.AUTO_PRIZES;
+
+	public boolean autoDrawn = ConstantUtil.AUTO_DRAWN;
+	
+	
+	
+	public boolean isAutoPrizes() {
+		return autoPrizes;
+	}
+
+	public void setAutoPrizes(boolean autoPrizes) {
+		this.autoPrizes = autoPrizes;
+	}
+
+	public boolean isAutoDrawn() {
+		return autoDrawn;
+	}
+
+	public void setAutoDrawn(boolean autoDrawn) {
+		this.autoDrawn = autoDrawn;
+	}
+
 	@Column(length = 200)
 	public String getContent() {
 		return content;

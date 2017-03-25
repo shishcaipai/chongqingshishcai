@@ -12,17 +12,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+<link href="http://www.ld3j.com/res/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
-	type="text/css" />
-<link href="<%=basePath%>static/css/jqueryui.css" type="text/css"
-	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<LINK href="http://www.ib18.cn/res/css/head.css" type=text/css
+<LINK href="http://www.ld3j.com/res/css/head.css" type=text/css
 	rel=stylesheet>
-<link href="http://www.ib18.cn/res/css/page.css" type="text/css"
+<link href="http://www.ld3j.com/res/css/page.css" type="text/css"
 	rel="stylesheet">
 <title>个人中心</title>
 </head>

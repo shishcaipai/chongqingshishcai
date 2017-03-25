@@ -15,7 +15,7 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<link href="http://www.ib18.cn/res/css/index.css" rel="stylesheet"
+<link href="http://www.ld3j.com/css/index.css" rel="stylesheet"
 	type="text/css" />
 <script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
 	type="text/javascript"></script>
