@@ -14,16 +14,17 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
-	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page_left.css" rel="stylesheet"
 	type="text/css" />
 <script src="<%=basePath%>static/js/commonUtil.js"
 	type="text/javascript"></script>
 <title>扫码充值</title>
-<LINK href="http://www.ib18.cn/res/css/header.css" type=text/css rel=stylesheet>
-<link href="http://www.ib18.cn/res/css/page.css" rel="stylesheet" type="text/css">
-<LINK href="http://www.ib18.cn/res/css/v1.css" type=text/css rel=stylesheet>
+<LINK href="<%=basePath%>static/new/css/header.css" type=text/css
+	rel=stylesheet>
+<link href="<%=basePath%>static/new/css/page.css" rel="stylesheet"
+	type="text/css">
+<LINK href="<%=basePath%>static/new/css/v1.css" type=text/css
+	rel=stylesheet>
 </HEAD>
 <style>
 .info {
@@ -103,102 +104,119 @@ div .a {
 </head>
 
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
-	<!--main-->
-	<
-	<div id="account">
-		<div class="account_left">
-			<jsp:include page="memberLeftMenu.jsp"></jsp:include>
-		</div>
-		<div class="account_right">
-			<div class="p_yd01">
-	
-		<div class="p_daohang">
-			<ul style="cursor: pointer;">
-				<li id="li_pay_weixin_alipay" style="float: left; "><b >扫码支付</b></li>						
-				
-				<li id="li_pay_online" style="float: left; margin-left: 25px; display:none;"><b style="color: black";>网银支付</b></li>
-				<li id="li_pay_weixin" style="float: left; margin-left:25px; display:none; "><b style="color:black" >微信转帐</b></li>
-				<li id="li_pay_alipay" style="float: left;margin-left: 25px; display:none;"><b style="color: black;">支付宝转账</b></li>
-			
-			
-			</ul>
-		</div>
-
-<div id="pay_weixin_alipay">
-			<div class="p_nr">
-				<div class="ld" style="width: 99%; margin: 5px 0px 0px 0px;">
-						<table class="ct" border="0" cellpadding="0" cellspacing="0" width="100%">
-							<tbody>
-								<tr>
-									<td class="nl">
-										<img src="<%=basePath%>static/images/weixin_alipay.png">
-									</td>
-									<td style="line-height: 23px; padding: 5px 0px">
-									<br><br><hr>
-
-									<h4 style="font-size: 16px; color:red; ">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服。谢谢！</h4>
-										<font style="font-size: 22px;font-weight: bold;">扫码支付须知:</font><br><br>
-										<font style="font-size: 14px; ">1:请用微信或支付宝扫描二维码或长按图片识别二维码进行付款。</font><br>
-										<font style="font-size: 14px; "> 2:支持各大银行储蓄卡、信用卡在线支付，<span style="font-size:14px;color:red;">微信扫码支付单笔限额3000</span>,支持多次充值。</font><br>
-										<font style="font-size: 14px; ">3:大额充值请选择<span style="font-size:14px;color:red;">在线充值</span></font><br>
-										<br><br>
-									</td>
-								</tr>
-						
-							</tbody>
-						</table>					
-				</div>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
+		<!--main-->
+		<div id="account">
+			<div class="account_left">
+				<jsp:include page="memberLeftMenu.jsp"></jsp:include>
 			</div>
-		</div>
+			<div class="account_right">
+				<div class="p_yd01">
 
-		<div id="pay_weixin" style="display: none;">
-			<div class="p_nr">
-				<div class="ld" style="width: 99%; margin: 5px 0px 0px 0px;">
-						<table class="ct" border="0" cellpadding="0" cellspacing="0" width="100%">
-							<tbody>
-								<tr>
-									<td class="nl">
-										<img src="/res/img/weixin222.png">
-									</td>
-									<td style="line-height: 23px; padding: 5px 0px">
-									<img src="/res/img/weixin.png"><br><br><br><br>
-									<h4 style="font-size: 16px; color:red; ">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服，谢谢！</h4>
-										<font style="font-size: 22px;font-weight: bold;">支付备注:<!--<span id="alipay_msg_txt" style="padding-right:22px;color: #F30;"></span>--></font><br><br>
-										<font style="font-size: 16px;font-weight: bold;">扫描二维码,添加好友，充值即<span style="padding-right:22px;color: #F30;"> 10元</span>充值红包。</font><br><br>
-										
-									</td>
-								</tr>								
-							</tbody>
-						</table>					
-				</div>
-			</div>
-		</div>
-		
-		<div id="pay_alipay"  style="display: none;">
-			<div class="p_nr">
-				<div class="ld" style="width: 99%; margin: 5px 0px 0px 0px;">
-						<table class="ct" border="0" cellpadding="0" cellspacing="0" width="100%">
-							<tbody style="padding:10px">
-								<tr>
-									<td class="nl">
-										<img src="/res/img/alipay888.png" width="267" height="263">
-									</td>
-									<td style="line-height: 23px; padding: 5px 0px">
-									<img src="/res/img/alipay_logo.png"><br><br>
-									<h4 style="font-size: 16px; color:red; ">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服，谢谢！</h4>
-										
-										<font style="font-size: 22px;font-weight: bold;">支付备注:<!--<span id="alipay_msg_txt" style="padding-right:22px;color: #F30;"></span>--></font><br><br>
-										<font style="font-size: 16px;font-weight: bold;">支付校验:<span style="padding-right:22px;color: #F30;"> 方</span></font>键<br><br>
-										<font style="font-size: 16px;font-weight: bold;">使用支付宝扫码支付，即送<span style="padding-right:22px;color: #F30;"> 10元</span>充值红包。</font><br><br>
+					<div class="p_daohang">
+						<ul style="cursor: pointer;">
+							<li id="li_pay_weixin_alipay" style="float: left;"><b>扫码支付</b></li>
 
-									</td>
-								</tr>								
-							</tbody>
-						</table>					
-				</div>
-			</div>
-		<div id="pay_online" style="display: none;>
+							<li id="li_pay_online"
+								style="float: left; margin-left: 25px; display: none;"><b
+								style="color: black";>网银支付</b></li>
+							<li id="li_pay_weixin"
+								style="float: left; margin-left: 25px; display: none;"><b
+								style="color: black">微信转帐</b></li>
+							<li id="li_pay_alipay"
+								style="float: left; margin-left: 25px; display: none;"><b
+								style="color: black;">支付宝转账</b></li>
+
+
+						</ul>
+					</div>
+
+					<div id="pay_weixin_alipay">
+						<div class="p_nr">
+							<div class="ld" style="width: 99%; margin: 5px 0px 0px 0px;">
+								<table class="ct" border="0" cellpadding="0" cellspacing="0"
+									width="100%">
+									<tbody>
+										<tr>
+											<td class="nl"><img
+												src="<%=basePath%>static/images/weixin_alipay.png"></td>
+											<td style="line-height: 23px; padding: 5px 0px"><br>
+											<br>
+											<hr>
+
+												<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服。谢谢！</h4>
+												<font style="font-size: 22px; font-weight: bold;">扫码支付须知:</font><br>
+											<br> <font style="font-size: 14px;">1:请用微信或支付宝扫描二维码或长按图片识别二维码进行付款。</font><br>
+												<font style="font-size: 14px;"> 2:支持各大银行储蓄卡、信用卡在线支付，<span
+													style="font-size: 14px; color: red;">微信扫码支付单笔限额3000</span>,支持多次充值。
+											</font><br> <font style="font-size: 14px;">3:大额充值请选择<span
+													style="font-size: 14px; color: red;">在线充值</span></font><br> <br>
+											<br></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div id="pay_weixin" style="display: none;">
+						<div class="p_nr">
+							<div class="ld" style="width: 99%; margin: 5px 0px 0px 0px;">
+								<table class="ct" border="0" cellpadding="0" cellspacing="0"
+									width="100%">
+									<tbody>
+										<tr>
+											<td class="nl"><img src="/res/img/weixin222.png">
+											</td>
+											<td style="line-height: 23px; padding: 5px 0px"><img
+												src="/res/img/weixin.png"><br>
+											<br>
+											<br>
+											<br>
+												<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服，谢谢！</h4>
+												<font style="font-size: 22px; font-weight: bold;">支付备注:<!--<span id="alipay_msg_txt" style="padding-right:22px;color: #F30;"></span>--></font><br>
+											<br> <font style="font-size: 16px; font-weight: bold;">扫描二维码,添加好友，充值即<span
+													style="padding-right: 22px; color: #F30;"> 10元</span>充值红包。
+											</font><br>
+											<br></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div id="pay_alipay" style="display: none;">
+						<div class="p_nr">
+							<div class="ld" style="width: 99%; margin: 5px 0px 0px 0px;">
+								<table class="ct" border="0" cellpadding="0" cellspacing="0"
+									width="100%">
+									<tbody style="padding: 10px">
+										<tr>
+											<td class="nl"><img src="/res/img/alipay888.png"
+												width="267" height="263"></td>
+											<td style="line-height: 23px; padding: 5px 0px"><img
+												src="/res/img/alipay_logo.png"><br>
+											<br>
+												<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服，谢谢！</h4>
+
+												<font style="font-size: 22px; font-weight: bold;">支付备注:<!--<span id="alipay_msg_txt" style="padding-right:22px;color: #F30;"></span>--></font><br>
+											<br> <font style="font-size: 16px; font-weight: bold;">支付校验:<span
+													style="padding-right: 22px; color: #F30;"> 方</span></font>键<br>
+											<br> <font style="font-size: 16px; font-weight: bold;">使用支付宝扫码支付，即送<span
+													style="padding-right: 22px; color: #F30;"> 10元</span>充值红包。
+											</font><br>
+											<br></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div id="pay_online"
+							style="display: none;>
 			<div class="p_nr">
 				<div class="ld" style="width: 99%; margin: 5px 0px 0px 0px;">
 				
@@ -394,7 +412,7 @@ div .a {
 		</div>
 	</div>
 	<!--main end -->
-
+</div>
 
 	<div class="opacity">
 		<div class="dialog">

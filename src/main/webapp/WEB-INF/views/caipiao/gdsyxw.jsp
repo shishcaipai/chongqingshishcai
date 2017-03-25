@@ -16,9 +16,9 @@
 <title>广东十一选五</title>
 <meta name="description" content="十一运">
 <meta name="keywords" content="十一运">
-<link href="http://www.ib18.cn/res/css/commonEX.css" type="text/css" rel="stylesheet">
+<link href="<%=basePath%>static/css/commonEX.css" type="text/css" rel="stylesheet">
 <script src="//tb.53kf.com/code/code/10145634/1"></script><script type="text/javascript" src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
-<link href="http://www.ib18.cn/res/css/frequency.css" type="text/css" rel="stylesheet">
+<link href="http://www.ld3j.com/res/css/frequency.css" type="text/css" rel="stylesheet">
 <script src="<%=basePath%>static/js/Jquery_marquee_frequency.js" type="text/javascript"></script>
 <script src="<%=basePath%>static/js/zhs.js" type="text/javascript"></script>
 <script src="<%=basePath%>static/js/Method2.js" type="text/javascript"></script>
@@ -34,57 +34,9 @@
 <script src="ajaxfileupload.jsajaxfileupload.js" type="text/javascript"></script>
 
 <script src="<%=basePath%>static/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-<jsp:include page="../header.jsp"></jsp:include>
-  
-  <script>
-  var ctx = "http://www.ib18.cn";
-  getLotteryTypes();	
-  	  function getLotteryTypes() {
-		  $.ajax({
-				type : "POST",
-				url : "http://www.ib18.cn/lotteryType/getAllLotterTypes?t=" + Math.random(),
-				dataType : "json",
-				success : function(data) {
-					data = eval(data);
-					var html = '<li class="sc_top_li"><a style=" margin-left:10px;" href="http://www.ib18.cn/index">首    页</a></li><li class="sc_top_li"><a href="http://www.ib18.cn/together?type=0">合买中心</a></li>';
-					for (var i = 0; i < data.length; i++) {
-						if (data[i].active == false) {
-							continue;
-						}
-						html += '<li class="sc_top_li"><a href="http://www.ib18.cn/lotteryType?id=' + data[i].id + '">' + data[i].name + '</a></li>';
-					}
-					html += '<li class="sc_top_li"><a href="http://www.ib18.cn/howplay">玩法介绍</a></li>';
-					html += '<li class="sc_top_li"><a href="http://www.ib18.cn/zoushi">走势图表</a></li>';
-					$('#lotteryTypesUl').html(html);
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-				}
-			});
-		  $.ajax({
-			type : "GET",
-			url : "http://www.ib18.cn/lotteryType/getQQ?t=" + Math.random(),
-			dataType : "text",
-			success : function(data) {
-				$('#qq').attr('href', 'http://wpa.qq.com/msgrd?v=3&site=qq&menu=yes&uin=' + data);
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
-			}
-		});
-  	  }
-  </script>
-<!--头部结束-->
-
-<div class="sitebar">
-	
-	<!--最新中奖和彩种 开始-->
-	
-
-
-
-
-
-
-
+<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 <script src="<%=basePath%>static/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 var SysSecond; 
@@ -113,7 +65,7 @@ $(document).ready(function() {
 	function initPage() {
 		var lotteryTypeId = "8";
 		$.ajax({
-			url : "http://www.ib18.cn/lotteryType/getLotteryInfo",
+			url : "http://www.ld3j.com/lotteryType/getLotteryInfo",
 			dataType : "text",
 			async : false,
 			data : {
@@ -1214,30 +1166,6 @@ $(function() {
 	<input type="hidden" id="ZjCut" name="ZjCut" value="">
 </form>
 <div class="clear"></div>
-<!--底部-->
-
-
-
-
-
-
-
-<link href="http://www.ib18.cn/res/css/foot.css" rel="stylesheet" type="text/css">
-	<div class="footer"> 
-	<div class="kong10"></div>
-	<div class="kong10"></div>
-	
-	<!-- <div class="f-nav">
-		<div class="hd"><b class="hd-1"></b><b class="hd-2"></b></div>
-		<div class="f-link">
-			<a title="" target="_blank" href="#" rel="nofollow">用户注册</a>|<a title="" target="_blank" href="#">加盟合作</a>|<a title="" target="_blank" href="#">进入网盟</a>|<a title="" target="_blank" href="#" rel="nofollow">友情链接</a>
-		</div>
-        <div class="f-guide">
-	   		<div class="f-guide-inner">
-				<em>热点导读：</em><a href="#" target="_blank" >重庆时时彩</a>|<a href="#" target="_blank" >江西时时彩</a>|<a href="#" target="_blank" >22选5</a>|<a href="#" target="_blank" >新疆时时彩</a>|<a href="#" target="_blank" >江西11选5</a>|<a href="#" target="_blank" >11运夺金 </a>|<a href="#" target="_blank" >上海时时乐</a>|<a href="#" target="_blank" >福彩3D</a>|<a href="#" target="_blank" >排列三</a>|<a href="#" target="_blank" >快乐十分</a>|<a href="#" target="_blank" >北京快乐8</a>|<a href="#" target="_blank" >彩票预测</a>|<a href="#" target="_blank" >购彩</a>|<a href="#" target="_blank" >彩票软件</a>
-			</div>
-	    </div>
-	</div> -->
 	
 	<div class="copy_new">
     	<p><a target="_blank" href="javascript:" rel="nofollow">粤ICP备13075023号</a><br>

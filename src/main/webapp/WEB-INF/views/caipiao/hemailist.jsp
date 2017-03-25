@@ -26,7 +26,7 @@
 		a.src = obj;
 	}
 </script>
-<link href="http://www.ib18.cn/res/css/index.css" type="text/css"
+<link href="<%=basePath%>static/new/css/index.css" type="text/css"
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/together.css" type="text/css"
 	rel="stylesheet">
@@ -39,7 +39,9 @@
 <script src="<%=basePath%>static/js/jquery.js" type="text/javascript"></script>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<ul id="tc_body">
 		<li class="tc_a">
 			<ul class="tc_a01">
@@ -145,7 +147,7 @@
 
 								</tr>
 							</c:forEach>
-							<form></form>
+							</form>
 							<TR>
 								<td colSpan=10>
 									<table class="hm_page" border="0" cellpadding="0"
@@ -219,6 +221,6 @@
 		}
 		window.setInterval("reinitIframe()", 200);
 	</script>
-
+</div>
 </body>
 </html>

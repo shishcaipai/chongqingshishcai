@@ -29,7 +29,6 @@
 	rel="stylesheet" />
 </head>
 <body style="height: 100%;">
-
 	<script type="text/javascript"
 		src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript">
@@ -105,7 +104,9 @@
 			});
 		});
 	</script>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<!--头部结束-->
 
 	<div class="q_main"
@@ -207,6 +208,7 @@
 
 			<input name="orderId" value="${order.orderNo}" type="hidden">
 		</form>
+	</div>
 	</div>
 </body>
 </html>

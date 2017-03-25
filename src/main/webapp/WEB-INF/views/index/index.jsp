@@ -301,9 +301,7 @@
 							<b style="float: left; margin: 12px 0px 0px 30px;"></b>中奖排行榜
 						</div>
 						<ul id="tabfirst_01">
-							<li class="tabin_01" onclick="total()">总榜</li>
-							<li onclick="today()">今日</li>
-							<li onclick="yesterday()">昨天</li>
+							<li class="tabin_01" ">总榜</li>
 						</ul>
 						<div id="tab_box_01">
 							<ul class="xc_grzjph02">

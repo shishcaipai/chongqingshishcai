@@ -20,73 +20,127 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.caijin.I000Wan.entity.Article;
+import com.caijin.I000Wan.entity.HeMaiOrderDetail;
+import com.caijin.I000Wan.entity.LotteryPeriod;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.Period;
 import com.caijin.I000Wan.service.ArticleService;
+import com.caijin.I000Wan.service.HeMaiOrderDetailService;
+import com.caijin.I000Wan.service.HeMaiOrderService;
+import com.caijin.I000Wan.service.LetteryPeriodService;
 import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
+import com.caijin.I000Wan.util.StaticDefine;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- *Index Controller
- * @author jeff
- * 2014-06-16
+ * Index Controller
+ * 
+ * @author jeff 2014-06-16
  */
 @Controller
 public class IndexController {
-	
-	
+
 	@Autowired
 	private PeriodService periodService;
-	
+
 	@Autowired
-	private  OrderService orderService;
+	private OrderService orderService;
 	@Autowired
 	private ArticleService articleService;
-  
+
+	@Autowired
+	private LetteryPeriodService letteryPeriodService;
+
+	@Autowired
+	private HeMaiOrderDetailService heMaiOrderDetailService;
+
+	@Autowired
+	private HeMaiOrderService heMaiService;
+
 	/**
 	 * 跳转到首页
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value="/index")
-	public ModelAndView index(HttpServletRequest request,Model model){
+	@RequestMapping(value = "/index")
+	public ModelAndView index(HttpServletRequest request, Model model) {
 		List<Map> map = periodService.findUserTotalAmountList(null);
+		List<HeMaiOrderDetail> heMaiOrders = heMaiOrderDetailService
+				.findAllHemaiOrderDetails(0 * StaticDefine.PAGE_SIZE,
+						StaticDefine.PAGE_SIZE);
+		if (null != heMaiOrders) {
+			for (int i = 0; i < heMaiOrders.size(); i++) {
+				int leftNum = heMaiService.getHemaiOrderFenNum(heMaiOrders
+						.get(i));
+				Integer buyNum = heMaiOrders.get(i).getFensum() - leftNum;
+				heMaiOrders.get(i).setOtherBuyNum(buyNum);
+			}
+		}
+		model.addAttribute("heMaiOrderDetails", heMaiOrders);
+
 		model.addAttribute("notice", articleService.findByType(Article.NOTICE));
-		model.addAttribute("zixian", articleService.findByType(Article.CAIPIAOZIXUN));
+		model.addAttribute("zixian",
+				articleService.findByType(Article.CAIPIAOZIXUN));
+		model.addAttribute("zixian2",
+				articleService.findByType(Article.CAIPIAOZIXUN));
+		model.addAttribute("frist", true);
 		model.addAttribute("map", map);
 		return new ModelAndView("index/index2");
 	}
+
 	/**
 	 * 跳转到首页
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value="/")
-	public ModelAndView indexs(HttpServletRequest request,Model model){
+	@RequestMapping(value = "/")
+	public ModelAndView indexs(HttpServletRequest request, Model model) {
 		List<Map> map = periodService.findUserTotalAmountList(null);
+		List<HeMaiOrderDetail> heMaiOrders = heMaiOrderDetailService
+				.findAllHemaiOrderDetails(0 * StaticDefine.PAGE_SIZE,
+						StaticDefine.PAGE_SIZE);
+		if (null != heMaiOrders) {
+			for (int i = 0; i < heMaiOrders.size(); i++) {
+				int leftNum = heMaiService.getHemaiOrderFenNum(heMaiOrders
+						.get(i));
+				Integer buyNum = heMaiOrders.get(i).getFensum() - leftNum;
+				heMaiOrders.get(i).setOtherBuyNum(buyNum);
+			}
+		}
+		model.addAttribute("heMaiOrderDetails", heMaiOrders);
+
 		model.addAttribute("notice", articleService.findByType(Article.NOTICE));
-		model.addAttribute("zixian", articleService.findByType(Article.CAIPIAOZIXUN));
+		model.addAttribute("zixian",
+				articleService.findByType(Article.CAIPIAOZIXUN));
+		model.addAttribute("zixian2",
+				articleService.findByType(Article.CAIPIAOZIXUN));
+		model.addAttribute("frist", true);
+		model.addAttribute("map", map);
 		return new ModelAndView("index/index2");
 	}
+
 	/**
 	 * @return
 	 */
-	@RequestMapping(value="/wfjx")
-	public ModelAndView jingZuSpf(HttpServletRequest request){
-		String type=request.getParameter("type");
-		if("cqcss".equals(type)){
+	@RequestMapping(value = "/wfjx")
+	public ModelAndView jingZuSpf(HttpServletRequest request) {
+		String type = request.getParameter("type");
+		if ("cqcss".equals(type)) {
 			return new ModelAndView("caipiao/cqcsswfjx");
-		}else{
-		return new ModelAndView("caipiao/wfjx");
+		} else {
+			return new ModelAndView("caipiao/wfjx");
 		}
 	}
-	
+
 	@RequestMapping(value = "/theWinningList")
-	public void theWinningList(HttpServletRequest request,HttpServletResponse response) {
-		
-		String date=request.getParameter("date");
+	public void theWinningList(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String date = request.getParameter("date");
 		List<Map> order = periodService.findUserTotalAmountList(date);
-		System.out.println("theWinningList:::"+order.size());
+		System.out.println("theWinningList:::" + order.size());
 
 		ObjectMapper mapper = new ObjectMapper(); // 转换器
 
@@ -113,6 +167,82 @@ public class IndexController {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+	/**
+	 * 网站公告
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/articles")
+	public ModelAndView articles(HttpServletRequest request) {
+		return new ModelAndView("articles/articles");
+	}
+
+	/**
+	 * 网站公告
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/notices")
+	public ModelAndView notices(HttpServletRequest request) {
+		return new ModelAndView("notices/notices");
+	}
+	/**
+	 * 合买大厅
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/lobby")
+	public ModelAndView lobby(HttpServletRequest request) {
+		return new ModelAndView("index/hemaidating");
+	}
+	/**
+	 * 跳转到首页
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getHistory")
+	@ResponseBody
+	public LotteryPeriod getHistory(HttpServletRequest request, Model model) {
+		if (request.getParameter("lotteryTypeId").equals(
+				Period.SHISHI_CAI_CHONGQING)) {
+			List<Map> map = periodService.findUserTotalAmountList(null);
+			try {
+				List<LotteryPeriod> list = letteryPeriodService
+						.findByTopNhistory(Period.SHISHI_CAI_CHONGQING, 1);
+				model.addAttribute("cqss", list.get(0));
+				return list.get(0);
+			} catch (Exception e) {
+
+			}
+		} else if (request.getParameter("lotteryTypeId").equals(
+				Period.SHISHI_CAI_CHONGQING)) {
+			try {
+				List<LotteryPeriod> list = letteryPeriodService
+						.findByTopNhistory(Period.SHISHI_CAI_GUANGDONG11XUAN5,
+								1);
+				return list.get(0);
+			} catch (Exception e) {
+
+			}
+		} else if (request.getParameter("lotteryTypeId").equals(
+				Period.SHISHI_CAI_CHONGQING)) {
+			try {
+				List<LotteryPeriod> list = letteryPeriodService
+						.findByTopNhistory(Period.SHISHI_CAI_JIANGXI, 1);
+				return list.get(0);
+			} catch (Exception e) {
+
+			}
+		} else {
+			try {
+				List<LotteryPeriod> list = letteryPeriodService
+						.findByTopNhistory(Period.SHISHI_CAI_SHANDONG, 1);
+				return list.get(0);
+			} catch (Exception e) {
+
+			}
+		}
+		return null;
+	}
 }

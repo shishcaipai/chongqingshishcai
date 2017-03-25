@@ -22,12 +22,12 @@
 <title>江西11选5</title>
 <meta name="description" content="十一运">
 <meta name="keywords" content="十一运">
-<link href="http://www.ib18.cn/res/css/commonEX.css" type="text/css"
+<link href="<%=basePath%>static/css/commonEX.css" type="text/css"
 	rel="stylesheet">
 <script src="//tb.53kf.com/code/code/10145634/1"></script>
 <script type="text/javascript"
-	src="http://www.ib18.cn/res/js/jquery-1.7.2.min.js"></script>
-<link href="http://www.ib18.cn/res/css/frequency.css" type="text/css"
+	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
+<link href="http://www.ld3j.com/res/css/frequency.css" type="text/css"
 	rel="stylesheet">
 <script src="<%=basePath%>static/js/Jquery_marquee_frequency.js"
 	type="text/javascript"></script>
@@ -211,7 +211,9 @@
 	<script type="text/javascript">
 	
 </script>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<script>
   var ctx = "http://www.ib18.cn";
   getLotteryTypes();	
