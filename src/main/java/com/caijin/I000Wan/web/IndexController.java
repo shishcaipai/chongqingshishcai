@@ -87,7 +87,7 @@ public class IndexController {
 				articleService.findByType(Article.CAIPIAOZIXUN));
 		model.addAttribute("frist", true);
 		model.addAttribute("map", map);
-		return new ModelAndView("index/index");
+		return new ModelAndView("index/index2");
 	}
 
 	/**
