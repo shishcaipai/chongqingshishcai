@@ -147,6 +147,35 @@ public class OrderAction {
 		}
 		renderText(response, msg);
 	}
+	
+	/**
+	 * 修改开奖方式
+	 * 
+	 * @param memberUser
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/order/updateAutoPrizes", method = RequestMethod.POST)
+	public void updateOderAutoPrizes(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String auto = request.getParameter("autoPrizes");
+		String orderNo = request.getParameter("orderNo");
+		boolean autoPrizes = Boolean.valueOf(auto);
+		String msg = "";
+			
+		try {
+			Order order = orderService.findOrderByOrderId(orderNo);
+			order.setAutoPrizes(!autoPrizes);
+			orderService.update(order);
+			orderService.clear();
+			msg = "修改成功";
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg = "修改失败";
+		}
+		renderText(response, msg);
+	}
 
 	private void renderText(HttpServletResponse response, Object result)
 			throws IOException {

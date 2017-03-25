@@ -55,7 +55,7 @@ public class IndexController {
 		model.addAttribute("notice", articleService.findByType(Article.NOTICE));
 		model.addAttribute("zixian", articleService.findByType(Article.CAIPIAOZIXUN));
 		model.addAttribute("map", map);
-		return new ModelAndView("index/index2");
+		return new ModelAndView("index/index");
 	}
 	/**
 	 * 跳转到首页
@@ -66,7 +66,7 @@ public class IndexController {
 		List<Map> map = periodService.findUserTotalAmountList(null);
 		model.addAttribute("notice", articleService.findByType(Article.NOTICE));
 		model.addAttribute("zixian", articleService.findByType(Article.CAIPIAOZIXUN));
-		return new ModelAndView("index/index2");
+		return new ModelAndView("index/index");
 	}
 	/**
 	 * @return
