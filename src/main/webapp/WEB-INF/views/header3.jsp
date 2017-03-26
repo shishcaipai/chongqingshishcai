@@ -105,11 +105,11 @@
 					title="彩票合买大厅">合买大厅</a>|</li>
 				<li pid="award"><a href="<%=basePath%>wfjx"
 					title="中国彩票开奖">玩法介绍</a>|</li>
-				<li pid="trend"><a href="http://www.ld3j.com/zoushi"
+				<li pid="trend"><a href="<%=basePath%>zaoshi"
 					title="福彩体彩走势图">走势图表</a>|</li>
-				<li pid="cpInfo"><a href="<%=basePath%>/articles"
+				<li pid="cpInfo"><a href="<%=basePath%>articles"
 					title="彩票资讯">彩票资讯</a>|</li>
-				<li pid="coupon"><a href="<%=basePath%>/notices"
+				<li pid="coupon"><a href="<%=basePath%>notices"
 					title="网站公告">网站公告</a>|</li>
 				<li pid="mobile"><a href="<%=basePath%>user/memberCenter"
 					title="手机购买彩票"><span class="icon_mob"></span>我的帐户</a></li>

@@ -13,11 +13,11 @@
 <head>
 <link href="<%=basePath%>static/css/bjdc.css" rel="stylesheet"
 	type="text/css">
-	<link href="<%=basePath%>static/css/public.css" rel="stylesheet"
-		type="text/css">
+<link href="<%=basePath%>static/css/public.css" rel="stylesheet"
+	type="text/css">
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>公告！</title>
 <meta name="description" content="时时乐" />
 <meta name="keywords" content="时时乐" />
@@ -28,7 +28,8 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>static/new/css/notice.css" type="text/css"
 	rel="stylesheet" />
-
+<link href="<%=basePath%>static/new/css/news.css" type="text/css"
+	rel="stylesheet" />
 <script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
 	type="text/javascript"></script>
 </head>
@@ -36,53 +37,40 @@
 	<jsp:include page="../header2.jsp"></jsp:include>
 	<div class="header clearfix">
 		<jsp:include page="../header3.jsp"></jsp:include>
-	<!--头部结束-->
-	<div class="box">
-		<!--左边-->
-		<div class="poNLeft">
+		<!--头部结束-->
 
-			<div class="poncon">
-				<span class="DivH15"></span>
-				<div style="text-align: center;">
+		<div class="container">
+			<div class="sub_left">
+				<div class="ssq_news">
+					<div class="M_box">
+						<div class="M_title">
+							<h2>公告</h2>
+						</div>
+						<div class="M_content">
+							<div class="news_list">
+								<ul>
 
+									<c:forEach var="art" items="${requestScope.notice }">
+										<li
+											style="width: 500px; height: 22px; overflow: hidden; line-height: 22px; margin: 6px;">
+											<em>[公告]</em> <a
+											href="<%=basePath %>article/article?id=${art.id }"
+											target="_blank" title="${art.title }" style="color: #333;">${art.title }</a>
+										</li>
+									</c:forEach>
 
-					<h1 style="color: red;">
-						<c:choose>
-							<c:when test="${article.type==0}">
-									【公告】		
-												</c:when>
-							<c:otherwise>
-									【推荐】
-											</c:otherwise>
-						</c:choose>
-						${article.title }
-					</h1>
+								</ul>
 
-
-
-				</div>
-				<span class="DivH15"></span>
-				<div class="from">
-					<div class="TimeShare">
-						<div class="PSource">作者：${article.author }
-							来源：${article.source } 更新时间：${article.updateDate }</div>
-						<div class="baidushare">
-							<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="content">
-					<div class="start">
-						<div style="width: 600px; margin: 50px auto;">
-							${article.content }</div>
-					</div>
-				</div>
-
 			</div>
-		</div>
-	</div>
-</div>
 
+		</div>
+
+	</div>
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
-	</html>
+</html>

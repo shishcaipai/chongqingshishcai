@@ -35,5 +35,11 @@
 					id="logoutLink" href="<%=basePath%>user/loginout">退出</a>]
 			</ul>
 		</div>
+		<div style="text-align:center;">
+								<a target="_blank"
+									href="http://wpa.qq.com/msgrd?v=3&uin=212395988&site=qq&menu=yes"><img
+									border="0" src="http://wpa.qq.com/pa?p=2:212395988:41"
+									alt="点击这里给我发消息" title="点击这里给我发消息" style="float: right;" /></a>
+							</div>
 	</div>
 </div>

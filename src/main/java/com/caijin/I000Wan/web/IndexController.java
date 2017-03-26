@@ -174,8 +174,10 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping(value = "/articles")
-	public ModelAndView articles(HttpServletRequest request) {
-		return new ModelAndView("articles/articles");
+	public ModelAndView articles(HttpServletRequest request, Model model) {
+		model.addAttribute("zixian",
+				articleService.findByType(Article.CAIPIAOZIXUN));
+		return new ModelAndView("article/zilist");
 	}
 
 	/**
@@ -184,8 +186,9 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping(value = "/notices")
-	public ModelAndView notices(HttpServletRequest request) {
-		return new ModelAndView("notices/notices");
+	public ModelAndView notices(HttpServletRequest request, Model model) {
+		model.addAttribute("notice", articleService.findByType(Article.NOTICE));
+		return new ModelAndView("article/noticeslist");
 	}
 	/**
 	 * 合买大厅
@@ -195,6 +198,15 @@ public class IndexController {
 	@RequestMapping(value = "/lobby")
 	public ModelAndView lobby(HttpServletRequest request) {
 		return new ModelAndView("index/hemaidating");
+	}
+	/**
+	 * 走势
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/zaoshi")
+	public ModelAndView zaoshi(HttpServletRequest request) {
+		return new ModelAndView("caipiao/zaoshidating");
 	}
 	/**
 	 * 跳转到首页

@@ -17,16 +17,16 @@
 				src="<%=basePath%>static/new/images/kxwz.gif">
 		</p>
 		<p>
-			ICP备案号：粤ICP备13088888号| 版权所有：好运彩票 | 开发公司：好运网络科技公司<BR>
-			<span class="red">！好运彩票郑重提示：彩票有风险，投注需谨慎</span> 不向未满18周岁的青少年出售彩票
+			ICP备案号：粤ICP备13088888号| 版权所有：鸿运彩票网 | 开发公司：鸿运网络科技公司<BR>
+			<span class="red">！鸿运彩票郑重提示：彩票有风险，投注需谨慎</span> 不向未满18周岁的青少年出售彩票
 		</p>
-		<script>
+		<!-- <script>
 			(function() {
 				var _53code = document.createElement("script");
 				_53code.src = "//tb.53kf.com/code/code/10144644/1";
 				var s = document.getElementsByTagName("script")[0];
 				s.parentNode.insertBefore(_53code, s);
 			})();
-		</script>
+		</script> -->
 	</div>
 

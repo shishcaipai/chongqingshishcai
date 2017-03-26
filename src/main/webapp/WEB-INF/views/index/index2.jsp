@@ -58,7 +58,7 @@
 									<p id="cqsscnum">暂无开奖数据请稍后</p>
 
 									<p class="tr m-r">
-										<span id="cqssctime"></span><a href="<%=basePath%>/zoushi">走势</a>
+										<span id="cqssctime"></span><a href="<%=basePath%>zaoshi">走势</a>
 										| <a href="<%=basePath%>cqssc/cqsscview">投注</a>
 									</p>
 								</li>
@@ -70,7 +70,7 @@
 									</p>
 									<p id="gd11c5num">暂无开奖数据请稍后</p>
 									<p class="tr m-r">
-										<span id="gd11c5time"></span><a href="<%=basePath%>/zoushi">走势</a>
+										<span id="gd11c5time"></span><a href="<%=basePath%>zaoshi">走势</a>
 										| <a href="<%=basePath%>gdsyxw/gdsyxwview">投注</a>
 									</p>
 								</li>
@@ -81,7 +81,7 @@
 									</p>
 									<p id="jx11c5num">暂无开奖数据请稍后</p>
 									<p class="tr m-r">
-										<span id="jx11c5time"></span><a href="<%=basePath%>/zoushi">走势</a>
+										<span id="jx11c5time"></span><a href="<%=basePath%>zaoshi">走势</a>
 										| <a href="<%=basePath%>jxssc/jxsscview">投注</a>
 									</p>
 								</li>
@@ -127,20 +127,20 @@
 				<!--彩票走势图-->
 				<div id="analysisTool">
 					<h2 class="grayTitle">
-						<a href="<%=basePath%>/zoushi">彩票走势图</a>
+						<a href="<%=basePath%>zaoshi">彩票走势图</a>
 					</h2>
 					<dl class="chartList clearfix">
 						<dt>
-							<a href="<%=basePath%>/zoushi">彩票走势图</a>
+							<a href="<%=basePath%>zaoshi">彩票走势图</a>
 						</dt>
 						<dd class="separator clearfix">
 							<span>数字彩：</span><br> <span><a
-									href="<%=basePath%>/zoushi">福彩3D</a></span>
+									href="<%=basePath%>zaoshi">福彩3D</a></span>
 								<dd>
 									<span>高频彩：</span><br> <span><a
-											href="<%=basePath%>/zoushi">重庆时时彩</a></span> <span><a
-											href="<%=basePath%>/zoushi">广东11选5</a></span> <span><a
-											href="<%=basePath%>/zoushi">江西11选5</a></span>
+											href="<%=basePath%>zaoshi">重庆时时彩</a></span> <span><a
+											href="<%=basePath%>zaoshi">广东11选5</a></span> <span><a
+											href="<%=basePath%>zaoshi">江西11选5</a></span>
 								</dd>
 					</dl>
 				</div>
@@ -625,9 +625,9 @@
 									$("#slider")
 											.append(
 													"<li><span>恭喜</span><span style='overflow: hidden;'>"
-															+ vo.username
+															+ vo.user_name
 															+ "</span><span style='color:red'>喜中 <b >"
-															+ vo.prize
+															+ parseFloat(vo.money).toFixed(2)
 															+ "</b> 元</span></li>");
 								}
 
@@ -641,7 +641,7 @@
 			<ul class="fo1">
 				<h1>
 					<img alt="快购彩票网"
-						src="http://www.ld3j.com/res/index/picture/fo1.png" />
+						src="<%=basePath%>static/new/images/fo1.png" />
 				</h1>
 				<li>交易安全</li>
 				<li>购买便捷</li>
@@ -650,32 +650,32 @@
 			<ul class="fo2">
 				<h1>
 					<img alt="快购彩票网"
-						src="http://www.ld3j.com/res/index/picture/fo2.png" />
+						src="<%=basePath%>static/new/images/fo2.png" />
 				</h1>
-				<li>・<a href="http://www.ld3j.com/article?id=cz1">充值方式</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=cz2">充值流程</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=cz3">修改真实姓名</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=cz4">修改银行卡</a></li>
+				<li>・<a href="<%=basePath%>articles?id=cz1">充值方式</a></li>
+				<li>・<a href="<%=basePath%>articles?id=cz2">充值流程</a></li>
+				<li>・<a href="<%=basePath%>articles?id=cz3">修改真实姓名</a></li>
+				<li>・<a href="<%=basePath%>articles?id=cz4">修改银行卡</a></li>
 			</ul>
 			<ul class="fo3">
 				<h1>
 					<img alt="快购彩票网"
-						src="http://www.ld3j.com/res/index/picture/fo3.png" />
+						src="<%=basePath%>static/new/images/fo3.png" />
 				</h1>
-				<li>・<a href="http://www.ld3j.com/article?id=tk1">如何提款</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=tk2">到账时间</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=tk3">银行提款费率</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=tk4">提款注意</a></li>
+				<li>・<a href="<%=basePath%>articles?id=tk1">如何提款</a></li>
+				<li>・<a href="<%=basePath%>articles?id=tk2">到账时间</a></li>
+				<li>・<a href="<%=basePath%>articles?id=tk3">银行提款费率</a></li>
+				<li>・<a href="<%=basePath%>articles?id=tk4">提款注意</a></li>
 			</ul>
 			<ul class="fo4" style="border-right: none">
 				<h1>
 					<img alt="快购彩票网"
-						src="http://www.ld3j.com/res/index/picture/fo4.png" />
+						src="<%=basePath%>static/new/images/fo4.png" />
 				</h1>
-				<li>・<a href="http://www.ld3j.com/article?id=bz1">如何注册网站会员</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=bz2">注册时需注意什么</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=bz3">如何注销会员帐户</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=bz4">密码忘记了怎么办</a></li>
+				<li>・<a href="<%=basePath%>articles?id=bz1">如何注册网站会员</a></li>
+				<li>・<a href="<%=basePath%>articles?id=bz2">注册时需注意什么</a></li>
+				<li>・<a href="<%=basePath%>articles?id=bz3">如何注销会员帐户</a></li>
+				<li>・<a href="<%=basePath%>articles?id=bz4">密码忘记了怎么办</a></li>
 			</ul>
 
 		</div>

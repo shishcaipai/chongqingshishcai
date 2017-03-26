@@ -1,0 +1,65 @@
+/* --整体-- */
+body{text-align:left;font-size:12px;color:#444;font-family:\5B8B\4F53,\5FAE\8F6F\96C5\9ED1,Verdana,Helvetica;margin:0;padding:0}
+
+/*主导航菜单E*/
+.topbox{height:80px;background:#fff}
+.footbox{background:#fff url(http://www.poluoluo.com/img/foot.gif) repeat-x 0 -188px;clear:both;margin-top:20px}
+.box{width:1000px;margin:0 auto;clear:both}
+.foot{width:970px;margin:0 auto;clear:both;height:210px;position:relative}
+.bgbox{width:970px;margin:0 auto;clear:both;background-color:#f5f5f5;overflow:hidden}
+.DivH1,.DivH4,.DivH5,.DivH8,.DivH9,.DivH10,.DivH15,.DivH20,.DivH25,.DivH30,.DivH40,.DivH50,.DivHXX{width:100%;overflow:hidden;clear:both;font-size:1px;display:block}
+.DivH1{height:1px}
+.DivH4{height:4px}
+.DivH5{height:5px}
+.DivH8{height:8px}
+.DivH9{height:9px}
+.DivH10{height:10px}
+.DivH15{height:15px}
+.DivH20{height:20px}
+.DivH25{height:25px}
+.DivH30{height:30px}
+.DivH40{height:40px}
+.DivH50{height:50px}
+.DivHXX{height:7px;height:7px\9;}
+.DivW1{text-indent:1px}
+.DivW5{text-indent:5px}
+.DivW10{text-indent:10px}
+.DivW15{text-indent:15px}
+.DivW20{text-indent:20px}
+.DivW25{text-indent:25px}
+.DivW30{text-indent:30px}
+.DivW40{text-indent:40px}
+.fl{float:left}
+.fr{float:right}
+.fleft{float:left}
+.fright{float:right}
+.fclear{clear:both}
+.boxH{margin-top:10px}
+.boxHpage{clear:both;margin:10px 0 15px}
+.ToolBg{background:#f7f7f7}
+
+
+
+
+/* 内容页图片列表*/
+.poncon{background:#fff}
+.poncon .list{padding:2px}
+.poncon .listc{padding:2px;text-align:center}
+.poncon .list .listwidth{width:100%;overflow:hidden}
+.poncon .list .listwidth .piclist{float:left;width:195px;text-align:center}
+.poNLeft .poncon .list .listwidth .piclist img{margin-top:10px;display:inline}
+.poNLeft .poncon .list .listwidth .W{float:right;width:508px}
+.tuwenlist{padding:2px;width:700px;overflow:hidden}
+.tuwenlist .pic_art{float:left;margin-left:4%;text-align:center;display:inline}
+.poNLeft .ponbar{height:2px;background:#c00;_overflow:hidden}
+.poNLeft .poncon{border:1px solid #ddd;border-top:none}
+.poNLeft .poncon .title{text-align:center;padding-top:5px}
+.poNLeft .poncon .title h1{color:#f00;font-size:24px;font-weight:bold;word-wrap:break-word}
+.poNLeft .poncon .from{width:100%;height:22px;font-size:12px;line-height:20px;text-align:center;border-bottom:1px solid #ddd;overflow:hidden;margin:0 auto; padding:0 0 4px}
+
+.poNLeft .poncon .content{color:#111}
+.poNLeft .poncon .content .start{width:100%;height:100%;font-size:14px;}
+.poNLeft .poncon .content .start a{color:#03f;font-size:14px}
+.poNLeft .poncon .content .start a:hover{color:#c00}
+.poNLeft .poncon .content .start td{font-size:14px}
+

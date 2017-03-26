@@ -52,7 +52,7 @@
                     
                         <P>
                             	<a href="<%=basePath%>cqssc/cqsscview" >开奖公告</a>
-                                <a href="<%=basePath%>zoushi" >走势图</a>
+                                <a href="<%=basePath%>zaoshi" >走势图</a>
                 </li>
                 <li id="tj_d11" gid="d11"> 
                     <span class="szImg szImg_d11"></span>
@@ -60,7 +60,7 @@
                     
                         <P> 	
                             <a href="<%=basePath%>sdsyy/sdsyyview" >开奖公告</a>
-                            <a href="<%=basePath%>/zoushi">走势图</a>
+                            <a href="<%=basePath%>zaoshi">走势图</a>
                         </P>
                 </li>
                 <li id="tj_jczq"  gid="jczq_spf_p" class="jczq">
@@ -69,7 +69,7 @@
                     <a href="<%=basePath%>gdsyxw/gdsyxwview" class="buyNow" ></a>
                         <P> 	
                             <a href="<%=basePath%>gdsyxw/gdsyxwview" >开奖公告</a>
-                            <a href="<%=basePath%>zoushi" >走势图</a>
+                            <a href="<%=basePath%>zaoshi" >走势图</a>
                         </P>
                 </li>
                  <li id="tj_ssq" gid="ssq"> 
@@ -77,7 +77,7 @@
                     <a href="<%=basePath%>jxssc/jxsscview" class="buyNow" ></a>
                         <P>
                             <a href="<%=basePath%>jxssc/jxsscview" >开奖公告</a>
-                            <a href="<%=basePath%>zoushi" >走势图</a>
+                            <a href="<%=basePath%>zaoshi" >走势图</a>
                         </P>
                 </li>
                  <li id="tj_kuai3" gid="kuai3"> 
@@ -98,7 +98,7 @@
 			<ul class="fo1">
 				<h1>
 					<img alt="快购彩票网"
-						src="http://www.ld3j.com/res/index/picture/fo1.png" />
+						src="<%=basePath%>static/new/images/fo1.png" />
 				</h1>
 				<li>交易安全</li>
 				<li>购买便捷</li>
@@ -107,32 +107,32 @@
 			<ul class="fo2">
 				<h1>
 					<img alt="快购彩票网"
-						src="http://www.ld3j.com/res/index/picture/fo2.png" />
+						src="<%=basePath%>static/new/images/fo2.png" />
 				</h1>
-				<li>・<a href="http://www.ld3j.com/article?id=cz1">充值方式</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=cz2">充值流程</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=cz3">修改真实姓名</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=cz4">修改银行卡</a></li>
+				<li>・<a href="<%=basePath%>articles?id=cz1">充值方式</a></li>
+				<li>・<a href="<%=basePath%>articles?id=cz2">充值流程</a></li>
+				<li>・<a href="<%=basePath%>articles?id=cz3">修改真实姓名</a></li>
+				<li>・<a href="<%=basePath%>articles?id=cz4">修改银行卡</a></li>
 			</ul>
 			<ul class="fo3">
 				<h1>
 					<img alt="快购彩票网"
-						src="http://www.ld3j.com/res/index/picture/fo3.png" />
+						src="<%=basePath%>static/new/images/fo3.png" />
 				</h1>
-				<li>・<a href="http://www.ld3j.com/article?id=tk1">如何提款</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=tk2">到账时间</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=tk3">银行提款费率</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=tk4">提款注意</a></li>
+				<li>・<a href="<%=basePath%>articles?id=tk1">如何提款</a></li>
+				<li>・<a href="<%=basePath%>articles?id=tk2">到账时间</a></li>
+				<li>・<a href="<%=basePath%>articles?id=tk3">银行提款费率</a></li>
+				<li>・<a href="<%=basePath%>articles?id=tk4">提款注意</a></li>
 			</ul>
 			<ul class="fo4" style="border-right: none">
 				<h1>
 					<img alt="快购彩票网"
-						src="http://www.ld3j.com/res/index/picture/fo4.png" />
+						src="<%=basePath%>static/new/images/fo4.png" />
 				</h1>
-				<li>・<a href="http://www.ld3j.com/article?id=bz1">如何注册网站会员</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=bz2">注册时需注意什么</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=bz3">如何注销会员帐户</a></li>
-				<li>・<a href="http://www.ld3j.com/article?id=bz4">密码忘记了怎么办</a></li>
+				<li>・<a href="<%=basePath%>articles?id=bz1">如何注册网站会员</a></li>
+				<li>・<a href="<%=basePath%>articles?id=bz2">注册时需注意什么</a></li>
+				<li>・<a href="<%=basePath%>articles?id=bz3">如何注销会员帐户</a></li>
+				<li>・<a href="<%=basePath%>articles?id=bz4">密码忘记了怎么办</a></li>
 			</ul>
 
 		</div>
