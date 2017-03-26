@@ -206,7 +206,7 @@ public class TimerTask {
 	public void getWebScan() {
 		log.info("读取网站信息。。。");
 		NewsCrawler crawler = new NewsCrawler("crawl", true);
-		crawler.setThreads(10);
+		crawler.setThreads(5);
 		crawler.setTopN(10);
 		try {
 			crawler.start(1);

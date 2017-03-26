@@ -16,32 +16,37 @@ import com.caijin.I000Wan.util.Result;
 
 @Component
 @Transactional
-public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> implements MemberUserService{
+public class MemberUserServiceImpl extends
+		CommonServiceImpl<MemberUser, String> implements MemberUserService {
 
 	@Autowired
 	private MemberUserDao memberUserDao;
-	
+
 	@Autowired
 	public void setMemberUserDao(MemberUserDao memberUserDao) {
 		super.setCommonDao(memberUserDao);
 	}
 
-	public MemberUser findByUserName(String userName){
-		try{
-		return memberUserDao.findByUserName(userName);
-		}catch(Exception e){
+	public MemberUser findByUserName(String userName) {
+		try {
+			return memberUserDao.findByUserName(userName);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new MemberUser();
 	}
-	
-	public List<Map> findMemberList(String userName,String realName,String mobile,String startDate,String endDate){
-	    return 	memberUserDao.findMemberList(userName, realName, mobile, startDate, endDate);
+
+	public List<Map> findMemberList(String userName, String realName,
+			String mobile, String startDate, String endDate) {
+		return memberUserDao.findMemberList(userName, realName, mobile,
+				startDate, endDate);
 	}
 
 	@Override
-	public Result getMemberUserAll(PageModel pageModel,String userName,String realName,String mobile,String startDate,String endDate) {
-		return  memberUserDao.getMemberUserAll(pageModel,userName, realName, mobile, startDate, endDate);
+	public Result getMemberUserAll(PageModel pageModel, String userName,
+			String realName, String mobile, String startDate, String endDate) {
+		return memberUserDao.getMemberUserAll(pageModel, userName, realName,
+				mobile, startDate, endDate);
 	}
 
 	@Override
@@ -52,7 +57,7 @@ public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> 
 	@Override
 	public List<MemberUser> findMemberByAgentUserId(int i, int pageSize,
 			String id) {
-		return memberUserDao.findMemberByAgentUserId(i,pageSize,id);
+		return memberUserDao.findMemberByAgentUserId(i, pageSize, id);
 	}
 
 	@Override
@@ -74,6 +79,7 @@ public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> 
 	public Integer getAllTodayActivePredUser(String id) {
 		return memberUserDao.getAllTodayActivePredUserCount(id);
 	}
+
 	@Override
 	public Integer getAllActivePredUser(String id) {
 		return memberUserDao.getAllActivePredUserCount(id);
@@ -82,8 +88,17 @@ public class MemberUserServiceImpl extends CommonServiceImpl<MemberUser,String> 
 	@Override
 	public void clear() {
 		memberUserDao.clear();
-		
+
 	}
-	
-	
+
+	@Override
+	public MemberUser findByPreId(String predId) {
+		try {
+			return memberUserDao.findByRegeisterID(predId);
+		} catch (Exception e) {
+
+		}
+		return null;
+	}
+
 }

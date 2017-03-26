@@ -26,4 +26,5 @@ public interface MemberUserDao extends MemberUserCustomDao,CommonDao<MemberUser,
 	int getAllTodayActivePredUserCount(String id);
 	@Query(value="select count(u.id) from member_user u left join trade_order o on o.member_id=u.id where u.commend_member_id=?1 and (o.order_type=2 or o.order_type=3  ) ",nativeQuery=true)
 	int getAllActivePredUserCount(String id);
+
 }

@@ -34,4 +34,6 @@ public interface MemberUserService extends CommonService<MemberUser, String> {
 
 	void clear();
 
+	MemberUser findByPreId(String predId);
+
 }

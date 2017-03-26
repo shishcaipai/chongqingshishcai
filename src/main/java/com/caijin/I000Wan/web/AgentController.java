@@ -23,6 +23,7 @@ import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
 import com.caijin.I000Wan.util.DateUtils;
 import com.caijin.I000Wan.util.Md5Util;
+import com.caijin.I000Wan.util.OrderUtils;
 import com.caijin.I000Wan.util.StaticDefine;
 
 @Controller
@@ -174,7 +175,10 @@ public class AgentController {
 					&& !"".equals(currentUser.getPredId())) {
 				predId = currentUser.getPredId();
 			} else {
-				predId = Md5Util.generatePassword(currentUser.getUserName());
+				predId = OrderUtils.getRandom();
+				while (userService.findByPreId(predId) != null) {
+					predId = OrderUtils.getRandom();
+				}
 				currentUser.setPredId(predId);
 				userService.update(currentUser);
 			}

@@ -41,6 +41,7 @@ import com.caijin.I000Wan.util.DateUtils;
 import com.caijin.I000Wan.util.EmailUtils;
 import com.caijin.I000Wan.util.GenerateLinkUtils;
 import com.caijin.I000Wan.util.Md5Util;
+import com.caijin.I000Wan.util.OrderUtils;
 import com.caijin.I000Wan.util.RandomValidateCode;
 import com.caijin.I000Wan.util.StaticDefine;
 import com.caijin.I000Wan.util.WFPublic;
@@ -818,7 +819,10 @@ public class UserController {
 					&& !"".equals(currentUser.getPredId())) {
 				predId = currentUser.getPredId();
 			} else {
-				predId = Md5Util.generatePassword(currentUser.getUserName());
+				predId = OrderUtils.getRandom();
+				while (userService.findByPreId(predId) != null) {
+					predId = OrderUtils.getRandom();
+				}
 				currentUser.setPredId(predId);
 				userService.update(currentUser);
 			}
@@ -935,6 +939,6 @@ public class UserController {
 			return "user/details";
 		}
 
-		return "user/orderdetail";
+		return "user/details";
 	}
 }

@@ -108,6 +108,7 @@
 							<td style="color: #666; font-weight: bold">金额</td>
 							<td style="color: #666; font-weight: bold">状态</td>
 							<td style="color: #666; font-weight: bold">备注</td>
+							<td style="color: #666; font-weight: bold">详情</td>
 						</tr>
 						<c:forEach var="order" items="${requestScope.orders }">
 							<tr>
@@ -127,6 +128,16 @@
 										test="${order.orderStatus ==3}"> 超时</c:if> <c:if
 										test="${order.orderStatus ==4}">订单取消</c:if></td>
 								<td>${order.content}</td>
+								<td width="10%" align="center" valign="middle">
+								<c:if test="${order.orderType ==2}">
+								<a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a>
+								</c:if>
+								<c:if test="${order.orderType ==3}">
+								<a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a>
+								</c:if>
+								<c:if test="${order.orderType ==4}">
+								<a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a>
+								</c:if>
 								</td>
 							</tr>
 						</c:forEach>
