@@ -61,8 +61,12 @@ public class JiangXiShiShiCaiController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("current", DateUtils.getCurrentJiangXiShiShiCai());
 		model.put("leftsecond", DateUtils.getJiangXiShiShiCaiLeftMisecond());
+		try{
 		model.put("left", DateUtils.getLeftJiangXiShiShiCai(DateUtils
 				.getCurrentJiangXiShiShiCai()));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return new ModelAndView("caipiao/jxssc", model);
 	}
 	

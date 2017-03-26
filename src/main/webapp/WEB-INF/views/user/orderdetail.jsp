@@ -12,17 +12,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/head.css" rel="stylesheet"
 	type="text/css" />
 <link href="<%=basePath%>static/css/jqueryui.css" type="text/css"
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<LINK href="http://www.ib18.cn/res/css/head.css" type=text/css
-	rel=stylesheet>
-<link href="http://www.ib18.cn/res/css/page.css" type="text/css"
+<link href="<%=basePath%>static/new/css/page.css" type="text/css"
 	rel="stylesheet">
 	<script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
@@ -32,7 +30,9 @@
 </head>
 
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<div id="account">
 		<div class="account_left">
 			<jsp:include page="memberLeftMenu.jsp"></jsp:include>
@@ -246,6 +246,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<!--main end -->
 </body>

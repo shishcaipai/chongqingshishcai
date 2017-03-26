@@ -57,15 +57,17 @@ public class ShanDongShiYiYunController {
 	 */
 	@RequestMapping(value = "/sdsyyview")
 	public ModelAndView jingZuJqs() {
-
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("current", DateUtils.getCurrentShanDongShiYiYun());
 		model.put("leftsecond", DateUtils.getShanDongShiYiYunLeftMisecond());
-		model.put("left", DateUtils.getLeftShanDongShiYiYun(DateUtils
-				.getCurrentShanDongShiYiYun()));
+		try {
+			model.put("left", DateUtils.getLeftShanDongShiYiYun(DateUtils
+					.getCurrentShanDongShiYiYun()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new ModelAndView("caipiao/sdsyy", model);
 	}
-
 
 	/**
 	 * 数据接口来自 http://f.apiplus.cn/cqssc-10.json json接口

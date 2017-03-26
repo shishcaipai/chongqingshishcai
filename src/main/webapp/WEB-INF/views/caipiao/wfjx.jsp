@@ -10,14 +10,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link href="http://www.ib18.cn/res/css/common.css" type="text/css"
+<link href="<%=basePath%>static/css/common.css" type="text/css"
 	rel="stylesheet"/>
 	<link href="<%=basePath%>static/css/jqueryui.css" type="text/css"
 	rel="stylesheet" />
 	<link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
 	<title>玩法介绍 - 时时牛</title>
-	<link href="http://www.ib18.cn/res/css/together.css" type="text/css" rel="stylesheet" />
+	<link href="<%=basePath%>static/css/together.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript">
 	function setxxx(obj) {
 	    var a = document.getElementById("howtoplay");
@@ -26,8 +26,9 @@
 </script>
 </head>
 <body style="height: 100%;">
-	<jsp:include page="../header.jsp"></jsp:include>
-	<jsp:include page="../banner.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<!--头部结束-->
 	<div class="q_main"
 		style="width: 1000px; margin: 0 auto; clear: both; margin-top: 6px;">

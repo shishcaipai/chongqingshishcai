@@ -1,0 +1,46 @@
+/* CSS Document */
+#account{
+	width:1000px;
+	overflow:hidden;
+	margin:0 auto;
+}
+/*左侧CSS样式*/
+.account_left{
+	float:left;
+	overflow:hidden;
+	width:162px;
+	margin-top:8px;
+	padding:3px;
+}
+
+.account_right{
+float:right;
+width:830px;
+overflow:hidden;
+margin-top:8px;
+}
+
+
+
+/*用户中心*/
+.user_left{ width:160px; border:1px solid #DDD; float:left; margin-bottom:6px}
+.user_hot{ width:100%; height:42px; line-height:42px; font-weight:bold; font-size:14px; color:#999; text-indent:1em; background-color: #FFF;}
+.user_scond{ width:100%; background:#FEF5E4;}
+.user_tub{ width:132px; height:22px; padding:10px 14px; line-height:22px; float:left;font-weight:bold; font-size:14px; color:#999;cursor: default;}
+.user_tub:HOVER{
+	color: #fff;
+	background-color: #f8b551;
+}
+.user_tub a{
+	color:#999;
+}
+.user_tub a:HOVER,.user_tub span:HOVER{
+	color: #fff;
+	cursor: pointer;
+}
+.user_third{ width:80%; height:80px; background:url(../images/sc_39.jpg)}
+.user_table{ width:146px; height:150px; margin:10px 4px 10px 10px;}
+.user_table tr td{ text-align:center}
+.line{
+	width:100%; height:180px; background:url(../images/line.jpg) repeat-x top;
+}

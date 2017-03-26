@@ -16,16 +16,17 @@
 	rel="stylesheet" />
 <script src="<%=basePath%>static/js/commonUtil.js"
 	type="text/javascript"></script>
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/head.css" rel="stylesheet"
 	type="text/css" />
 <title>安全中心</title>
 </head>
 
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
-	<jsp:include page="../banner.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<div id="account">
 		<div class="account_left">
 			<jsp:include page="memberLeftMenu.jsp"></jsp:include>
@@ -112,6 +113,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<!--main end -->
 

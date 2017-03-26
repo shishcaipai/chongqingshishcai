@@ -15,8 +15,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
  
 <body>
-       <br /><jsp:include page="../header.jsp"></jsp:include>
-	   <jsp:include page="../banner.jsp"></jsp:include>
+      <jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 <!--main-->
 <div class="main fn_clear user">
 	<div class="wrap">
@@ -67,6 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         
     </div>
+</div>
 </div>
 <!--main end -->
  

@@ -16,17 +16,19 @@
 	rel="stylesheet" />
 <script src="<%=basePath%>static/js/commonUtil.js"
 	type="text/javascript"></script>
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/head.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/page.css" type="text/css" rel="stylesheet"/>
+<link href="<%=basePath%>static/new/css/page.css" type="text/css" rel="stylesheet"/>
 	
 <title>修改密码</title>
 </head>
 
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<!--main-->
 	<div id="account">
 		<div class="account_left">
@@ -92,6 +94,7 @@
 			onclick="resetPasswordSubmit()"/></td> </tr> </table> </div> </div>
 			</div> </div> --%>
 		</div>
+	</div>
 	</div>
 	<!--main end -->
 

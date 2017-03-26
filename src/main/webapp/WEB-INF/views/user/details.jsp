@@ -13,16 +13,14 @@
 <TITLE></TITLE>
 <link href="<%=basePath%>static/css/hmtz.css" type="text/css"
 	rel="stylesheet">
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/head.css" rel="stylesheet"
 	type="text/css" />
 <link href="<%=basePath%>static/css/jqueryui.css" type="text/css"
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<link href="http://www.ib18.cn/res/css/page.css" type="text/css"
-	rel="stylesheet">
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript"
@@ -52,7 +50,9 @@
 </script>
 </HEAD>
 <BODY>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<div id="account">
 		<div class="account_left">
 			<jsp:include page="memberLeftMenu.jsp"></jsp:include>
@@ -308,6 +308,6 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 </body>
 </html>

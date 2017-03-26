@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,18 +16,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description" content="时时乐" />
 <meta name="keywords" content="时时乐" />
 
-	<link href="<%=basePath%>static/css/commonEX.css" type="text/css" rel="stylesheet">
-	
+<link href="<%=basePath%>static/css/commonEX.css" type="text/css"
+	rel="stylesheet">
+
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
-	<link href="<%=basePath%>static/css/frequency.css" type="text/css" rel="stylesheet">
+<link href="http://www.ld3j.com/res/css/frequency.css" type="text/css"
+	rel="stylesheet">
 <script src="<%=basePath%>static/js/Jquery_marquee_frequency.js"
 	type="text/javascript"></script>
-	
-<script src="<%=basePath%>static/js/zhs.js" type="text/javascript" charset="utf-8"></script>
-<script src="<%=basePath%>static/js/Method.js" type="text/javascript"  charset="utf-8"></script>
-<script src="<%=basePath%>static/js/Betting.js" type="text/javascript" charset="utf-8"></script>
-<script src="<%=basePath%>static/js/loading.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="<%=basePath%>static/js/zhs.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="<%=basePath%>static/js/Method.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="<%=basePath%>static/js/Betting.js" type="text/javascript"
+	charset="utf-8"></script>
+<script src="<%=basePath%>static/js/loading.js" type="text/javascript"
+	charset="utf-8"></script>
 <script src="<%=basePath%>static/js/public.vbs"></script>
 <link type="text/css" rel="stylesheet"
 	href="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/style.css" />
@@ -38,33 +45,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet" />
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
-	<div id="test_con" style="display: none">
-		<div id="tab" class="tlh_denglu">
-			<div id="Div1" class="tlh_denglu">
-				<div id="tabtop" class="tlh_denglu_bt">
-					<input type="button" id="Button1" value="&#160;&#160;"
-						onclick="closeLayer()">
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 
-				</div>
-				<div class="tlh_denglu_nr">
-					<p>
-						您好，第&nbsp;<span id="dqqh"></span>&nbsp;期已截止，请在下一期开售再进行投注。投注时请确认您选择的期号
-					</p>
+			<!--最新中奖和彩种 开始-->
 
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="sitebar">
-
-		<!--最新中奖和彩种 开始-->
-
-		<script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
-			type="text/javascript"></script>
-		<script type="text/javascript">
+			<script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
+				type="text/javascript"></script>
+			<script type="text/javascript">
 var SysSecond; 
 var InterValObj; 
 var isError = false;
@@ -189,954 +178,949 @@ function SetRemainTime() {
 } 
 </script>
 
-		<ul class="yh_tz01">
-			<li class="yh_tz02"><img
-				src="<%=basePath%>static/images/ssc.png" width="57" height="57"></li>
-			<li class="yh_tz03">
-				<div>
-					<h2>重庆时时彩</h2>
-				</div>
-				<div>
-					每天120期,10：00到22：00每10分钟一期,22：00后每5分钟一期<br /> <span id="kjsj"></span>
-				</div>
-			</li>
-			<li class="yh_tz04">
-				<div id="dateEnd" style="display: none">2016-12-13 16:09:10</div>
-				<div class="yh_tz05">
-					<span id="activeexpectshow">第<font color="#FF3300"><b><span
-								id="buyExpectShow"><span id="headCurrentPhase">${current}</span></span></b></font>期
-					</span><br />
-				</div>
-				<div class="xxxx_01">
-					<span class="t_tz05">离投注截止还有</span> <span id="RemainSecond"></span>
-				</div>
-			</li>
+			<ul class="yh_tz01">
+				<li class="yh_tz02"><img
+					src="<%=basePath%>static/images/ssc.png" width="57" height="57"></li>
+				<li class="yh_tz03">
+					<div>
+						<h2>重庆时时彩</h2>
+					</div>
+					<div>
+						每天120期,10：00到22：00每10分钟一期,22：00后每5分钟一期<br /> <span id="kjsj"></span>
+					</div>
+				</li>
+				<li class="yh_tz04">
+					<div id="dateEnd" style="display: none">2016-12-13 16:09:10</div>
+					<div class="yh_tz05">
+						<span id="activeexpectshow">第<font color="#FF3300"><b><span
+									id="buyExpectShow"><span id="headCurrentPhase">${current}</span></span></b></font>期
+						</span><br />
+					</div>
+					<div class="xxxx_01">
+						<span class="t_tz05">离投注截止还有</span> <span id="RemainSecond"></span>
+					</div>
+				</li>
 
-		</ul>
-		<!--最新中奖和彩种 结束-->
+			</ul>
+			<!--最新中奖和彩种 结束-->
 
-		<!--投注主体 开始-->
-		<div class="t_tz09">
-			<table class="t_tz10" border="0" cellspacing="0" cellpadding="0">
-				<tbody>
-					<tr>
-						<td class="adtd02"><a href="javascript:;" class="menu1"
-							value="12">前三直选</a> <a href="javascript:;" class="menu1 menu2"
-							value="2">后三直选</a> <a href="javascript:;" class="menu1"
-							value="13">前三组选</a> <a href="javascript:;" class="menu1"
-							value="8">后三组选</a> <a href="javascript:;" class="menu1"
-							value="14">前二</a> <a href="javascript:;" class="menu1" value="3">后二</a>
-							<a href="javascript:;" class="menu1" value="10">不定位</a> <a
-							href="javascript:;" class="menu1" value="11">定位胆</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+			<!--投注主体 开始-->
+			<div class="t_tz09">
+				<table class="t_tz10" border="0" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td class="adtd02"><a href="javascript:;" class="menu1"
+								value="12">前三直选</a> <a href="javascript:;" class="menu1 menu2"
+								value="2">后三直选</a> <a href="javascript:;" class="menu1"
+								value="13">前三组选</a> <a href="javascript:;" class="menu1"
+								value="8">后三组选</a> <a href="javascript:;" class="menu1"
+								value="14">前二</a> <a href="javascript:;" class="menu1" value="3">后二</a>
+								<a href="javascript:;" class="menu1" value="10">不定位</a> <a
+								href="javascript:;" class="menu1" value="11">定位胆</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
 
-		<div class="Betting">
-			<table class="t_tz15" cellpadding="0" cellspacing="0" border="0">
-				<tbody>
-					<tr>
-						<td class="adtd04" style="border-bottom: none;"><span
-							id="selex3xz3" style="display: none;"><input type="radio"
-								name="radiobutton" value="11">组三</span> <span id="selex3xz6"
-							style="display: none;"><input type="radio"
-								name="radiobutton" value="12">组六</span> <span id="selex3xhz"
-							style="display: none;"><input type="radio"
-								name="radiobutton" value="14">组选和值</span> <span
-							id="selex3xz3hz" style="display: none;"><input
-								type="radio" name="radiobutton" value="22">组三和值</span> <span
-							id="selex3xz6hz" style="display: none;"><input
-								type="radio" name="radiobutton" value="23">组六和值</span> <span
-							id="touzhufangshi_1" style="display: none;">直选：</span> <span
-							id="selfs" style="display: inline;"><input type="radio"
-								name="radiobutton" value="1">复式</span> <span id="selex3xzxhz"
-							style=""><input type="radio" name="radiobutton" value="18">和值</span>
-							<span id="selds" style="display: inline;"><input
-								type="radio" name="radiobutton" value="2">单式</span> <span
-							id="selex3xzxdt" style="display: none;"><input
-								type="radio" name="radiobutton" value="19">直选胆拖</span> <span
-							id="selex3xz3dt" style="display: none;"><input
-								type="radio" name="radiobutton" value="15">组三胆拖</span> <span
-							id="selex3xz6dt" style="display: none;"><input
-								type="radio" name="radiobutton" value="16">组六胆拖</span> <span
-							id="selex2xfshzds" style="display: none;"> <input
-								type="radio" name="radiobutton" value="20">和值&nbsp;&nbsp;&nbsp;&nbsp;
-								<font>组选：</font> <input type="radio" name="radiobutton"
-								value="7">复式 <input type="radio" name="radiobutton"
-								value="8">单式 <input type="radio" name="radiobutton"
-								value="9">和值 <!--      <input type="radio" name="radiobutton" value="21">包胆-->
-						</span> <span id="selbdw" style="display: none;"> <input
-								type="radio" name="radiobutton" value="24">前三不定位 <input
-								type="radio" name="radiobutton" value="25">后三不定位
+			<div class="Betting">
+				<table class="t_tz15" cellpadding="0" cellspacing="0" border="0">
+					<tbody>
+						<tr>
+							<td class="adtd04" style="border-bottom: none;"><span
+								id="selex3xz3" style="display: none;"><input type="radio"
+									name="radiobutton" value="11">组三</span> <span id="selex3xz6"
+								style="display: none;"><input type="radio"
+									name="radiobutton" value="12">组六</span> <span id="selex3xhz"
+								style="display: none;"><input type="radio"
+									name="radiobutton" value="14">组选和值</span> <span
+								id="selex3xz3hz" style="display: none;"><input
+									type="radio" name="radiobutton" value="22">组三和值</span> <span
+								id="selex3xz6hz" style="display: none;"><input
+									type="radio" name="radiobutton" value="23">组六和值</span> <span
+								id="touzhufangshi_1" style="display: none;">直选：</span> <span
+								id="selfs" style="display: inline;"><input type="radio"
+									name="radiobutton" value="1">复式</span> <span id="selex3xzxhz"
+								style=""><input type="radio" name="radiobutton"
+									value="18">和值</span> <span id="selds" style="display: inline;"><input
+									type="radio" name="radiobutton" value="2">单式</span> <span
+								id="selex3xzxdt" style="display: none;"><input
+									type="radio" name="radiobutton" value="19">直选胆拖</span> <span
+								id="selex3xz3dt" style="display: none;"><input
+									type="radio" name="radiobutton" value="15">组三胆拖</span> <span
+								id="selex3xz6dt" style="display: none;"><input
+									type="radio" name="radiobutton" value="16">组六胆拖</span> <span
+								id="selex2xfshzds" style="display: none;"> <input
+									type="radio" name="radiobutton" value="20">和值&nbsp;&nbsp;&nbsp;&nbsp;
+									<font>组选：</font> <input type="radio" name="radiobutton"
+									value="7">复式 <input type="radio" name="radiobutton"
+									value="8">单式 <input type="radio" name="radiobutton"
+									value="9">和值 <!--      <input type="radio" name="radiobutton" value="21">包胆-->
+							</span> <span id="selbdw" style="display: none;"> <input
+									type="radio" name="radiobutton" value="24">前三不定位 <input
+									type="radio" name="radiobutton" value="25">后三不定位
 
-						</span></td>
-					</tr>
-					<tr>
-						<td class="t_tz16"><span class="t_tz17"></span><font
-							color="#666666"><span id="zhexplain1">（从000~999中选一个三位数为一个投注号码，单注奖金<font
-									color="red">1800</font>元）
-							</span></font></td>
-					</tr>
-					<tr>
-						<td class="adtd06">
-							<div class="touzhu_kuang">
-								<!--直选 开始-->
-								<table id="numtb" cellspacing="0" cellpadding="0" width="100%"
-									border="0" class="numtbTable" style="display: table;">
-									<tbody>
-										<tr style="display: none;">
-											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>万位<br>
-											<br>
-											<font color="#2255aa" id="div_yl_1">遗漏</font></td>
-											<td class="line_b1" style="padding-left: 5px">
-												<table border="0">
-													<tbody>
-														<tr id="tr_vote_1">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td width="10">&nbsp;</td>
-															<td><span class="pointer">全</span> <span
-																class="pointer">大</span> <span class="pointer">小</span>
-																<span class="pointer">奇</span> <span class="pointer">偶</span>
-																<span class="pointer">清</span></td>
-														</tr>
-														<tr id="tr_yl_1">
-															<td class="yl_1">0</td>
-															<td class="yl_1">5</td>
-															<td class="yl_1"><font color="red">22</font></td>
-															<td class="yl_1"><font color="red">28</font></td>
-															<td class="yl_1">10</td>
-															<td class="yl_1">9</td>
-															<td class="yl_1">14</td>
-															<td class="yl_1">4</td>
-															<td class="yl_1">1</td>
-															<td class="yl_1">0</td>
-															<td colspan="2">&nbsp;</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr style="display: none;">
-											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>千位<br>
-											<br>
-											<font color="#2255aa" id="div_yl_2">遗漏</font></td>
-											<td class="line_b1" style="padding-left: 5px">
-												<table border="0">
-													<tbody>
-														<tr id="tr_vote_2">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td width="10">&nbsp;</td>
-															<td><span class="pointer">全</span> <span
-																class="pointer">大</span> <span class="pointer">小</span>
-																<span class="pointer">奇</span> <span class="pointer">偶</span>
-																<span class="pointer">清</span></td>
-														</tr>
-														<tr id="tr_yl_2">
-															<td class="yl_1"><font color="red">29</font></td>
-															<td class="yl_1">10</td>
-															<td class="yl_1">5</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">1</td>
-															<td class="yl_1"><font color="red">41</font></td>
-															<td class="yl_1"><font color="red">25</font></td>
-															<td class="yl_1">9</td>
-															<td class="yl_1">2</td>
-															<td class="yl_1">3</td>
-															<td colspan="2">&nbsp;</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr style="">
-											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>百位<br>
-											<br>
-											<font color="#2255aa" id="div_yl_3" style="">遗漏</font></td>
-											<td class="line_b1" style="padding-left: 5px">
-												<table border="0">
-													<tbody>
-														<tr id="tr_vote_3">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td width="10">&nbsp;</td>
-															<td><span class="pointer">全</span> <span
-																class="pointer">大</span> <span class="pointer">小</span>
-																<span class="pointer">奇</span> <span class="pointer">偶</span>
-																<span class="pointer">清</span></td>
-														</tr>
-														<tr id="tr_yl_3" style="">
-															<td class="yl_1">13</td>
-															<td class="yl_1">8</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">10</td>
-															<td class="yl_1"><font color="red">21</font></td>
-															<td class="yl_1">9</td>
-															<td class="yl_1">3</td>
-															<td class="yl_1">1</td>
-															<td class="yl_1">6</td>
-															<td class="yl_1">7</td>
-															<td colspan="2">&nbsp;</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr style="">
-											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>十位<br>
-											<br>
-											<font color="#2255aa" id="div_yl_4" style="">遗漏</font></td>
-											<td class="line_b1" style="padding-left: 5px">
-												<table border="0">
-													<tbody>
-														<tr id="tr_vote_4">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td width="10">&nbsp;</td>
-															<td><span class="pointer">全</span> <span
-																class="pointer">大</span> <span class="pointer">小</span>
-																<span class="pointer">奇</span> <span class="pointer">偶</span>
-																<span class="pointer">清</span></td>
-														</tr>
-														<tr id="tr_yl_4" style="">
-															<td class="yl_1">4</td>
-															<td class="yl_1">1</td>
-															<td class="yl_1"><font color="red">39</font></td>
-															<td class="yl_1">6</td>
-															<td class="yl_1">3</td>
-															<td class="yl_1">10</td>
-															<td class="yl_1">9</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">7</td>
-															<td class="yl_1">11</td>
-															<td colspan="2">&nbsp;</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr style="">
-											<td class="line_b1 cs_042" align="center" valign="top"
-												width="62"><br>个位<br>
-											<br>
-											<font color="#2255aa" id="div_yl_5" style="">遗漏</font></td>
-											<td class="line_b1" style="padding-left: 5px">
-												<table border="0">
-													<tbody>
-														<tr id="tr_vote_5">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td width="10">&nbsp;</td>
-															<td><span class="pointer">全</span> <span
-																class="pointer">大</span> <span class="pointer">小</span>
-																<span class="pointer">奇</span> <span class="pointer">偶</span>
-																<span class="pointer">清</span></td>
-														</tr>
-														<tr id="tr_yl_5" style="">
-															<td class="yl_1">10</td>
-															<td class="yl_1">0</td>
-															<td class="yl_1">9</td>
-															<td class="yl_1">14</td>
-															<td class="yl_1">4</td>
-															<td class="yl_1">5</td>
-															<td class="yl_1"><font color="red">21</font></td>
-															<td class="yl_1">1</td>
-															<td class="yl_1">7</td>
-															<td class="yl_1">6</td>
-															<td colspan="2">&nbsp;</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--直选 结束-->
+							</span></td>
+						</tr>
+						<tr>
+							<td class="t_tz16"><span class="t_tz17"></span><font
+								color="#666666"><span id="zhexplain1">（从000~999中选一个三位数为一个投注号码，单注奖金<font
+										color="red">1800</font>元）
+								</span></font></td>
+						</tr>
+						<tr>
+							<td class="adtd06">
+								<div class="touzhu_kuang">
+									<!--直选 开始-->
+									<table id="numtb" cellspacing="0" cellpadding="0" width="100%"
+										border="0" class="numtbTable" style="display: table;">
+										<tbody>
+											<tr style="display: none;">
+												<td class="line_b1 cs_042" align="center" valign="top"
+													width="62"><br>万位<br> <br> <font
+													color="#2255aa" id="div_yl_1">遗漏</font></td>
+												<td class="line_b1" style="padding-left: 5px">
+													<table border="0">
+														<tbody>
+															<tr id="tr_vote_1">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td width="10">&nbsp;</td>
+																<td><span class="pointer">全</span> <span
+																	class="pointer">大</span> <span class="pointer">小</span>
+																	<span class="pointer">奇</span> <span class="pointer">偶</span>
+																	<span class="pointer">清</span></td>
+															</tr>
+															<tr id="tr_yl_1">
+																<td class="yl_1">0</td>
+																<td class="yl_1">5</td>
+																<td class="yl_1"><font color="red">22</font></td>
+																<td class="yl_1"><font color="red">28</font></td>
+																<td class="yl_1">10</td>
+																<td class="yl_1">9</td>
+																<td class="yl_1">14</td>
+																<td class="yl_1">4</td>
+																<td class="yl_1">1</td>
+																<td class="yl_1">0</td>
+																<td colspan="2">&nbsp;</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr style="display: none;">
+												<td class="line_b1 cs_042" align="center" valign="top"
+													width="62"><br>千位<br> <br> <font
+													color="#2255aa" id="div_yl_2">遗漏</font></td>
+												<td class="line_b1" style="padding-left: 5px">
+													<table border="0">
+														<tbody>
+															<tr id="tr_vote_2">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td width="10">&nbsp;</td>
+																<td><span class="pointer">全</span> <span
+																	class="pointer">大</span> <span class="pointer">小</span>
+																	<span class="pointer">奇</span> <span class="pointer">偶</span>
+																	<span class="pointer">清</span></td>
+															</tr>
+															<tr id="tr_yl_2">
+																<td class="yl_1"><font color="red">29</font></td>
+																<td class="yl_1">10</td>
+																<td class="yl_1">5</td>
+																<td class="yl_1">0</td>
+																<td class="yl_1">1</td>
+																<td class="yl_1"><font color="red">41</font></td>
+																<td class="yl_1"><font color="red">25</font></td>
+																<td class="yl_1">9</td>
+																<td class="yl_1">2</td>
+																<td class="yl_1">3</td>
+																<td colspan="2">&nbsp;</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr style="">
+												<td class="line_b1 cs_042" align="center" valign="top"
+													width="62"><br>百位<br> <br> <font
+													color="#2255aa" id="div_yl_3" style="">遗漏</font></td>
+												<td class="line_b1" style="padding-left: 5px">
+													<table border="0">
+														<tbody>
+															<tr id="tr_vote_3">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td width="10">&nbsp;</td>
+																<td><span class="pointer">全</span> <span
+																	class="pointer">大</span> <span class="pointer">小</span>
+																	<span class="pointer">奇</span> <span class="pointer">偶</span>
+																	<span class="pointer">清</span></td>
+															</tr>
+															<tr id="tr_yl_3" style="">
+																<td class="yl_1">13</td>
+																<td class="yl_1">8</td>
+																<td class="yl_1">0</td>
+																<td class="yl_1">10</td>
+																<td class="yl_1"><font color="red">21</font></td>
+																<td class="yl_1">9</td>
+																<td class="yl_1">3</td>
+																<td class="yl_1">1</td>
+																<td class="yl_1">6</td>
+																<td class="yl_1">7</td>
+																<td colspan="2">&nbsp;</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr style="">
+												<td class="line_b1 cs_042" align="center" valign="top"
+													width="62"><br>十位<br> <br> <font
+													color="#2255aa" id="div_yl_4" style="">遗漏</font></td>
+												<td class="line_b1" style="padding-left: 5px">
+													<table border="0">
+														<tbody>
+															<tr id="tr_vote_4">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td width="10">&nbsp;</td>
+																<td><span class="pointer">全</span> <span
+																	class="pointer">大</span> <span class="pointer">小</span>
+																	<span class="pointer">奇</span> <span class="pointer">偶</span>
+																	<span class="pointer">清</span></td>
+															</tr>
+															<tr id="tr_yl_4" style="">
+																<td class="yl_1">4</td>
+																<td class="yl_1">1</td>
+																<td class="yl_1"><font color="red">39</font></td>
+																<td class="yl_1">6</td>
+																<td class="yl_1">3</td>
+																<td class="yl_1">10</td>
+																<td class="yl_1">9</td>
+																<td class="yl_1">0</td>
+																<td class="yl_1">7</td>
+																<td class="yl_1">11</td>
+																<td colspan="2">&nbsp;</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr style="">
+												<td class="line_b1 cs_042" align="center" valign="top"
+													width="62"><br>个位<br> <br> <font
+													color="#2255aa" id="div_yl_5" style="">遗漏</font></td>
+												<td class="line_b1" style="padding-left: 5px">
+													<table border="0">
+														<tbody>
+															<tr id="tr_vote_5">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td width="10">&nbsp;</td>
+																<td><span class="pointer">全</span> <span
+																	class="pointer">大</span> <span class="pointer">小</span>
+																	<span class="pointer">奇</span> <span class="pointer">偶</span>
+																	<span class="pointer">清</span></td>
+															</tr>
+															<tr id="tr_yl_5" style="">
+																<td class="yl_1">10</td>
+																<td class="yl_1">0</td>
+																<td class="yl_1">9</td>
+																<td class="yl_1">14</td>
+																<td class="yl_1">4</td>
+																<td class="yl_1">5</td>
+																<td class="yl_1"><font color="red">21</font></td>
+																<td class="yl_1">1</td>
+																<td class="yl_1">7</td>
+																<td class="yl_1">6</td>
+																<td colspan="2">&nbsp;</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--直选 结束-->
 
-								<!--大小单双 开始-->
-								<table id="numta" cellspacing="0" cellpadding="0" border="0"
-									width="540" class="numtbTable daxiaodanshuang"
-									style="display: none;">
+									<!--大小单双 开始-->
+									<table id="numta" cellspacing="0" cellpadding="0" border="0"
+										width="540" class="numtbTable daxiaodanshuang"
+										style="display: none;">
+										<tbody>
+											<tr>
+												<td bgcolor="#f5f5f5" align="center" valign="middle"
+													width="60">十位</td>
+												<td>
+													<table cellspacing="10" border="0" align="center">
+														<tbody>
+															<tr id="tr_vote_6">
+																<td class="ball_r_1">大</td>
+																<td class="ball_r_1">小</td>
+																<td class="ball_r_1">单</td>
+																<td class="ball_r_1">双</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+												<td bgcolor="#f5f5f5" align="center" valign="middle"
+													width="60">个位</td>
+												<td>
+													<table cellspacing="10" border="0" align="center">
+														<tbody>
+															<tr id="tr_vote_7">
+																<td class="ball_r_1">大</td>
+																<td class="ball_r_1">小</td>
+																<td class="ball_r_1">单</td>
+																<td class="ball_r_1">双</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--大小单双 结束-->
+
+									<!--单式 开始-->
+									<table id="numtc" cellspacing="0" cellpadding="0" width="100%"
+										border="0" class="numtbTable" style="display: none;">
+										<tbody>
+											<tr>
+												<td></td>
+											</tr>
+											<tr>
+												<td class="geshi">【提醒】直接在下面框中输入或粘贴投注内容，最多输入400注。<a
+													id="gsexplain"
+													href="http://cc.77qiu.com/Trade/CQSSC/Xml/dg/ssc_zxds.txt"
+													style="color: #06c" target="_blank"> <!-- 查看标准格式样本 -->
+												</a><br>
+													<table cellpadding="0 " width="100%" border="0">
+														<tbody>
+															<tr>
+																<td width="311"><textarea name="pastecontent"
+																		rows="8" cols="42" id="pastecontent"></textarea></td>
+																<td width="10">&nbsp;</td>
+																<td align="left">&nbsp;</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--单式 结束-->
+
+									<!--二星组选复式/包胆 开始-->
+									<table id="numtb_2xzxfs" border="0" class="numtbTable"
+										style="display: none;">
+										<tbody>
+											<tr id="tr_vote_8">
+												<td class="ball_r">0</td>
+												<td class="ball_r">1</td>
+												<td class="ball_r">2</td>
+												<td class="ball_r">3</td>
+												<td class="ball_r">4</td>
+												<td class="ball_r">5</td>
+												<td class="ball_r">6</td>
+												<td class="ball_r">7</td>
+												<td class="ball_r">8</td>
+												<td class="ball_r">9</td>
+												<td id="zhexplain3" style="padding-left: 10px">(1≤个数≤2)</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--二星组选复式/包胆 结束-->
+
+									<!--二星组选和值 开始-->
+									<table id="numtb_2xzxhz" border="0" class="numtbTable"
+										style="display: none;">
+										<tbody>
+											<tr id="tr_vote_9">
+												<td class="ball_r">0</td>
+												<td class="ball_r">1</td>
+												<td class="ball_r">2</td>
+												<td class="ball_r">3</td>
+												<td class="ball_r">4</td>
+												<td class="ball_r">5</td>
+												<td class="ball_r">6</td>
+												<td class="ball_r">7</td>
+												<td class="ball_r">8</td>
+												<td class="ball_r">9</td>
+												<td class="ball_r">10</td>
+												<td class="ball_r">11</td>
+												<td class="ball_r">12</td>
+												<td class="ball_r">13</td>
+												<td class="ball_r">14</td>
+												<td class="ball_r">15</td>
+												<td class="ball_r">16</td>
+												<td class="ball_r">17</td>
+												<td class="ball_r">18</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--二星组选和值 结束-->
+
+									<!--组三/组六复式 开始-->
+									<table id="numtb_3xz3fs" class="numtbTable"
+										style="display: none;" width="100%" border="0" cellspacing="0"
+										cellpadding="0">
+										<tbody>
+											<tr id="tr_vote_10">
+												<td class="ball_r">0</td>
+												<td class="ball_r">1</td>
+												<td class="ball_r">2</td>
+												<td class="ball_r">3</td>
+												<td class="ball_r">4</td>
+												<td class="ball_r">5</td>
+												<td class="ball_r">6</td>
+												<td class="ball_r">7</td>
+												<td class="ball_r">8</td>
+												<td class="ball_r">9</td>
+												<!-- <td id="zhexplain4">(至少选2个号码)</td> -->
+												<td width="10">&nbsp;</td>
+												<td><span class="pointer">全</span> <span
+													class="pointer">大</span> <span class="pointer">小</span> <span
+													class="pointer">奇</span> <span class="pointer">偶</span> <span
+													class="pointer">清</span></td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td colspan="2">&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--组三/组六复式 结束-->
+
+									<!--三星包胆复式 开始-->
+									<table id="numtb_3xbdfs" cellspacing="0" cellpadding="0"
+										width="100%" border="0" class="numtbTable"
+										style="display: none;">
+										<tbody>
+											<tr>
+												<td width="62"><input type="radio" name="radiobd"
+													value="1">包一胆</td>
+												<td style="padding-left: 5px">
+													<table border="0">
+														<tbody>
+															<tr id="tr_vote_11">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td>(只能选1个号码)</td>
+															</tr>
+															<tr>
+																<td height="10"></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td width="62"><input type="radio" name="radiobd"
+													value="2">包二胆</td>
+												<td style="padding-left: 5px">
+													<table border="0" id="bdnumtwo">
+														<tbody>
+															<tr id="tr_vote_12">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td>(只能选1个号码)</td>
+															</tr>
+															<tr>
+																<td height="10"></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--三星包胆复式 结束-->
+
+									<!--三星组选/直选和值 开始-->
+									<table id="numtb_3xzxhz" border="0" class="numtbTable"
+										style="display: none;">
+										<tbody>
+											<tr id="tr_vote_13">
+												<td class="ball_r">0</td>
+												<td class="ball_r">1</td>
+												<td class="ball_r">2</td>
+												<td class="ball_r">3</td>
+												<td class="ball_r">4</td>
+												<td class="ball_r">5</td>
+												<td class="ball_r">6</td>
+												<td class="ball_r">7</td>
+												<td class="ball_r">8</td>
+												<td class="ball_r">9</td>
+												<td class="ball_r">10</td>
+												<td class="ball_r">11</td>
+												<td class="ball_r">12</td>
+												<td class="ball_r">13</td>
+											</tr>
+											<tr>
+												<td height="12"></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr id="tr_vote_14">
+												<td class="ball_r">14</td>
+												<td class="ball_r">15</td>
+												<td class="ball_r">16</td>
+												<td class="ball_r">17</td>
+												<td class="ball_r">18</td>
+												<td class="ball_r">19</td>
+												<td class="ball_r">20</td>
+												<td class="ball_r">21</td>
+												<td class="ball_r">22</td>
+												<td class="ball_r">23</td>
+												<td class="ball_r">24</td>
+												<td class="ball_r">25</td>
+												<td class="ball_r">26</td>
+												<td class="ball_r">27</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--三星组选/直选和值 结束-->
+
+									<!--三星直选/组三/组六胆拖  开始-->
+									<table id="numtb_3xz3fsdt" cellspacing="0" cellpadding="0"
+										width="100%" border="0" class="numtbTable"
+										style="display: none;">
+										<tbody>
+											<tr>
+												<td class="line_b1" align="center" valign="middle"
+													width="62">胆码</td>
+												<td class="line_b1" style="padding-left: 5px"
+													bgcolor="#f5f5f5">
+													<table border="0">
+														<tbody>
+															<tr id="tr_vote_15">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td id="dtinfo_1"><font color="red">（0＜胆码个数≤2）</font></td>
+															</tr>
+															<tr>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td class="line_b1" align="center" valign="middle">拖码</td>
+												<td class="line_b1" style="padding-left: 5px"
+													bgcolor="#f5f5f5">
+													<table border="0">
+														<tbody>
+															<tr id="tr_vote_16">
+																<td class="ball_r">0</td>
+																<td class="ball_r">1</td>
+																<td class="ball_r">2</td>
+																<td class="ball_r">3</td>
+																<td class="ball_r">4</td>
+																<td class="ball_r">5</td>
+																<td class="ball_r">6</td>
+																<td class="ball_r">7</td>
+																<td class="ball_r">8</td>
+																<td class="ball_r">9</td>
+																<td id="dtinfo_2"><font color="red">（3
+																		≤胆码＋拖码）</font></td>
+															</tr>
+															<tr>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+																<td>&nbsp;</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--三星直选/组三/组六胆拖  结束-->
+
+									<!--三星直选组合复式  开始-->
+									<table id="numtb_3xzxfs" border="0" class="numtbTable"
+										style="display: none;">
+										<tbody>
+											<tr id="tr_vote_17">
+												<td class="ball_r">0</td>
+												<td class="ball_r">1</td>
+												<td class="ball_r">2</td>
+												<td class="ball_r">3</td>
+												<td class="ball_r">4</td>
+												<td class="ball_r">5</td>
+												<td class="ball_r">6</td>
+												<td class="ball_r">7</td>
+												<td class="ball_r">8</td>
+												<td class="ball_r">9</td>
+												<td>(至少选3个号码)</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--三星直选组合复式  结束-->
+
+									<!--三星组选组三和值 开始-->
+									<table id="numtb_3xzxz3hz" border="0" class="numtbTable"
+										style="display: none;">
+										<tbody>
+											<tr id="tr_vote_18">
+												<td class="ball_r">1</td>
+												<td class="ball_r">2</td>
+												<td class="ball_r">3</td>
+												<td class="ball_r">4</td>
+												<td class="ball_r">5</td>
+												<td class="ball_r">6</td>
+												<td class="ball_r">7</td>
+												<td class="ball_r">8</td>
+												<td class="ball_r">9</td>
+												<td class="ball_r">10</td>
+												<td class="ball_r">11</td>
+												<td class="ball_r">12</td>
+												<td class="ball_r">13</td>
+											</tr>
+											<tr>
+												<td height="12"></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr id="tr_vote_19">
+												<td class="ball_r">14</td>
+												<td class="ball_r">15</td>
+												<td class="ball_r">16</td>
+												<td class="ball_r">17</td>
+												<td class="ball_r">18</td>
+												<td class="ball_r">19</td>
+												<td class="ball_r">20</td>
+												<td class="ball_r">21</td>
+												<td class="ball_r">22</td>
+												<td class="ball_r">23</td>
+												<td class="ball_r">24</td>
+												<td class="ball_r">25</td>
+												<td class="ball_r">26</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--三星组选组三和值 结束-->
+
+									<!--三星组选组六和值 开始-->
+									<table id="numtb_3xzxz6hz" border="0" class="numtbTable"
+										style="display: none;">
+										<tbody>
+											<tr id="tr_vote_20">
+												<td class="ball_r">3</td>
+												<td class="ball_r">4</td>
+												<td class="ball_r">5</td>
+												<td class="ball_r">6</td>
+												<td class="ball_r">7</td>
+												<td class="ball_r">8</td>
+												<td class="ball_r">9</td>
+												<td class="ball_r">10</td>
+												<td class="ball_r">11</td>
+												<td class="ball_r">12</td>
+												<td class="ball_r">13</td>
+											</tr>
+											<tr>
+												<td height="12"></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr id="tr_vote_21">
+												<td class="ball_r">14</td>
+												<td class="ball_r">15</td>
+												<td class="ball_r">16</td>
+												<td class="ball_r">17</td>
+												<td class="ball_r">18</td>
+												<td class="ball_r">19</td>
+												<td class="ball_r">20</td>
+												<td class="ball_r">21</td>
+												<td class="ball_r">22</td>
+												<td class="ball_r">23</td>
+												<td class="ball_r">24</td>
+											</tr>
+										</tbody>
+									</table>
+									<!--组六和值 结束-->
+								</div>
+								<table border="0" cellspacing="0" cellpadding="0" class="t_tz18">
 									<tbody>
 										<tr>
-											<td bgcolor="#f5f5f5" align="center" valign="middle"
-												width="60">十位</td>
 											<td>
-												<table cellspacing="10" border="0" align="center">
-													<tbody>
-														<tr id="tr_vote_6">
-															<td class="ball_r_1">大</td>
-															<td class="ball_r_1">小</td>
-															<td class="ball_r_1">单</td>
-															<td class="ball_r_1">双</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-											<td bgcolor="#f5f5f5" align="center" valign="middle"
-												width="60">个位</td>
-											<td>
-												<table cellspacing="10" border="0" align="center">
-													<tbody>
-														<tr id="tr_vote_7">
-															<td class="ball_r_1">大</td>
-															<td class="ball_r_1">小</td>
-															<td class="ball_r_1">单</td>
-															<td class="ball_r_1">双</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--大小单双 结束-->
-
-								<!--单式 开始-->
-								<table id="numtc" cellspacing="0" cellpadding="0" width="100%"
-									border="0" class="numtbTable" style="display: none;">
-									<tbody>
-										<tr>
-											<td></td>
-										</tr>
-										<tr>
-											<td class="geshi">【提醒】直接在下面框中输入或粘贴投注内容，最多输入400注。<a
-												id="gsexplain"
-												href="http://cc.77qiu.com/Trade/CQSSC/Xml/dg/ssc_zxds.txt"
-												style="color: #06c" target="_blank">
-													<!-- 查看标准格式样本 -->
-											</a><br>
-												<table cellpadding="0 " width="100%" border="0">
-													<tbody>
-														<tr>
-															<td width="311"><textarea name="pastecontent"
-																	rows="8" cols="42" id="pastecontent"></textarea></td>
-															<td width="10">&nbsp;</td>
-															<td align="left">&nbsp;</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--单式 结束-->
-
-								<!--二星组选复式/包胆 开始-->
-								<table id="numtb_2xzxfs" border="0" class="numtbTable"
-									style="display: none;">
-									<tbody>
-										<tr id="tr_vote_8">
-											<td class="ball_r">0</td>
-											<td class="ball_r">1</td>
-											<td class="ball_r">2</td>
-											<td class="ball_r">3</td>
-											<td class="ball_r">4</td>
-											<td class="ball_r">5</td>
-											<td class="ball_r">6</td>
-											<td class="ball_r">7</td>
-											<td class="ball_r">8</td>
-											<td class="ball_r">9</td>
-											<td id="zhexplain3" style="padding-left: 10px">(1≤个数≤2)</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--二星组选复式/包胆 结束-->
-
-								<!--二星组选和值 开始-->
-								<table id="numtb_2xzxhz" border="0" class="numtbTable"
-									style="display: none;">
-									<tbody>
-										<tr id="tr_vote_9">
-											<td class="ball_r">0</td>
-											<td class="ball_r">1</td>
-											<td class="ball_r">2</td>
-											<td class="ball_r">3</td>
-											<td class="ball_r">4</td>
-											<td class="ball_r">5</td>
-											<td class="ball_r">6</td>
-											<td class="ball_r">7</td>
-											<td class="ball_r">8</td>
-											<td class="ball_r">9</td>
-											<td class="ball_r">10</td>
-											<td class="ball_r">11</td>
-											<td class="ball_r">12</td>
-											<td class="ball_r">13</td>
-											<td class="ball_r">14</td>
-											<td class="ball_r">15</td>
-											<td class="ball_r">16</td>
-											<td class="ball_r">17</td>
-											<td class="ball_r">18</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--二星组选和值 结束-->
-
-								<!--组三/组六复式 开始-->
-								<table id="numtb_3xz3fs" class="numtbTable"
-									style="display: none;" width="100%" border="0" cellspacing="0"
-									cellpadding="0">
-									<tbody>
-										<tr id="tr_vote_10">
-											<td class="ball_r">0</td>
-											<td class="ball_r">1</td>
-											<td class="ball_r">2</td>
-											<td class="ball_r">3</td>
-											<td class="ball_r">4</td>
-											<td class="ball_r">5</td>
-											<td class="ball_r">6</td>
-											<td class="ball_r">7</td>
-											<td class="ball_r">8</td>
-											<td class="ball_r">9</td>
-											<!-- <td id="zhexplain4">(至少选2个号码)</td> -->
-											<td width="10">&nbsp;</td>
-											<td><span class="pointer">全</span> <span class="pointer">大</span>
-												<span class="pointer">小</span> <span class="pointer">奇</span>
-												<span class="pointer">偶</span> <span class="pointer">清</span>
-											</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td colspan="2">&nbsp;</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--组三/组六复式 结束-->
-
-								<!--三星包胆复式 开始-->
-								<table id="numtb_3xbdfs" cellspacing="0" cellpadding="0"
-									width="100%" border="0" class="numtbTable"
-									style="display: none;">
-									<tbody>
-										<tr>
-											<td width="62"><input type="radio" name="radiobd"
-												value="1">包一胆</td>
-											<td style="padding-left: 5px">
-												<table border="0">
-													<tbody>
-														<tr id="tr_vote_11">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td>(只能选1个号码)</td>
-														</tr>
-														<tr>
-															<td height="10"></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td width="62"><input type="radio" name="radiobd"
-												value="2">包二胆</td>
-											<td style="padding-left: 5px">
-												<table border="0" id="bdnumtwo">
-													<tbody>
-														<tr id="tr_vote_12">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td>(只能选1个号码)</td>
-														</tr>
-														<tr>
-															<td height="10"></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--三星包胆复式 结束-->
-
-								<!--三星组选/直选和值 开始-->
-								<table id="numtb_3xzxhz" border="0" class="numtbTable"
-									style="display: none;">
-									<tbody>
-										<tr id="tr_vote_13">
-											<td class="ball_r">0</td>
-											<td class="ball_r">1</td>
-											<td class="ball_r">2</td>
-											<td class="ball_r">3</td>
-											<td class="ball_r">4</td>
-											<td class="ball_r">5</td>
-											<td class="ball_r">6</td>
-											<td class="ball_r">7</td>
-											<td class="ball_r">8</td>
-											<td class="ball_r">9</td>
-											<td class="ball_r">10</td>
-											<td class="ball_r">11</td>
-											<td class="ball_r">12</td>
-											<td class="ball_r">13</td>
-										</tr>
-										<tr>
-											<td height="12"></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr id="tr_vote_14">
-											<td class="ball_r">14</td>
-											<td class="ball_r">15</td>
-											<td class="ball_r">16</td>
-											<td class="ball_r">17</td>
-											<td class="ball_r">18</td>
-											<td class="ball_r">19</td>
-											<td class="ball_r">20</td>
-											<td class="ball_r">21</td>
-											<td class="ball_r">22</td>
-											<td class="ball_r">23</td>
-											<td class="ball_r">24</td>
-											<td class="ball_r">25</td>
-											<td class="ball_r">26</td>
-											<td class="ball_r">27</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--三星组选/直选和值 结束-->
-
-								<!--三星直选/组三/组六胆拖  开始-->
-								<table id="numtb_3xz3fsdt" cellspacing="0" cellpadding="0"
-									width="100%" border="0" class="numtbTable"
-									style="display: none;">
-									<tbody>
-										<tr>
-											<td class="line_b1" align="center" valign="middle" width="62">胆码</td>
-											<td class="line_b1" style="padding-left: 5px"
-												bgcolor="#f5f5f5">
-												<table border="0">
-													<tbody>
-														<tr id="tr_vote_15">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td id="dtinfo_1"><font color="red">（0＜胆码个数≤2）</font></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td class="line_b1" align="center" valign="middle">拖码</td>
-											<td class="line_b1" style="padding-left: 5px"
-												bgcolor="#f5f5f5">
-												<table border="0">
-													<tbody>
-														<tr id="tr_vote_16">
-															<td class="ball_r">0</td>
-															<td class="ball_r">1</td>
-															<td class="ball_r">2</td>
-															<td class="ball_r">3</td>
-															<td class="ball_r">4</td>
-															<td class="ball_r">5</td>
-															<td class="ball_r">6</td>
-															<td class="ball_r">7</td>
-															<td class="ball_r">8</td>
-															<td class="ball_r">9</td>
-															<td id="dtinfo_2"><font color="red">（3
-																	≤胆码＋拖码）</font></td>
-														</tr>
-														<tr>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-															<td>&nbsp;</td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--三星直选/组三/组六胆拖  结束-->
-
-								<!--三星直选组合复式  开始-->
-								<table id="numtb_3xzxfs" border="0" class="numtbTable"
-									style="display: none;">
-									<tbody>
-										<tr id="tr_vote_17">
-											<td class="ball_r">0</td>
-											<td class="ball_r">1</td>
-											<td class="ball_r">2</td>
-											<td class="ball_r">3</td>
-											<td class="ball_r">4</td>
-											<td class="ball_r">5</td>
-											<td class="ball_r">6</td>
-											<td class="ball_r">7</td>
-											<td class="ball_r">8</td>
-											<td class="ball_r">9</td>
-											<td>(至少选3个号码)</td>
-										</tr>
-										<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--三星直选组合复式  结束-->
-
-								<!--三星组选组三和值 开始-->
-								<table id="numtb_3xzxz3hz" border="0" class="numtbTable"
-									style="display: none;">
-									<tbody>
-										<tr id="tr_vote_18">
-											<td class="ball_r">1</td>
-											<td class="ball_r">2</td>
-											<td class="ball_r">3</td>
-											<td class="ball_r">4</td>
-											<td class="ball_r">5</td>
-											<td class="ball_r">6</td>
-											<td class="ball_r">7</td>
-											<td class="ball_r">8</td>
-											<td class="ball_r">9</td>
-											<td class="ball_r">10</td>
-											<td class="ball_r">11</td>
-											<td class="ball_r">12</td>
-											<td class="ball_r">13</td>
-										</tr>
-										<tr>
-											<td height="12"></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr id="tr_vote_19">
-											<td class="ball_r">14</td>
-											<td class="ball_r">15</td>
-											<td class="ball_r">16</td>
-											<td class="ball_r">17</td>
-											<td class="ball_r">18</td>
-											<td class="ball_r">19</td>
-											<td class="ball_r">20</td>
-											<td class="ball_r">21</td>
-											<td class="ball_r">22</td>
-											<td class="ball_r">23</td>
-											<td class="ball_r">24</td>
-											<td class="ball_r">25</td>
-											<td class="ball_r">26</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--三星组选组三和值 结束-->
-
-								<!--三星组选组六和值 开始-->
-								<table id="numtb_3xzxz6hz" border="0" class="numtbTable"
-									style="display: none;">
-									<tbody>
-										<tr id="tr_vote_20">
-											<td class="ball_r">3</td>
-											<td class="ball_r">4</td>
-											<td class="ball_r">5</td>
-											<td class="ball_r">6</td>
-											<td class="ball_r">7</td>
-											<td class="ball_r">8</td>
-											<td class="ball_r">9</td>
-											<td class="ball_r">10</td>
-											<td class="ball_r">11</td>
-											<td class="ball_r">12</td>
-											<td class="ball_r">13</td>
-										</tr>
-										<tr>
-											<td height="12"></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr id="tr_vote_21">
-											<td class="ball_r">14</td>
-											<td class="ball_r">15</td>
-											<td class="ball_r">16</td>
-											<td class="ball_r">17</td>
-											<td class="ball_r">18</td>
-											<td class="ball_r">19</td>
-											<td class="ball_r">20</td>
-											<td class="ball_r">21</td>
-											<td class="ball_r">22</td>
-											<td class="ball_r">23</td>
-											<td class="ball_r">24</td>
-										</tr>
-									</tbody>
-								</table>
-								<!--组六和值 结束-->
-							</div>
-							<table border="0" cellspacing="0" cellpadding="0" class="t_tz18">
-								<tbody>
-									<tr>
-										<td>
-											<div style="line-height: 40px; margin-left: 150px;">
-												<!-- 
+												<div style="line-height: 40px; margin-left: 150px;">
+													<!-- 
 											<b style="display: inline-block;float: left;">
 		                                		已选择：<span id="temp_select_zhushu" style="color: red;">0</span> 注，共：<span id="temp_select_money" style="color: red;">0</span> 元
 											</b>
 											 -->
-												<input type="button" id="button_add" name="button_add"
-													class="button_add pointer" 
-													style="display: inline-block; margin-left: 10px;" />
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-
-							<div class="touzhu_kuang02">
-								<table cellspacing="0" cellpadding="0" border="0">
-									<tbody>
-										<tr>
-											<td><select id="codesshow" size="6" name="codesshow"></select></td>
-											<td>
-												<table id="maindelfun" cellpadding="0">
-													<tbody>
-														<tr>
-															<td width="90" height="28" align="left" valign="top"><input
-																type="button" id="btn_jixuan1" name="btn_jixuan1"
-																class="button1" value="机选一注"></td>
-														</tr>
-														<tr>
-															<td width="90" height="28" align="left" valign="top"><input
-																type="button" id="btn_jixuan5" name="btn_jixuan5"
-																class="button1" value="机选五注"></td>
-														</tr>
-														<tr>
-															<td width="90" height="28" align="left" valign="top"><input
-																type="button" id="btn_jixuan10" name="btn_jixuan10"
-																class="button1" value="机选十注"></td>
-														</tr>
-														<tr>
-															<td width="90" height="28" align="left" valign="top"><input
-																type="button" id="btn_delline" name="btn_delline"
-																class="button1" value="删除选号"></td>
-														</tr>
-														<tr>
-															<td width="90" height="28" align="left" valign="top"><input
-																type="button" id="btn_clearall" name="btn_clearall"
-																class="button1" value="清空投注"></td>
-														</tr>
-													</tbody>
-												</table>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<table class="t_tz20" border="0" cellpadding="0" cellspacing="0">
-									<tbody>
-										<tr>
-											<td class="yh_tz_an_kd">
-												<div class="t_tz19">
-													<p>
-														单倍注数：<span id="zhushushow2" class="bold red2">0</span>，金额：<font
-															color="red">￥</font><span id="moneyshow2"
-															class="bold red2">0</span>元，期数：<span id="expectnumshow"
-															class="bold red2">1</span>，总金额：<font color="red">￥</font><span
-															id="moneyshow3" class="bold red2">0</span>元 <span
-															id="lotteryTypeId" style="display: none;">1</span> <span
-															id="phase" style="display: none;"
-															currentPhase="currentPhase">20161213061</span>
-													</p>
-												</div> <input type="button" id="btn_SubmitZ" name="btn_SubmitZ"
-												>&nbsp; <input target="_blank"
-												type="button" id="btn_SubmitHM" name="btn_SubmitHM"
-												><br>
-											<!--合买-->
+													<input type="button" id="button_add" name="button_add"
+														class="button_add pointer"
+														style="display: inline-block; margin-left: 10px;" />
+												</div>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 
-								<table class="t_tz20" border="0" cellpadding="0" cellspacing="0">
-									<tbody>
-										<tr>
-											<td>
+								<div class="touzhu_kuang02">
+									<table cellspacing="0" cellpadding="0" border="0">
+										<tbody>
+											<tr>
+												<td><select id="codesshow" size="6" name="codesshow"></select></td>
+												<td>
+													<table id="maindelfun" cellpadding="0">
+														<tbody>
+															<tr>
+																<td width="90" height="28" align="left" valign="top"><input
+																	type="button" id="btn_jixuan1" name="btn_jixuan1"
+																	class="button1" value="机选一注"></td>
+															</tr>
+															<tr>
+																<td width="90" height="28" align="left" valign="top"><input
+																	type="button" id="btn_jixuan5" name="btn_jixuan5"
+																	class="button1" value="机选五注"></td>
+															</tr>
+															<tr>
+																<td width="90" height="28" align="left" valign="top"><input
+																	type="button" id="btn_jixuan10" name="btn_jixuan10"
+																	class="button1" value="机选十注"></td>
+															</tr>
+															<tr>
+																<td width="90" height="28" align="left" valign="top"><input
+																	type="button" id="btn_delline" name="btn_delline"
+																	class="button1" value="删除选号"></td>
+															</tr>
+															<tr>
+																<td width="90" height="28" align="left" valign="top"><input
+																	type="button" id="btn_clearall" name="btn_clearall"
+																	class="button1" value="清空投注"></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table class="t_tz20" border="0" cellpadding="0"
+										cellspacing="0">
+										<tbody>
+											<tr>
+												<td class="yh_tz_an_kd">
+													<div class="t_tz19">
+														<p>
+															单倍注数：<span id="zhushushow2" class="bold red2">0</span>，金额：<font
+																color="red">￥</font><span id="moneyshow2"
+																class="bold red2">0</span>元，期数：<span id="expectnumshow"
+																class="bold red2">1</span>，总金额：<font color="red">￥</font><span
+																id="moneyshow3" class="bold red2">0</span>元 <span
+																id="lotteryTypeId" style="display: none;">1</span> <span
+																id="phase" style="display: none;"
+																currentPhase="currentPhase">20161213061</span>
+														</p>
+													</div> <input type="button" id="btn_SubmitZ" name="btn_SubmitZ">&nbsp;
+													<input target="_blank" type="button" id="btn_SubmitHM"
+													name="btn_SubmitHM"><br> <!--合买-->
+												</td>
+											</tr>
+										</tbody>
+									</table>
 
-												<table width="0" border="0" class="touzhu_zh">
-													<tbody>
-														<tr>
-															<td><input type="checkbox" name="IsZhuihao"
-																id="IsZhuihao" onclick="ChangeStatus()"
-																checked="checked"></td>
-															<td>追号&nbsp;&nbsp;</td>
-															<td><input type="checkbox" name="ZjStop" value="1"
-																id="ZjStop"></td>
-															<td>中奖后停止追号</td>
-														</tr>
-													</tbody>
-												</table> <script language="javascript">
+									<table class="t_tz20" border="0" cellpadding="0"
+										cellspacing="0">
+										<tbody>
+											<tr>
+												<td>
+
+													<table width="0" border="0" class="touzhu_zh">
+														<tbody>
+															<tr>
+																<td><input type="checkbox" name="IsZhuihao"
+																	id="IsZhuihao" onclick="ChangeStatus()"
+																	checked="checked"></td>
+																<td>追号&nbsp;&nbsp;</td>
+																<td><input type="checkbox" name="ZjStop" value="1"
+																	id="ZjStop"></td>
+																<td>中奖后停止追号</td>
+															</tr>
+														</tbody>
+													</table> <script language="javascript">
                                          function ChangeStatus()
                                         {
 										  if (document.getElementById('IsZhuihao').checked == true)
@@ -1148,64 +1132,64 @@ function SetRemainTime() {
                                         }
                                         </script>
 
-											</td>
-										</tr>
+												</td>
+											</tr>
 
-										<tr>
-											<td id="zuihao">
-												<!--日期 开始-->
-												<ul class="tabDay">
-													<li class="tab2 tab1" id="expectheadtd1">今日可选期号</li>
-													<li class="tab2" id="btTab">倍投计算器</li>
-												</ul> <!--日期 结束-->
-												<div class="clear"></div>
-												<div id="zhDiv">
-													<ul class="tang_0114">
-														<li><input type="checkbox" id="selectallexpect"
-															name="selectallexpect"> <span>期数：</span> <input
-															type="text" id="batchexpectsel" name="batchexpectsel"
-															size="3" maxlength="4" value="1"></li>
-														<li><span>倍数：</span> <input type="text"
-															id="selectallbieshu" name="selectallbieshu" size="4"
-															value="1" maxlength="4"></li>
-													</ul>
-
+											<tr>
+												<td id="zuihao">
+													<!--日期 开始-->
+													<ul class="tabDay">
+														<li class="tab2 tab1" id="expectheadtd1">今日可选期号</li>
+														<li class="tab2" id="btTab">倍投计算器</li>
+													</ul> <!--日期 结束-->
 													<div class="clear"></div>
+													<div id="zhDiv">
+														<ul class="tang_0114">
+															<li><input type="checkbox" id="selectallexpect"
+																name="selectallexpect"> <span>期数：</span> <input
+																type="text" id="batchexpectsel" name="batchexpectsel"
+																size="3" maxlength="4" value="1"></li>
+															<li><span>倍数：</span> <input type="text"
+																id="selectallbieshu" name="selectallbieshu" size="4"
+																value="1" maxlength="4"></li>
+														</ul>
 
-													<input type="hidden" id="TouzhuExpectType"
-														name="TouzhuExpectType" value="1"> <br />
-													<div id="TzList" style="height: 190px">
-														<table class="tlh_zhbgys" id="tbshowtozhuexpect"
-															cellspacing="1" cellpadding="3" width="100%" border="0">
-															<tbody>
-																<c:forEach items="${requestScope.left }" var="pase">
-																	<tr>
-																		<td width="140" style="text-indent: 1em"><input
-																			type="checkbox" name="checkbeishu"
-																			onchange='beishuselect()'> <font color="red"><span
-																				currentPhase="currentPhase" id="currentPhase2">${pase}</span>
-																				<c:choose>
-																					<c:when test="${pase==current}">  
+														<div class="clear"></div>
+
+														<input type="hidden" id="TouzhuExpectType"
+															name="TouzhuExpectType" value="1"> <br />
+														<div id="TzList" style="height: 190px">
+															<table class="tlh_zhbgys" id="tbshowtozhuexpect"
+																cellspacing="1" cellpadding="3" width="100%" border="0">
+																<tbody>
+																	<c:forEach items="${requestScope.left }" var="pase">
+																		<tr>
+																			<td width="140" style="text-indent: 1em"><input
+																				type="checkbox" name="checkbeishu"
+																				onchange='beishuselect()'> <font color="red"><span
+																					currentPhase="currentPhase" id="currentPhase2">${pase}</span>
+																					<c:choose>
+																						<c:when test="${pase==current}">  
                           [当前期]   
                </c:when>
-																					<c:otherwise>
+																						<c:otherwise>
 
-																					</c:otherwise>
-																				</c:choose> </font></td>
-																		<td align="left" width="160">倍数： <input
-																			type="text" name="beishu_show" value="0" size="4"
-																			maxlength="4" disabled=""> <font color="red">0</font>元
-																			<input type="hidden" name="expect_hidden"
-																			currentPhase="currentPhase" value=">${pase}">
-																		</td>
-																	</tr>
+																						</c:otherwise>
+																					</c:choose> </font></td>
+																			<td align="left" width="160">倍数： <input
+																				type="text" name="beishu_show" value="0" size="4"
+																				maxlength="4" disabled=""> <font color="red">0</font>元
+																				<input type="hidden" name="expect_hidden"
+																				currentPhase="currentPhase" value=">${pase}">
+																			</td>
+																		</tr>
 
 
-																</c:forEach>
-														</table>
+																	</c:forEach>
+															</table>
+														</div>
 													</div>
-												</div>
-												<style>
+													<style>
 .btab {
 	clear: both;
 	font-weight: 100;
@@ -1334,139 +1318,141 @@ function SetRemainTime() {
 	color: #DE4500;
 }
 </style>
-												<div id="btDiv" style="display: none">
-													<div class="beitou_z">
-														<label>起始期：</label> <select id="btStartList" name="Adigit">
-															<c:forEach items="${requestScope.left }" var="pase"
-																varStatus="status">
-																<option value="${pase}">[
-																	<c:out value="${status.count}" />]${pase}
-																	<c:choose>
-																		<c:when test="${pase==current}">  
+													<div id="btDiv" style="display: none">
+														<div class="beitou_z">
+															<label>起始期：</label> <select id="btStartList"
+																name="Adigit">
+																<c:forEach items="${requestScope.left }" var="pase"
+																	varStatus="status">
+																	<option value="${pase}">[
+																		<c:out value="${status.count}" />]${pase}
+																		<c:choose>
+																			<c:when test="${pase==current}">  
                          (当前期号)
                </c:when>
-																		<c:otherwise>
+																			<c:otherwise>
 
-																		</c:otherwise>
-																	</c:choose>
-															</c:forEach>
+																			</c:otherwise>
+																		</c:choose>
+																</c:forEach>
 
-															</option>
+																</option>
 
-															<label>我要追</label>
-															<input type="text" value="5" maxlength="4" size="4"
-															id="btIssueNum" name="sq">
-															<span>期</span>
-													</div>
-													<div class="jsuan">
-
-														<div class="tjan">
-															<p>
-																<label>起始倍数： </label> <input type="text" value="1"
-																	class="input_06" style="width: 45px;" name="sb"
-																	maxlength="6" id="btStartMultiple"> <label>
-																	最大倍投不超过</label> <input type="text" style="width: 50px;"
-																	value="100" class="input_06" name="sbMax"
-																	id="btMaxMultiple"> <label> 倍 单倍奖金：</label> <input
-																	type="text" class="input_06" name="dj" id="btBonus"
-																	maxlength="6" size="6" value=""> <label>
-																	元</label>
-															</p>
-															<p>
-																<strong>收益率设置</strong>
-															</p>
-															<p>
-																<input type="radio" name="rdoWinCondition" value="1"
-																	checked="checked"> <label>全程收益：</label> <input
-																	type="text" value="30" maxlength="6" size="6"
-																	class="input_06" name="NumInput2" id="allMargin">
-																<label> %</label>
-															</p>
-															<p>
-																<input type="radio" name="rdoWinCondition" value="2">
-																<label>前 </label> <input type="text" value="10"
-																	maxlength="6" size="6" class="input_06"
-																	name="NumInput2" id="preIssueNum" disabled="">
-																<label> 期收益率：</label> <input type="text" value="10"
-																	class="input_06" name="NumInput2" id="preMargin"
-																	disabled=""> <label> %，之后收益率</label> <input
-																	type="text" value="5" class="input_06" name="NumInput2"
-																	id="afterMargin" disabled=""> <label>%</label>
-															</p>
-															<p>
-																<input type="radio" name="rdoWinCondition" value="3">
-																<label>累积收益不低于 </label> <input type="text" value="100"
-																	class="input_06" style="width: 50px;" name="NumInput2"
-																	id="minMoney" disabled=""> <label> 元</label>
-															</p>
+																<label>我要追</label>
+																<input type="text" value="5" maxlength="4" size="4"
+																id="btIssueNum" name="sq">
+																<span>期</span>
 														</div>
-														<div class="jsqr">
-															<input type="button" name="Input3" id="btnCalc">
-															<p>
-																(期数：<span id="btIssueCount" class="red">0</span>期，总投入：<span
-																	id="btInvestment" class="red">0</span>元，总收益：<span
-																	id="btRevenue" class="red">0</span>元)
-															</p>
+														<div class="jsuan">
+
+															<div class="tjan">
+																<p>
+																	<label>起始倍数： </label> <input type="text" value="1"
+																		class="input_06" style="width: 45px;" name="sb"
+																		maxlength="6" id="btStartMultiple"> <label>
+																		最大倍投不超过</label> <input type="text" style="width: 50px;"
+																		value="100" class="input_06" name="sbMax"
+																		id="btMaxMultiple"> <label> 倍 单倍奖金：</label> <input
+																		type="text" class="input_06" name="dj" id="btBonus"
+																		maxlength="6" size="6" value=""> <label>
+																		元</label>
+																</p>
+																<p>
+																	<strong>收益率设置</strong>
+																</p>
+																<p>
+																	<input type="radio" name="rdoWinCondition" value="1"
+																		checked="checked"> <label>全程收益：</label> <input
+																		type="text" value="30" maxlength="6" size="6"
+																		class="input_06" name="NumInput2" id="allMargin">
+																	<label> %</label>
+																</p>
+																<p>
+																	<input type="radio" name="rdoWinCondition" value="2">
+																	<label>前 </label> <input type="text" value="10"
+																		maxlength="6" size="6" class="input_06"
+																		name="NumInput2" id="preIssueNum" disabled="">
+																	<label> 期收益率：</label> <input type="text" value="10"
+																		class="input_06" name="NumInput2" id="preMargin"
+																		disabled=""> <label> %，之后收益率</label> <input
+																		type="text" value="5" class="input_06"
+																		name="NumInput2" id="afterMargin" disabled="">
+																	<label>%</label>
+																</p>
+																<p>
+																	<input type="radio" name="rdoWinCondition" value="3">
+																	<label>累积收益不低于 </label> <input type="text" value="100"
+																		class="input_06" style="width: 50px;" name="NumInput2"
+																		id="minMoney" disabled=""> <label> 元</label>
+																</p>
+															</div>
+															<div class="jsqr">
+																<input type="button" name="Input3" id="btnCalc">
+																<p>
+																	(期数：<span id="btIssueCount" class="red">0</span>期，总投入：<span
+																		id="btInvestment" class="red">0</span>元，总收益：<span
+																		id="btRevenue" class="red">0</span>元)
+																</p>
+															</div>
+														</div>
+														<div class="btab">
+															<table width="100%" cellspacing="1" bgcolor="#f3eee2">
+																<colgroup>
+																	<col width="20%">
+																	<col width="13%">
+																	<col width="13%">
+																	<col width="13%">
+																	<col width="13%">
+																	<col width="13%">
+																	<col width="15%">
+																</colgroup>
+																<thead>
+																	<tr>
+																		<th height="30">期号</th>
+																		<th>投入倍数</th>
+																		<th>当期投入</th>
+																		<th>累计投入</th>
+																		<th>当期奖金</th>
+																		<th>累计收益</th>
+																		<th>收益率</th>
+																	</tr>
+																</thead>
+															</table>
+														</div>
+														<div class="bta height12">
+															<table id="btTable" cellspacing="0">
+																<colgroup>
+																	<col width="20%">
+																	<col width="13%">
+																	<col width="13%">
+																	<col width="13%">
+																	<col width="13%">
+																	<col width="13%">
+																	<col width="15%">
+																</colgroup>
+																<tbody>
+																</tbody>
+															</table>
 														</div>
 													</div>
-													<div class="btab">
-														<table width="100%" cellspacing="1" bgcolor="#f3eee2">
-															<colgroup>
-																<col width="20%">
-																<col width="13%">
-																<col width="13%">
-																<col width="13%">
-																<col width="13%">
-																<col width="13%">
-																<col width="15%">
-															</colgroup>
-															<thead>
-																<tr>
-																	<th height="30">期号</th>
-																	<th>投入倍数</th>
-																	<th>当期投入</th>
-																	<th>累计投入</th>
-																	<th>当期奖金</th>
-																	<th>累计收益</th>
-																	<th>收益率</th>
-																</tr>
-															</thead>
-														</table>
-													</div>
-													<div class="bta height12">
-														<table id="btTable" cellspacing="0">
-															<colgroup>
-																<col width="20%">
-																<col width="13%">
-																<col width="13%">
-																<col width="13%">
-																<col width="13%">
-																<col width="13%">
-																<col width="15%">
-															</colgroup>
-															<tbody>
-															</tbody>
-														</table>
-													</div>
-												</div>
 
 
 
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 
 
-						</td>
-					</tr>
-				</tbody>
-			</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 
-		</div>
-		<!--投注主体 结束-->
-		<script language="javascript">
+			</div>
+			<!--投注主体 结束-->
+			<script language="javascript">
  $(function(){
  	var _tab=$('ul#tabfirst_01>li');
 	var _con=$('div#tab_box_01>div');
@@ -1482,8 +1468,8 @@ function SetRemainTime() {
 	});
 })
 </script>
-		<!-- 历史开奖中奖排行 -->
-		<style type="text/css">
+			<!-- 历史开奖中奖排行 -->
+			<style type="text/css">
 #tabfirst_01 li {
 	float: left;
 	display: inline;
@@ -1528,9 +1514,9 @@ function SetRemainTime() {
 	color: red;
 }
 </style>
-		<script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
-			type="text/javascript"></script>
-		<script type="text/javascript">
+			<script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
+				type="text/javascript"></script>
+			<script type="text/javascript">
 $(document).ready(function() {
 	var lotteryTypeId = "1";
 	queryHistoryDrawNumbers();
@@ -1601,219 +1587,218 @@ function drawNumber() {
 function zjxb() {
 	$.ajax({
 		url : "<%=basePath%>cqssc/winningrecord",
-		dataType : "json",
-		data : {
-			t : Math.random()
-		},
-		success : function(data2) {
-			if (data2) {
-			
-				$("#newWinerMq>ul>li").remove();
-				for ( var index in data2) {
-					var vo = data2[index];
-					$("#newWinerMq>ul").append("<li><span>恭喜</span><span style='overflow: hidden;'>"+vo.user+"</span><span>喜中 <b>"+vo.money+"</b> 元</span></li>");
+						dataType : "json",
+						data : {
+							t : Math.random()
+						},
+						success : function(data2) {
+							if (data2) {
+
+								$("#newWinerMq>ul>li").remove();
+								for ( var index in data2) {
+									var vo = data2[index];
+									$("#newWinerMq>ul").append(
+											"<li><span>恭喜</span><span style='overflow: hidden;'>"
+													+ vo.user
+													+ "</span><span>喜中 <b>"
+													+ vo.money
+													+ "</b> 元</span></li>");
+								}
+
+							}
+						}
+					});
 				}
-			
-			}
-		}
-	});
-}
 
-	
+				function total() {
+					$("#tab_box_01").show();
+					$("#tab_box_02").hide();
+				}
 
-function total() {
-	$("#tab_box_01").show();
-	$("#tab_box_02").hide();
-}
-
-$(function() {
-	$("#newWinerMq").marquee({
-		auto: true,
-		interval: 2000,
-		showNum: 10,
-		stepLen: 3,
-		type: 'vertical'
-	});
-});
-
-</script>
-		<div class="yhzt_y01">
-			<ul class="yhzt_y02">
-				<li class="yhzt_y02_bt"><h2 style="margin-left: 35px;">重庆时时彩
-						历史开奖</h2></li>
-				<li class="yhzt_y02_nr">
-					<ul class="yhzt_y03">
-						<li class="yhzt_y03_01">
-							<p>
-								第 <span id="activeexpectshow1"><span id="buyExpectShow"><span
-										id="lastPhase"></span></span></span> 期开奖<br> 开奖时间：<span id="qssj">2016-12-13
-									16:01:39</span>
-							</p>
-						</li>
-						<div id="winnumber" style="display: none">0,0,3,6,4</div>
-						<li class="yhzt_y03_02" id="kjhm"></li>
-					</ul>
-					<table width="0" border="0" cellspacing="0" cellpadding="0"
-						class="yhzt_y04" id="CodeListTable">
-						<thead>
-							<tr>
-								<td class="yhzt_y04_01">期号</td>
-								<td class="yhzt_y04_01">时间</td>
-								<td class="yhzt_y04_02">号码</td>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-							<tr>
-								<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
-								</td>
-								<td class="yhzt_y04_01"><font color="red"><span
-										class="history_date">14:21</span></font></td>
-								<td class="yhzt_y04_02"><span class="history_number">
-										7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
-							</tr>
-					</table>
-				</li>
-			</ul>
-
-
-			<ul class="yhzt_y02">
-				<li class="yhzt_y02_bt"><h2 style="margin-left: 35px;">中奖喜报</h2></li>
-				<li class="yhzt_y02_nr">
-					<div id="newWinerMq">
-						<ul>
-							<li>中奖喜报加载中…</li>
+				$(function() {
+					$("#newWinerMq").marquee({
+						auto : true,
+						interval : 2000,
+						showNum : 10,
+						stepLen : 3,
+						type : 'vertical'
+					});
+				});
+			</script>
+			<div class="yhzt_y01">
+				<ul class="yhzt_y02">
+					<li class="yhzt_y02_bt"><h2 style="margin-left: 35px;">重庆时时彩
+							历史开奖</h2></li>
+					<li class="yhzt_y02_nr">
+						<ul class="yhzt_y03">
+							<li class="yhzt_y03_01">
+								<p>
+									第 <span id="activeexpectshow1"><span id="buyExpectShow"><span
+											id="lastPhase"></span></span></span> 期开奖<br> 开奖时间：<span id="qssj">2016-12-13
+										16:01:39</span>
+								</p>
+							</li>
+							<div id="winnumber" style="display: none">0,0,3,6,4</div>
+							<li class="yhzt_y03_02" id="kjhm"></li>
 						</ul>
-					</div>
-				</li>
-			</ul>
+						<table width="0" border="0" cellspacing="0" cellpadding="0"
+							class="yhzt_y04" id="CodeListTable">
+							<thead>
+								<tr>
+									<td class="yhzt_y04_01">期号</td>
+									<td class="yhzt_y04_01">时间</td>
+									<td class="yhzt_y04_02">号码</td>
+								</tr>
+							</thead>
+							<tbody>
 
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+								<tr>
+									<td class="yhzt_y04_01">&nbsp;<span class="history_phase">20161213050</span>&nbsp
+									</td>
+									<td class="yhzt_y04_01"><font color="red"><span
+											class="history_date">14:21</span></font></td>
+									<td class="yhzt_y04_02"><span class="history_number">
+											7&nbsp;&nbsp;0&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;3 </span></td>
+								</tr>
+						</table>
+					</li>
+				</ul>
+
+
+				<ul class="yhzt_y02">
+					<li class="yhzt_y02_bt"><h2 style="margin-left: 35px;">中奖喜报</h2></li>
+					<li class="yhzt_y02_nr">
+						<div id="newWinerMq">
+							<ul>
+								<li>中奖喜报加载中…</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+
+			</div>
 		</div>
-
-	</div>
-	<form id="formh8" name="formh8" method="post" target="_blank">
-		<input type="hidden" id="expectlistsuc1" name="expectlistsuc1">
-		<input type="hidden" id="beishulistsuc1" name="beishulistsuc1"
-			value="1"> <input type="hidden" id="expectlistsuc2"
-			name="expectlistsuc2"> <input type="hidden"
-			id="beishulistsuc2" name="beishulistsuc2"> <input
-			type="hidden" id="expectlistsuc3" name="expectlistsuc3"> <input
-			type="hidden" id="beishulistsuc3" name="beishulistsuc3"> <input
-			type="hidden" id="expectlistsuc4" name="expectlistsuc4"> <input
-			type="hidden" id="beishulistsuc4" name="beishulistsuc4"> <input
-			type="hidden" id="playcode" name="playcode" value="3x"> <input
-			type="hidden" id="allmoney" name="allmoney" value=""> <input
-			type="hidden" id="expectnum" name="expectnum" value=""> <input
-			type="hidden" id="Zhuihao" name="Zhuihao" value=""> <input
-			type="hidden" id="expectlistsuc" name="expectlistsuc" value="">
-		<input type="hidden" id="beishulistsuc" name="beishulistsuc" value="">
-		<input type="hidden" id="codes" name="codes" value=""> <input
-			type="hidden" id="buyExpect" name="buyExpect" value=""> <input
-			type="hidden" id="playtypeid" name="playtypeid" value=""> <input
-			type="hidden" id="zhushunum" name="zhushunum" value=""> <input
-			type="hidden" id="ZjCut" name="ZjCut" value="">
-	</form>
+		<form id="formh8" name="formh8" method="post" target="_blank">
+			<input type="hidden" id="expectlistsuc1" name="expectlistsuc1">
+			<input type="hidden" id="beishulistsuc1" name="beishulistsuc1"
+				value="1"> <input type="hidden" id="expectlistsuc2"
+				name="expectlistsuc2"> <input type="hidden"
+				id="beishulistsuc2" name="beishulistsuc2"> <input
+				type="hidden" id="expectlistsuc3" name="expectlistsuc3"> <input
+				type="hidden" id="beishulistsuc3" name="beishulistsuc3"> <input
+				type="hidden" id="expectlistsuc4" name="expectlistsuc4"> <input
+				type="hidden" id="beishulistsuc4" name="beishulistsuc4"> <input
+				type="hidden" id="playcode" name="playcode" value="3x"> <input
+				type="hidden" id="allmoney" name="allmoney" value=""> <input
+				type="hidden" id="expectnum" name="expectnum" value=""> <input
+				type="hidden" id="Zhuihao" name="Zhuihao" value=""> <input
+				type="hidden" id="expectlistsuc" name="expectlistsuc" value="">
+			<input type="hidden" id="beishulistsuc" name="beishulistsuc" value="">
+			<input type="hidden" id="codes" name="codes" value=""> <input
+				type="hidden" id="buyExpect" name="buyExpect" value=""> <input
+				type="hidden" id="playtypeid" name="playtypeid" value=""> <input
+				type="hidden" id="zhushunum" name="zhushunum" value=""> <input
+				type="hidden" id="ZjCut" name="ZjCut" value="">
+		</form>
 
 	</div>
 	</div>
-
 	<script>
-	function updateOmitValue(omitValue) {
-		// alert(omitValue);
-		omitValue = eval("(" + omitValue + ")");
-		
-		var arr = new Array();
-		arr[5] = 'ge';
-		arr[4] = 'shi';
-		arr[3] = 'bai';
-		arr[2] = 'qian';
-		arr[1] = 'wan';
-		arr[0] = '';
-		for (var i = 0; i <= 5; i++) {
-		$('#tr_yl_' + i).children('.yl_1').each(function(j) {
-			var val = omitValue[arr[i]][j];
-			// alert(val);
-			var html;
-			if (val >= 20) {
-				html = '<font color="red">' + val + '</font>';
-			} else {
-				html = val;
-			}
-			$(this).html(html);
-			
-		});
-			
-		}
-	}
-	
-	var omitValue = '{"all":{"0":"0","11":"101429","1":"1","2":"2","3":"0","4":"0","5":"2","6":"0","7":"1","8":"4","9":"4","10":"101429"},"bai":{"0":"32","11":"101429","1":"1","2":"37","3":"0","4":"7","5":"15","6":"16","7":"2","8":"11","9":"4","10":"101429"},"ge":{"0":"12","11":"101429","1":"3","2":"7","3":"4","4":"0","5":"15","6":"6","7":"8","8":"19","9":"16","10":"101429"},"qian":{"0":"0","11":"101429","1":"22","2":"17","3":"4","4":"6","5":"2","6":"8","7":"1","8":"21","9":"11","10":"101429"},"shi":{"0":"23","11":"101429","1":"8","2":"2","3":"42","4":"10","5":"5","6":"0","7":"7","8":"4","9":"14","10":"101429"},"wan":{"0":"0","11":"101429","1":"3","2":"8","3":"1","4":"5","5":"12","6":"2","7":"4","8":"17","9":"26","10":"101429"}}';
-	updateOmitValue(omitValue);
-</script>
+		function updateOmitValue(omitValue) {
+			// alert(omitValue);
+			omitValue = eval("(" + omitValue + ")");
 
+			var arr = new Array();
+			arr[5] = 'ge';
+			arr[4] = 'shi';
+			arr[3] = 'bai';
+			arr[2] = 'qian';
+			arr[1] = 'wan';
+			arr[0] = '';
+			for (var i = 0; i <= 5; i++) {
+				$('#tr_yl_' + i).children('.yl_1').each(function(j) {
+					var val = omitValue[arr[i]][j];
+					// alert(val);
+					var html;
+					if (val >= 20) {
+						html = '<font color="red">' + val + '</font>';
+					} else {
+						html = val;
+					}
+					$(this).html(html);
+
+				});
+
+			}
+		}
+
+		var omitValue = '{"all":{"0":"0","11":"101429","1":"1","2":"2","3":"0","4":"0","5":"2","6":"0","7":"1","8":"4","9":"4","10":"101429"},"bai":{"0":"32","11":"101429","1":"1","2":"37","3":"0","4":"7","5":"15","6":"16","7":"2","8":"11","9":"4","10":"101429"},"ge":{"0":"12","11":"101429","1":"3","2":"7","3":"4","4":"0","5":"15","6":"6","7":"8","8":"19","9":"16","10":"101429"},"qian":{"0":"0","11":"101429","1":"22","2":"17","3":"4","4":"6","5":"2","6":"8","7":"1","8":"21","9":"11","10":"101429"},"shi":{"0":"23","11":"101429","1":"8","2":"2","3":"42","4":"10","5":"5","6":"0","7":"7","8":"4","9":"14","10":"101429"},"wan":{"0":"0","11":"101429","1":"3","2":"8","3":"1","4":"5","5":"12","6":"2","7":"4","8":"17","9":"26","10":"101429"}}';
+		updateOmitValue(omitValue);
+	</script>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

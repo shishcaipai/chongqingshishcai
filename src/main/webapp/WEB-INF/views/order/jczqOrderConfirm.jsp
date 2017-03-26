@@ -15,7 +15,7 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-	<link href="http://www.ib18.cn/res/css/index.css" rel="stylesheet"
+	<link href="<%=basePath%>static/new/css/index.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
@@ -23,7 +23,9 @@
 </head>
 
 <body>
-<jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 <!--main-->
 <div class="banner" >
 <div style="margin:0 auto; width:996px; height:100px; border:1px solid #F00">
@@ -77,6 +79,7 @@
 </table>
 </div>
 
+</div>
 </div>
 </div>
 <!--main end -->

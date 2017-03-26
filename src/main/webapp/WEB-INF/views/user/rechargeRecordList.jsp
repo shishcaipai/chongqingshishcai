@@ -16,17 +16,19 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/page.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/head.css" rel="stylesheet"
 	type="text/css" />
 <title>账户明细-充值记录</title>
 </head>
 
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 
 	<!--main-->
 	<div id="account">
@@ -98,6 +100,7 @@
 			</div>
 
 		</div>
+	</div>
 	</div>
 	<!--main end -->
 

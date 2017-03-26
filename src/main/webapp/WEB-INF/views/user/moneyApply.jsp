@@ -13,11 +13,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page_left.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/head.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/head.css" rel="stylesheet"
 	type="text/css" />
-<link href="http://www.ib18.cn/res/css/page.css" type="text/css"
+<link href="<%=basePath%>static/new/css/page.css" type="text/css"
 	rel="stylesheet">
 <link href="<%=basePath%>static/css/jqueryui.css" type="text/css"
 	rel="stylesheet" />
@@ -31,8 +31,9 @@
 </head>
 
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
-	<jsp:include page="../banner.jsp"></jsp:include>
+	<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<!--main-->
 	<div id="account">
 		<div class="account_left">
@@ -121,6 +122,7 @@
 			</div>
 
 		</div>
+	</div>
 	</div>
 	<!--main end -->
 

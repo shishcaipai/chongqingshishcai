@@ -12,7 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="http://www.ib18.cn/res/css/page_left.css" rel="stylesheet"
+<link href="<%=basePath%>static/new/css/page_left.css" rel="stylesheet"
 	type="text/css" />
 <link href="<%=basePath%>static/css/head.css" rel="stylesheet"
 	type="text/css" />
@@ -20,17 +20,19 @@
 	rel="stylesheet" />
 <link href="<%=basePath%>static/css/style.css" type="text/css"
 	rel="stylesheet" />
-<link href="http://www.ib18.cn/res/css/page.css" type="text/css"
+<link href="<%=basePath%>static/new/css/page.css" type="text/css"
 	rel="stylesheet">
-<link href="http://www.80cb.cn/res/css/common.css" type="text/css"
+<link href="<%=basePath%>static/new/css/common.css" type="text/css"
 	rel="stylesheet">
-<link href="http://www.80cb.cn/res/css/cps.css" type="text/css"
+<link href="<%=basePath%>static/new/css/cps.css" type="text/css"
 	rel="stylesheet">
 <title>推广管理</title>
 </head>
 
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../header2.jsp"></jsp:include>
+	<div class="header clearfix">
+		<jsp:include page="../header3.jsp"></jsp:include>
 	<div id="account">
 		<div class="account_left">
 			<jsp:include page="agentMemberLeftMenu.jsp"></jsp:include>
@@ -115,6 +117,7 @@
 			</div>
 		</div>
 	</div>
+	</div>
 	<!--main end -->
 <script type="text/javascript">
 	function change(index) {
@@ -138,14 +141,5 @@
 	}
 	page();
 </script>
-	<jsp:include page="../footer.jsp"></jsp:include>
-	<div class="opacity">
-		<div class="dialog">
-			<div class="diatitle">
-				<em>提示</em>
-			</div>
-			<div class="diabox">提示信息</div>
-		</div>
-	</div>
 </body>
 </html>
