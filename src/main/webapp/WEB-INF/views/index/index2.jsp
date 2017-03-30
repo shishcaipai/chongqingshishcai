@@ -523,7 +523,7 @@
 										</c:forEach>
 									</ul>
 								</div>
-								<div class="zx_block">
+								<%-- <div class="zx_block">
 									<div id="sfCon">
 										<ul class="news_list">
 											<c:forEach var="art" items="${requestScope.zixian2 }">
@@ -537,7 +537,7 @@
 
 										</ul>
 									</div>
-								</div>
+								</div> --%>
 
 
 							</div>
@@ -625,7 +625,7 @@
 									$("#slider")
 											.append(
 													"<li><span>恭喜</span><span style='overflow: hidden;'>"
-															+ vo.user_name
+															+ vo.user
 															+ "</span><span style='color:red'>喜中 <b >"
 															+ parseFloat(vo.money).toFixed(2)
 															+ "</b> 元</span></li>");

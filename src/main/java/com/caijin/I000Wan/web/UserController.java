@@ -930,6 +930,47 @@ public class UserController {
 					.getOtherId());
 			parentOrder.setPeriod(periodService.findPeriodByOId(order
 					.getOtherId()));
+			
+             //---
+			List<Period> list = periodService.findPeriodByOId(parentOrder.getOrderNo());
+			if (list != null) {
+				model.addAttribute("pNum", list.size());
+			} else {
+				model.addAttribute("pNum", 0);
+			}
+			for (Period period : list) {
+				LotteryPeriod lperiod = letteryPeriodService.findByPeriod(
+						Period.SHISHI_CAI_CHONGQING, period.getLetterPharse());
+				if (lperiod != null) {
+					period.setLetterPharse(lperiod.getPeriodNumber());
+				}
+			}
+			order.setPeriod(list);
+			List<OrderDetail> details = orderDetailService
+					.findOrderDetailByOrderId(parentOrder);
+			for (OrderDetail detail : details) {
+				detail.setBuyCaiNumber("["
+						+ WFPublic.getpalynamebyid(detail.getBuyCaiNumber()
+								.substring(1, 4))
+						+ "]"
+						+ detail.getBuyCaiNumber().substring(5,
+								detail.getBuyCaiNumber().length()));
+			}
+
+			model.addAttribute("details", details);
+			if (order.getPeriod() != null && !order.getPeriod().isEmpty()) {
+				if (Period.SHISHI_CAI_CHONGQING.equals(order.getPeriod().get(0)
+						.getLotteryCode())) {
+					model.addAttribute("caipiaotype", "重庆时时彩");
+				}
+				model.addAttribute("parsh", order.getPeriod().get(0)
+						.getLotteryPeriod());
+				model.addAttribute(
+						"endDate",
+						DateUtils.getLeftEndDate(order.getPeriod().get(0)
+								.getLotteryPeriod()));
+			}
+			//==
 			model.addAttribute("order", order);
 			HeMaiOrderDetail heDetail = heMaiOrderDetailService
 					.findOrderHemaiDetailByOrderId(parentOrder);
