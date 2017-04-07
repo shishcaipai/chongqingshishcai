@@ -76,18 +76,18 @@
 				}
 			});
 			$("#baodiCount").blur(function() {
-				var totalmoney = $("#totalmoney").val();
-				var baodiCount = $("#baodiCount").val();
-				var divideCount = $("#divideCount").val();
+				var totalmoney = parseInt($("#totalmoney").val());
+				var baodiCount = parseInt($("#baodiCount").val());
+				var divideCount = parseInt($("#divideCount").val());
 				$("#baodiMoney").html(totalmoney / divideCount * baodiCount);
 				var sca = (baodiCount / divideCount) * 100 + "" + "%";
 				$("#baodiScale").html(sca);
 
 			});
 			$("#btn_submit").click(function() {
-				var divideCount = $("#divideCount").val();
-				var baodiCount = $("#baodiCount").val();
-				var buyCount = $("#buyCount").val();
+				var divideCount = parseInt($("#divideCount").val());
+				var baodiCount = parseInt($("#baodiCount").val());
+				var buyCount = parseInt($("#buyCount").val());
 				if (buyCount <= 0) {
 					alert("发起购买必须大于一份");
 					return;

@@ -120,20 +120,20 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 	@Transactional
 	@Override
 	public void clear() {
-		 EntityManager em = this.emf.createEntityManager();
-		
-		
+		EntityManager em = this.emf.createEntityManager();
+
 		try {
-			 Session session = em.unwrap(Session.class);
+			Session session = em.unwrap(Session.class);
 			session.getTransaction().begin();
 			session.clear();
 			em.flush();
-			session.getTransaction().commit();;
+			session.getTransaction().commit();
+			;
 			emf.getCache().evictAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			 em.close();
+			em.close();
 		}
 	}
 
@@ -181,12 +181,38 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 		return sql;
 	}
 
+	public String getzjSql(String userName, String startDate, String endDate) {
+		String sql = "select torder.order_no,torder.name,torder.order_type,torder.total_money,torder.cash_back_status,"
+				+ "torder.order_status,torder.pay_status,torder.create_date,"
+				+ "mu.user_name,mu.real_name,mu.address,mu.telephone, torder.wprize_status, torder.auto_prizes "
+				+ "from trade_order torder,member_user mu where (torder.wprize_status=1 or torder.wprize_status=2 ) and  (torder.cash_back_status=0 or torder.cash_back_status=1 ) and torder.member_id=mu.id ";
+
+		if (userName != null && !userName.equals("")) {
+			sql += "and mu.user_name like '%" + userName + "%' ";
+		}
+
+		// if (orderType != null && !orderType.equals("")) {
+		sql += "and (torder.order_type = 2 or torder.order_type = 3)";
+		// }
+
+		if (startDate != null && !startDate.equals("")) {
+			sql += "and torder.order_time >= '" + startDate + "' ";
+		}
+
+		if (endDate != null && !endDate.equals("")) {
+			sql += "and torder.order_time <= '" + endDate + "' ";
+		}
+
+		sql += " order by torder.order_time desc ";
+		return sql;
+	}
+
 	@Override
 	public Result findOrderListByCondition(PageModel pageModel,
 			String userName, String realName, String telephone,
 			String orderType, String orderStatus, String payStatus,
 			String startDate, String endDate) {
-		Result result=new Result<List<Map>>();
+		Result result = new Result<List<Map>>();
 		result.setTotal(getCount(getSql(userName, realName, telephone,
 				orderType, orderStatus, payStatus, startDate, endDate)));
 		result.setRows(this.querySqlObjects(
@@ -196,14 +222,41 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 		return result;
 	}
 
+	/**
+	 * 中奖且未发奖的订单订单列
+	 * 
+	 * @param pageModel
+	 * @param userName
+	 * @param realName
+	 * @param telephone
+	 * @param orderType
+	 * @param orderStatus
+	 * @param payStatus
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	@Override
+	public Result findzjOrderListByCondition(PageModel pageModel,
+			String userName, String startDate, String endDate) {
+		Result result = new Result<List<Map>>();
+		log.error("sql::" + getzjSql(userName, startDate, endDate));
+		result.setTotal(getCount(getzjSql(userName, startDate, endDate)));
+		result.setRows(this.querySqlObjects(
+				getzjSql(userName, startDate, endDate), pageModel.getPage(),
+				pageModel.getRows()));
+		return result;
+	}
+
 	public void updateByOrderNo(String orderNo, int orderSucess) {
-		 String sql = "update trade_order set order_status="+orderSucess+" where order_no='"
-				+ orderNo + "' or other_id='"
-					+ orderNo + "'";
-//		 String sql2 = "update trade_order set order_status="+orderSucess+" where other_id='"
-//					+ orderNo + "'";
+		String sql = "update trade_order set order_status=" + orderSucess
+				+ " where order_no='" + orderNo + "' or other_id='" + orderNo
+				+ "'";
+		// String sql2 =
+		// "update trade_order set order_status="+orderSucess+" where other_id='"
+		// + orderNo + "'";
 		this.exceSql(sql);
-//		this.exceSql(sql2);
-		
+		// this.exceSql(sql2);
+
 	}
 }

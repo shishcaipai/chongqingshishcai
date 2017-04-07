@@ -15,4 +15,6 @@ public interface OrderCustomDao {
 			String orderType,String orderStatus,String payStatus,
 			String startDate,String endDate);
 	List<Map> findUserTotalAmountList(String startDate);
+	Result findzjOrderListByCondition(PageModel pageModel, String userName,String startDate,
+			String endDate);
 }

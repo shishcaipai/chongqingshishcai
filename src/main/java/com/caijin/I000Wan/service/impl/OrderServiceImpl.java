@@ -58,6 +58,26 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 				endDate);
 	}
 
+	/**
+	 * 中奖且未发奖的订单订单列
+	 * 
+	 * @param pageModel
+	 * @param userName
+	 * @param realName
+	 * @param telephone
+	 * @param orderType
+	 * @param orderStatus
+	 * @param payStatus
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public Result findzjOrderListByCondition(PageModel pageModel,
+			String userName, String startDate, String endDate) {
+		return orderDao.findzjOrderListByCondition(pageModel, userName,
+				startDate, endDate);
+	}
+
 	public Order findOrderByOrderId(String orderId) {
 		return orderDao.findOrderByOrderId(orderId);
 	}
@@ -218,18 +238,18 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 	}
 
 	@Override
-	public  List<Order> findOrderByTypeAndOtherId(int hemaiImpBuyOrder, String id) {
+	public List<Order> findOrderByTypeAndOtherId(int hemaiImpBuyOrder, String id) {
 		return orderDao.findOrderByTypeAndOtherId(hemaiImpBuyOrder, id);
 	}
 
 	@Override
 	public void updateByOrderNo(String orderNo, int orderSucess) {
-		orderDaoImpl.updateByOrderNo(orderNo,orderSucess);
+		orderDaoImpl.updateByOrderNo(orderNo, orderSucess);
 		orderDaoImpl.clear();
 	}
-	public Order findOrderByTypeAndOrderId(int orderType, String orderNo){
-		return orderDao.findOrderByTypeAndOrderId(orderType,orderNo);
+
+	public Order findOrderByTypeAndOrderId(int orderType, String orderNo) {
+		return orderDao.findOrderByTypeAndOrderId(orderType, orderNo);
 	}
-	
 
 }

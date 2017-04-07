@@ -31,7 +31,7 @@ public class MemberUser extends BaseEntity {
 	private String sex;// 性别
 	private String bankName;// 银行名称
 	private Boolean activated;// 账号是否邮件激活
-	private float totalScore = 0;// 总金额
+//	private float totalScore = 0;// 总金额
 	private float availableScore = 0;// 可用金额
 	private float actionScore = 0;// 活动金额
 	private float frozenScore = 0;// 冻结金额
@@ -231,14 +231,14 @@ public class MemberUser extends BaseEntity {
 		this.activated = activated;
 	}
 
-	@Column(name = "total_score")
-	public float getTotalScore() {
-		return totalScore;
-	}
-
-	public void setTotalScore(float totalScore) {
-		this.totalScore = totalScore;
-	}
+//	@Column(name = "total_score")
+//	public float getTotalScore() {
+//		return totalScore;
+//	}
+//
+//	public void setTotalScore(float totalScore) {
+//		this.totalScore = totalScore;
+//	}
 
 	@Column(name = "available_score")
 	public float getAvailableScore() {

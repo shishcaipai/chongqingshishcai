@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import com.caijin.I000Wan.common.entity.BaseEntity;
 
 @Entity
-@Table(name = "SYS_ROLE_MENU")
+@Table(name = "sys_role_menu")
 public class RoleMenu extends BaseEntity {
 	private Role role;
 	private Menu menu;

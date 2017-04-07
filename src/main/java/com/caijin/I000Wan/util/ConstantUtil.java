@@ -10,5 +10,5 @@ public class ConstantUtil {
 	/**
 	 * 全局定义  是否自动计算中奖
 	 */
-	public static boolean AUTO_DRAWN = false;
+	public static boolean AUTO_DRAWN = true;
 }

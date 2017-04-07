@@ -211,7 +211,7 @@ public class MemberAction {
 					user.setActionScore(user.getActionScore() + actionScore);
 					user.setAvailableScore(user.getAvailableScore()
 							+ availableScore);
-					user.setTotalScore(user.getActionScore() + user.getAvailableScore());
+//					user.setTotalScore(user.getActionScore() + user.getAvailableScore());
 					user.setCreateDate(new Date());
 					user.setUpdateDate(new Date());
 					memberUserService.update(user);

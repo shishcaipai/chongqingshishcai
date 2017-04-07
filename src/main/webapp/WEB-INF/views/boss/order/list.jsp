@@ -15,7 +15,7 @@
 	charset="utf-8"></script>
 <script src="<%=basePath%>static/js/commonUtil.js"
 	type="text/javascript"></script>
-<script src="<%=basePath%>static/boss/js/tradeOrder.js?orde=163"
+<script src="<%=basePath%>static/boss/js/tradeOrder.js?orde=1"
 	type="text/javascript"></script>
 <%@ include file="../../common/easyUiInclude.jsp"%>
 
@@ -75,9 +75,7 @@
 			<a href="javascript:searchOrder()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a> <a
 				href="javascript:updateOrderUserDialog()" class="easyui-linkbutton"
-				iconCls="icon-edit" plain="true">修改</a> <a
-				href="javascript:deleteOrder()" class="easyui-linkbutton"
-				iconCls="icon-remove" plain="true">删除</a> <a
+				iconCls="icon-edit" plain="true">修改订单方案</a>  <a
 				href="javascript:clearSearchForm()" class="easyui-linkbutton"
 				iconCls="icon-cancel" plain="true">清空</a>
 		</div>

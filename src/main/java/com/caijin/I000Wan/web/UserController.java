@@ -144,7 +144,7 @@ public class UserController {
 			mu.setTelephone(mobile);
 			mu.setEmail(email);
 			mu.setQq(qq);
-			mu.setTotalScore(0);
+//			mu.setTotalScore(0);
 			mu.setAvailableScore(0);
 			log.info(mu.getCommendMemberId()
 					+ "==============tuijian================"

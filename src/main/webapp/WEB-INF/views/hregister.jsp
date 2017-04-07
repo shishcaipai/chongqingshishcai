@@ -14,7 +14,6 @@
 <script type="text/javascript">
 window.onload = function(){
 var url = window.location.href;
-alert(url);
 $.ajax({
 	url : "<%=basePath%>/user/register",
 	dataType : "json",

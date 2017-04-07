@@ -123,10 +123,10 @@ div .a {
 								style="float: left; margin-left: 25px; display: none;"><b
 								style="color: black";>网银支付</b></li>
 							<li id="li_pay_weixin"
-								style="float: left; margin-left: 25px; display: none;"><b
+								style="float: left; margin-left: 25px; "><b
 								style="color: black">微信转帐</b></li>
 							<li id="li_pay_alipay"
-								style="float: left; margin-left: 25px; display: none;"><b
+								style="float: left; margin-left: 25px;"><b
 								style="color: black;">支付宝转账</b></li>
 
 
@@ -140,9 +140,23 @@ div .a {
 									width="100%">
 									<tbody>
 										<tr>
-											<td class="nl"><img
+										<td valign="top">
+											微信：
+										</td>
+											<td class="nl">
+											<img
 												src="<%=basePath%>static/images/weixin_alipay.png"></td>
-											<td style="line-height: 23px; padding: 5px 0px"><br>
+												<td valign="top">
+											  支付宝：
+										</td>
+											<td class="nl">
+										    
+											<img src="<%=basePath%>static/images/zhifubao_alipay.png"/>
+											</td>
+											</tr>
+											<tr>
+											<td colspan="4" >
+											<br>
 											<br>
 											<hr>
 
@@ -169,10 +183,9 @@ div .a {
 									width="100%">
 									<tbody>
 										<tr>
-											<td class="nl"><img src="/res/img/weixin222.png">
+											<td class="nl"><img src="<%=basePath%>static/images/zhifubao_alipay.png">
 											</td>
-											<td style="line-height: 23px; padding: 5px 0px"><img
-												src="/res/img/weixin.png"><br>
+											<td style="line-height: 23px; padding: 5px 0px"><br>
 											<br>
 											<br>
 											<br>

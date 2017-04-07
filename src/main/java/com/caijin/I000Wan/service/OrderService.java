@@ -19,9 +19,11 @@ public interface OrderService extends CommonService<Order, String> {
 	 */
 	List<Order> getMyRechargeList(String userId);
 
-	Result findOrderListByCondition(PageModel pageModel,String userName, String realName,
-			String telephone, String orderType, String orderStatus,
-			String payStatus, String startDate, String endDate);
+	Result findOrderListByCondition(PageModel pageModel, String userName,
+			String realName, String telephone, String orderType,
+			String orderStatus, String payStatus, String startDate,
+			String endDate);
+
 	Order findOrderByOrderId(String orderId);
 
 	Order findOrder(String orderId, Integer payStatus);
@@ -73,13 +75,12 @@ public interface OrderService extends CommonService<Order, String> {
 	 */
 	float getPlatformAllMoney(String memberUserID);
 
-	//计算代理人下的所有交易金额
+	// 计算代理人下的所有交易金额
 	float getAllTradingAllPredUser(String id);
 
 	float getTodayTradingAllPredUser(String id);
 
-	List<Map> findMemberByAgentUserId(
-			int i, int pageSize, String id);
+	List<Map> findMemberByAgentUserId(int i, int pageSize, String id);
 
 	int findCountMemberByAgentUserId(String id);
 
@@ -95,6 +96,9 @@ public interface OrderService extends CommonService<Order, String> {
 
 	void updateByOrderNo(String orderNo, int orderSucess);
 
-	 Order findOrderByTypeAndOrderId(int orderType, String orderNo);
+	Order findOrderByTypeAndOrderId(int orderType, String orderNo);
+
+	Result findzjOrderListByCondition(PageModel pageModel, String userName,
+			String startDate, String endDate);
 
 }

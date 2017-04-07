@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,18 +27,25 @@ import cn.edu.hfut.dmic.webcollector.model.Links;
 import cn.edu.hfut.dmic.webcollector.model.Page;
 import cn.edu.hfut.dmic.webcollector.crawler.BreadthCrawler;
 
+import com.caijin.I000Wan.entity.HeMaiOrder;
+import com.caijin.I000Wan.entity.HeMaiOrderDetail;
 import com.caijin.I000Wan.entity.LotteryPeriod;
+import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.OrderDetail;
 import com.caijin.I000Wan.entity.Period;
 import com.caijin.I000Wan.response.ChongQingReturnBean;
 import com.caijin.I000Wan.response.ChongQingReturnData;
+import com.caijin.I000Wan.service.HeMaiOrderDetailService;
+import com.caijin.I000Wan.service.HeMaiOrderService;
 import com.caijin.I000Wan.service.LetteryPeriodService;
+import com.caijin.I000Wan.service.MemberUserService;
 import com.caijin.I000Wan.service.OrderDetailService;
 import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
 import com.caijin.I000Wan.util.BonusUtil;
 import com.caijin.I000Wan.util.DateUtils;
+import com.caijin.I000Wan.util.GenerateOrderNoUtil;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,6 +68,14 @@ public class TimerTask {
 
 	@Autowired
 	private OrderDetailService orderDetailService;
+
+	@Autowired
+	private MemberUserService memberUserService;
+
+	@Autowired
+	private HeMaiOrderDetailService heMaiOrderDetailService;
+	@Autowired
+	private HeMaiOrderService heMaiOrderService;
 
 	/**
 	 * 中奖任务计算
@@ -298,22 +314,33 @@ public class TimerTask {
 								.findbyQIhao(data.getExpect());
 						if (orderList != null)
 							for (OrderDetail order : orderList) {
-								String caiNumber = order.getBuyCaiNumber();
-								// 计算得到中奖金额
-								float money = BonusUtil.getLotteryHondleBonus(
-										BonusUtil.getBonusNumber(data
-												.getOpencode()), caiNumber);
-								if (money > 0) {
-									pdService.updatePeriodbyQIhaoAndOrderNo(
-											data.getExpect(),
-											order.getOrderNo(), 1, money);
-								} else {
-									pdService.updatePeriodbyQIhaoAndOrderNo(
-											data.getExpect(),
-											order.getOrderNo(), 2, money);
+								/**
+								 * 是否自动计算中奖
+								 */
+								if (order.getOrder().autoDrawn) {
+									String caiNumber = order.getBuyCaiNumber();
+									// 计算得到中奖金额
+									float money = BonusUtil
+											.getLotteryHondleBonus(BonusUtil
+													.getBonusNumber(data
+															.getOpencode()),
+													caiNumber);
+									if (money > 0) {
+										pdService
+												.updatePeriodbyQIhaoAndOrderNo(
+														data.getExpect(),
+														order.getOrderNo(), 1,
+														money);
+									} else {
+										pdService
+												.updatePeriodbyQIhaoAndOrderNo(
+														data.getExpect(),
+														order.getOrderNo(), 2,
+														money);
+									}
+									map.put(order.getOrder().getOrderNo(),
+											order.getOrder());
 								}
-								map.put(order.getOrder().getOrderNo(),
-										order.getOrder());
 							}
 
 					}
@@ -325,27 +352,97 @@ public class TimerTask {
 			while (keys.hasNext()) {
 				orderId = keys.next();
 				float money = pdService.getMoneyPeriodByOId(orderId);
+				order = map.get(orderId);
 				if (pdService.getPeriodUNStatusByOId(orderId) == 0) {
-					order = map.get(orderId);
 					if (money > 0) {
 						order.setWprizeStatus(Order.WPRIS_STATUS_ALL);
 					} else {
 						order.setWprizeStatus(Order.WPRIS_STATUS_WI);
 					}
-					order.setCurrentWPMoney(order.getCurrentWPMoney() + money);
+					order.setCurrentWPMoney(money);
 					orderService.update(order);
 				} else {
-					order = map.get(orderId);
 					if (money > 0) {
 						order.setWprizeStatus(Order.WPRIS_STATUS_PORTION);
 					} else {
-						order.setWprizeStatus(Order.WPRIS_STATUS_PWI);
+						// 不处理当前状态 还有期数未计算
 					}
-					order.setCurrentWPMoney(order.getCurrentWPMoney() + money);
+					order.setCurrentWPMoney(money);
 					orderService.update(order);
 				}
+				if (order.isAutoPrizes()) {
+
+					if (money > 0) {
+
+						if (order.getOrderType() == Order.PROXY_BUY_ORDER) {
+							// 如果发过奖，则把减去上次所有统计中奖金额全部发放
+							if (order.getCashBackStatus() == Order.CASHBACKSTATUS_PORTION) {
+								money = money - order.getCurrentWPMoney();
+							}
+							Order newOrder = new Order();
+							newOrder.setOrderType(Order.AWARD_ORDER);
+							newOrder.setOrderNo(GenerateOrderNoUtil
+									.getOrderNumber());
+							MemberUser memberUser = order.getMemberUser();
+							memberUser.setAvailableScore(money
+									+ memberUser.getAvailableScore());
+							newOrder.setOrderStatus(Order.ORDER_SUCESS);
+							newOrder.setCreateDate(new Date());
+							newOrder.setUpdateDate(new Date());
+							newOrder.setOtherId(order.getOrderNo());
+							newOrder.setMemberUser(memberUser);
+							orderService.save(newOrder);
+							memberUserService.update(memberUser);
+							if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
+								order.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
+							} else {
+								order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
+							}
+							orderService.update(order);
+						} else if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
+
+							//  如果发过奖，则把减去上次所有统计中奖金额全部发放
+							if (order.getCashBackStatus() == Order.CASHBACKSTATUS_PORTION) {
+								money = money - order.getCurrentWPMoney();
+							}
+							}
+							HeMaiOrderDetail heiMaiDetail = heMaiOrderDetailService
+									.findOrderHemaiDetailByOrderId(order);
+							List<HeMaiOrder> heMaiOrders = heMaiOrderService
+									.findOrderHemaiByOrderId(heiMaiDetail);
+							for (HeMaiOrder heMaiOrder : heMaiOrders) {
+								float funMoney = money
+										* heMaiOrder.getSubGuaranteeSum()
+										/ heiMaiDetail.getFensum();
+								Order newOrder = new Order();
+								newOrder.setOrderType(Order.AWARD_ORDER);
+								newOrder.setOrderNo(GenerateOrderNoUtil
+										.getOrderNumber());
+								MemberUser memberUser = order.getMemberUser();
+								memberUser.setAvailableScore(funMoney
+										+ memberUser.getAvailableScore());
+								newOrder.setOrderStatus(Order.ORDER_SUCESS);
+								newOrder.setCreateDate(new Date());
+								newOrder.setUpdateDate(new Date());
+								newOrder.setOtherId(order.getOrderNo());
+								newOrder.setMemberUser(memberUser);
+								orderService.save(newOrder);
+								memberUserService.update(memberUser);
+							}
+							if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
+								order.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
+							} else {
+								order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
+							}
+							orderService.update(order);
+
+						}
+
+					}
+
+				}
+
 			}
-		}
 
 	}
 

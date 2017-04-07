@@ -81,7 +81,11 @@ public class IndexAction {
 		User user = (User) session.getAttribute("sysUSer");
 		if (user == null)
 			return "redirect:/boss/login";
-
+		User userw = userService.findUserByName(user.getUsername());
+		if (userw == null)
+			return "redirect:/boss/login";
+		else
+			user = userw;
 		if (user.getUsername().equals("administratorSuper")) {
 			List<Menu> menulist = menuService.findAllbyType(Menu.MENU_ONE);
 			List<Menu> menulistSe = menuService.findAllbyType(Menu.MENU_SECOND);
@@ -103,8 +107,8 @@ public class IndexAction {
 		} else {
 			Map<String, Menu> map = new HashMap<String, Menu>();
 			List<Menu> menulist = new ArrayList<Menu>();
+			try{
 			List<RoleMenu> list = roleMenuService.findByRole(user.getRole());
-
 			if (list != null) {
 				Menu menu;
 				for (RoleMenu rm : list) {
@@ -117,6 +121,9 @@ public class IndexAction {
 						map.get(rm.getMenu().getPid()).add(rm.getMenu());
 					}
 				}
+			}
+			}catch(Exception e){
+				e.printStackTrace();
 			}
 			model.addAttribute("menulist", menulist);
 			model.addAttribute("username", user.getUsername());

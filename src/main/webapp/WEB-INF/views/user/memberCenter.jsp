@@ -51,7 +51,7 @@
 
 							<tr>
 								<td>可用余额:<b style="color: #dc0000;">￥${memberUser.availableScore}</b></td>
-								<td>总金额:<b style="color: #dc0000;">￥${memberUser.totalScore}</b></td>
+								<td>总金额:<b style="color: #dc0000;">￥${memberUser.availableScore+memberUser.actionScore}</b></td>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 							</tr>

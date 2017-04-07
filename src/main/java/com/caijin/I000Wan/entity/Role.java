@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 import com.caijin.I000Wan.common.entity.BaseEntity;
 @Entity
-@Table(name = "SYS_ROLE")
+@Table(name = "sys_role")
 public class Role extends BaseEntity {
 private String roleName;
 private String descption;

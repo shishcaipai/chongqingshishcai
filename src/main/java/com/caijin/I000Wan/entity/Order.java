@@ -63,7 +63,6 @@ public class Order extends BaseEntity {
 	public final static int WPRIS_STATUS_ALL = 2;// 全部中奖
 
 	public final static int WPRIS_STATUS_WI = 3;// 未中奖
-	public final static int WPRIS_STATUS_PWI = 4;// 部分不中奖
 
 	public final static int CASHBACKSTATUS_NO = 0;// 订单返现状态
 	public final static int CASHBACKSTATUS_PORTION = 1;
@@ -278,6 +277,14 @@ public class Order extends BaseEntity {
 
 	public void setWprizeStatus(int wprizeStatus) {
 		this.wprizeStatus = wprizeStatus;
+	}
+	@Column(length = 10)
+	public int getCashBackStatus() {
+		return cashBackStatus;
+	}
+
+	public void setCashBackStatus(int cashBackStatus) {
+		this.cashBackStatus = cashBackStatus;
 	}
 
 }

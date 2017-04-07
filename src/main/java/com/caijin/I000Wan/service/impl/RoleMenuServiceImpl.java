@@ -33,6 +33,7 @@ public class RoleMenuServiceImpl extends CommonServiceImpl<RoleMenu, String>
 		try {
 			return roleMenuDao.findByRole(role.getId());
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ArrayList<RoleMenu>();
 		}
 	}

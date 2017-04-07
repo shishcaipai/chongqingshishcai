@@ -14,7 +14,7 @@ import com.caijin.I000Wan.entity.RoleMenu;
  * @since 2014-06-17
  */
 public interface RoleMenuDao extends CommonDao<RoleMenu,String>{
-	@Query(value="select * from SYS_ROLE_MENU p where p.role_id=?1",nativeQuery=true)
+	@Query(value="select * from sys_role_menu p where p.role_id=?1",nativeQuery=true)
 	List<RoleMenu> findByRole(String id);
 
 //	@Query("select a from Article a where a.type =?1 order by a.createDate desc ")

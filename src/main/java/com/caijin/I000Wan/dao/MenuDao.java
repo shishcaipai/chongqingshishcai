@@ -14,8 +14,8 @@ import com.caijin.I000Wan.entity.Menu;
  * @since 2014-06-17
  */
 public interface MenuDao extends CommonDao<Menu,String>{
-	@Query(value="select * from SYS_MENU m " +
-			" inner join SYS_ROLE_MENU d on d.`menu_id`=m.`id` " +
+	@Query(value="select * from sys_menu m " +
+			" inner join sys_role_menu d on d.`menu_id`=m.`id` " +
 			" where d.role_id=?1;",nativeQuery=true)
 	List<Menu> findByRoleId(String roleId);
 //	@Query(value="select *  from SYS_MENU  d  where  d.type = ?1;",nativeQuery=true)
