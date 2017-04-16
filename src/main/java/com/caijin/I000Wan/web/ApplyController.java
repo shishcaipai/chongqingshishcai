@@ -148,13 +148,13 @@ public class ApplyController {
 					if (withdrawPassword != null
 							&& Md5Util.generatePassword(withdrawPassword)
 									.equals(mu.getMoneyPwd())) {
-						if (mu.getAvailableScore() < new Integer(applyMoneyStr)) {
+						if (mu.getAvailableScore() < Float.valueOf(applyMoneyStr)) {
 							map.put("msg", "可用余额不足！");
 						} else {
 							ApplyRecord applyRecord = new ApplyRecord();
 							applyRecord.setBankNo(bamkCardNo);
 							applyRecord
-									.setApplyMoney(new Integer(applyMoneyStr));
+									.setApplyMoney(Float.valueOf(applyMoneyStr));
 							applyRecord.setCreateDate(new Date());
 							applyRecord.setBank(bank);
 							applyRecord.setBankName(bankName);
@@ -164,9 +164,9 @@ public class ApplyController {
 							applyRecord.setMemberUser(mu);
 
 							mu.setAvailableScore(mu.getAvailableScore()
-									- new Integer(applyMoneyStr));
-							mu.setActionScore(mu.getActionScore()
-									+ new Integer(applyMoneyStr));
+									- Float.valueOf(applyMoneyStr));
+							mu.setFrozenScore(mu.getFrozenScore()
+									+ Float.valueOf(applyMoneyStr));
 							memberUserService.update(mu);
 
 							applyRecordService.save(applyRecord);

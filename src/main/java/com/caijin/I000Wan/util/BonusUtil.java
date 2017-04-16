@@ -253,10 +253,84 @@ public class BonusUtil {
 
 		} else if (lmode.getType().equals(type315)) {
 
+			if ((mode.getDecade().equals(mode.getUnit()) && mode.getDecade()
+					.equals(mode.getHundredsplace()))
+					|| (mode.getUnit().equals(mode.getHundredsplace()) && mode
+							.getUnit().equals(mode.getDecade()))|| (mode.getHundredsplace().equals(mode.getUnit()) && mode
+									.getHundredsplace().equals(mode.getDecade()))) {
+				String kaijiangCode = openCode.substring(5);
+				if (kaijiangCode.indexOf(mode.getUnit()) != -1) {
+					if (kaijiangCode.indexOf(mode.getDecade()) != -1) {
+
+						return WFPublic.getpalyJj(type415);
+					}
+					if (kaijiangCode.indexOf(mode.getHundredsplace()) != -1) {
+
+						return WFPublic.getpalyJj(type415);
+					}
+				}
+				if (kaijiangCode.indexOf(mode.getDecade()) != -1) {
+					if (kaijiangCode.indexOf(mode.getUnit()) != -1) {
+
+						return WFPublic.getpalyJj(type415);
+					}
+					if (kaijiangCode.indexOf(mode.getHundredsplace()) != -1) {
+
+						return WFPublic.getpalyJj(type415);
+					}
+				}
+				if (kaijiangCode.indexOf(mode.getHundredsplace()) != -1) {
+					if (kaijiangCode.indexOf(mode.getUnit()) != -1) {
+
+						return WFPublic.getpalyJj(type415);
+					}
+					if (kaijiangCode.indexOf(mode.getDecade()) != -1) {
+
+						return WFPublic.getpalyJj(type415);
+					}
+				}
+			}
+
 		} else if (lmode.getType().equals(type316)) {
 
 		} else if (lmode.getType().equals(type415)) {
+			if ((mode.getMyriabit().equals(mode.getHundredsplace()) && mode.getMyriabit()
+					.equals(mode.getThousand()))
+					|| (mode.getThousand().equals(mode.getMyriabit()) && mode
+							.getThousand().equals(mode.getHundredsplace()))|| (mode.getHundredsplace().equals(mode.getMyriabit()) && mode
+									.getHundredsplace().equals(mode.getThousand()))) {
+			String kaijiangCode = openCode.substring(5);
+			if (kaijiangCode.indexOf(mode.getMyriabit()) != -1) {
+				if (kaijiangCode.indexOf(mode.getThousand()) != -1) {
 
+					return WFPublic.getpalyJj(type415);
+				}
+				if (kaijiangCode.indexOf(mode.getHundredsplace()) != -1) {
+
+					return WFPublic.getpalyJj(type415);
+				}
+			}
+			if (kaijiangCode.indexOf(mode.getThousand()) != -1) {
+				if (kaijiangCode.indexOf(mode.getMyriabit()) != -1) {
+
+					return WFPublic.getpalyJj(type415);
+				}
+				if (kaijiangCode.indexOf(mode.getHundredsplace()) != -1) {
+
+					return WFPublic.getpalyJj(type415);
+				}
+			}
+			if (kaijiangCode.indexOf(mode.getHundredsplace()) != -1) {
+				if (kaijiangCode.indexOf(mode.getMyriabit()) != -1) {
+
+					return WFPublic.getpalyJj(type415);
+				}
+				if (kaijiangCode.indexOf(mode.getThousand()) != -1) {
+
+					return WFPublic.getpalyJj(type415);
+				}
+			}
+			}
 		} else if (lmode.getType().equals(type416)) {
 
 		} else if (lmode.getType().equals(type417)) {

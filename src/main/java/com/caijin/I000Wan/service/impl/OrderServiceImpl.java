@@ -293,7 +293,15 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 		}
 		return 0;
 	}
-
+	@Override
+	public float getAgnetCurrentActionMoney(MemberUser user) {
+		try {
+			return orderDao.getAgnetActionCurrentMoney(user.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 //	@Override
 //	public float getAgnetylMoney(MemberUser user) {
 //		try {

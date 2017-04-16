@@ -239,15 +239,21 @@ public class AgentController {
 						user.getId());
 		model.addAttribute("memberUsers", memberUsers);
 		log.info("--------用户数量-----" + memberUsers.size());
-		model.addAttribute("almoney_one", orderService.getAgnetCzMoney(user));
-		model.addAttribute("almoney_t", orderService.getAgnetZsMoney(user));
-		model.addAttribute("almoney_th", orderService.getAgnettkzMoney(user));
-		model.addAttribute("almoney_f", orderService.getAgnetCurrentMoney(user));
-		model.addAttribute(
-				"almoney_p",
-				orderService.getAgnettkzMoney(user)+ orderService.getAgnetZsMoney(user)
-						+ orderService.getAgnetCurrentMoney(user)
-						- orderService.getAgnetCzMoney(user)- orderService.getAgnetZsMoney(user));
+		float cz = orderService.getAgnetCzMoney(user);
+		float zs = orderService.getAgnetZsMoney(user);
+		float kz = orderService.getAgnettkzMoney(user);
+		float currentMoney = orderService.getAgnetCurrentMoney(user)
+				+ orderService.getAgnetCurrentActionMoney(user);
+
+		// 充值金额
+		model.addAttribute("almoney_one", cz);
+		// 赠送金额
+		model.addAttribute("almoney_t", zs);
+		// 提现金额
+		model.addAttribute("almoney_th", kz);
+		// 当前金额
+		model.addAttribute("almoney_f", currentMoney);
+		model.addAttribute("almoney_p", kz + currentMoney - zs - cz);
 		model.addAttribute("size", size);
 
 		model.addAttribute("page", pageSize);

@@ -109,6 +109,8 @@ public interface OrderService extends CommonService<Order, String> {
 
 	float getAgnetCurrentMoney(MemberUser user);
 
+	float getAgnetCurrentActionMoney(MemberUser user);
+
 //	float getAgnetylMoney(MemberUser user);
 
 }

@@ -125,4 +125,7 @@ public interface OrderDao extends OrderCustomDao, CommonDao<Order, String> {
 	//当前代理下所有可用金额
 	@Query(value = "select  sum(m.available_score) from  member_user m  where m.commend_member_id=?1  ", nativeQuery = true)
 	public float getAgnetCurrentMoney(String id);
+	//当前代理下可用赠送金额
+	@Query(value = "select  sum(m.action_score) from  member_user m  where m.commend_member_id=?1  ", nativeQuery = true)
+	public float getAgnetActionCurrentMoney(String id);
 }

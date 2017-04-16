@@ -149,7 +149,7 @@ public class WFPublic {
 				|| id.equals("703") || id.equals("120") || id.equals("119")
 				|| id.equals("121")) // 前三星组选和值不参与倍投
 		{
-			palyMoney = 0;
+			palyMoney = (float) 6.6;
 		}
 
 		else if (id.equals("106") || id.equals("431") || id.equals("437")
