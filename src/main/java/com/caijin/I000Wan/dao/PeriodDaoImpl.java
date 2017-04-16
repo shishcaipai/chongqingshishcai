@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.caijin.I000Wan.common.dao.CustomBaseSqlDaoImpl;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 import com.caijin.I000Wan.web.OrderController;
 
 public class PeriodDaoImpl extends CustomBaseSqlDaoImpl implements
@@ -57,5 +59,17 @@ public class PeriodDaoImpl extends CustomBaseSqlDaoImpl implements
 			em.close();
 		}
 	}
+	public String getSql() {
+		String sql = "select mu.* from history_period mu  order by mu.opentime desc  ";
+		return sql;
+	}
 
+	public Result getfPeriodResults(PageModel pageModel) {
+		Result result = new Result();
+		result.setTotal(this.getCount(getSql()));
+		result.setRows(this.querySqlObjects(
+				getSql(),
+				pageModel.getPage(), pageModel.getRows()));
+		return result;
+	}
 }

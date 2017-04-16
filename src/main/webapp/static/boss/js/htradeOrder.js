@@ -8,7 +8,7 @@ $(function() {
 		striped : true,//设置为true将交替显示行背景。
 		collapsible : true,//显示可折叠按钮
 		toolbar:"#tb",//在添加 增添、删除、修改操作的按钮要用到这个
-		url:'../../boss/order/ajax_list',//url调用Action方法
+		url:'../../boss/order/hajax_list',//url调用Action方法
 		loadMsg : '数据装载中......',
 		singleSelect:true,//为true时只能选择单行
 		fitColumns:true,//允许表格自动缩放，以适应父容器

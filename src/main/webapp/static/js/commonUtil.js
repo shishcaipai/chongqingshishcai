@@ -15,6 +15,11 @@ function formatTime(str) {
 	}
 }
 
+function formatTimebi(str) {
+	if (str != null) {
+		return (new Date(parseInt(str))).Format("yyyy-MM-dd hh:mm"); //
+	}
+}
 Date.prototype.Format = function(fmt) {
 	var o = {
 		"M+" :this.getMonth() + 1, // 月份

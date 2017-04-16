@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 
 <%
 	String path = request.getContextPath();
@@ -23,6 +24,8 @@
 	rel="stylesheet" />
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
+	<script src="<%=basePath%>static/js/commonUtil.js"
+	type="text/javascript"></script>
 <script type="text/javascript" src="<%=basePath%>static/js/Method.js"></script>
 <script type="text/javascript">
 		function chexiao() {
@@ -70,7 +73,11 @@
 											<b style="font-weight: normal;">发起人:</b>
 									</span> <span
 										style="float: left; font-family: Arial; color: #333; font-weight: bold; padding-top: 3px;">
-											<b style="font-weight: normal;">${order.memberUser.userName}</b>***
+											<b style="font-weight: normal;"> <c:choose>
+													<c:when test="${order.orderType==4}">
+											${porder.memberUser.userName}</b>*** </c:when> <c:otherwise>
+											${order.memberUser.userName}</b>***
+											</c:otherwise> </c:choose>
 									</span> <span
 										style="float: left; padding-right: 15px; padding-top: 2px;">
 											&nbsp; </span></td>
@@ -80,9 +87,23 @@
 									<td></td>
 									<td class="tc_tzxq_nr">彩种:&nbsp;&nbsp;
 										${caipiaotype}&nbsp; <span class="hemai_red">${parsh}</span>&nbsp;期
-										方案编号:<span style="color: #999;">${order.orderNo}</span>&nbsp;&nbsp;&nbsp;
-										此方案发起时间：<span style="color: #999;">${order.createDate}</span>&nbsp;&nbsp;&nbsp;
-										认购截止时间：<span style="color: #999;">${endDate}</span>
+										方案编号:<span style="color: #999;"> <c:choose>
+												<c:when test="${order.orderType==4}">
+											${porder.orderNo}
+										</c:when>
+												<c:otherwise>
+											${order.orderNo}
+											</c:otherwise>
+											</c:choose>
+									</span>&nbsp;&nbsp;&nbsp; 此方案发起时间：<span style="color: #999;"> <c:choose>
+												<c:when test="${order.orderType==4}">
+											<fmt:formatDate type="both" value="${porder.createDate}" />
+										</c:when>
+												<c:otherwise>
+											<fmt:formatDate  type="both" value="${order.createDate}" />
+											</c:otherwise>
+											</c:choose>
+									</span>&nbsp;&nbsp;&nbsp; 认购截止时间：<span style="color: #999;">${endDate}</span>
 									</td>
 								</tr>
 
@@ -93,18 +114,28 @@
 											cellspacing="0" cellpadding="0">
 											<tbody>
 												<tr class="cy_hm_04bt">
-													<td>总金额</td>
-													<td>倍数</td>
-													<td>购买时间</td>
-													<td>购买进度</td>
-													<td>认购状态</td>
-													<td>中奖后是否停止追号</td>
+													<td >总金额</td>
+													<td >倍数</td>
+													<td >购买时间</td>
+													<td >购买进度</td>
+													<td >认购状态</td>
+													<td >是否停止追号</td>
 												</tr>
 												<tr class="cy_hm_04nr">
-													<td>￥<span class="hemai_red">${order.totalMoney}</span>元
+													<td>￥<span class="hemai_red"> <c:choose>
+																<c:when test="${order.orderType==4}">
+											${porder.totalMoney}
+										</c:when>
+																<c:otherwise>
+											${order.totalMoney}
+											</c:otherwise>
+															</c:choose>
+													</span>元
 													</td>
-													<td>${order.totalMoney}倍</td>
-													<td><span class="hemai_red">${order.createDate}</span></td>
+													<td>${beisu}倍</td>
+													<td><span class="hemai_red">
+													<fmt:formatDate type="both" pattern="yyyy-MM-dd HH:mm" value="${order.createDate}" />
+													</span></td>
 													<c:if test="${order.orderType ==2}">
 														<td></td>
 													</c:if>
@@ -120,16 +151,19 @@
 															test="${order.orderStatus ==2}"> 失败</c:if> <c:if
 															test="${order.orderStatus ==3}"> 超时</c:if> <c:if
 															test="${order.orderStatus ==4}"> 订单撤销</c:if></td>
-													<td><c:if test="${order.isZhuiHao ==0}">
+													<td>
+														<%-- <c:if test="${order.isZhuiHao ==0}">
                                          否
                                     	</c:if> <c:if
 															test="${order.isZhuiHao ==1}">
                                          是
-                                    	</c:if> | <c:if test="${order.isCut ==0}">
+                                    	</c:if> | --%> <c:if
+															test="${order.isCut ==0}">
                                          否
                                     	</c:if> <c:if test="${order.isCut ==1}">
                                          是
-                                    	</c:if></td>
+                                    	</c:if>
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -145,7 +179,7 @@
 									<c:forEach var="orderDetail" items="${requestScope.details}">
                                            ${orderDetail.buyCaiNumber}；
 									</c:forEach> 
-													</c:if>			
+									</c:if>			
 									<c:if test="${order.orderType ==3}">
 													<c:if test="${heDetail.type ==1}"> 	<c:forEach
 														var="orderDetail" items="${requestScope.details}">
@@ -155,9 +189,19 @@
 														var="orderDetail" items="${requestScope.details}">
                                            ${orderDetail.buyCaiNumber}；
 									</c:forEach> </c:if>
-										<c:if test="${heDetail.type ==3}">此方案保密 </c:if>
-													</c:if>
-													<c:if test="${order.orderType ==4}">
+										<c:if test="${heDetail.type ==3}">
+									<c:if test="${order.memberUser.userName !=sessionScope.memberUser.userName}">
+									   此方案保密
+									</c:if>
+									<c:if test="${order.memberUser.userName ==sessionScope.memberUser.userName}">
+									<c:forEach
+														var="orderDetail" items="${requestScope.details}">
+                                           ${orderDetail.buyCaiNumber}；
+									</c:forEach>
+									</c:if>
+										 </c:if>
+										</c:if>
+									<c:if test="${order.orderType ==4}">
 														<c:if test="${heDetail.type ==1}"> 	<c:forEach
 														var="orderDetail" items="${requestScope.details}">
                                            ${orderDetail.buyCaiNumber}；
@@ -198,7 +242,14 @@
 												<c:forEach var="period" items="${requestScope.order.period}">
 													<tr class="cy_hm_04nr">
 														<td>${period.lotteryPeriod}</td>
-														<td><span class="hemai_red">￥${order.totalMoney/pNum}
+														<td><span class="hemai_red">￥ <c:choose>
+																	<c:when test="${order.orderType==4}">
+											${porder.totalMoney}
+										</c:when>
+																	<c:otherwise>
+											${order.totalMoney}
+											</c:otherwise>
+																</c:choose>
 														</span>元</td>
 														<td>${period.beisu}倍</td>
 														<td>${period.letterPharse}</td>
@@ -252,10 +303,26 @@
 				<td style="display: none"></td>
 				<td style="padding-left: 15px;">${heDetail.memberUser.userName}***</td>
 
-				<td><span class="new_hemai_red">${order.totalMoney}元</span></td>
-				<td><span class="new_hemai_red">￥${order.totalMoney/heDetail.fensum}元</span></td>
+				<td><span class="new_hemai_red"> <c:choose>
+							<c:when test="${order.orderType==4}">
+											${porder.totalMoney}
+										</c:when>
+							<c:otherwise>
+											${order.totalMoney}
+											</c:otherwise>
+						</c:choose> 元
+				</span></td>
+				<td><span class="new_hemai_red">￥ <c:choose>
+							<c:when test="${order.orderType==4}">
+											${porder.totalMoney/heDetail.fensum}
+										</c:when>
+							<c:otherwise>
+											${order.totalMoney/heDetail.fensum}
+											</c:otherwise>
+						</c:choose> 元
+				</span></td>
 				<td><span class="new_hemai_red">${leftNum/heDetail.fensum*100}%</span></td>
-				<td>${heDetail.subGuaranteeSum}</td>
+				<td>${heDetail.fensum-heDetail.subGuaranteeSum}</td>
 				<td class="new_hemai_an">&nbsp;&nbsp;&nbsp;&nbsp; <span
 					style="margin-left: 25px"><c:if
 							test="${order.orderStatus ==0}">下单待确认</c:if> <c:if
@@ -304,7 +371,7 @@
 																	<td>认购份数</td>
 																	<td>认购金额</td>
 																	<td>购买时间</td>
-																	<td>资金</td>
+																	<td>奖金</td>
 																</tr>
 																<c:forEach var="hemaiOrder"
 																	items="${requestScope.hemaiorders}">
@@ -315,7 +382,8 @@
 																		</td>
 																		<TD>认购金额： ${hemaiOrder.floatManay}</td>
 																		<td>${hemaiOrder.createDate}</td>
-																		<td><span class="hemai_red">￥ 0.00</span>元</td>
+																		<td><span class="hemai_red">￥${hemaiOrder.currentWPMoney}
+																		</span>元</td>
 																	</tr>
 																</c:forEach>
 															</tbody>

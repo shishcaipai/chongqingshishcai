@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -69,18 +69,18 @@
 								id="DataList" class="ylf_tg_bg">
 								<thead>
 									<tr>
-										<th width="20%">会员</th>
-										<th width="20%">注册时间</th>
-										<th width="20%">消费总额</th>
-										<th width="20%">返利总额</th>
-										<th width="10%">查看</th>
+										<th style="text-align: center;" width="20%">注册时间</th>
+										<th style="text-align: center;" width="20%">会员</th>
+										<th style="text-align: center;" width="20%">消费总额</th>
+										<th style="text-align: center;" width="20%">返利总额</th>
+										<th style="text-align: center;" width="10%">查看</th>
 									</tr>
 								</thead>
 								<tbody>
 
 <c:forEach var="user" items="${requestScope.memberUsers }">
-										<tr class="page_tzjl01" >
-										<td style="text-align: center;">${user.createdate }</td>
+										<tr class="page_tzjl02" >
+										<td style="text-align: center;"><fmt:formatDate  type="both" value="${user.createdate}" pattern="yyyy-MM-dd"/></td>
 										<td style="text-align: center;">${user.username }</td>
 										<td style="text-align: center;">${user.money }</td>
 										<td style="text-align: center;">${user.pmoney }</td>

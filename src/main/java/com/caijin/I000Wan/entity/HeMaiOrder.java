@@ -21,6 +21,9 @@ public class HeMaiOrder extends BaseEntity{
 	private int status=0;
 	private String orderNo;
 	private HeMaiOrderDetail orderDetail;
+	
+	public float currentWPMoney;// 当前中奖金额
+	
 	@Column(length = 10)
 	public Integer getSubGuaranteeSum() {
 		return subGuaranteeSum;
@@ -71,6 +74,14 @@ public class HeMaiOrder extends BaseEntity{
 
 	public void setOrderDetail(HeMaiOrderDetail orderDetail) {
 		this.orderDetail = orderDetail;
+	}
+
+	public float getCurrentWPMoney() {
+		return currentWPMoney;
+	}
+
+	public void setCurrentWPMoney(float currentWPMoney) {
+		this.currentWPMoney = currentWPMoney;
 	}
 
 }

@@ -101,4 +101,14 @@ public interface OrderService extends CommonService<Order, String> {
 	Result findzjOrderListByCondition(PageModel pageModel, String userName,
 			String startDate, String endDate);
 
+	float getAgnetCzMoney(MemberUser user);
+
+	float getAgnetZsMoney(MemberUser user);
+
+	float getAgnettkzMoney(MemberUser user);
+
+	float getAgnetCurrentMoney(MemberUser user);
+
+//	float getAgnetylMoney(MemberUser user);
+
 }

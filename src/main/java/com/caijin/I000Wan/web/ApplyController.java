@@ -102,68 +102,87 @@ public class ApplyController {
 		MemberUser mu = (MemberUser) request.getSession().getAttribute(
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
 
-		String bamkCardNo = request.getParameter("bamkCardNo");
+		String cardTypes = request.getParameter("cardType");
 		String applyMoneyStr = request.getParameter("applyMoney");
-		String bankCode = request.getParameter("bankCode");
-		String idCardNo = request.getParameter("idCardNo");
-		String applyName = request.getParameter("applyName");
+		// String idCardNo = request.getParameter("idCardNo");
+		// String applyName = request.getParameter("applyName");
 		String withdrawPassword = request.getParameter("withdrawPassword");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sucess", false);
 
-		Bank bank = null;
-
+		int cardType = 0;
+		Bank bank;
+		  String bamkCardNo;
+		  String idCardNo;
+	        String applyName;
+	        String bankName;
 		try {
-			bank = Bank.valueOf(bankCode);
-			if (mu != null) {
-				try {
-					MemberUser user = memberUserService.find(mu.getId());
-					mu = user;
-					request.getSession().setAttribute(
-							MemberUser.FRONT_MEMBER_LOGIN_SESSION, mu);
-				} catch (Exception e) {
-					e.printStackTrace();
-					map.put("msg", "提款申请失败，用户信息已失效请重新登陆！");
-					return map;
-				}
-				log.info("可用余额:" + mu.getAvailableScore());
-				log.info("密码:" +  Md5Util.generatePassword(withdrawPassword));
-				log.info("密码:" +  mu.getMoneyPwd());
-				if (withdrawPassword != null
-						&& Md5Util.generatePassword(withdrawPassword).equals(
-								mu.getMoneyPwd())) {
-					if (mu.getAvailableScore() < new Integer(applyMoneyStr)) {
-						map.put("msg", "可用余额不足！");
-					} else {
-						ApplyRecord applyRecord = new ApplyRecord();
-						applyRecord.setBankNo(bamkCardNo);
-						applyRecord.setApplyMoney(new Integer(applyMoneyStr));
-						applyRecord.setCreateDate(new Date());
-						applyRecord.setBank(bank);
-						applyRecord.setBankName(bank == null ? "" : bank
-								.getName());
-						applyRecord.setApplyName(applyName);
-						applyRecord.setAuditStatus(ApplyRecord.UN_AUDIT);// 未审核
-						applyRecord.setIdCardNo(idCardNo);
-						applyRecord.setMemberUser(mu);
-
-						mu.setAvailableScore(mu.getAvailableScore()
-								- new Integer(applyMoneyStr));
-						mu.setActionScore(mu.getActionScore()
-								+ new Integer(applyMoneyStr));
-						memberUserService.update(mu);
-
-						applyRecordService.save(applyRecord);
-
-						map.put("sucess", true);
-						map.put("msg", "提款申请成功！");
+			cardType = Integer.valueOf(cardTypes);
+			if (cardType == 1){
+				bank=Bank.ZFB;
+				bamkCardNo=mu.getZfbCode();
+				bankName=Bank.ZFB.getName();
+			}else{
+				bank=Bank.CCB;
+				bamkCardNo=mu.getBankCode();
+				bankName=mu.getBankName();
+			}
+			if(bamkCardNo!=null&&!bamkCardNo.equals("")){
+			applyName=mu.getRealName();
+			idCardNo=mu.getIdentityCard();
+      
+				if (mu != null) {
+					try {
+						MemberUser user = memberUserService.find(mu.getId());
+						mu = user;
+						request.getSession().setAttribute(
+								MemberUser.FRONT_MEMBER_LOGIN_SESSION, mu);
+					} catch (Exception e) {
+						e.printStackTrace();
+						map.put("msg", "提款申请失败，用户信息已失效请重新登陆！");
+						return map;
 					}
+					log.info("可用余额:" + mu.getAvailableScore());
+					log.info("密码:" + Md5Util.generatePassword(withdrawPassword));
+					log.info("密码:" + mu.getMoneyPwd());
+					if (withdrawPassword != null
+							&& Md5Util.generatePassword(withdrawPassword)
+									.equals(mu.getMoneyPwd())) {
+						if (mu.getAvailableScore() < new Integer(applyMoneyStr)) {
+							map.put("msg", "可用余额不足！");
+						} else {
+							ApplyRecord applyRecord = new ApplyRecord();
+							applyRecord.setBankNo(bamkCardNo);
+							applyRecord
+									.setApplyMoney(new Integer(applyMoneyStr));
+							applyRecord.setCreateDate(new Date());
+							applyRecord.setBank(bank);
+							applyRecord.setBankName(bankName);
+							applyRecord.setApplyName(applyName);
+							applyRecord.setAuditStatus(ApplyRecord.UN_AUDIT);// 未审核
+							applyRecord.setIdCardNo(idCardNo);
+							applyRecord.setMemberUser(mu);
 
+							mu.setAvailableScore(mu.getAvailableScore()
+									- new Integer(applyMoneyStr));
+							mu.setActionScore(mu.getActionScore()
+									+ new Integer(applyMoneyStr));
+							memberUserService.update(mu);
+
+							applyRecordService.save(applyRecord);
+
+							map.put("sucess", true);
+							map.put("msg", "提款申请成功！");
+						}
+
+					} else {
+						map.put("msg", "提款申请失败，提款密码验证错误！");
+					}
 				} else {
-					map.put("msg", "提款申请失败，提款密码验证错误！");
+					map.put("msg", "提款申请失败，用户信息已失效请重新登陆！");
 				}
-			} else {
-				map.put("msg", "提款申请失败，用户信息已失效请重新登陆！");
+			}else{
+				map.put("msg", "提款申请失败，请先绑定银行或支付宝信息！");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

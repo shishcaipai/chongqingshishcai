@@ -25,6 +25,23 @@
 	type="text/css">
 <LINK href="<%=basePath%>static/new/css/v1.css" type=text/css
 	rel=stylesheet>
+	<script type="text/javascript"
+		src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+	function showdiv(targetid){
+		if(1==targetid){
+		$("#pay_weixin_alipay").css('display','none'); 
+		$("#pay_weixin").css('display','block');
+	}else{
+		$("#pay_weixin").css('display','none'); 
+		$("#pay_weixin_alipay").css('display','block');
+	}
+	    /*   var target=document.getElementById(targetid);
+	      var current=document.getElementById(objN);
+	                target.style.display="block";
+	                current.style.display="none"; */
+	}
+</script>
 </HEAD>
 <style>
 .info {
@@ -121,13 +138,11 @@ div .a {
 
 							<li id="li_pay_online"
 								style="float: left; margin-left: 25px; display: none;"><b
-								style="color: black";>网银支付</b></li>
-							<li id="li_pay_weixin"
-								style="float: left; margin-left: 25px; "><b
-								style="color: black">微信转帐</b></li>
-							<li id="li_pay_alipay"
-								style="float: left; margin-left: 25px;"><b
-								style="color: black;">支付宝转账</b></li>
+								style="color: black"; >网银支付</b></li>
+							<li id="li_pay_weixin" style="float: left; margin-left: 25px;"
+								onclick="showdiv(2)"><b style="color: black">微信转帐</b></li>
+							<li id="li_pay_alipay" style="float: left; margin-left: 25px;"
+								onclick="showdiv(1)"><b style="color: black;">支付宝转账</b></li>
 
 
 						</ul>
@@ -140,34 +155,21 @@ div .a {
 									width="100%">
 									<tbody>
 										<tr>
-										<td valign="top">
-											微信：
-										</td>
-											<td class="nl">
-											<img
+											<td class="nl"><img
 												src="<%=basePath%>static/images/weixin_alipay.png"></td>
-												<td valign="top">
-											  支付宝：
-										</td>
-											<td class="nl">
-										    
-											<img src="<%=basePath%>static/images/zhifubao_alipay.png"/>
 											</td>
-											</tr>
-											<tr>
-											<td colspan="4" >
-											<br>
-											<br>
-											<hr>
-
-												<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服。谢谢！</h4>
-												<font style="font-size: 22px; font-weight: bold;">扫码支付须知:</font><br>
-											<br> <font style="font-size: 14px;">1:请用微信或支付宝扫描二维码或长按图片识别二维码进行付款。</font><br>
-												<font style="font-size: 14px;"> 2:支持各大银行储蓄卡、信用卡在线支付，<span
-													style="font-size: 14px; color: red;">微信扫码支付单笔限额3000</span>,支持多次充值。
-											</font><br> <font style="font-size: 14px;">3:大额充值请选择<span
-													style="font-size: 14px; color: red;">在线充值</span></font><br> <br>
-											<br></td>
+											<td>
+												<hr>
+													<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名：<font style="font-size: 14px;color: black;">${sessionScope.memberUser.userName}</font>，或及时联系在线客服。谢谢！</h4>
+													<font style="font-size: 22px; font-weight: bold;">扫码支付须知:</font><br>
+														<br> <font style="font-size: 14px;">1:请用微信扫描二维码或长按图片识别二维码进行付款。</font><br>
+																<font style="font-size: 14px;">
+																	2:可添加微信号：<font style="font-size: 14px;color: red;">HongYunCaiPiao88 </font>添加好友转账充值<span
+																	style="font-size: 14px; color: red;"></span>
+															</font><br> <font style="font-size: 14px;">3:微信扫码支付单笔限额10000,支持多次充值。<span
+																		style="font-size: 14px; color: red;"></span></font><br>
+																		<br> <br>
+											</td>
 										</tr>
 
 									</tbody>
@@ -183,18 +185,19 @@ div .a {
 									width="100%">
 									<tbody>
 										<tr>
-											<td class="nl"><img src="<%=basePath%>static/images/zhifubao_alipay.png">
-											</td>
-											<td style="line-height: 23px; padding: 5px 0px"><br>
-											<br>
-											<br>
-											<br>
-												<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服，谢谢！</h4>
-												<font style="font-size: 22px; font-weight: bold;">支付备注:<!--<span id="alipay_msg_txt" style="padding-right:22px;color: #F30;"></span>--></font><br>
-											<br> <font style="font-size: 16px; font-weight: bold;">扫描二维码,添加好友，充值即<span
-													style="padding-right: 22px; color: #F30;"> 10元</span>充值红包。
-											</font><br>
-											<br></td>
+											<td class="nl"><img
+												src="<%=basePath%>static/images/zhifubao_alipay.jpg"></td>
+											<td >
+											<hr>
+											<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名:<font style="font-size: 14px;color: black;">${sessionScope.memberUser.userName}</font>，或及时联系在线客服。谢谢！</h4>
+													<font style="font-size: 22px; font-weight: bold;">扫码支付须知:</font><br>
+														<br> <font style="font-size: 14px;">1:请用支付宝扫描二维码或长按图片识别二维码进行付款。</font><br>
+																<font style="font-size: 14px;">
+																	2:可添加支付宝账号：<font style="font-size: 14px; color: red;">212395988@qq.com 谢佳辉 </font> 添加好友转账充值<span
+																	style="font-size: 14px; color: red;"></span>
+															</font><br> <font style="font-size: 14px;" color: red;>3:为了你的资金及时到账，充值时请备注您的用户名：<font style="font-size: 14px; color: red;">${sessionScope.memberUser.userName}</font>，或及时联系在线客服。谢谢！。<span
+																		style="font-size: 14px; color: red;"></span></font><br>
+																		<br> <br></td>
 										</tr>
 									</tbody>
 								</table>
@@ -212,17 +215,18 @@ div .a {
 											<td class="nl"><img src="/res/img/alipay888.png"
 												width="267" height="263"></td>
 											<td style="line-height: 23px; padding: 5px 0px"><img
-												src="/res/img/alipay_logo.png"><br>
-											<br>
-												<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服，谢谢！</h4>
+												src="/res/img/alipay_logo.png"><br> <br>
+															<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服，谢谢！</h4>
 
-												<font style="font-size: 22px; font-weight: bold;">支付备注:<!--<span id="alipay_msg_txt" style="padding-right:22px;color: #F30;"></span>--></font><br>
-											<br> <font style="font-size: 16px; font-weight: bold;">支付校验:<span
-													style="padding-right: 22px; color: #F30;"> 方</span></font>键<br>
-											<br> <font style="font-size: 16px; font-weight: bold;">使用支付宝扫码支付，即送<span
-													style="padding-right: 22px; color: #F30;"> 10元</span>充值红包。
-											</font><br>
-											<br></td>
+															<font style="font-size: 22px; font-weight: bold;">支付备注:<!--<span id="alipay_msg_txt" style="padding-right:22px;color: #F30;"></span>--></font><br>
+																<br> <font
+																	style="font-size: 16px; font-weight: bold;">支付校验:<span
+																		style="padding-right: 22px; color: #F30;"> 方</span></font>键<br>
+																		<br> <font
+																			style="font-size: 16px; font-weight: bold;">使用支付宝扫码支付，即送<span
+																				style="padding-right: 22px; color: #F30;">
+																					10元</span>充值红包。
+																		</font><br> <br></td>
 										</tr>
 									</tbody>
 								</table>

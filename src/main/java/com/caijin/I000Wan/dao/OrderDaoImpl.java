@@ -80,12 +80,6 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 		return this.querySqlObjects(sql);
 	}
 
-	// public void updateOrderByQihao(String orderId, String qihao) {
-	// String sql = "update trade_order set order_status=2 where order_on='"
-	// + orderId + "'";
-	// this.exceSql(sql);
-	//
-	// }
 
 	public List<Map> findMemberByAgentUserId(int i, int pageSize, String id) {
 		String sql = "select mu.id as id, uu.money,uu.pmoney,mu.user_name as username,mu.real_name as realname,mu.telephone as telephone,mu.create_date as createdate,mu.email as email from member_user mu  left join (select sum(td.total_money) as money,sum(td.current_wp_money) as pmoney,td.member_id from trade_order td  where td.order_status=1 group by td.member_id) as uu on uu.member_id=mu.id  where   mu.commend_member_id = '"
@@ -96,26 +90,13 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 
 	public List<Map> findMemberStaticIncomeByAgentUserId(int i, int pageSize,
 			String id) {
-		String sql = "select atb.applyMoney, uu.money,uu.pmoney, score.actionScore,score.available, mu.id as id,mu.user_name as username,mu.type as type,mu.available_score as totalActionScore,mu.create_date as createdate,mu.action_score as totalactionScore from member_user mu  left join (select sum(td.total_money) as money,sum(td.current_wp_money) as pmoney,td.member_id from trade_order td  where td.order_status=1 group by td.member_id) as uu on uu.member_id=mu.id "
+		String sql = "select atb.applyMoney, uu.money,uu.pmoney, score.actionScore,score.available, mu.id as id,mu.user_name as username,mu.type as type,mu.available_score as totalavailabeScore,mu.create_date as createdate,mu.action_score as totalactionScore from member_user mu  left join (select sum(td.total_money) as money,sum(td.current_wp_money) as pmoney,td.member_id from trade_order td  where td.order_status=1 group by td.member_id) as uu on uu.member_id=mu.id "
 				+ "left join (select sum(dd.action_score) as actionScore,sum(dd.available_score) as available,dd.member_id from chongzhi_record dd  group by dd.member_id) as score on score.member_id=mu.id  left join (select sum(map.apply_money) as applyMoney,map.member_id from apply_record map  where map.audit_status=1 group by map.member_id) as atb on atb.member_id=mu.id  where   mu.commend_member_id = '"
 				+ id + "'    order by mu.create_date desc;";
 		log.info(sql);
 		return this.querySqlObjects(sql);
 	}
 
-	// public int updateCaiNUmByID(String num, String id) {
-	// String sql = "update order_detail set buy_cai_number='" + num
-	// + "' where id='" + id + "'";
-	// return this.exceSql(sql);
-	// }
-	// public void updateOrderByOrderNo(String orderNO, int status) {
-	// String sql =
-	// "update trade_order set wprize_status="+status+" where order_on='"
-	// + orderNO + "'";
-	// log.info(sql);
-	// this.exceSql(sql);
-	//
-	// }
 
 	@Transactional
 	@Override
@@ -177,7 +158,7 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 			sql += "and torder.order_time <= '" + endDate + "' ";
 		}
 
-		sql += " order by torder.order_time desc ";
+		sql += " order by torder.create_date desc ";
 		return sql;
 	}
 
@@ -185,7 +166,7 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 		String sql = "select torder.order_no,torder.name,torder.order_type,torder.total_money,torder.cash_back_status,"
 				+ "torder.order_status,torder.pay_status,torder.create_date,"
 				+ "mu.user_name,mu.real_name,mu.address,mu.telephone, torder.wprize_status, torder.auto_prizes "
-				+ "from trade_order torder,member_user mu where (torder.wprize_status=1 or torder.wprize_status=2 ) and  (torder.cash_back_status=0 or torder.cash_back_status=1 ) and torder.member_id=mu.id ";
+				+ "from trade_order torder,member_user mu where (torder.wprize_status=1 or torder.wprize_status=2 ) and torder.member_id=mu.id ";
 
 		if (userName != null && !userName.equals("")) {
 			sql += "and mu.user_name like '%" + userName + "%' ";
@@ -203,7 +184,7 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 			sql += "and torder.order_time <= '" + endDate + "' ";
 		}
 
-		sql += " order by torder.order_time desc ";
+		sql += " order by torder.create_date desc ";
 		return sql;
 	}
 
@@ -259,4 +240,5 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 		// this.exceSql(sql2);
 
 	}
+
 }

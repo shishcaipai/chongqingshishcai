@@ -27,7 +27,6 @@
 							{field:'telephone',title:'手机号码',width:90,align:'center'},
 							{field:'identity_card',title:'身份证',width:90,align:'center'},
 							{field:'bank_code',title:'支付宝账号',width:90,align:'center'},
-							{field:'total_score',title:'总金额',width:90,align:'center'},
 							{field:'available_score',title:'可取金额',width:100,align:'center'},
 							{field:'action_score',title:'赠送金额',width:100,align:'center'},
 							{field:'frozen_score',title:'冻结金额',width:100,align:'center'},

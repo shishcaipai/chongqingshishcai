@@ -373,7 +373,6 @@
 								<div class="promotionText">
 									<ul id="topInfoTab" class="grayTitle">
 										<li class="active">公告</li>
-
 									</ul>
 									<div id="topNotice" class="promotion_con">
 										<ul class="promotion_list">
@@ -453,9 +452,9 @@
 														pattern="##.##" minFractionDigits="2" /></span></td>
 											<td style="color: #333;"><span style="float: left;">
 													<fmt:formatNumber
-														value="${(order.fensum - order.subGuaranteeSum) * 100 / order.fensum }"
+														value="${(order.fensum-order.otherBuyNum) * 100 / order.fensum }"
 														pattern="##.##" minFractionDigits="2" />% + <fmt:formatNumber
-														value="${( order.fensum - order.otherBuyNum) * 100 / order.fensum }"
+														value="${( 1) * 100 / order.fensum }"
 														pattern="##.##" minFractionDigits="2" />% </td>
 											<td>${order.otherBuyNum }</td>
 
@@ -508,14 +507,13 @@
 						<div id="infoBox">
 							<div class="zx_module clearfix">
 								<div class="info_title">
-									<a target="_blank" href="/News/" title="彩票资讯">彩票资讯</a>
+									<a target="_blank" href="<%=basePath%>notices" title="彩票资讯">彩票资讯</a>
 								</div>
 								<div class="zx_block">
 									<ul class="news_list">
-
 										<c:forEach var="art" items="${requestScope.zixian }">
 											<li
-												style="width: 500px; height: 22px; overflow: hidden; line-height: 22px; margin: 6px;">
+												style="width: 500px; height: 22px; overflow: hidden; line-height: 22px; margin: 5px;">
 												<em>[资讯]</em> <a
 												href="<%=basePath %>article/article?id=${art.id }"
 												target="_blank" title="${art.title }" style="color: #333;">${art.title }</a>
@@ -652,30 +650,30 @@
 					<img alt="快购彩票网"
 						src="<%=basePath%>static/new/images/fo2.png" />
 				</h1>
-				<li>・<a href="<%=basePath%>articles?id=cz1">充值方式</a></li>
-				<li>・<a href="<%=basePath%>articles?id=cz2">充值流程</a></li>
-				<li>・<a href="<%=basePath%>articles?id=cz3">修改真实姓名</a></li>
-				<li>・<a href="<%=basePath%>articles?id=cz4">修改银行卡</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=cz1">充值方式</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=cz2">充值流程</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=cz3">修改真实姓名</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=cz4">修改银行卡</a></li>
 			</ul>
 			<ul class="fo3">
 				<h1>
 					<img alt="快购彩票网"
 						src="<%=basePath%>static/new/images/fo3.png" />
 				</h1>
-				<li>・<a href="<%=basePath%>articles?id=tk1">如何提款</a></li>
-				<li>・<a href="<%=basePath%>articles?id=tk2">到账时间</a></li>
-				<li>・<a href="<%=basePath%>articles?id=tk3">银行提款费率</a></li>
-				<li>・<a href="<%=basePath%>articles?id=tk4">提款注意</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=tk1">如何提款</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=tk2">到账时间</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=tk3">银行提款费率</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=tk4">提款注意</a></li>
 			</ul>
 			<ul class="fo4" style="border-right: none">
 				<h1>
 					<img alt="快购彩票网"
 						src="<%=basePath%>static/new/images/fo4.png" />
 				</h1>
-				<li>・<a href="<%=basePath%>articles?id=bz1">如何注册网站会员</a></li>
-				<li>・<a href="<%=basePath%>articles?id=bz2">注册时需注意什么</a></li>
-				<li>・<a href="<%=basePath%>articles?id=bz3">如何注销会员帐户</a></li>
-				<li>・<a href="<%=basePath%>articles?id=bz4">密码忘记了怎么办</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=bz1">如何注册网站会员</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=bz2">注册时需注意什么</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=bz3">如何注销会员帐户</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=bz4">密码忘记了怎么办</a></li>
 			</ul>
 
 		</div>

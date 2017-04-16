@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.caijin.I000Wan.common.service.CommonService;
 import com.caijin.I000Wan.entity.Period;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 
 public interface PeriodService extends CommonService<Period,String>{
 
@@ -53,4 +55,6 @@ public interface PeriodService extends CommonService<Period,String>{
 	List<Period> findbyQIhao(String shangQinhao, Integer statusBefore);
 
 	List<Period> findPeriodByOIdAndStatus(String orderNo, Integer winningCurrent);
+	
+	 Result getPeriodResults(PageModel pageModel) ;
 }

@@ -101,9 +101,9 @@
 												pattern="##.##" minFractionDigits="2" /></span></td>
 									<td style="color: #333;"><span style="float: left;">
 											<fmt:formatNumber
-												value="${(order.fensum - order.subGuaranteeSum) * 100 / order.fensum }"
+												value="${(order.fensum-order.otherBuyNum) * 100 / order.fensum }"
 												pattern="##.##" minFractionDigits="2" />% + <fmt:formatNumber
-												value="${( order.fensum - order.otherBuyNum) * 100 / order.fensum }"
+												value="${(1) * 100 / order.fensum }"
 												pattern="##.##" minFractionDigits="2" />% </td>
 									<td>${order.otherBuyNum }</td>
 
@@ -129,7 +129,7 @@
 														style="margin-left: 25px">订单取消</span></td></c:if>
 														<c:if test="${order.order.orderStatus ==0}">
 													<td class="new_hemai_srk"><input name="buynum"
-														type="text" class="rec_text" id="${order.id}" value="0" />
+														type="text" class="rec_text" id="${order.id}" value="1" />
 													</td>
 													<td class="new_hemai_an"><a
 														onclick="javascript:btnBuy(this);"

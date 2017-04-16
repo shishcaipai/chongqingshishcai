@@ -44,30 +44,33 @@
 				</div>
 				<div class="p_nr">
 					<!--账户明细-->
-					<table class="zhmx" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td>
-								<table width="100%" border="0" cellspacing="0" cellpadding="0"
-									class="zhmx_nr01">
-									<tr>
+							<TABLE cellSpacing=0 cellPadding=0 border="0" border=0
+						class="page_tzjl">
+								<TBODY>
+							<tr class="page_tzjl01">
 										<td width="130" align="center" valign="middle">交易时间</td>
 										<td width="280" align="center" valign="middle">交易类型&nbsp;|&nbsp;订单号</td>
 										<td width="100" align="center" valign="middle">账户收入</td>
 										<td width="100" align="center" valign="middle">认购金额</td>
 										<td align="center" valign="middle">备&nbsp;&nbsp;注</td>
+										<td align="center" valign="middle">操作</td>
 									</tr>
 									<c:forEach var="order" items="${requestScope.orders }">
-							<tr>
+							<tr  class="page_tzjl02">
 							<td width="130" align="center" valign="middle">${order.orderTime }</td>
 								<td width="280" align="center" valign="middle"><c:if test="${order.orderType ==1}">订单充值</c:if> <c:if
-										test="${order.orderType ==3}"> 合买订单 </c:if> <c:if
-										test="${order.orderType ==2}"> 普通订单</c:if>&nbsp;|&nbsp;${order.orderNo }</td>
-								<td width="100" align="center" valign="middle">${order.currentWPMoney }</td>
+										test="${order.orderType ==3}"> 合买方案 </c:if> <c:if
+										test="${order.orderType ==2}"> 普通订单</c:if>
+										<c:if
+										test="${order.orderType ==4}"> 合买订单</c:if>&nbsp;|&nbsp;${order.orderNo }</td>
+								<td width="100" align="center" valign="middle"><font style="font-size: 14px;color: red;">${order.currentWPMoney }</font></td>
 								<td width="100" align="center" valign="middle">${order.totalMoney }</td>
 								<td align="center" valign="middle">--</td>
+								<td width="10%" align="center" valign="middle"><a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a></td>
 								</td>
 							</tr>
 						</c:forEach>
+						</TBODY>
 								</table>
 								<table width="100%" border="0" cellspacing="0" cellpadding="0"
 									class="page_tzjl02">
@@ -104,9 +107,6 @@
 									</TR>
 
 								</table>
-							</td>
-						</tr>
-					</table>
 				</div>
 			</div>
 

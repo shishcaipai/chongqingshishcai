@@ -92,12 +92,16 @@
 					alert("发起购买必须大于一份");
 					return;
 				}
-				if (buyCount == divideCount) {
-					alert("发起购买不能等于总份数");
+				if (buyCount >= divideCount) {
+					alert("发起购买不能大于或等于总份数");
 					return;
 				}
 				if (baodiCount > divideCount) {
-					alert(divideCount+"保底不能大于总份数"+baodiCount);
+					alert("保底不能大于总份数");
+					return;
+				}
+				if (baodiCount+buyCount > divideCount) {
+					alert("保底份数与发起人购买不能大于总份数");
 					return;
 				}
 				$("#Form1").submit();
@@ -173,8 +177,8 @@
 											style="border-right: none; height: 40px; color: #333;">
 											是否公开：<input name="isopen" type="radio" value="1"
 											checked="checked" /> 方案公开 <input name="isopen" type="radio"
-											value="0" /> 跟单后公开<input name="isopen" type="radio"
-											value="2" /> 完全保密
+											value="2" /> 跟单后公开<input name="isopen" type="radio"
+											value="3" /> 完全保密
 										</td>
 									</tr>
 								</tbody>

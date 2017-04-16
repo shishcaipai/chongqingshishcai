@@ -15,7 +15,7 @@
 	charset="utf-8"></script>
 <script src="<%=basePath%>static/js/commonUtil.js"
 	type="text/javascript"></script>
-<script src="<%=basePath%>static/boss/js/tradeOrder.js?orde=7"
+<script src="<%=basePath%>static/boss/js/htradeOrder.js?orde=7"
 	type="text/javascript"></script>
 <%@ include file="../../common/easyUiInclude.jsp"%>
 

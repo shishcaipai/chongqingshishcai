@@ -73,7 +73,7 @@ public interface PeriodDao extends CommonDao<Period, String>, PeriodCustomDao {
 	 * @param orderId
 	 * @return
 	 */
-	@Query("select count(p.id) from Period p  where p.orderId=?1  and  p.status=1 ")
+	@Query("select count(p.id) from Period p  where p.orderId=?1  and  p.status=1  and p.winning=0")
 	int getPeriodUNStatusByOId(String orderId);
 
 	@Query("select p from Period p where p.lotteryPeriod = ?1 and    p.status=?2 ")

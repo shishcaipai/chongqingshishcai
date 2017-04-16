@@ -252,4 +252,56 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 		return orderDao.findOrderByTypeAndOrderId(orderType, orderNo);
 	}
 
+	// 代理人下充值总数
+		@Override
+		public float getAgnetCzMoney(MemberUser user) {
+			try {
+				return orderDao.getAgnetCzMoney(user.getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return 0;
+		}
+		// 代理人下活动金额总数
+		@Override
+		public float getAgnetZsMoney(MemberUser user) {
+			try {
+				return orderDao.getAgnetZsMoney(user.getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return 0;
+		}
+
+	@Override
+	public float getAgnettkzMoney(MemberUser user) {
+		try {
+			return orderDao.getAgnettkzMoney(user.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public float getAgnetCurrentMoney(MemberUser user) {
+		try {
+			return orderDao.getAgnetCurrentMoney(user.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+//	@Override
+//	public float getAgnetylMoney(MemberUser user) {
+//		try {
+//			return orderDao.getAgnetylMoney(user.getId());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return 0;
+//	}
+
 }

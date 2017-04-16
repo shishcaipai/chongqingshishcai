@@ -319,7 +319,6 @@ public class HeMaiController {
 
 		}
 		int reNums = 0;
-		;
 		try {
 			reNums = Integer.valueOf(reNum);
 		} catch (Exception e) {
@@ -327,7 +326,7 @@ public class HeMaiController {
 		}
 		float money = 0;
 		try {
-			money = Float.valueOf(order.getTotalMoney()) / total * (reNums);
+			money = Float.valueOf(order.getTotalMoney()) / total * (reNums+i);
 		} catch (Exception e) {
 
 		}
@@ -340,7 +339,7 @@ public class HeMaiController {
 				heMaiOrderDetail.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_UN);
 				heMaiOrderDetail.setMinimumGuaranteeSum(i);
 			}
-			heMaiOrderDetail.setSubGuaranteeSum(reNums);
+			heMaiOrderDetail.setSubGuaranteeSum(total-reNums);
 			heMaiOrderDetail.setMemberUser(memberUser);
 			heMaiOrderDetail.setFensum(total);
 			heMaiOrderDetail
@@ -352,6 +351,11 @@ public class HeMaiController {
 			}
 			heMaiOrderDetail.setCreateDate(new Date());
 			heMaiOrderDetailService.save(heMaiOrderDetail);
+			try {
+				money = Float.valueOf(order.getTotalMoney()) / total * (reNums);
+			} catch (Exception e) {
+
+			}
 			if (money > 0) {
 				HeMaiOrder hemaiOrder = new HeMaiOrder();
 				hemaiOrder.setCreateDate(new Date());
@@ -360,7 +364,7 @@ public class HeMaiController {
 
 				hemaiOrder.setFloatManay(money);
 				hemaiOrder.setSubGuaranteeSum(reNums);
-				if (reNums == 0) {
+				if ((total-reNums) == 0) {
 					hemaiOrder
 							.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_SUCCESS);
 				} else {
@@ -484,6 +488,20 @@ public class HeMaiController {
 								- a
 								* Float.valueOf(subscribeAmount));
 						memberUserService.update(memberUser);
+						
+						Order newOrder = new Order();
+						newOrder.setOrderNo(hemaiOrder.getId());
+						newOrder.setOtherId(hemaiOrder.getOrderNo());
+						newOrder.setMemberUser(memberUser);
+						newOrder.setOrderType(Order.HEMAI_IMP_BUY_ORDER);
+						newOrder.setOrderStatus(Order.WAIT_ORDER);
+						newOrder.setPayStatus(Order.PAY_STATUS_SUCESS);
+						newOrder.setLotteryType(Period.SHISHI_CAI_CHONGQING);
+						newOrder.setCreateDate(new Date());
+						newOrder.setOrderTime(new Date());
+						newOrder.setName("合买订单");
+						newOrder.setTotalMoney(money);
+						orderService.save(newOrder);
 						if (heMaiService.getHemaiOrderFenNum(detail) == (detail
 								.getFensum())) {
 							detail.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_SUCCESS);
@@ -502,19 +520,6 @@ public class HeMaiController {
 										Period.SHISHI_CAI_CHONGQING);
 							}
 							orderService.update(order);
-							Order newOrder = new Order();
-							newOrder.setOrderNo(hemaiOrder.getId());
-							newOrder.setOtherId(hemaiOrder.getOrderNo());
-							newOrder.setMemberUser(memberUser);
-							newOrder.setOrderType(Order.HEMAI_IMP_BUY_ORDER);
-							newOrder.setOrderStatus(Order.WAIT_ORDER);
-							newOrder.setPayStatus(Order.PAY_STATUS_SUCESS);
-							newOrder.setLotteryType(Period.SHISHI_CAI_CHONGQING);
-							newOrder.setCreateDate(new Date());
-							newOrder.setOrderTime(new Date());
-							newOrder.setName("合买订单");
-							newOrder.setTotalMoney(money);
-							orderService.save(newOrder);
 							orderService
 									.updateByOrderNo(hemaiOrder.getOrderNo(),
 											Order.ORDER_SUCESS);
@@ -585,9 +590,11 @@ public class HeMaiController {
 				memberUserService.update(memberUser);
 				Order od = new Order();
 				od.setContent("合买方案，用户手动撤单，退回金额");
-				od.setOrderType(Order.AWARD_ORDER);
+				od.setOrderType(Order.DJ_ORDER);
 				od.setOrderStatus(Order.ORDER_SUCESS);
 				od.setOrderNo(System.currentTimeMillis() + "");
+				od.setOtherId(orderNo);
+				od.setTotalMoney(hemaiOrder.getFloatManay());
 				od.setName("合买方案撤单");
 				od.setMemberUser(memberUser);
 				orderService.update(od);

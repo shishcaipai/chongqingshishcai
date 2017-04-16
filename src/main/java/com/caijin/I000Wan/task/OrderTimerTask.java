@@ -48,86 +48,63 @@ public class OrderTimerTask {
 	/**
 	 * 下单任务 还需计算追号投注
 	 */
-	@Scheduled(cron = "0 0/2 *  * * ? ")
-	public void job1() {
+	@Scheduled(cron = "0 0/3 *  * * ? ")
+	public synchronized void job1() {
+		synchronized (OrderTimerTask.class) {
 
-		String shangQinhao = DateUtils
-				.getLeftShangyiqiChongQingShiShicai(DateUtils
-						.getCurrentChongQingShiShicai());
-		log.info("执行该投注记录。。。" + shangQinhao);
-		List<Period> periodList = pdService.findbyQIhao(shangQinhao,
-				Period.STATUS_BEFORE);
-		for (Period period : periodList) {
-			Order order = orderService.findOrderByOrderId(period.getOrderId());
-			if (order != null
-					&& (order.getOrderType() == Order.HEMAI_BUY_ORDER || order
-							.getOrderType() == Order.PROXY_BUY_ORDER)
-					&& order.getIsZhuiHao() == 1 && order.getIsCut() == 1) {
-				List<Period> p = pdService.findPeriodByOIdAndStatus(
-						order.getOrderNo(), Period.WINNING_CURRENT);
-				if (p != null && !p.isEmpty()) {
-					// 待定
-					period.setStatus(Period.STATUS_AFTER);
+			String shangQinhao = DateUtils
+					.getLeftShangyiqiChongQingShiShicai(DateUtils
+							.getCurrentChongQingShiShicai());
+			log.info("执行该投注记录。。。" + shangQinhao);
+			List<Period> periodList = pdService.findbyQIhao(shangQinhao,
+					Period.STATUS_BEFORE);
+			for (Period period : periodList) {
+				Order order = orderService.findOrderByOrderId(period
+						.getOrderId());
+				if (order != null
+						&& (order.getOrderType() == Order.HEMAI_BUY_ORDER || order
+								.getOrderType() == Order.PROXY_BUY_ORDER)
+						&& order.getIsZhuiHao() == 1 && order.getIsCut() == 1) {
+					List<Period> p = pdService.findPeriodByOIdAndStatus(
+							order.getOrderNo(), Period.WINNING_CURRENT);
+					if (p != null && !p.isEmpty()) {
+						// 待定
+						period.setStatus(Period.STATUS_AFTER);
+					} else {
+						period.setStatus(Period.STATUS_CURRENT);
+					}
 				} else {
 					period.setStatus(Period.STATUS_CURRENT);
 				}
-			} else {
-				period.setStatus(Period.STATUS_CURRENT);
+				pdService.update(period);
 			}
-			pdService.update(period);
-		}
-		log.info("订单过期通知任务进行中。。。" + shangQinhao);
-		List<Order> orders = orderService.findOrderByStatus(Order.WAIT_ORDER);
 
-		for (Order order : orders) {
-			List<Period> periods = pdService
-					.findPeriodByOId(order.getOrderNo());
-			boolean bo = OrderUtils.getCurrentDate(
-					DateUtils.getCurrentChongQingShiShicai(), periods);
-			log.info("订单过期通知任务进行中。。。有过期订单" + order.getOrderNo() + "-------"
-					+ bo);
-			if (!bo) {
-				if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
-					HeMaiOrderDetail detail = heMaiOrderDetailService
-							.findOrderHemaiDetailByOrderId(order);
-					int leftNum = heMaiOrderService.getHemaiOrderFenNum(detail);
-					leftNum = detail.getFensum() - leftNum;
-					if (detail != null) {
-						if (detail.getMinimumGuaranteeSum() >= leftNum) {
+			log.info("订单过期通知任务进行中。。。" + shangQinhao);
+			List<Order> orders = orderService
+					.findOrderByStatus(Order.WAIT_ORDER);
 
-							HeMaiOrder hemaiOrder = new HeMaiOrder();
-							hemaiOrder.setCreateDate(new Date());
-							hemaiOrder.setMemberUser(detail.getMemberUser());
-							hemaiOrder.setOrderNo(detail.getOrder()
-									.getOrderNo());
-							float a = Float.valueOf(detail.getOrder()
-									.getTotalMoney())
-									/ Float.valueOf(detail.getFensum());
-							hemaiOrder
-									.setFloatManay(a * Float.valueOf(leftNum));
-							hemaiOrder.setSubGuaranteeSum(leftNum);
-							hemaiOrder.setOrderDetail(detail);
+			for (Order order : orders) {
+				List<Period> periods = pdService.findPeriodByOId(order
+						.getOrderNo());
+				boolean bo = OrderUtils.getCurrentDate(
+						DateUtils.getCurrentChongQingShiShicai(), periods);
+				log.info(order.getPayStatus() + "订单过期通知任务进行中。。。有过期订单"
+						+ order.getOrderNo() + "-------" + bo);
+				if (!bo) {
+					if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
+						HeMaiOrderDetail detail = heMaiOrderDetailService
+								.findOrderHemaiDetailByOrderId(order);
+						int leftNum = heMaiOrderService
+								.getHemaiOrderFenNum(detail);
+						log.info(leftNum + "订单过期通知任务进行中。leftNum。。有过期订单"
+								+ order.getOrderNo() + "-------"
+								+ detail.getFensum());
+						leftNum = detail.getFensum() - leftNum;
+						log.info(leftNum + "订单过期通知任务进行中。leftNum。。有过期订单"
+								+ order.getOrderNo() + "-------");
+						if (leftNum <= 0) {
 							detail.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_SUCCESS);
 							heMaiOrderDetailService.update(detail);
-							order.setOrderStatus(Order.ORDER_SUCESS);
-							order.setPayStatus(Order.PAY_STATUS_SUCESS);
-							if (leftNum > 0) {
-								heMaiOrderService.save(hemaiOrder);
-								Order newOrder = new Order();
-								newOrder.setOrderNo(hemaiOrder.getId());
-								newOrder.setOtherId(hemaiOrder.getOrderNo());
-								newOrder.setMemberUser(order.getMemberUser());
-								newOrder.setOrderType(Order.HEMAI_IMP_BUY_ORDER);
-								newOrder.setOrderStatus(Order.WAIT_ORDER);
-								newOrder.setPayStatus(Order.PAY_STATUS_SUCESS);
-								newOrder.setLotteryType(Period.SHISHI_CAI_CHONGQING);
-								newOrder.setCreateDate(new Date());
-								newOrder.setOrderTime(new Date());
-								newOrder.setName("合买订单");
-								newOrder.setTotalMoney(a
-										* Float.valueOf(leftNum));
-								orderService.save(newOrder);
-							}
 							if (order.getIsZhuiHao() == 0) {
 								pdService.updatePeriodStatusByOId(
 										order.getOrderNo(),
@@ -141,46 +118,133 @@ public class OrderTimerTask {
 							}
 							orderService.updateByOrderNo(order.getOrderNo(),
 									Order.ORDER_SUCESS);
+							order.setOrderStatus(Order.ORDER_SUCESS);
+							order.setPayStatus(Order.PAY_STATUS_SUCESS);
 							orderService.update(order);
-							log.info("订单过期通知任务进行中。。。成功" + order.getOrderNo());
-						} else {
-							order.setOrderStatus(Order.ORDER_FAILUE);
-							order.setPayStatus(Order.PAY_STATUS_OFFTIME);
+							continue;
+						}
+						log.info(detail + "订单过期通知任务进行中。detail。。有过期订单"
+								+ order.getOrderNo() + "-------");
+						if (detail != null) {
+							log.info(detail.getMinimumGuaranteeSum()
+									+ "订单过期通知任务进行中。detail.getMinimumGuaranteeSum()。。有过期订单"
+									+ order.getOrderNo() + "-------");
+							if (detail.getMinimumGuaranteeSum() >= leftNum
+									&& leftNum > 0) {
 
-							orderService.update(order);
-							List<HeMaiOrder> hemaiOrder = heMaiOrderService
-									.findOrderHemaiByOrderId(detail);
-							if (hemaiOrder != null)
-								for (HeMaiOrder heOrder : hemaiOrder) {
-									heOrder.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_FAIL);
-									log.info("订单过期通知任务进行中。。。订单出错:::"
-											+ heOrder.getStatus());
-									heMaiOrderService.update(heOrder);
-									heOrder.getMemberUser().setAvailableScore(
-											heOrder.getMemberUser()
-													.getAvailableScore()
-													+ heOrder.getFloatManay());
-									Order ors = orderService
-											.findOrderByTypeAndOrderId(
-													Order.HEMAI_IMP_BUY_ORDER,
-													heOrder.getId());
-									ors.setOrderStatus(Order.ORDER_FAILUE);
-									ors.setPayStatus(Order.PAY_STATUS_FANXIAN);
-									log.info("订单过期通知任务进行中。 更新"
-											+ heOrder.getId());
-									orderService.update(ors);
-
+								HeMaiOrder hemaiOrder = new HeMaiOrder();
+								hemaiOrder.setCreateDate(new Date());
+								hemaiOrder
+										.setMemberUser(detail.getMemberUser());
+								hemaiOrder.setOrderNo(detail.getOrder()
+										.getOrderNo());
+								float a = Float.valueOf(detail.getOrder()
+										.getTotalMoney())
+										/ Float.valueOf(detail.getFensum());
+								hemaiOrder.setFloatManay(a
+										* Float.valueOf(leftNum));
+								hemaiOrder.setSubGuaranteeSum(leftNum);
+								hemaiOrder.setOrderDetail(detail);
+								detail.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_SUCCESS);
+								heMaiOrderDetailService.update(detail);
+								order.setOrderStatus(Order.ORDER_SUCESS);
+								order.setPayStatus(Order.PAY_STATUS_SUCESS);
+								if (leftNum > 0) {
+									int te = heMaiOrderService
+											.getHemaiOrderFenNum(detail);
+									if (detail.getFensum() - te <= 0) {
+										continue;
+									}
+									log.info("订单过期通知任务进行中。。。保存订单::"
+											+ hemaiOrder.getOrderNo()
+											+ "----fensum"
+											+ hemaiOrder.getSubGuaranteeSum());
+									heMaiOrderService.save(hemaiOrder);
+									Order newOrder = new Order();
+									newOrder.setOrderNo(hemaiOrder.getId());
+									newOrder.setOtherId(hemaiOrder.getOrderNo());
+									newOrder.setMemberUser(order
+											.getMemberUser());
+									newOrder.setOrderType(Order.HEMAI_IMP_BUY_ORDER);
+									newOrder.setOrderStatus(Order.WAIT_ORDER);
+									newOrder.setPayStatus(Order.PAY_STATUS_SUCESS);
+									newOrder.setLotteryType(Period.SHISHI_CAI_CHONGQING);
+									newOrder.setCreateDate(new Date());
+									newOrder.setOrderTime(new Date());
+									newOrder.setName("合买订单");
+									newOrder.setTotalMoney(a
+											* Float.valueOf(leftNum));
+									orderService.save(newOrder);
 								}
-							detail.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_FAIL);
-							heMaiOrderDetailService.update(detail);
+								if (order.getIsZhuiHao() == 0) {
+									pdService.updatePeriodStatusByOId(
+											order.getOrderNo(),
+											Period.STATUS_CURRENT,
+											Period.SHISHI_CAI_CHONGQING);
+								} else {
+									pdService.updatePeriodStatusByOId(
+											order.getOrderNo(),
+											Period.STATUS_BEFORE,
+											Period.SHISHI_CAI_CHONGQING);
+								}
+								orderService.updateByOrderNo(
+										order.getOrderNo(), Order.ORDER_SUCESS);
+								orderService.update(order);
+								log.info("订单过期通知任务进行中。。。成功"
+										+ order.getOrderNo());
+							} else {
+								order.setOrderStatus(Order.ORDER_FAILUE);
+								order.setPayStatus(Order.PAY_STATUS_OFFTIME);
+
+								orderService.update(order);
+								List<HeMaiOrder> hemaiOrder = heMaiOrderService
+										.findOrderHemaiByOrderId(detail);
+								if (hemaiOrder != null)
+									for (HeMaiOrder heOrder : hemaiOrder) {
+										heOrder.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_FAIL);
+										log.info("订单过期通知任务进行中。。。订单出错:::"
+												+ heOrder.getStatus());
+										heMaiOrderService.update(heOrder);
+										heOrder.getMemberUser()
+												.setAvailableScore(
+														heOrder.getMemberUser()
+																.getAvailableScore()
+																+ heOrder
+																		.getFloatManay());
+										Order ors = orderService
+												.findOrderByTypeAndOrderId(
+														Order.HEMAI_IMP_BUY_ORDER,
+														heOrder.getId());
+										ors.setOrderStatus(Order.ORDER_FAILUE);
+										ors.setPayStatus(Order.PAY_STATUS_FANXIAN);
+										Order od = new Order();
+										od.setContent("合买方案,超时，退回金额");
+										od.setOrderType(Order.DJ_ORDER);
+										od.setOrderStatus(Order.ORDER_SUCESS);
+										od.setOrderNo(System
+												.currentTimeMillis() + "");
+										od.setOtherId(order.getOrderNo());
+										od.setTotalMoney(ors.getTotalMoney());
+										od.setName("合买方案超时撤单");
+										od.setMemberUser(heOrder
+												.getMemberUser());
+										orderService.update(od);
+										log.info("订单过期通知任务进行中。 更新"
+												+ heOrder.getId());
+										orderService.update(ors);
+
+									}
+								detail.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_FAIL);
+								heMaiOrderDetailService.update(detail);
+							}
+						} else {
 						}
 					} else {
+						order.setOrderStatus(Order.ORDER_FAILUE);
+						order.setPayStatus(Order.PAY_STATUS_OFFTIME);
+						orderService.update(order);
+						log.info("订单过期通知任务进行中。。。失败" + order.getOrderNo());
 					}
-				} else {
-					order.setOrderStatus(Order.ORDER_FAILUE);
-					order.setPayStatus(Order.PAY_STATUS_OFFTIME);
-					orderService.update(order);
-					log.info("订单过期通知任务进行中。。。失败" + order.getOrderNo());
 				}
 			}
 		}

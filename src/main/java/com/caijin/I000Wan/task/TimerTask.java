@@ -76,7 +76,6 @@ public class TimerTask {
 	private HeMaiOrderDetailService heMaiOrderDetailService;
 	@Autowired
 	private HeMaiOrderService heMaiOrderService;
-
 	/**
 	 * 中奖任务计算
 	 */
@@ -214,8 +213,9 @@ public class TimerTask {
 	/*
 	 * 中奖任务计算
 	 */
-	@Scheduled(cron = "0 0/3 *  * * ? ")
+	@Scheduled(cron = "0 0/2 *  * * ? ")
 	public void job() {
+		
 		getWebScan();
 	}
 
@@ -313,12 +313,13 @@ public class TimerTask {
 						List<OrderDetail> orderList = orderDetailService
 								.findbyQIhao(data.getExpect());
 						if (orderList != null)
-							for (OrderDetail order : orderList) {
+							for (OrderDetail orderDetal : orderList) {
 								/**
 								 * 是否自动计算中奖
 								 */
-								if (order.getOrder().autoDrawn) {
-									String caiNumber = order.getBuyCaiNumber();
+								if (orderDetal.getOrder().autoDrawn) {
+									String caiNumber = orderDetal
+											.getBuyCaiNumber();
 									// 计算得到中奖金额
 									float money = BonusUtil
 											.getLotteryHondleBonus(BonusUtil
@@ -329,17 +330,17 @@ public class TimerTask {
 										pdService
 												.updatePeriodbyQIhaoAndOrderNo(
 														data.getExpect(),
-														order.getOrderNo(), 1,
-														money);
+														orderDetal.getOrderNo(),
+														1, money);
 									} else {
 										pdService
 												.updatePeriodbyQIhaoAndOrderNo(
 														data.getExpect(),
-														order.getOrderNo(), 2,
-														money);
+														orderDetal.getOrderNo(),
+														2, money);
 									}
-									map.put(order.getOrder().getOrderNo(),
-											order.getOrder());
+									map.put(orderDetal.getOrder().getOrderNo(),
+											orderDetal.getOrder());
 								}
 							}
 
@@ -353,6 +354,13 @@ public class TimerTask {
 				orderId = keys.next();
 				float money = pdService.getMoneyPeriodByOId(orderId);
 				order = map.get(orderId);
+				List<Period> lists = pdService.findPeriodByOId(order
+						.getOrderNo());
+				int beisu = 1;
+				if (lists != null && !lists.isEmpty()) {
+					beisu = lists.get(0).getBeisu();
+				}
+				money = money * beisu;
 				if (pdService.getPeriodUNStatusByOId(orderId) == 0) {
 					if (money > 0) {
 						order.setWprizeStatus(Order.WPRIS_STATUS_ALL);
@@ -370,15 +378,37 @@ public class TimerTask {
 					order.setCurrentWPMoney(money);
 					orderService.update(order);
 				}
+				// 如果是合买方案就计算子订单中奖金额
+				Order or;
+				if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
+					HeMaiOrderDetail heiMaiDetail = heMaiOrderDetailService
+							.findOrderHemaiDetailByOrderId(order);
+					List<HeMaiOrder> heMaiOrders = heMaiOrderService
+							.findOrderHemaiByOrderId(heiMaiDetail);
+					for (HeMaiOrder heMaiOrder : heMaiOrders) {
+						heMaiOrder
+								.setCurrentWPMoney((order.getCurrentWPMoney() / heiMaiDetail
+										.getFensum())
+										* heMaiOrder.getSubGuaranteeSum());
+						heMaiOrderService.update(heMaiOrder);
+						or = orderService
+								.findOrderByOrderId(heMaiOrder.getId());
+						if (or != null) {
+							or.setCurrentWPMoney(heMaiOrder.getCurrentWPMoney());
+							or.setWprizeStatus(order.getWprizeStatus());
+							orderService.update(or);
+						}
+
+					}
+				}
+
 				if (order.isAutoPrizes()) {
-
-					if (money > 0) {
-
-						if (order.getOrderType() == Order.PROXY_BUY_ORDER) {
-							// 如果发过奖，则把减去上次所有统计中奖金额全部发放
-							if (order.getCashBackStatus() == Order.CASHBACKSTATUS_PORTION) {
-								money = money - order.getCurrentWPMoney();
-							}
+					if (order.getOrderType() == Order.PROXY_BUY_ORDER) {
+						// 如果发过奖，则把减去上次所有统计中奖金额全部发放
+						if (order.getCashBackStatus() == Order.CASHBACKSTATUS_PORTION) {
+							money = money - order.getCurrentWPMoney();
+						}
+						if (money > 0) {
 							Order newOrder = new Order();
 							newOrder.setOrderType(Order.AWARD_ORDER);
 							newOrder.setOrderNo(GenerateOrderNoUtil
@@ -386,6 +416,7 @@ public class TimerTask {
 							MemberUser memberUser = order.getMemberUser();
 							memberUser.setAvailableScore(money
 									+ memberUser.getAvailableScore());
+							newOrder.setTotalMoney(money);
 							newOrder.setOrderStatus(Order.ORDER_SUCESS);
 							newOrder.setCreateDate(new Date());
 							newOrder.setUpdateDate(new Date());
@@ -399,13 +430,14 @@ public class TimerTask {
 								order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
 							}
 							orderService.update(order);
-						} else if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
+						}
+					} else if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
 
-							//  如果发过奖，则把减去上次所有统计中奖金额全部发放
-							if (order.getCashBackStatus() == Order.CASHBACKSTATUS_PORTION) {
-								money = money - order.getCurrentWPMoney();
-							}
-							}
+						// 如果发过奖，则把减去上次所有统计中奖金额全部发放
+						if (order.getCashBackStatus() == Order.CASHBACKSTATUS_PORTION) {
+							money = money - order.getCurrentWPMoney();
+						}
+						if (money > 0) {
 							HeMaiOrderDetail heiMaiDetail = heMaiOrderDetailService
 									.findOrderHemaiDetailByOrderId(order);
 							List<HeMaiOrder> heMaiOrders = heMaiOrderService
@@ -418,8 +450,10 @@ public class TimerTask {
 								newOrder.setOrderType(Order.AWARD_ORDER);
 								newOrder.setOrderNo(GenerateOrderNoUtil
 										.getOrderNumber());
-								MemberUser memberUser = order.getMemberUser();
+								MemberUser memberUser = heMaiOrder.getMemberUser();
 								memberUser.setAvailableScore(funMoney
+										+ memberUser.getAvailableScore());
+								newOrder.setTotalMoney(funMoney
 										+ memberUser.getAvailableScore());
 								newOrder.setOrderStatus(Order.ORDER_SUCESS);
 								newOrder.setCreateDate(new Date());
@@ -428,6 +462,16 @@ public class TimerTask {
 								newOrder.setMemberUser(memberUser);
 								orderService.save(newOrder);
 								memberUserService.update(memberUser);
+								or = orderService.findOrderByOrderId(heMaiOrder
+										.getId());
+								if (or != null) {
+									if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
+										or.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
+									} else {
+										or.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
+									}
+									orderService.update(or);
+								}
 							}
 							if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
 								order.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
@@ -435,15 +479,14 @@ public class TimerTask {
 								order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
 							}
 							orderService.update(order);
-
 						}
-
 					}
 
 				}
 
 			}
-
+			memberUserService.clear();
+		}
 	}
 
 }

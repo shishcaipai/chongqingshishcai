@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -112,14 +112,30 @@
 						</tr>
 						<c:forEach var="order" items="${requestScope.orders }">
 							<tr>
-								<td>${order.orderNo }</td>
+								<td>
+								<c:if
+										test="${order.orderType ==4}">${order.otherId }</c:if> <c:if
+										test="${order.orderType ==5}"> ${order.otherId }</c:if>
+								<c:if test="${order.orderType ==1}">${order.orderNo }</c:if> <c:if
+										test="${order.orderType ==2}"> ${order.orderNo } </c:if> <c:if
+										test="${order.orderType ==3}"> ${order.orderNo }</c:if> 
+										<c:if
+										test="${order.orderType ==6}"> ${order.orderNo }</c:if>
+										 <c:if
+										test="${order.orderType ==7}"> ${order.orderNo }</c:if>
+								</td>
 								<td>${order.name }</td>
-								<td>${order.orderTime }</td>
+								<td>	<fmt:formatDate  type="both" value="${order.createDate}" /></td>
 								<td><c:if test="${order.orderType ==1}">订单充值</c:if> <c:if
 										test="${order.orderType ==2}"> 彩票订单 </c:if> <c:if
 										test="${order.orderType ==3}"> 合买方案</c:if> <c:if
 										test="${order.orderType ==4}"> 合买订单</c:if> <c:if
-										test="${order.orderType ==5}"> 返现充值订单</c:if></td>
+										test="${order.orderType ==5}"> 方案发奖</c:if>
+										 <c:if
+										test="${order.orderType ==6}"> 提现</c:if>
+										 <c:if
+										test="${order.orderType ==7}"> 冻结返回</c:if>
+										</td>
 								<td>${order.totalMoney }</td>
 								<td><c:if test="${order.orderStatus ==0}">下单待确认</c:if> <c:if
 										test="${order.orderStatus ==1}"> 成功</c:if> <c:if

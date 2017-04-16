@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -22,7 +23,7 @@
 	type="text/css" />
 <link href="<%=basePath%>static/new/css/page.css" type="text/css"
 	rel="stylesheet" />
-<title>1000万不是梦想！</title>
+<title>银行信息</title>
 </head>
 
 <body>
@@ -52,13 +53,13 @@
 							style="margin-bottom: 10px; padding: 10px; background: #f6f6f6;">
 							绑定支付宝是您提款时的唯一账户，是资金提取的安全保证。 <span class="red">如需修改，请联系客服</span>
 						</p>
-						<c:choose>
-							<c:when test="${empty memberUser.identityCard}">
+						<%--  --%><c:choose>
+						<%-- 	<c:when test="${empty memberUser.identityCard}">
 								<p>
 									您还未完善个人信息，请先 <a href="<%=basePath%>user/realNameInfo">实名认证</a>
 								</p>
-							</c:when>
-							<c:otherwise>
+							</c:when> --%>
+						<%-- 	<c:otherwise> --%>
 								<table cellpadding="6" cellspacing="6" class="table_u_all">
 									<tr>
 										<td class="tikuan_a2" align="right">真实姓名：</td>
@@ -66,26 +67,54 @@
 									</tr>
 									<tr>
 										<td class="tikuan_a2" align="right">支付宝账号：</td>
+										<td class="tikuan_a3"><input id="zfbCode" type="text"
+											class="zlxg_srk" size="30"
+											<c:if test="${not empty memberUser.zfbCode}">readonly=\"readonly\"</c:if>
+											value="${memberUser.zfbCode}" /><span class="gray">此支付宝账号必须和上述真实姓名一致！</span></td>
+									</tr>
+									<tr>
+										<td class="tikuan_a2" align="right">银行名称：</td>
+										<td class="tikuan_a3"><input id="bankName" type="text"
+											class="zlxg_srk" size="30"
+											<c:if test="${not empty memberUser.bankName}">readonly=\"readonly\"</c:if>
+											value="${memberUser.bankName}" /></td>
+									</tr>
+									<tr>
+										<td class="tikuan_a2" align="right">所在地城市：</td>
+										<td class="tikuan_a3"><input id="city" type="text"
+											class="zlxg_srk" size="30"
+											<c:if test="${not empty memberUser.city}">readonly=\"readonly\"</c:if>
+											value="${memberUser.city}" /><span class="gray"></span></td>
+									</tr>
+									<tr>
+										<td class="tikuan_a2" align="right">银行卡开户行：</td>
+										<td class="tikuan_a3"><input id="openBank" type="text"
+											class="zlxg_srk" size="30"
+											<c:if test="${not empty memberUser.openBank}">readonly=\"readonly\"</c:if>
+											value="${memberUser.openBank}" /><span class="gray"></span></td>
+									</tr>
+									<tr>
+										<td class="tikuan_a2" align="right">绑定银行卡号码：</td>
 										<td class="tikuan_a3"><input id="bankCode" type="text"
 											class="zlxg_srk" size="30"
 											<c:if test="${not empty memberUser.bankCode}">readonly=\"readonly\"</c:if>
-											value="${memberUser.bankCode}" /><span class="gray">此支付宝账号必须和上述真实姓名一致！</span></td>
+											value="${memberUser.bankCode}" /><span class="gray">此银行卡账号必须和上述真实姓名一致！</span></td>
 									</tr>
-									<c:if test="${empty memberUser.bankCode}">
+									<c:if test="${empty memberUser.zfbCode}">
 										<tr>
 											<td class="tikuan_a2" align="right">网站登录密码：</td>
 											<td class="tikuan_a3"><input id="password"
 												type="password" class="zlxg_srk" size="30" /></td>
 										</tr>
 										<tr>
-											<td></td>
-											<td>
-  <input class="zlxg_tijiao" id="btnCommit" type="submit" value="提&nbsp;交" name="Submit" onclick="bankCodeSubmit()" />
+											<td class="tikuan_a2"></td>
+											<td class="tikuan_a3">
+                        <input  id="btnCommit" type="submit" value="提&nbsp;交" name="Submit" onclick="bankCodeSubmit()" />
 										</tr>
 									</c:if>
 								</table>
-							</c:otherwise>
-						</c:choose>
+							<%-- </c:otherwise>
+						</c:choose> --%>
 
 					</div>
 				</div>
@@ -113,9 +142,25 @@
 		    	alert("支付宝账号不能为空");
 				 return;
 			}
-			if(!validateEmail($("#bankCode").val().trim())
-				&&!checkPhone($("#bankCode").val().trim())){
+			if(!validateEmail($("#zfbCode").val().trim())
+				&&!checkPhone($("#zfbCode").val().trim())){
 				alert("请输入支付宝账号（手机号/邮箱地址）");
+				 return;
+			}
+			if($("#bankCode").val().trim()==''){
+		    	alert("银行账号不能为空");
+				 return;
+			}
+			if($("#openBank").val().trim()==''){
+		    	alert("开户行不能为空");
+				 return;
+			}
+			if($("#bankName").val().trim()==''){
+		    	alert("银行名称不能为空");
+				 return;
+			}
+			if($("#city").val().trim()==''){
+		    	alert("所在地城市不能为空");
 				 return;
 			}
 			if($("#password").val().trim()==''){
@@ -125,6 +170,11 @@
 			
 			var memberUser={};
 		    	memberUser["bankCode"]=$("#bankCode").val().trim();
+		    	memberUser["zfbCode"]=$("#zfbCode").val().trim();
+		    	memberUser["openBank"]=$("#openBank").val().trim();
+		    	memberUser["bankName"]=$("#bankName").val().trim();
+		    	memberUser["city"]=$("#city").val().trim();
+		    	
 				memberUser["pwd"]=$("#password").val().trim();
 				memberUser["userName"]=$("#userName").val().trim();
 	

@@ -21,7 +21,17 @@
 									公告		
 												</c:when>
 							<c:otherwise>
-									资讯
+								
+									<c:choose>
+							<c:when test="${article.type==1}">
+										资讯
+												</c:when>
+							<c:otherwise>
+									网站帮助
+											</c:otherwise>
+						</c:choose>
+									
+									
 											</c:otherwise>
 						</c:choose></title>
 <meta name="description" content="时时乐" />
@@ -49,13 +59,20 @@
 					<h1 style="color: red;">
 						<c:choose>
 							<c:when test="${article.type==0}">
-									【公告】		
+									【公告】	${article.title }	
 												</c:when>
 							<c:otherwise>
-									【推荐】
+										<c:choose>
+							<c:when test="${article.type==1}">
+										【推荐】${article.title }
+												</c:when>
+							<c:otherwise>
+							${article.title }
 											</c:otherwise>
 						</c:choose>
-						${article.title }
+											</c:otherwise>
+						</c:choose>
+						
 					</h1>
 
 
@@ -64,8 +81,17 @@
 				<span class="DivH15"></span>
 				<div class="from">
 					<div class="TimeShare">
-						<div class="PSource">作者：${article.author }
-							来源：${article.source } 更新时间：${article.updateDate }</div>
+						<div class="PSource">
+						
+						<c:choose>
+							<c:when test="${article.type==3}">
+												</c:when>
+							<c:otherwise>
+						作者：${article.author }
+							来源：${article.source } 更新时间：${article.updateDate }
+											</c:otherwise>
+						</c:choose>
+						</div>
 						<div class="baidushare">
 							<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"></div>
 						</div>
@@ -82,6 +108,50 @@
 		</div>
 	</div>
 </div>
+<div class="footer_bj">
+		<div class="footer">
+			<ul class="fo1">
+				<h1>
+					<img alt="快购彩票网"
+						src="<%=basePath%>static/new/images/fo1.png" />
+				</h1>
+				<li>交易安全</li>
+				<li>购买便捷</li>
+				<li>派奖快速</li>
+			</ul>
+			<ul class="fo2">
+				<h1>
+					<img alt="快购彩票网"
+						src="<%=basePath%>static/new/images/fo2.png" />
+				</h1>
+				<li>・<a href="<%=basePath%>article/article?id=cz1">充值方式</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=cz2">充值流程</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=cz3">修改真实姓名</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=cz4">修改银行卡</a></li>
+			</ul>
+			<ul class="fo3">
+				<h1>
+					<img alt="快购彩票网"
+						src="<%=basePath%>static/new/images/fo3.png" />
+				</h1>
+				<li>・<a href="<%=basePath%>article/article?id=tk1">如何提款</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=tk2">到账时间</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=tk3">银行提款费率</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=tk4">提款注意</a></li>
+			</ul>
+			<ul class="fo4" style="border-right: none">
+				<h1>
+					<img alt="快购彩票网"
+						src="<%=basePath%>static/new/images/fo4.png" />
+				</h1>
+				<li>・<a href="<%=basePath%>article/article?id=bz1">如何注册网站会员</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=bz2">注册时需注意什么</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=bz3">如何注销会员帐户</a></li>
+				<li>・<a href="<%=basePath%>article/article?id=bz4">密码忘记了怎么办</a></li>
+			</ul>
+
+		</div>
+	</div>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 	</html>

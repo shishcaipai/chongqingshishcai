@@ -40,6 +40,8 @@ public class Order extends BaseEntity {
 	public final static int AWARD_ORDER = 5;
 	// 提现订单
 	public final static int DEPOSIT_ORDER = 6;
+	// 网站冻订单
+		public final static int DJ_ORDER = 7;
 
 	public final static int ORDER_SUCESS = 1;
 	public final static int WAIT_ORDER = 0;

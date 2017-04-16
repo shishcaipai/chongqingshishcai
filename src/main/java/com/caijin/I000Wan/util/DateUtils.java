@@ -10,7 +10,6 @@ import java.util.TimeZone;
 
 public class DateUtils {
 
-
 	public static String getCurrentChongQingShiShicai() {
 		StringBuffer stringBuffer = new StringBuffer();
 		Calendar currentDate = Calendar.getInstance(TimeZone
@@ -19,6 +18,14 @@ public class DateUtils {
 		int hours = currentDate.get(Calendar.HOUR_OF_DAY);
 		int month = currentDate.get(Calendar.MONTH) + 1;
 		int mis = currentDate.get(Calendar.MINUTE);
+		mis = mis + 1;
+		if (mis > 60) {
+			hours = hours + 1;
+			if (hours > 23) {
+				hours = 0;
+			}
+			mis = mis - 60;
+		}
 		int years = currentDate.get(Calendar.YEAR);
 		if (hours >= 10) {
 			stringBuffer.append(years);
@@ -35,7 +42,7 @@ public class DateUtils {
 				end = end + (hours - 10) * 60 / 10;
 				end = end + (mis / 10) + 1;
 			} else {
-				end = 97;
+				end = 96;
 				end = end + (hours - 22) * 60 / 5;
 				end = end + (mis / 5) + 1;
 			}
@@ -147,6 +154,14 @@ public class DateUtils {
 		int mis = currentDate.get(Calendar.MINUTE);
 		int years = currentDate.get(Calendar.YEAR);
 		int ms = currentDate.get(Calendar.SECOND);
+		mis = mis + 1;
+		if (mis > 60) {
+			hours = hours + 1;
+			if (hours > 23) {
+				hours = 0;
+			}
+			mis = mis - 60;
+		}
 		if (0 <= hours && hours < 2) {
 			return (5 - mis % 5) * 60 - ms;
 		} else if (2 < hours && hours < 10) {
@@ -261,6 +276,9 @@ public class DateUtils {
 		stringBuffer.append(date);
 		int num = ((hours - 9) * 60 + mis) / 10;
 		int end = 1 + num;
+		if (num < 0) {
+			num = 0;
+		}
 		if (end < 10) {
 			stringBuffer.append("0");
 		}
@@ -311,6 +329,9 @@ public class DateUtils {
 		}
 		stringBuffer.append(date);
 		int num = ((hours - 9) * 60 + mis) / 10;
+		if (num < 0) {
+			num = 0;
+		}
 		int end = 1 + num;
 		if (end < 10) {
 			stringBuffer.append("0");

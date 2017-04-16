@@ -16,6 +16,8 @@ import com.caijin.I000Wan.dao.OrderDaoImpl;
 import com.caijin.I000Wan.dao.PeriodDao;
 import com.caijin.I000Wan.entity.Period;
 import com.caijin.I000Wan.service.PeriodService;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 
 @Component
 @Transactional
@@ -141,5 +143,8 @@ public class PeriodServiceImpl extends CommonServiceImpl<Period, String>
 			Integer winningCurrent) {
 		return periodDao.findPeriodByOIdAndStatus(orderNo,winningCurrent);
 	}
-
+	@Override
+	public Result getPeriodResults(PageModel pageModel) {
+		return periodDao.getfPeriodResults(pageModel);
+	}
 }

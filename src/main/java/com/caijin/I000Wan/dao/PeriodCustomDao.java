@@ -14,4 +14,5 @@ public interface PeriodCustomDao {
 			String lotteryCode, String parse);
 
 	public void clear();
+	Result getfPeriodResults(PageModel pageModel);
 }

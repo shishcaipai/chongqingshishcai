@@ -6,11 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.caijin.I000Wan.common.dao.CommonDao;
 import com.caijin.I000Wan.entity.LotteryPeriod;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 
 /**
  * 彩票期数Dao
  */
-public interface LotteryPeriodDao extends CommonDao<LotteryPeriod,String>{
+public interface LotteryPeriodDao extends  CommonDao<LotteryPeriod,String>{
 
 	/**
 	 * 根据彩票编码查询当前期数
@@ -32,6 +34,8 @@ public interface LotteryPeriodDao extends CommonDao<LotteryPeriod,String>{
 	LotteryPeriod findByTopPeriod();
 	@Query("select p from LotteryPeriod p where p.periodNumber= ?1 and p.lotteryCode=?2")
 	LotteryPeriod findByPeriod(String periodNumber, String lotteryCode);
+
+	
 	
 	
 }

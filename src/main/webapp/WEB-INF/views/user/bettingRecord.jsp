@@ -70,7 +70,7 @@
 				<TD width="10%" align="center" valign="middle">详情</TD>
 			  </tr>
      <c:forEach var="order" items="${requestScope.orderDetails }">
-								<tr class="page_tzjl01">
+								<tr class="page_tzjl02">
 									<td width="20%" align="center" valign="middle">${order.orderNo }</td>
 									<td width="12%" align="center" valign="middle">重庆时时彩</td>
 									<td width="12%" align="center" valign="middle">${order.memberUser.userName }</td>
@@ -80,7 +80,7 @@
 										test="${order.orderStatus ==1}"> 成功 </c:if> <c:if
 										test="${order.orderStatus ==2}"> 失败</c:if> <c:if
 										test="${order.orderStatus ==3}"> 超时</c:if></td></td>
-									<td width="14%" align="center" valign="middle">${order.currentWPMoney }</td>
+									<td width="14%" align="center" valign="middle"><font style="font-size: 14px;color: red;">${order.currentWPMoney }</font></td>
 									<td width="10%" align="center" valign="middle"><a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a></td>
 								</tr>
 							</c:forEach>

@@ -45,7 +45,7 @@ public class AgentController {
 	public String agentMenu(HttpServletRequest request, Model model) {
 		MemberUser user = (MemberUser) request.getSession().getAttribute(
 				MemberUser.FRONT_MEMBER_LOGIN_SESSION);
-		if (user != null&&user.getId()!=null) {
+		if (user != null && user.getId() != null) {
 			model.addAttribute("todayIncome",
 					orderService.getTodayMoney(user.getId()));
 			model.addAttribute("totalIncome",
@@ -80,8 +80,8 @@ public class AgentController {
 			if (num == 0) {
 				// 客户交易量
 				model.addAttribute("dailyTradingVolume", total);
-			}else{
-				model.addAttribute("dailyTradingVolume", total/num);	
+			} else {
+				model.addAttribute("dailyTradingVolume", total / num);
 			}
 			return "agent/agentMemberCenter";
 		} else {
@@ -129,7 +129,7 @@ public class AgentController {
 		List<Map> memberUsers = orderService.findMemberByAgentUserId(
 				(pageNum - 1) * StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE,
 				user.getId());
-		log.info("--------用户数量-----"+memberUsers.size());
+		log.info("--------用户数量-----" + memberUsers.size());
 		model.addAttribute("memberUsers", memberUsers);
 		model.addAttribute("size", size);
 		model.addAttribute("page", pageSize);
@@ -233,12 +233,23 @@ public class AgentController {
 		Integer size = orderService.findCountMemberByAgentUserId(user.getId());
 		Integer pageSize = size % StaticDefine.PAGE_SIZE == 0 ? size
 				/ StaticDefine.PAGE_SIZE : size / StaticDefine.PAGE_SIZE + 1;
-		List<Map> memberUsers = orderService.findMemberStaticIncomeByAgentUserId(
-				(pageNum - 1) * StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE,
-				user.getId());
+		List<Map> memberUsers = orderService
+				.findMemberStaticIncomeByAgentUserId((pageNum - 1)
+						* StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE,
+						user.getId());
 		model.addAttribute("memberUsers", memberUsers);
-		log.info("--------用户数量-----"+memberUsers.size());
+		log.info("--------用户数量-----" + memberUsers.size());
+		model.addAttribute("almoney_one", orderService.getAgnetCzMoney(user));
+		model.addAttribute("almoney_t", orderService.getAgnetZsMoney(user));
+		model.addAttribute("almoney_th", orderService.getAgnettkzMoney(user));
+		model.addAttribute("almoney_f", orderService.getAgnetCurrentMoney(user));
+		model.addAttribute(
+				"almoney_p",
+				orderService.getAgnettkzMoney(user)+ orderService.getAgnetZsMoney(user)
+						+ orderService.getAgnetCurrentMoney(user)
+						- orderService.getAgnetCzMoney(user)- orderService.getAgnetZsMoney(user));
 		model.addAttribute("size", size);
+
 		model.addAttribute("page", pageSize);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("memberUser", user);

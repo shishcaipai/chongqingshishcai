@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.caijin.I000Wan.common.service.CommonService;
 import com.caijin.I000Wan.entity.LotteryPeriod;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 
 public interface LetteryPeriodService extends CommonService<LotteryPeriod,String>{
 
@@ -31,14 +33,7 @@ public interface LetteryPeriodService extends CommonService<LotteryPeriod,String
 	List<LotteryPeriod> findByTopNhistory(String lotteryCode,int n);
 
 	LotteryPeriod findByTopPeriod();
+
+
 	
-//	/**
-//	 * 根据彩票编码查找预售的前N期期数数据
-//	 * @param lotteryCode
-//	 * @param n
-//	 * @return
-//	 */
-//	List<LotteryPeriod> findByTopNnew(String lotteryCode,int n);
-//	
-//	LotteryPeriod findPeriodById(Integer id);
 }

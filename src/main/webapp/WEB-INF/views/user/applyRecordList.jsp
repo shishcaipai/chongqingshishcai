@@ -75,7 +75,7 @@
 								<th style="text-align: center;">银行</th>
 							</tr>
 							<c:forEach var="record" items="${requestScope.recordList }">
-								<tr class="page_tzjl01">
+								<tr class="page_tzjl02">
 									<td style="text-align: center;"><fmt:formatDate pattern="yyyy-MM-dd" value="${record.createDate}" /></td>
 									<td style="text-align: center;">${record.applyMoney }</td>
 									<td style="text-align: center;">${record.applyName }</td>

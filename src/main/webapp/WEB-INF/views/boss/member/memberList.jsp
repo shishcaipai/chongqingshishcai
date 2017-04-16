@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 引入Jquery -->
 <script type="text/javascript"	src="<%=basePath%>/static/js/jquery-1.7.2.min.js" charset="utf-8"></script>
 <script src="<%=basePath%>static/js/commonUtil.js" type="text/javascript"></script>
-<script src="<%=basePath%>static/boss/js/memberUser.js?id=2" type="text/javascript"></script>
+<script src="<%=basePath%>static/boss/js/memberUser.js?id=1" type="text/javascript"></script>
 <%@ include file="../../common/easyUiInclude.jsp"%>
 
 </head>
@@ -62,8 +62,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td>真实名：</td>
 			<td><input  type="text" id="realName" name="real_name"/></td>
 			<td>支付宝：</td>
-			<td><input type="text" id="bankCode" name="bank_code"/></td>
+			<td><input type="text" id="zfbCode" name="zfb_code"/></td>
 		</tr>
+		<tr>	
 			<td>手机号：</td>
 			<td><input type="text" id="telephone" name="telephone"/></td>
 			<td>用户类型：</td>
@@ -71,6 +72,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value ="0">会员</option>
 			<option value ="1">代理人</option>
 			</select></</td> 
+		<tr>
+		<tr>	
+			<td>状态：</td>
+			<td><select  id="activated" name="activated">
+			<option value ="1">激活</option>
+			<option value ="0">禁用</option>
+			</select></</td> 
+			<td></td>
+			<td></td>
 		<tr>
 			<td colspan="4" align="right">
 	       	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="add" onClick="saveMemberUser()">提交</a>&nbsp;&nbsp;

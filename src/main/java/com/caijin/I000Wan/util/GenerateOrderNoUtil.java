@@ -14,9 +14,9 @@ import com.caijin.I000Wan.web.OrderController;
 public class GenerateOrderNoUtil {
 
 	public static String getOrderNumber(){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
-		String orderNumber = "jj1000"+sdf.format(date);
+		String orderNumber = "jj"+sdf.format(date);
 		orderNumber += randamNext();
 		return orderNumber;
 	}

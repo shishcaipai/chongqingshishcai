@@ -68,7 +68,7 @@
 				<TD width="10%" align="center" valign="middle">详情</TD>
 			  </tr>
      <c:forEach var="order" items="${requestScope.list }">
-								<tr class="page_tzjl01">
+								<tr  class="page_tzjl02">
 									<td width="20%" align="center" valign="middle">${order.orderNo }</td>
 									<td width="12%" align="center" valign="middle">重庆时时彩</td>
 									<td width="12%" align="center" valign="middle">${order.username }</td>
@@ -76,7 +76,7 @@
 									<td width="8%" align="center" valign="middle">${order.fenmoney }</td>
 									<td width="15%" align="center" valign="middle">${order.createDate }</td>
 									<td width="5%" align="center" valign="middle">${order.zhongjiao }</td>
-									<td width="14%" align="center" valign="middle">${order.money }</td>
+									<td width="14%" align="center" valign="middle"><font style="font-size: 14px;color: red;">${order.money }</font></td>
 									<td width="10%" align="center" valign="middle"><a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a></td>
 								</tr>
 							</c:forEach>

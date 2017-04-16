@@ -10,6 +10,8 @@ import com.caijin.I000Wan.common.service.impl.CommonServiceImpl;
 import com.caijin.I000Wan.dao.LotteryPeriodDao;
 import com.caijin.I000Wan.entity.LotteryPeriod;
 import com.caijin.I000Wan.service.LetteryPeriodService;
+import com.caijin.I000Wan.util.PageModel;
+import com.caijin.I000Wan.util.Result;
 
 @Component
 @Transactional
@@ -50,6 +52,8 @@ public class LetteryPeriodServiceImpl extends CommonServiceImpl<LotteryPeriod,St
 	public LotteryPeriod findByPeriod(String lotteryCode, String periodNumber) {
 		return lotteryPeriodDao.findByPeriod(periodNumber,lotteryCode);
 	}
+
+	
 	
 
 }

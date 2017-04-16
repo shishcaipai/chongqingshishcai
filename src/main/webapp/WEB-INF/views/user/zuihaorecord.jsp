@@ -69,7 +69,7 @@
 
 							</tr>
 							<c:forEach var="order" items="${requestScope.orders }">
-								<tr class="page_tzjl01">
+								<tr class="page_tzjl02">
 									<td width="20%" align="center" valign="middle">${order.orderDetail.order.orderId }</td>
 									<td width="20%" align="center" valign="middle">重庆时时彩</td>
 									<td width="20%" align="center" valign="middle">${order.floatManay }</td>

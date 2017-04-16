@@ -84,7 +84,7 @@
 			</div> -->
 			<div class="user_tub">
 				<span style="margin-left: 40px;"
-					onclick="javascript:location='<%=basePath%>user/bankInfo'">绑定支付宝</span>
+					onclick="javascript:location='<%=basePath%>user/bankInfo'">绑定银行卡</span>
 			</div>
 			<%-- <c:choose>
 				<c:when

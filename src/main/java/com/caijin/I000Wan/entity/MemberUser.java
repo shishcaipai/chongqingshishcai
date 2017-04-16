@@ -27,10 +27,12 @@ public class MemberUser extends BaseEntity {
 	private String city;
 	private String telephone;
 	private String bankCode;// 银行卡号
+	private String openBank;//开户银行
+	private String zfbCode;//支付宝
 	private String identityCard;// 身份证号码
 	private String sex;// 性别
 	private String bankName;// 银行名称
-	private Boolean activated;// 账号是否邮件激活
+	private Boolean activated=true;// 账号是否邮件激活
 //	private float totalScore = 0;// 总金额
 	private float availableScore = 0;// 可用金额
 	private float actionScore = 0;// 活动金额
@@ -39,6 +41,7 @@ public class MemberUser extends BaseEntity {
 	private int type;
 	private String moneyPwd;
 	private String qq;
+	private String ip;//ip
 	/**
 	 * 推荐人id
 	 */
@@ -231,14 +234,6 @@ public class MemberUser extends BaseEntity {
 		this.activated = activated;
 	}
 
-//	@Column(name = "total_score")
-//	public float getTotalScore() {
-//		return totalScore;
-//	}
-//
-//	public void setTotalScore(float totalScore) {
-//		this.totalScore = totalScore;
-//	}
 
 	@Column(name = "available_score")
 	public float getAvailableScore() {
@@ -273,6 +268,30 @@ public class MemberUser extends BaseEntity {
 
 	public void setQq(String qq) {
 		this.qq = qq;
+	}
+
+	public String getZfbCode() {
+		return zfbCode;
+	}
+
+	public void setZfbCode(String zfbCode) {
+		this.zfbCode = zfbCode;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getOpenBank() {
+		return openBank;
+	}
+
+	public void setOpenBank(String openBank) {
+		this.openBank = openBank;
 	}
 
 

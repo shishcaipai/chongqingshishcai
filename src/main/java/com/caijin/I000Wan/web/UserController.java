@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.caijin.I000Wan.entity.HeMaiOrder;
 import com.caijin.I000Wan.entity.HeMaiOrderDetail;
+import com.caijin.I000Wan.entity.LogData;
 import com.caijin.I000Wan.entity.LotteryPeriod;
 import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
@@ -33,6 +34,7 @@ import com.caijin.I000Wan.interceptor.CommonInterceptor;
 import com.caijin.I000Wan.service.HeMaiOrderDetailService;
 import com.caijin.I000Wan.service.HeMaiOrderService;
 import com.caijin.I000Wan.service.LetteryPeriodService;
+import com.caijin.I000Wan.service.LogDataService;
 import com.caijin.I000Wan.service.MemberUserService;
 import com.caijin.I000Wan.service.OrderDetailService;
 import com.caijin.I000Wan.service.OrderService;
@@ -69,6 +71,8 @@ public class UserController {
 
 	@Autowired
 	private LetteryPeriodService letteryPeriodService;
+	@Autowired
+	private LogDataService logDataService;
 
 	/**
 	 * 注册 先查找是否为推广链接
@@ -144,7 +148,7 @@ public class UserController {
 			mu.setTelephone(mobile);
 			mu.setEmail(email);
 			mu.setQq(qq);
-//			mu.setTotalScore(0);
+			// mu.setTotalScore(0);
 			mu.setAvailableScore(0);
 			log.info(mu.getCommendMemberId()
 					+ "==============tuijian================"
@@ -181,7 +185,19 @@ public class UserController {
 
 		return "user/login";
 	}
-
+	public String getIRealIPAddr(HttpServletRequest request) {   
+		 String ip = request.getHeader("x-forwarded-for"); 
+		  if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip) || "null".equalsIgnoreCase(ip))    {   
+		    ip = request.getHeader("Proxy-Client-IP");
+		 }
+		 if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)   || "null".equalsIgnoreCase(ip)) {  
+		  ip = request.getHeader("WL-Proxy-Client-IP");
+		 }
+		 if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)    || "null".equalsIgnoreCase(ip)) {
+		  ip = request.getRemoteAddr(); 
+		 }
+		 return ip;
+		}
 	/**
 	 * 登录
 	 * 
@@ -192,7 +208,7 @@ public class UserController {
 		boolean result = false;
 		String msg = "";// 返回提示语
 		MemberUser mu = null;
-
+		String ip = getIRealIPAddr(req);
 		String userName = req.getParameter("userName");
 		if (userName != null) {
 			try {
@@ -218,8 +234,12 @@ public class UserController {
 			mu = userService.findByUserName(userName);
 			if (mu != null) {
 				if (Md5Util.validatePassword(mu.getPwd(), pwd)) {
+					if(mu.getActivated()!=null&&mu.getActivated()){
 					mu.setRandomCode(realRandomCode);
 					result = true;
+					}else {
+						msg = "用户未激活或被禁访问";
+					}
 				} else {
 					msg = "密码错误!";
 				}
@@ -231,6 +251,16 @@ public class UserController {
 		}
 		if (result) {
 			req.getSession().setAttribute("memberUser", mu);
+			try {
+				LogData logData = new LogData();
+				logData.setCreateDate(new Date());
+				logData.setIp(ip);
+				logData.setMemberUser(mu);
+				logDataService.save(logData);
+			} catch (Exception e) {
+
+			}
+
 			return "redirect:/index";
 		} else {
 			model.addAttribute("result", result);
@@ -394,12 +424,16 @@ public class UserController {
 		String message = "支付宝账号保存出错";
 		MemberUser member = userService
 				.findByUserName(memberUser.getUserName());
+		if(member!=null){
 		try {
 			if (!Md5Util.validatePassword(member.getPwd(), memberUser.getPwd())) {
 				message = "网站登录密码不正确，请重新输入";
 			} else {
-				member.setBankName(Bank.ZFB.name());
+				member.setBankName(memberUser.getBankName());
 				member.setBankCode(memberUser.getBankCode());
+				member.setZfbCode(memberUser.getZfbCode());
+				member.setCity(memberUser.getCity());
+				member.setOpenBank(memberUser.getOpenBank());
 				member.setUpdateDate(new Date());// 最后修改人
 				userService.update(member);
 				sessionReload(request, member);
@@ -407,6 +441,9 @@ public class UserController {
 			}
 		} catch (Exception e) {
 			message = "支付宝账号保存出错:" + e.getMessage();
+		}
+		}else{
+			message = "用户信息出错，请重新登陆";
 		}
 		return message;
 	}
@@ -861,6 +898,7 @@ public class UserController {
 	public String orderDetail(HttpServletRequest request, Model model) {
 		String orderId = (String) request.getParameter("orderId");
 		Order order = orderService.findOrderByOrderId(orderId);
+		Integer beisu = 0;
 		if (order.getOrderType() == Order.HEMAI_BUY_ORDER
 				|| order.getOrderType() == Order.PROXY_BUY_ORDER) {
 			List<Period> list = periodService.findPeriodByOId(orderId);
@@ -870,10 +908,11 @@ public class UserController {
 				model.addAttribute("pNum", 0);
 			}
 			for (Period period : list) {
+				beisu = period.getBeisu();
 				LotteryPeriod lperiod = letteryPeriodService.findByPeriod(
-						Period.SHISHI_CAI_CHONGQING, period.getLetterPharse());
+						Period.SHISHI_CAI_CHONGQING, period.getLotteryPeriod());
 				if (lperiod != null) {
-					period.setLetterPharse(lperiod.getPeriodNumber());
+					period.setLetterPharse(lperiod.getLotteryPeriod());
 				}
 			}
 			order.setPeriod(list);
@@ -889,7 +928,7 @@ public class UserController {
 			}
 
 			model.addAttribute("details", details);
-
+			model.addAttribute("beisu", beisu);
 		}
 		if (order.getPeriod() != null && !order.getPeriod().isEmpty()) {
 			if (Period.SHISHI_CAI_CHONGQING.equals(order.getPeriod().get(0)
@@ -918,8 +957,8 @@ public class UserController {
 			MemberUser user = (MemberUser) request.getSession().getAttribute(
 					MemberUser.FRONT_MEMBER_LOGIN_SESSION);
 			if (user != null
-					&& heDetail.getMemberUser().getUserName()
-							.equals(user.getUserName())
+					&& user.getUserName().equals(
+							heDetail.getMemberUser().getUserName())
 					&& order.getOrderStatus() == Order.WAIT_ORDER) {
 				model.addAttribute("chexiao", true);
 			}
@@ -930,9 +969,9 @@ public class UserController {
 					.getOtherId());
 			parentOrder.setPeriod(periodService.findPeriodByOId(order
 					.getOtherId()));
-			
-             //---
-			List<Period> list = periodService.findPeriodByOId(parentOrder.getOrderNo());
+
+			List<Period> list = periodService.findPeriodByOId(parentOrder
+					.getOrderNo());
 			if (list != null) {
 				model.addAttribute("pNum", list.size());
 			} else {
@@ -940,9 +979,9 @@ public class UserController {
 			}
 			for (Period period : list) {
 				LotteryPeriod lperiod = letteryPeriodService.findByPeriod(
-						Period.SHISHI_CAI_CHONGQING, period.getLetterPharse());
+						Period.SHISHI_CAI_CHONGQING, period.getLotteryPeriod());
 				if (lperiod != null) {
-					period.setLetterPharse(lperiod.getPeriodNumber());
+					period.setLetterPharse(lperiod.getLotteryPeriod());
 				}
 			}
 			order.setPeriod(list);
@@ -965,18 +1004,33 @@ public class UserController {
 				}
 				model.addAttribute("parsh", order.getPeriod().get(0)
 						.getLotteryPeriod());
+				model.addAttribute("beisu", order.getPeriod().get(0).getBeisu());
 				model.addAttribute(
 						"endDate",
 						DateUtils.getLeftEndDate(order.getPeriod().get(0)
 								.getLotteryPeriod()));
 			}
-			//==
+
+			// ==
 			model.addAttribute("order", order);
+			model.addAttribute("porder", parentOrder);
 			HeMaiOrderDetail heDetail = heMaiOrderDetailService
 					.findOrderHemaiDetailByOrderId(parentOrder);
+			int leftNum = heMaiOrderService.getHemaiOrderFenNum(heDetail);
+			model.addAttribute("leftNum", leftNum);
 			model.addAttribute("heDetail", heDetail);
-			HeMaiOrder hemaiOrder = heMaiOrderService.find(order.getOrderNo());
-			model.addAttribute("hemaiorder", hemaiOrder);
+			List<HeMaiOrder> lists = heMaiOrderService
+					.findOrderHemaiByOrderId(heDetail);
+			List<HeMaiOrder> newList = new ArrayList<HeMaiOrder>();
+			for (HeMaiOrder hemaiorder : lists) {
+				if (hemaiorder.getMemberUser().getUserName()
+						.equals(order.getMemberUser().getUserName())) {
+					newList.add(hemaiorder);
+					break;
+				}
+			}
+			model.addAttribute("hemaiorders", newList);
+			model.addAttribute("size", (lists.size()));
 			return "user/details";
 		}
 

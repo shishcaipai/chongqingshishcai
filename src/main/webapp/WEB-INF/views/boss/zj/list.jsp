@@ -42,6 +42,7 @@
 		<div>
 			<a href="javascript:searchOrder()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a>
+				
 		</div>
 	</div>
 

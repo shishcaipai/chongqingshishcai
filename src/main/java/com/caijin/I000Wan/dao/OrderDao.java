@@ -108,6 +108,21 @@ public interface OrderDao extends OrderCustomDao, CommonDao<Order, String> {
 
 	@Query("select o from Order o where o.orderType=?1 and o.otherId=?2 order by o.createDate desc ")
 	public List<Order> findOrderByTypeAndOtherId(int hemaiImpBuyOrder, String id);
+
 	@Query("select o from Order o where o.orderType=?1 and o.orderNo=?2 order by o.createDate desc ")
 	public Order findOrderByTypeAndOrderId(int orderType, String orderNo);
+
+	// 代理人下充值总数
+	@Query(value = "select  sum(o.available_score) from chongzhi_record o left join member_user m on  o.member_id=m.id where m.commend_member_id=?1  ", nativeQuery = true)
+	public float getAgnetCzMoney(String id);
+
+	// 代理人下活动奖金额总数
+	@Query(value = "select  sum(o.action_score) from chongzhi_record o left join member_user m on  o.member_id=m.id where m.commend_member_id=?1  ", nativeQuery = true)
+	public float getAgnetZsMoney(String id);
+	// 代理人下提现金额总数
+	@Query(value = "select  sum(o.apply_money) from apply_record o left join member_user m on  o.member_id=m.id where m.commend_member_id=?1 and o.audit_status=1 ", nativeQuery = true)
+	public float getAgnettkzMoney(String id);
+	//当前代理下所有可用金额
+	@Query(value = "select  sum(m.available_score) from  member_user m  where m.commend_member_id=?1  ", nativeQuery = true)
+	public float getAgnetCurrentMoney(String id);
 }
