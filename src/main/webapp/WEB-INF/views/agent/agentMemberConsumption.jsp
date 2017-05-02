@@ -48,11 +48,7 @@
 									<td height="28">会员</td>
 									<td align="left"><select id="agentID" name="SelAgentID">
 
-											<option value="4656">518168</option>
-
-											<option value="4658">cxju8881</option>
-
-											<option value="4790">17786282835</option>
+											
 
 									</select></td>
 									<td align="center">&nbsp;&nbsp;<input class="cps_ny_a3"
@@ -82,9 +78,9 @@
 										<tr class="page_tzjl02" >
 										<td style="text-align: center;"><fmt:formatDate  type="both" value="${user.createdate}" pattern="yyyy-MM-dd"/></td>
 										<td style="text-align: center;">${user.username }</td>
-										<td style="text-align: center;">${user.money }</td>
-										<td style="text-align: center;">${user.pmoney }</td>
-										<td style="text-align: center;"><a herf='${user.id }'>查看</a></td>
+										<td style="text-align: center;"> <fmt:formatNumber type="number" value="${user.money }" maxFractionDigits="2"/></td>
+										<td style="text-align: center;"><fmt:formatNumber type="number" value="${user.pmoney }" maxFractionDigits="2"/></td>
+										<td style="text-align: center;"><a href='<%=basePath%>agent/agentMembeInDetail?userID=${user.id }'>查看</a></td>
 										</td>
 									</tr>
 									</c:forEach>

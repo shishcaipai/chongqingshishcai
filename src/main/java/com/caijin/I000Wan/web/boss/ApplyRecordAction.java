@@ -83,6 +83,7 @@ public class ApplyRecordAction {
 				order.setCreateDate(new Date());
 				order.setTotalMoney(applyRecord.getApplyMoney());
 				order.setOrderStatus(Order.ORDER_SUCESS);
+				order.setMemberUser(applyRecord.getMemberUser());
 				order.setName("用户提现");
 				orderService.update(order);
 			}

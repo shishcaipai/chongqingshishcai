@@ -326,11 +326,11 @@ public class HeMaiController {
 		}
 		float money = 0;
 		try {
-			money = Float.valueOf(order.getTotalMoney()) / total * (reNums+i);
+			money = Float.valueOf(order.getTotalMoney()) / total * (reNums + i);
 		} catch (Exception e) {
 
 		}
-		if (memberUser.getAvailableScore() >= money) {
+		if ((memberUser.getAvailableScore() + memberUser.getActionScore()) >= money) {
 			HeMaiOrderDetail heMaiOrderDetail = new HeMaiOrderDetail();
 			heMaiOrderDetail.setOrder(order);
 			heMaiOrderDetail.setDesc(dec);
@@ -339,7 +339,7 @@ public class HeMaiController {
 				heMaiOrderDetail.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_UN);
 				heMaiOrderDetail.setMinimumGuaranteeSum(i);
 			}
-			heMaiOrderDetail.setSubGuaranteeSum(total-reNums);
+			heMaiOrderDetail.setSubGuaranteeSum(total - reNums);
 			heMaiOrderDetail.setMemberUser(memberUser);
 			heMaiOrderDetail.setFensum(total);
 			heMaiOrderDetail
@@ -364,7 +364,7 @@ public class HeMaiController {
 
 				hemaiOrder.setFloatManay(money);
 				hemaiOrder.setSubGuaranteeSum(reNums);
-				if ((total-reNums) == 0) {
+				if ((total - reNums) == 0) {
 					hemaiOrder
 							.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_SUCCESS);
 				} else {
@@ -383,12 +383,26 @@ public class HeMaiController {
 				newOrder.setLotteryType(Period.SHISHI_CAI_CHONGQING);
 				newOrder.setCreateDate(new Date());
 				newOrder.setOrderTime(new Date());
-				newOrder.setName("合买订单");
+				newOrder.setName("合买跟单");
 				// newOrder.setOrderNo(System.currentTimeMillis() + "");
 				newOrder.setTotalMoney(money);
 				orderService.save(newOrder);
-				memberUser.setAvailableScore(memberUser.getAvailableScore()
-						- money);
+				if (memberUser.getActionScore() > money) {
+					hemaiOrder.setActionManay(money);
+					memberUser.setActionScore(memberUser.getActionScore()
+							- money);
+				} else if (memberUser.getActionScore() > 0
+						&& memberUser.getActionScore() < money) {
+					float actionScore = memberUser.getActionScore();
+					hemaiOrder.setActionManay(money);
+					memberUser.setActionScore(0);
+					memberUser.setAvailableScore(memberUser.getAvailableScore()
+							- (money - actionScore));
+				} else {
+					memberUser.setAvailableScore(memberUser.getAvailableScore()
+							- money);
+				}
+				heMaiService.update(hemaiOrder);
 				if (reNums == heMaiOrderDetail.getFensum()) {
 					order.setOrderStatus(Order.ORDER_SUCESS);
 					order.setPayStatus(Order.PAY_STATUS_SUCESS);
@@ -467,8 +481,8 @@ public class HeMaiController {
 				if (buyed <= (detail.getFensum())) {
 					float a = Float.valueOf(detail.getOrder().getTotalMoney())
 							/ Float.valueOf(detail.getFensum());
-					if (a * Float.valueOf(subscribeAmount) < memberUser
-							.getAvailableScore()) {
+					if (a * Float.valueOf(subscribeAmount) <=(memberUser
+							.getAvailableScore() + memberUser.getActionScore())) {
 						HeMaiOrder hemaiOrder = new HeMaiOrder();
 						hemaiOrder.setCreateDate(new Date());
 						hemaiOrder.setMemberUser(user);
@@ -483,12 +497,24 @@ public class HeMaiController {
 						hemaiOrder.setOrderDetail(detail);
 						heMaiService.save(hemaiOrder);
 						float money = a * Float.valueOf(subscribeAmount);
-						memberUser.setAvailableScore(memberUser
-								.getAvailableScore()
-								- a
-								* Float.valueOf(subscribeAmount));
+
+						if (memberUser.getActionScore() > money) {
+							hemaiOrder.setActionManay(money);
+							memberUser.setActionScore(memberUser
+									.getActionScore() - money);
+						} else if (memberUser.getActionScore() > 0
+								&& memberUser.getActionScore() < money) {
+							float actionScore = memberUser.getActionScore();
+							hemaiOrder.setActionManay(actionScore);
+							memberUser.setActionScore(0);
+							memberUser.setAvailableScore(memberUser
+									.getAvailableScore()
+									- (money - actionScore));
+						} else {
+							memberUser.setAvailableScore(memberUser
+									.getAvailableScore() - money);
+						}
 						memberUserService.update(memberUser);
-						
 						Order newOrder = new Order();
 						newOrder.setOrderNo(hemaiOrder.getId());
 						newOrder.setOtherId(hemaiOrder.getOrderNo());
@@ -613,7 +639,7 @@ public class HeMaiController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/test")
 	public String ceshi(HttpServletRequest request, Model model) {
 		return "user/details";

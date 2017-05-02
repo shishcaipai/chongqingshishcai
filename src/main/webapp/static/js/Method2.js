@@ -1492,77 +1492,29 @@ function checkData(checkType) {
             ZjCut = 1;
         }
         if (checkType == "zg") {
-            $.ajax({
-                type: "POST",
-                url: "bet/buy",
-                dataType : "json",
-                data: {
-                    allmoney: allmoney,
-                    // buyExpect: buyExpect,
-                    codes: codes,
-                    expectlistsuc: expectlistsuc,
-                    beishulistsuc: beishulistsuc,
-                    ZjCut: ZjCut,
-					lotteryTypeId:lotteryTypeId,
-					phase:phase,
-					t : Math.random()
-                },
-                success: function(data) {
-					try {
-						data = eval(data);
-					} catch (e) {
-						alert('会话超时，请重新登陆');
-						window.location = '';
+        	 var  data={
+					    totalMoney:allmoney,//投注总金额
+					    playname:playname,//投注名称
+						codes:codes,//投注彩票代码
+						expectnum:expectnum,//投注彩票期数
+						zhushunum: $("#zhushushow2").text(),//投注数
+						expectlistsuc:expectlistsuc, //投注彩票期数list
+						beishulistsuc:beishulistsuc,//投注彩票倍数list
+						ZjCut:ZjCut,//是否追号停止
+						IsZhuihao:Zhuihao,//是否追号
+						lotteryTypeId:lotteryTypeId,//彩种类型ID
+						lotteryType:"jx11x5",//彩种类型代码
+						phase:phase,//当前期号
+						t : Math.random()
+					};
+					var form = '<form action="../order/ajax_save" method="post" id="tmpForm2">';
+					for (var name in data) {
+					var val = eval('data.' + name);
+					form += '<input type="text" name="' + name + '" value="' + val + '">';
 					}
-					if (data && data.statusCode && data.statusCode == 200) {
-						
-	                    //清空
-                        zhushu = 0; //注数清0
-                        clear_expectbeishu(); //清空倍数期号
-                        $("#codesshow > option").remove(); //投注内容清空
-                        FirstLoadTouzhuExpect = true;
-                        SelectTouzhuExpectType(1);
-                        $("#selectallbieshu").val(1);
-                        $("#set_beishu").val(1);
-						$("#btn_SubmitZ,#btn_SubmitHM,#btn_SubmitPath").attr("disabled",false);
-						
-						if(confirm("投注成功！\n是否立即查看投注记录？")) {
-							window.open("betDetail?betId=" + data.message, "_blank");
-						}
-					}
-                	/*
-                	if (data == '') {
-                        //window.frames["login"].location.reload();
-                        //清空
-                        zhushu = 0; //注数清0
-                        clear_expectbeishu(); //清空倍数期号
-                        $("#codesshow > option").remove(); //投注内容清空
-                        FirstLoadTouzhuExpect = true;
-                        SelectTouzhuExpectType(1);
-                        $("#selectallbieshu").val(1);
-                        $("#set_beishu").val(1);
-                        $("#btn_SubmitZ,#btn_SubmitHM,#btn_SubmitPath").attr("disabled", false);
-                        alert("发起成功");
-                	} else {
-                		alert('会话超时，请重新登陆');
-						window.location = '';
-                	}
-                	*/
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown) {
-                	var s = XMLHttpRequest.responseText;
-                	if (s == '') {
-						window.location = '';
-					}
-					var errorJson = JSON.parse(s);
-					if (errorJson.message == "用户可用余额不足") {
-						window.location = "myAccount?type=pay";
-					}
-					$("#btn_SubmitZ,#btn_SubmitHM,#btn_SubmitPath").attr("disabled",false);
-					s = eval("(" + s + ")");
-					alert(s.message);
-				}
-            });
+					form += '</form>';
+					$('body').append(form);
+					$('#tmpForm2').submit();
         }
         else {
         	var _data = {

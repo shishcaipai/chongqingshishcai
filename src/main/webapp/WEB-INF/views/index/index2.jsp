@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -111,8 +112,8 @@
 										varStatus="status">
 										<tr>
 											<td><span class='xh_top'>${ status.index + 1}</span></td>
-											<td><span class="nickNames">${map.user_name}***</span></td>
-											<td class="t_r">${map.money}&nbsp;元</td>
+											<td><span class="nickNames">${fn:substring(map.user_name, 0, 4)}***</span></td>
+											<td class="t_r"><fmt:formatNumber type="number" value="${map.money }" maxFractionDigits="2"/>&nbsp;元</td>
 										</tr>
 
 									</c:forEach>
@@ -444,8 +445,7 @@
 										items="${requestScope.heMaiOrderDetails }">
 										<tr class="tab_hemai_2">
 											<td style="display: none">1</td>
-											<td style="padding-left: 15px;">${order.memberUser.userName}</td>
-
+											<td style="padding-left: 15px;">${fn:substring(order.memberUser.userName, 0, 4)}***</td>
 											<td><span class="new_hemai_red">${order.order.totalMoney}元</span></td>
 											<td><span class="new_hemai_red"><fmt:formatNumber
 														value="${order.order.totalMoney/order.fensum}"
@@ -549,13 +549,13 @@
 	<script type="text/javascript">
 		$(function() {
 			zjxb();
-			 getcqssc();
+		    getcqssc();
 			getgd11c5();
 			getjx11c5(); 
 			setInterval(zjxb, 30000);
 			setInterval(getcqssc, 50000);
-			setInterval(getjx11c5, 50000);
-			setInterval(getjx11c5, 50000);
+			setInterval(getjx11c5, 100000);
+			setInterval(getgd11c5, 100000);
 		});
 		function getcqssc(){
 			getlottery("cqssc",'cqssctime','cqssc','cqsscnum');
@@ -623,8 +623,8 @@
 									$("#slider")
 											.append(
 													"<li><span>恭喜</span><span style='overflow: hidden;'>"
-															+ vo.user
-															+ "</span><span style='color:red'>喜中 <b >"
+															+ vo.user.substring(0,4)
+															+ "***</span><span style='color:red'>喜中 <b >"
 															+ parseFloat(vo.money).toFixed(2)
 															+ "</b> 元</span></li>");
 								}

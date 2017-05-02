@@ -34,6 +34,7 @@ import com.caijin.I000Wan.service.OrderDetailService;
 import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
 import com.caijin.I000Wan.util.BonusUtil;
+import com.caijin.I000Wan.util.ConstantUtil;
 import com.caijin.I000Wan.util.DataGridModel;
 import com.caijin.I000Wan.util.GenerateOrderNoUtil;
 import com.caijin.I000Wan.util.Mum;
@@ -70,6 +71,8 @@ public class OrderAction {
 	@Autowired
 	private HeMaiOrderService heMaiOrderService;
 
+	public static Map<String, Order> currertOrder = new HashMap<String, Order>();
+
 	@RequestMapping("/order/hlist")
 	public String orderHeiList() {
 
@@ -92,6 +95,22 @@ public class OrderAction {
 		Result result = orderService.findOrderListByCondition(pageModel,
 				userName, realName, telephone, orderType, orderStatus,
 				payStatus, startDate, endDate);
+		for (int i = 0; i < result.getRows().size(); i++) {
+			Map<String, Object> map = (Map<String, Object>) result.getRows()
+					.get(i);
+			if (map.containsKey("order_no")) {
+				List<OrderDetail> list = orderDetailService
+						.findOrderDetailByOrderId((String) map.get("order_no"));
+				if (list != null && !list.isEmpty()) {
+					map.put("number", list.get(0).getBuyCaiNumber());
+				}
+				List<Period> lists = periodlService
+						.findPeriodByOId((String) map.get("order_no"));
+				if (lists != null && !lists.isEmpty()) {
+					map.put("prash", lists.get(0).getLotteryPeriod());
+				}
+			}
+		}
 		return result;
 	}
 
@@ -117,6 +136,22 @@ public class OrderAction {
 		Result result = orderService.findOrderListByCondition(pageModel,
 				userName, realName, telephone, orderType, orderStatus,
 				payStatus, startDate, endDate);
+		for (int i = 0; i < result.getRows().size(); i++) {
+			Map<String, Object> map = (Map<String, Object>) result.getRows()
+					.get(i);
+			if (map.containsKey("order_no")) {
+				List<OrderDetail> list = orderDetailService
+						.findOrderDetailByOrderId((String) map.get("order_no"));
+				if (list != null && !list.isEmpty()) {
+					map.put("number", list.get(0).getBuyCaiNumber());
+				}
+				List<Period> lists = periodlService
+						.findPeriodByOId((String) map.get("order_no"));
+				if (lists != null && !lists.isEmpty()) {
+					map.put("prash", lists.get(0).getLotteryPeriod());
+				}
+			}
+		}
 		return result;
 	}
 
@@ -139,18 +174,6 @@ public class OrderAction {
 		map.put("detail", details);
 		map.put("period", periods);
 		return map;
-		// String json = "";
-		// try {
-		// json = mapper.writeValueAsString(map);
-		// } catch (JsonProcessingException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// } // 将对
-		// try {
-		// renderText(response, json);
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
 	}
 
 	/**
@@ -166,16 +189,20 @@ public class OrderAction {
 			HttpServletResponse response) throws IOException {
 		String json = request.getParameter("orders");
 		String orderNo = request.getParameter("orderNo");
-//		String status = request.getParameter("wprizeStatus");
-//		int wprizeStatus = Integer.valueOf(status);
 		log.info("----------" + json);
 		String msg = "";
 		int i = 0;
 		int length = 0;
 		try {
 			Order order = orderService.findOrderByOrderId(orderNo);
+
 			if (order.getOrderStatus() == Order.ORDER_SUCESS
-					&& order.getPayStatus() == Order.PAY_STATUS_SUCESS) {
+					&& order.getPayStatus() == Order.PAY_STATUS_SUCESS
+					&& !(order.getWprizeStatus() == Order.WPRIS_STATUS_ALL || order
+							.getWprizeStatus() == Order.WPRIS_STATUS_PORTION)) {
+				order.setAutoPrizes(false);
+				order.setAutoDrawn(false);
+				orderService.update(order);
 				if (json != null && !json.equals("")) {
 					ObjectMapper mapper = new ObjectMapper();
 					List<Mum> lendReco = mapper.readValue(json,
@@ -215,8 +242,6 @@ public class OrderAction {
 									periodlService.update(period);
 									currentMoney = currentMoney + money;
 								} else {
-									// period.setMoney(money *
-									// period.getBeisu());
 									period.setWinning(Period.winning_AFTER);
 									periodlService.update(period);
 								}
@@ -269,8 +294,11 @@ public class OrderAction {
 
 						}
 					}
+					order = orderService.findOrderByOrderId(order.getId());
 					// 发奖
-					if (order.autoPrizes) {
+					if (order.isAutoPrizes()) {
+						if (!currertOrder.containsKey(orderNo)) {
+							currertOrder.put(orderNo, order);
 						if (order.getOrderType() == Order.PROXY_BUY_ORDER) {
 							// 如果没有发过奖，则把所有统计中奖金额全部发放
 							if (order.getCashBackStatus() == Order.CASHBACKSTATUS_NO) {
@@ -347,30 +375,31 @@ public class OrderAction {
 								} else {
 									order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
 								}
-								// order.setWprizeStatus(Order.WPRIS_STATUS_ALL);
 								orderService.update(order);
 							}
 
 						}
-					}
+						currertOrder.remove(orderNo);
+					}else{
+						msg = "修改成功，但有其他任务在处理发奖，不再处理发奖"; 
+				 }
 
-					// }
+					 }
 
 				}
 				if (length == i) {
 					msg = "修改成功";
 				} else if (i == 0) {
-					msg = "修改失败";
+					msg = "修改成功";
 				} else if (i < length) {
 					msg = "修改部分成功";
 				}
-				// order.setWprizeStatus(wprizeStatus);
 				orderService.update(order);
 				orderService.clear();
 				memberUserService.clear();
 				log.info(i + "----------" + length);
 			} else {
-				msg = "无效订单，不允许修改状态";
+				msg = "无效订单或订单已发奖，不允许修改状态";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -392,16 +421,40 @@ public class OrderAction {
 			HttpServletResponse response) throws IOException {
 		String auto = request.getParameter("autoPrizes");
 		String orderNo = request.getParameter("orderNo");
+		String type = request.getParameter("type");
+
 		boolean autoPrizes = Boolean.valueOf(auto);
 		String msg = "";
-
+		if (type != null && type.equals("2")) {
+			if (ConstantUtil.AUTO_PRIZES) {
+				msg = "1";
+			} else {
+				msg = "0";
+			}
+			renderText(response, msg);
+			return;
+		} else if (type != null && type.equals("3")) {
+			if ("1".equals(auto)) {
+				autoPrizes = true;
+			} else {
+				autoPrizes = false;
+			}
+			ConstantUtil.AUTO_DRAWN = autoPrizes;
+			ConstantUtil.AUTO_PRIZES = autoPrizes;
+			renderText(response, "修改成功");
+			return;
+		}
 		try {
 			Order order = orderService.findOrderByOrderId(orderNo);
-			order.setAutoPrizes(!autoPrizes);
-			order.setAutoDrawn(!autoPrizes);
-			orderService.update(order);
-			orderService.clear();
-			msg = "修改成功";
+			if (order.getCashBackStatus() == order.CASHBACKSTATUS_PORTION) {
+				msg = "已经部分发过奖了，不允许修改成自动发奖";
+			} else {
+				order.setAutoPrizes(!autoPrizes);
+				order.setAutoDrawn(!autoPrizes);
+				orderService.update(order);
+				orderService.clear();
+				msg = "修改成功";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			msg = "修改失败";
@@ -428,178 +481,190 @@ public class OrderAction {
 			HttpServletResponse response) throws IOException {
 		String orderNo = request.getParameter("orderNo");
 		String msg = "";
-		try {
-			Order order = orderService.findOrderByOrderId(orderNo);
-			if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL
-					|| order.getWprizeStatus() == Order.WPRIS_STATUS_PORTION) {
-				List<OrderDetail> orderDetails = orderDetailService
-						.findOrderDetailByOrderId(order);
-				List<Period> periods = periodlService.findPeriodByOId(order
-						.getOrderNo());
-				LotteryPeriod letteryPeriod;
-				float currentMoney = 0;
-				// 计算中奖过程
-				for (Period period : periods) {
-					if (period.getStatus() == Period.STATUS_CURRENT
-							&& period.getWinning() == Period.winning_BEFORE) {
-						letteryPeriod = letteryperiodlService.findByPeriod(
-								period.getLotteryCode(),
-								period.getLotteryPeriod());
+		if (!currertOrder.containsKey(orderNo)) {
+			try {
+				Order order = orderService.findOrderByOrderId(orderNo);
+				currertOrder.put("orderNo", order);
+				if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL
+						|| order.getWprizeStatus() == Order.WPRIS_STATUS_PORTION) {
+					List<OrderDetail> orderDetails = orderDetailService
+							.findOrderDetailByOrderId(order);
+					List<Period> periods = periodlService.findPeriodByOId(order
+							.getOrderNo());
+					LotteryPeriod letteryPeriod;
+					float currentMoney = 0;
+					// 计算中奖过程
+					for (Period period : periods) {
+						if (period.getStatus() == Period.STATUS_CURRENT
+								&& period.getWinning() == Period.winning_BEFORE) {
+							letteryPeriod = letteryperiodlService.findByPeriod(
+									period.getLotteryCode(),
+									period.getLotteryPeriod());
 
-						if (letteryPeriod != null) {
-							for (OrderDetail detail : orderDetails) {
-								float money = BonusUtil.getLotteryHondleBonus(
-										BonusUtil.getBonusNumber(letteryPeriod
-												.getLotteryPeriod()), detail
-												.getBuyCaiNumber());
-								if (money > 0) {
-									money = money * period.getBeisu();
-									period.setMoney(money);
-									period.setWinning(Period.WINNING_CURRENT);
-									periodlService.update(period);
-									currentMoney = currentMoney + money;
-								} else {
-									period.setMoney(money * period.getBeisu());
-									period.setWinning(Period.winning_AFTER);
-									periodlService.update(period);
+							if (letteryPeriod != null) {
+								for (OrderDetail detail : orderDetails) {
+									float money = BonusUtil
+											.getLotteryHondleBonus(
+													BonusUtil
+															.getBonusNumber(letteryPeriod
+																	.getLotteryPeriod()),
+													detail.getBuyCaiNumber());
+									if (money > 0) {
+										money = money * period.getBeisu();
+										period.setMoney(money);
+										period.setWinning(Period.WINNING_CURRENT);
+										periodlService.update(period);
+										currentMoney = currentMoney + money;
+									} else {
+										period.setMoney(money
+												* period.getBeisu());
+										period.setWinning(Period.winning_AFTER);
+										periodlService.update(period);
+									}
+
 								}
 
 							}
-
 						}
 					}
-				}
-				if (periodlService.getPeriodUNStatusByOId(order.getOrderNo()) == 0) {
-					if (currentMoney > 0) {
-						order.setWprizeStatus(Order.WPRIS_STATUS_ALL);
-					} else {
-						if (order.getWprizeStatus() == Order.WPRISE_STATUS_NO)
-							order.setWprizeStatus(Order.WPRIS_STATUS_WI);
-					}
-					order.setCurrentWPMoney(order.getCurrentWPMoney()
-							+ currentMoney);
-
-					orderService.update(order);
-				} else {
-					if (currentMoney > 0) {
-						order.setWprizeStatus(Order.WPRIS_STATUS_PORTION);
-					} else {
-						// 不处理当前状态 还有期数未计算
-					}
-					order.setCurrentWPMoney(order.getCurrentWPMoney()
-							+ currentMoney);
-					orderService.update(order);
-				}
-				// 如果是合买方案就计算子订单中奖金额
-				Order or;
-				if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
-					HeMaiOrderDetail heiMaiDetail = heMaiOrderDetailService
-							.findOrderHemaiDetailByOrderId(order);
-					List<HeMaiOrder> heMaiOrders = heMaiOrderService
-							.findOrderHemaiByOrderId(heiMaiDetail);
-					for (HeMaiOrder heMaiOrder : heMaiOrders) {
-						heMaiOrder
-								.setCurrentWPMoney((order.getCurrentWPMoney() / heiMaiDetail
-										.getFensum())
-										* heMaiOrder.getSubGuaranteeSum());
-						heMaiOrderService.update(heMaiOrder);
-						or = orderService
-								.findOrderByOrderId(heMaiOrder.getId());
-						if (or != null) {
-							or.setCurrentWPMoney(heMaiOrder.getCurrentWPMoney());
-							or.setWprizeStatus(order.getWprizeStatus());
-							orderService.update(or);
-						}
-
-					}
-				}
-				// 发奖
-				// if (currentMoney > 0) {
-				if (order.getOrderType() == Order.PROXY_BUY_ORDER) {
-					// 如果没有发过奖，则把所有统计中奖金额全部发放
-					if (order.getCashBackStatus() == Order.CASHBACKSTATUS_NO) {
-						currentMoney = order.getCurrentWPMoney();
-					}
-					if (currentMoney > 0) {
-						Order newOrder = new Order();
-						newOrder.setOrderType(Order.AWARD_ORDER);
-						newOrder.setOrderNo(GenerateOrderNoUtil
-								.getOrderNumber());
-						MemberUser memberUser = order.getMemberUser();
-						memberUser.setAvailableScore(currentMoney
-								+ memberUser.getAvailableScore());
-						newOrder.setOrderStatus(Order.ORDER_SUCESS);
-						newOrder.setTotalMoney(currentMoney);
-						newOrder.setCreateDate(new Date());
-						newOrder.setUpdateDate(new Date());
-						newOrder.setOtherId(order.getOrderNo());
-						newOrder.setMemberUser(memberUser);
-						orderService.save(newOrder);
-						memberUserService.update(memberUser);
-						if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
-							order.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
+					if (periodlService.getPeriodUNStatusByOId(order
+							.getOrderNo()) == 0) {
+						if (currentMoney > 0) {
+							order.setWprizeStatus(Order.WPRIS_STATUS_ALL);
 						} else {
-							order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
+							if (order.getWprizeStatus() == Order.WPRISE_STATUS_NO)
+								order.setWprizeStatus(Order.WPRIS_STATUS_WI);
 						}
+						order.setCurrentWPMoney(order.getCurrentWPMoney()
+								+ currentMoney);
+
+						orderService.update(order);
+					} else {
+						if (currentMoney > 0) {
+							order.setWprizeStatus(Order.WPRIS_STATUS_PORTION);
+						} else {
+							// 不处理当前状态 还有期数未计算
+						}
+						order.setCurrentWPMoney(order.getCurrentWPMoney()
+								+ currentMoney);
 						orderService.update(order);
 					}
-				} else if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
-
-					// 如果没有发过奖，则把所有统计中奖金额全部发放
-					if (order.getCashBackStatus() == Order.CASHBACKSTATUS_NO) {
-						currentMoney = order.getCurrentWPMoney();
-					}
-					if (currentMoney > 0) {
+					// 如果是合买方案就计算子订单中奖金额
+					Order or;
+					if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
 						HeMaiOrderDetail heiMaiDetail = heMaiOrderDetailService
 								.findOrderHemaiDetailByOrderId(order);
 						List<HeMaiOrder> heMaiOrders = heMaiOrderService
 								.findOrderHemaiByOrderId(heiMaiDetail);
 						for (HeMaiOrder heMaiOrder : heMaiOrders) {
-							float funMoney = currentMoney
-									* heMaiOrder.getSubGuaranteeSum()
-									/ heiMaiDetail.getFensum();
+							heMaiOrder.setCurrentWPMoney((order
+									.getCurrentWPMoney() / heiMaiDetail
+									.getFensum())
+									* heMaiOrder.getSubGuaranteeSum());
+							heMaiOrderService.update(heMaiOrder);
+							or = orderService.findOrderByOrderId(heMaiOrder
+									.getId());
+							if (or != null) {
+								or.setCurrentWPMoney(heMaiOrder
+										.getCurrentWPMoney());
+								or.setWprizeStatus(order.getWprizeStatus());
+								orderService.update(or);
+							}
+
+						}
+					}
+					// 发奖
+					// if (currentMoney > 0) {
+					if (order.getOrderType() == Order.PROXY_BUY_ORDER) {
+						// 如果没有发过奖，则把所有统计中奖金额全部发放
+						if (order.getCashBackStatus() == Order.CASHBACKSTATUS_NO) {
+							currentMoney = order.getCurrentWPMoney();
+						}
+						if (currentMoney > 0) {
 							Order newOrder = new Order();
 							newOrder.setOrderType(Order.AWARD_ORDER);
 							newOrder.setOrderNo(GenerateOrderNoUtil
 									.getOrderNumber());
-							MemberUser memberUser = heMaiOrder.getMemberUser();
-							memberUser.setAvailableScore(funMoney
+							MemberUser memberUser = order.getMemberUser();
+							memberUser.setAvailableScore(currentMoney
 									+ memberUser.getAvailableScore());
 							newOrder.setOrderStatus(Order.ORDER_SUCESS);
+							newOrder.setTotalMoney(currentMoney);
 							newOrder.setCreateDate(new Date());
-							newOrder.setTotalMoney(funMoney);
 							newOrder.setUpdateDate(new Date());
 							newOrder.setOtherId(order.getOrderNo());
 							newOrder.setMemberUser(memberUser);
 							orderService.save(newOrder);
 							memberUserService.update(memberUser);
-							or = orderService.findOrderByOrderId(heMaiOrder
-									.getId());
-							if (or != null) {
-								if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
-									or.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
-								} else {
-									or.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
-								}
-								orderService.update(or);
+							if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
+								order.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
+							} else {
+								order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
 							}
+							orderService.update(order);
 						}
-						if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
-							order.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
-						} else {
-							order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
-						}
-						orderService.update(order);
-					}
-				}
-				// }
+					} else if (order.getOrderType() == Order.HEMAI_BUY_ORDER) {
 
+						// 如果没有发过奖，则把所有统计中奖金额全部发放
+						if (order.getCashBackStatus() == Order.CASHBACKSTATUS_NO) {
+							currentMoney = order.getCurrentWPMoney();
+						}
+						if (currentMoney > 0) {
+							HeMaiOrderDetail heiMaiDetail = heMaiOrderDetailService
+									.findOrderHemaiDetailByOrderId(order);
+							List<HeMaiOrder> heMaiOrders = heMaiOrderService
+									.findOrderHemaiByOrderId(heiMaiDetail);
+							for (HeMaiOrder heMaiOrder : heMaiOrders) {
+								float funMoney = currentMoney
+										* heMaiOrder.getSubGuaranteeSum()
+										/ heiMaiDetail.getFensum();
+								Order newOrder = new Order();
+								newOrder.setOrderType(Order.AWARD_ORDER);
+								newOrder.setOrderNo(GenerateOrderNoUtil
+										.getOrderNumber());
+								MemberUser memberUser = heMaiOrder
+										.getMemberUser();
+								memberUser.setAvailableScore(funMoney
+										+ memberUser.getAvailableScore());
+								newOrder.setOrderStatus(Order.ORDER_SUCESS);
+								newOrder.setCreateDate(new Date());
+								newOrder.setTotalMoney(funMoney);
+								newOrder.setUpdateDate(new Date());
+								newOrder.setOtherId(order.getOrderNo());
+								newOrder.setMemberUser(memberUser);
+								orderService.save(newOrder);
+								memberUserService.update(memberUser);
+								or = orderService.findOrderByOrderId(heMaiOrder
+										.getId());
+								if (or != null) {
+									if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
+										or.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
+									} else {
+										or.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
+									}
+									orderService.update(or);
+								}
+							}
+							if (order.getWprizeStatus() == Order.WPRIS_STATUS_ALL) {
+								order.setCashBackStatus(Order.CASHBACKSTATUS_ALL);
+							} else {
+								order.setCashBackStatus(Order.CASHBACKSTATUS_PORTION);
+							}
+							orderService.update(order);
+						}
+					}
+					// }
+
+				}
+				memberUserService.clear();
+				msg = "发奖成功";
+			} catch (Exception e) {
+				e.printStackTrace();
+				msg = "发奖失败";
 			}
-			memberUserService.clear();
-			msg = "发奖成功";
-		} catch (Exception e) {
-			e.printStackTrace();
-			msg = "发奖失败";
+			currertOrder.remove(orderNo);
+		} else {
+			msg = "订单正在计算中，请不要重复提交发奖";
 		}
 		renderText(response, msg);
 	}

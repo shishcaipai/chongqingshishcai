@@ -74,18 +74,18 @@ $(function() {
 		            },
 		            {field:'wprize_status',title:'是否中奖',width:90,align:'center',
 		            	formatter:function (value){
-		            		  if(value == 0){
-		            		    return '未中奖';
-		            		  }else if(value == 1){
-		            		    return '追号中奖';
-		            		  }else if(value == 2){
-		            		    return '中奖';
-		            		  }
+		            		 if(value == 0){
+			            		    return '待开奖';
+			            		  }else if(value == 3){
+			            		    return '未中奖';
+			            		  }else if(value == 2||value == 1){
+			            		    return '中奖';
+			            		  }
 		            	}
 		            },
 					{field:'user_name',title:'下单人账号',width:90,align:'center'},
-					{field:'real_name',title:'下单人名称',width:90,align:'center'},
-					{field:'telephone',title:'电话',width:90,align:'center'},
+					{field:'number',title:'投注号码',width:180,align:'center'},
+					{field:'prash',title:'期号',width:180,align:'center'},
 					{field:'create_date',title:'订单时间',width:140,align:'center',
 						formatter: function(value,row,index){
 							var time = row.create_date;

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -23,7 +24,7 @@
 					style="cursor: pointer; color: #f30;" id="mymoeny">
 					<c:choose>
 					<c:when test="${sessionScope.memberUser != null}">
-												${memberUser.availableScore}
+												<fmt:formatNumber type="number" value="${memberUser.availableScore+memberUser.actionScore } " maxFractionDigits="2"/>
 												</c:when>
 											<c:otherwise>
 											***

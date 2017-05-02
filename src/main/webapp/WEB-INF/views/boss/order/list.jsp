@@ -15,7 +15,7 @@
 	charset="utf-8"></script>
 <script src="<%=basePath%>static/js/commonUtil.js"
 	type="text/javascript"></script>
-<script src="<%=basePath%>static/boss/js/tradeOrder.js?orde=7"
+<script src="<%=basePath%>static/boss/js/tradeOrder.js?orde=920"
 	type="text/javascript"></script>
 <%@ include file="../../common/easyUiInclude.jsp"%>
 
@@ -69,19 +69,28 @@
 					<td colspan="3"><input name="checkEndTime" id="checkEndTime"
 						class="easyui-datebox" style="width: 150px"></td>
 				</tr>
+				<tr>
+					<td  align="right">全局发奖态：</td>
+					<td  align="left"><select id="arw_Status"  name="arw_Status" style="width: 150px;">
+							<option value="1">自动发奖</option>
+							<option value="0">手动发奖</option>
+					</select></td>
+					<td> <a href="javascript:updateAutoPrizes()" class="easyui-linkbutton"
+				iconCls="icon-edit" plain="true">确认修改全局发奖发方式</a></td>
+				
+				</tr>
 			</table>
 		</form>
 		<div>
 			<a href="javascript:searchOrder()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">查询</a> <a
 				href="javascript:updateOrderUserDialog()" class="easyui-linkbutton"
-				iconCls="icon-edit" plain="true">修改订单方案</a>  <a
+				iconCls="icon-edit" plain="true">修改订单方案</a> <a
 				href="javascript:clearSearchForm()" class="easyui-linkbutton"
 				iconCls="icon-cancel" plain="true">清空</a>
 		</div>
 	</div>
-
-
+	
 	<div id="dlg" class="easyui-window"
 		data-options="modal:true,iconCls:'icon-save',closed:'true'">
 		<form method="post" id="orderForm" name="orderForm">
@@ -89,7 +98,8 @@
 				<tr>
 					<td colspan="6" align="right">订单号：</td>
 					<td colspan="40" align="left"><input type="text"
-						name="order_no" id="order_no" readonly="readonly" style="overflow: visible;"/></td>
+						name="order_no" id="order_no" readonly="readonly"
+						style="overflow: visible;" /></td>
 					<td></td>
 					<td></td>
 				</tr>

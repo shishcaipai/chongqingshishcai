@@ -48,7 +48,8 @@ public class MemberAction {
 
 	@Autowired
 	private UserService userService;
-
+	
+	
 	@RequestMapping("/member/list")
 	public String memberList() {
 

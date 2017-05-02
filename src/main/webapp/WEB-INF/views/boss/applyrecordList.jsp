@@ -78,7 +78,20 @@
 				title : '申请银行',
 				width : 90,
 				align : 'center'
-			}, {
+			}
+			, {
+				field : 'open_bank',
+				title : '开户银行',
+				width : 90,
+				align : 'center'
+			}
+			, {
+				field : 'bank_no',
+				title : '银行卡号/支付宝',
+				width : 180,
+				align : 'center'
+			}
+			, {
 				field : 'audit_status',
 				title : '审核状态',
 				width : 90,

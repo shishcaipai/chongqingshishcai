@@ -11,12 +11,6 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<script id="hz6d_send_acc"
-	src="http://accwww11.53kf.com/sendacc.jsp?cmd=ACC&amp;did=0&amp;sid=12&amp;company_id=72145634&amp;guest_id=10110341180015&amp;status=0&amp;guest_name=&amp;guest_ip=61.50.96.62&amp;guest_ip_info=%E5%8C%97%E4%BA%AC%E5%B8%82%5B%E8%81%94%E9%80%9A%5D&amp;from_page=http%3A%2F%2Fwww.ib18.cn%2Flogin&amp;talk_page=http%3A%2F%2Fwww.ib18.cn%2FlotteryType%3Fid%3D4&amp;kf_time=1487224693&amp;bto_id6d=-99&amp;time=1487224775298&amp;ucust_id=&amp;style=1&amp;is_mobile=n&amp;visitor_type=old&amp;is_uv=0&amp;browser=chrome&amp;os=macos&amp;is_revisit=1&amp;page_title=%E6%B1%9F%E8%A5%BF%E5%8D%81%E4%B8%80%E9%80%89%E4%BA%94"
-	charset="utf-8"></script>
-<script id="ivt_script"
-	src="http://www11.53kf.com/kf_ivt_new.php?arg=10145634&amp;style=1&amp;isonline=0&amp;kfonline=0&amp;lang=zh-cn&amp;resize=yes&amp;charset=gbk&amp;kflist=off&amp;kf=&amp;zdkf_type=1&amp;referer=http%3A%2F%2Fwww.ib18.cn%2FlotteryType%3Fid%3D4&amp;keyword=http%3A%2F%2Fwww.ib18.cn%2Flogin&amp;tpl_name=crystal_blue&amp;tpl_width=702&amp;tpl_height=470&amp;uid=2f95a1abb0e75d6a4d882bced9700bfb&amp;0.3019898522179574"
-	charset="utf-8"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 
 <title>江西11选5</title>
@@ -24,7 +18,6 @@
 <meta name="keywords" content="十一运">
 <link href="<%=basePath%>static/css/commonEX.css" type="text/css"
 	rel="stylesheet">
-<script src="//tb.53kf.com/code/code/10145634/1"></script>
 <script type="text/javascript"
 	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
 <link href="http://www.ld3j.com/res/css/frequency.css" type="text/css"
@@ -34,7 +27,7 @@
 <script src="<%=basePath%>static/js/zhs.js" type="text/javascript"></script>
 <script src="<%=basePath%>static/js/Method2.js"
 	type="text/javascript"></script>
-<script src="<%=basePath%>static/js/Betting2.js"
+<script src="<%=basePath%>static/js/Betting2.js?id=1"
 	type="text/javascript"></script>
 <script src="<%=basePath%>static/js/loading.js"
 	type="text/javascript"></script>
@@ -43,160 +36,8 @@
 
 </head>
 <body>
-	<div id="div_company_mini"
-		style="display: none; position: fixed; right: 0px; bottom: 0px; width: 403px; height: 378px; overflow: hidden; z-index: 10089; cursor: move;">
-		<div id="hz6d_cname_mini_div"
-			style="font-size: 16px; overflow: hidden; position: absolute; top: 7px; left: 10px; width: 330px; height: 20px; color: #fff; text-indent: 30px; background: url(http://www11.53kf.com/style/chat/minichat2/img/minchat_ns_1.png) -79px 0 no-repeat; font-weight: bold; font-family: Arial;">好运相随</div>
-		<div title="缩小" mini_narrow="缩小" mini_recover="还原" max_min="max"
-			style="position: absolute; top: 10px; right: 46px; width: 12px; height: 12px; background: url(http://www11.53kf.com/style/chat/minichat2/img/min.png?11) no-repeat; cursor: pointer;"
-			onclick="max_min_company_mini(this);"></div>
-		<div title="切换到正常窗口"
-			style="position: absolute; top: 10px; right: 28px; width: 12px; height: 12px; background: url(http://www11.53kf.com/style/chat/minichat2/img/maxto.gif) no-repeat; cursor: pointer;"
-			onclick="max_from_company_mini(this);"></div>
-		<div title="关闭"
-			style="position: absolute; top: 10px; right: 10px; width: 12px; height: 12px; background: url(http://www11.53kf.com/style/chat/minichat2/img/minchat_ns_1.png) -18px 0 no-repeat; cursor: pointer;"
-			onclick="close_company_mini();"></div>
-		<div id="mini_header_bg_div"
-			style="position: static; width: 403px; height: 35px; background: url(http://www11.53kf.com/style/chat/minichat2/img/header_bg_1.png?111) no-repeat;"></div>
-		<div id="iframe_company_mini_div" style="width: 100%; height: 100%;">
-			<iframe id="iframe_company_mini" frameborder="0" width="100%"
-				height="100%"></iframe>
-		</div>
-	</div>
-	<div id="kfivtwin" style="display: none; overflow: visible;">
-		<div id="acc_title" class="Lelem" minheight="100" minwidth="100"
-			maxheight="400" maxwidth="400"
-			style="position: relative; z-index: 10000; overflow: visible;">
-			<div class="Lelem" type="img"
-				style="display: block; cursor: default; position: absolute; top: 64px; left: 5px; z-index: 10001; width: 390px; height: 196px;">
-				<img style="width: 390px; height: 196px;"
-					src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/common_bg_inv/commonbg_3.png">
-			</div>
-			<div
-				style="display: block; cursor: default; position: absolute; top: 73px; left: 19px; z-index: 10002; width: 106px; height: 22px; color: rgb(255, 255, 255);"
-				type="text" class="Lelem">
-				<span
-					style="vertical-align: top; font-size: 15.4px; line-height: 22px; color: rgb(255, 255, 255); font-family: 宋体;"
-					iseditable="1">53KF在线客服</span>
-			</div>
-			<div
-				style="display: block; cursor: pointer; position: absolute; top: 70px; left: 358px; z-index: 10003; width: 22px; height: 24px;"
-				onclick="onliner_zdfq=3;hidden_ivt();;" type="img" class="Lelem">
-				<img
-					src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/close_btn/closebtn_2.png"
-					style="width: 22px; height: 24px;">
-			</div>
-			<div
-				style="display: block; cursor: default; position: absolute; top: 104px; left: 14px; z-index: 10004; width: 125px; height: 139px;"
-				type="img" class="Lelem">
-				<img
-					src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/other_img/otherimg_11.png"
-					style="width: 125px; height: 139px;">
-			</div>
-			<div
-				style="display: block; cursor: default; position: absolute; top: 103px; left: 163px; z-index: 10005; width: 139px; height: 41px;"
-				type="text" class="Lelem">
-				<span style="vertical-align: top; font-size: 28.7px;" iseditable="1">欢迎咨询</span>
-			</div>
-			<div
-				style="display: block; cursor: default; position: absolute; top: 147px; left: 162px; z-index: 10006; width: 227px; height: 17px;"
-				type="text" class="Lelem">
-				<span style="vertical-align: top; font-family: 宋体; font-size: 12px;"
-					iseditable="1">53KF.com，感谢大家的支持！</span>
-			</div>
-			<div
-				style="display: block; cursor: default; position: absolute; top: 167px; left: 164px; z-index: 10007; width: 192px; height: 17px;"
-				type="text" class="Lelem">
-				<span style="vertical-align: top; font-family: 宋体; font-size: 12px;"
-					iseditable="1">请问有什么可以帮您？</span>
-			</div>
-			<div class="Lelem" type="img"
-				onclick="onliner_zdfq=2;hz6d_is_exist(&quot;window.open(%22http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26language%3Dzh-cn%26charset%3Dgbk%26username%3D%26userinfo%3D%26introurl%3D%26lyurl%3D%26lytype%3D0%26copartner%3D%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D4%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26brief%3D%26logo%3D%26question%3D%26uid%3D2f95a1abb0e75d6a4d882bced9700bfb%26tfrom%3D2%22%2C%22_blank%22%2C%22height%3D473%2Cwidth%3D703%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno%22)&quot;);hidden_ivt();;"
-				style="display: block; cursor: pointer; position: absolute; top: 199px; left: 162px; z-index: 10008; width: 118px; height: 37px;">
-				<img style="width: 118px; height: 37px;"
-					src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/click_btn/clickbtn_10.png">
-			</div>
-			<div
-				style="display: block; cursor: pointer; position: absolute; top: 237px; left: 18px; z-index: 10009; width: 101px; height: 17px;"
-				type="text" class="Lelem">
-				<a href="http://www.53kf.com" target="_blank"
-					style="text-decoration: none; cursor: pointer;"><span
-					style="vertical-align: top; font-size: 10px; line-height: 17px; color: rgb(138, 131, 126); font-family: 宋体;"
-					iseditable="1">这是什么工具？</span></a>
-			</div>
-			<div
-				style="display: block; cursor: pointer; position: absolute; top: 236px; left: 293px; z-index: 10010; width: 101px; height: 17px;"
-				type="text" class="Lelem">
-				<a href="http://www.53kf.com" target="_blank"
-					style="text-decoration: none; cursor: pointer;"><span
-					style="vertical-align: top; font-size: 10px; line-height: 17px; color: rgb(138, 131, 126); font-family: 宋体;"
-					iseditable="1">Powered by 53KF</span></a>
-			</div>
-		</div>
-	</div>
 	<div id="kfivteffect"
 		style="display: none; position: absolute; width: 0px; height: 0px; overflow: hidden; border: 1px solid rgb(27, 136, 208); z-index: 10087; background: rgb(214, 238, 253);"></div>
-	<iframe id="kfiframe" src="" frameborder="0" scrolling="no"
-		style="display: none; overflow: hidden;"></iframe>
-	<div id="iconDiv1" style="height: auto; width: auto;">
-		<iframe
-			style="position: absolute; z-index: 7998; width: 0px; height: 0px; top: 0px; left: 0px;"
-			frameborder="0"></iframe>
-		<div id="iconDivMain1"
-			style="z-index: 10085; left: 1316px; top: 301px; width: 123px; height: 302px; overflow: hidden; position: absolute;">
-			<div class="Lelem" id="KFLOGO"
-				style="width: 123px; height: 302px; position: relative; z-index: 10000; cursor: pointer;"
-				undefined="" maxwidth="400" maxheight="400" minwidth="100"
-				minheight="100">
-				<div class="Lelem"
-					style="left: 0px; top: 0px; width: 108px; height: 122px; display: block; position: absolute; z-index: 10001; cursor: pointer;"
-					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D4%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D2f95a1abb0e75d6a4d882bced9700bfb#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
-					type="img">
-					<img style="width: 108px; height: 122px;"
-						src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/click_btn/clickbtn_4.png">
-				</div>
-				<div class="Lelem"
-					style="left: 0px; top: 0px; width: 121px; height: 298px; display: block; position: absolute; z-index: 10002; cursor: pointer;"
-					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D4%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D2f95a1abb0e75d6a4d882bced9700bfb#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
-					type="img"
-					eld_img="http://www11.53kf.com/img/upload/10145634/zdypic/icon_off_16831479344987.gif">
-					<img style="width: 121px; height: 298px;"
-						src="http://www11.53kf.com/img/upload/10145634/zdypic/icon_off_16831479344987.gif">
-				</div>
-				<div class="Lelem"
-					style="left: 96px; top: 6px; width: 18px; height: 18px; display: block; position: absolute; z-index: 10003; cursor: pointer;"
-					onclick="_53_close_icon(this);" type="img">
-					<img style="width: 18px; height: 18px;"
-						src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/close_btn/closebtn_0.png">
-				</div>
-				<div class="Lelem" type="img"
-					onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww11.53kf.com%2FwebCompany.php%3Farg%3D10145634%26style%3D1%26language%3Dzh-cn%26charset%3Dgbk%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26referer%3Dhttp%253A%252F%252Fwww.ib18.cn%252FlotteryType%253Fid%253D4%26keyword%3Dhttp%253A%252F%252Fwww.ib18.cn%252Flogin%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D2f95a1abb0e75d6a4d882bced9700bfb#liyc#%2C%20#liyc#_blank#liyc#%2C%20#liyc#height%3D470%2Cwidth%3D702%2Ctop%3D200%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"
-					style="display: block; cursor: pointer; position: absolute; top: 102px; left: 5px; z-index: 10004; width: 110px; height: 35px;">
-					<img
-						src="http://www11.53kf.com/style/setting/ver06/img/icon/logo-skin/click_btn/clickbtn_203.png"
-						style="width: 110px; height: 35px;">
-				</div>
-				<div class="Lelem" type="img"
-					eld_img="http://www11.53kf.com/img/upload/10145634/zdypic/icon_off_94841479344987.png"
-					style="display: block; cursor: default; position: absolute; left: 10px; top: 160px; width: 100px; height: 100px; z-index: 10005;">
-					<img
-						src="http://www11.53kf.com/img/upload/10145634/zdypic/icon_off_94841479344987.png"
-						style="width: 100px; height: 100px;">
-				</div>
-				<div class="Lelem" type="text"
-					style="display: block; cursor: default; position: absolute; top: 261px; left: 0px; z-index: 10006; width: 122px; height: 41px; color: rgb(255, 0, 0); background-color: rgb(255, 255, 153);">
-					<span iseditable="1"
-						style="vertical-align: top; font-size: 28.7px; line-height: 41px; font-family: 微软雅黑; color: rgb(255, 0, 0);"></span>
-				</div>
-				<div class="Lelem" type="text"
-					style="display: block; cursor: default; position: absolute; top: 268px; left: 21px; z-index: 10007; width: 90px; height: 22px; color: rgb(255, 0, 0);">
-					<span iseditable="1"
-						style="vertical-align: top; font-size: 15.4px; line-height: 22px; font-family: 微软雅黑; color: rgb(255, 0, 0);">恭
-						喜 发 财</span>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!--头部开始-->
 
 	<link href="<%=basePath%>static/css/head.css" rel="stylesheet"
@@ -214,55 +55,10 @@
 	<jsp:include page="../header2.jsp"></jsp:include>
 	<div class="header clearfix">
 		<jsp:include page="../header3.jsp"></jsp:include>
-	<script>
-  var ctx = "http://www.ib18.cn";
-  getLotteryTypes();	
-  	  function getLotteryTypes() {
-		  $.ajax({
-				type : "POST",
-				url : "http://www.ib18.cn/lotteryType/getAllLotterTypes?t=" + Math.random(),
-				dataType : "json",
-				success : function(data) {
-					data = eval(data);
-					var html = '<li class="sc_top_li"><a style=" margin-left:10px;" href="http://www.ib18.cn/index">首    页</a></li><li class="sc_top_li"><a href="http://www.ib18.cn/together?type=0">合买中心</a></li>';
-					for (var i = 0; i < data.length; i++) {
-						if (data[i].active == false) {
-							continue;
-						}
-						html += '<li class="sc_top_li"><a href="http://www.ib18.cn/lotteryType?id=' + data[i].id + '">' + data[i].name + '</a></li>';
-					}
-					html += '<li class="sc_top_li"><a href="http://www.ib18.cn/howplay">玩法介绍</a></li>';
-					html += '<li class="sc_top_li"><a href="http://www.ib18.cn/zoushi">走势图表</a></li>';
-					$('#lotteryTypesUl').html(html);
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-				}
-			});
-		  $.ajax({
-			type : "GET",
-			url : "http://www.ib18.cn/lotteryType/getQQ?t=" + Math.random(),
-			dataType : "text",
-			success : function(data) {
-				$('#qq').attr('href', 'http://wpa.qq.com/msgrd?v=3&site=qq&menu=yes&uin=' + data);
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
-			}
-		});
-  	  }
-  </script>
 	<!--头部结束-->
 
 	<div class="sitebar">
-
 		<!--最新中奖和彩种 开始-->
-
-
-
-
-
-
-
-
 		<script src="<%=basePath%>static/js/jquery-1.7.2.min.js"
 			type="text/javascript"></script>
 		<script type="text/javascript">
@@ -292,7 +88,7 @@ $(document).ready(function() {
 	function initPage() {
 		var lotteryTypeId = "4";
 		$.ajax({
-			url : "http://www.ib18.cn/lotteryType/getLotteryInfo",
+			url :  "<%=basePath%>cqssc/shishicai",
 			dataType : "text",
 			async : false,
 			data : {
@@ -402,7 +198,7 @@ function SetRemainTime() {
 </script>
 		<ul class="yh_tz01">
 			<li class="yh_tz02"><img
-				src="http://www.ib18.cn/res/img/11x5.png" width="57" height="57"></li>
+				src="<%=basePath%>static/images/11x5.png" width="57" height="57"></li>
 			<li class="yh_tz03">
 				<div>
 					<h2>江西11选5</h2>
@@ -1579,49 +1375,10 @@ $(function() {
 
 
 
-	<link href="http://www.ib18.cn/res/css/foot.css" rel="stylesheet"
-		type="text/css">
-	<div class="footer">
-		<div class="kong10"></div>
-		<div class="kong10"></div>
-
-		<!-- <div class="f-nav">
-		<div class="hd"><b class="hd-1"></b><b class="hd-2"></b></div>
-		<div class="f-link">
-			<a title="" target="_blank" href="#" rel="nofollow">用户注册</a>|<a title="" target="_blank" href="#">加盟合作</a>|<a title="" target="_blank" href="#">进入网盟</a>|<a title="" target="_blank" href="#" rel="nofollow">友情链接</a>
-		</div>
-        <div class="f-guide">
-	   		<div class="f-guide-inner">
-				<em>热点导读：</em><a href="#" target="_blank" >重庆时时彩</a>|<a href="#" target="_blank" >江西时时彩</a>|<a href="#" target="_blank" >22选5</a>|<a href="#" target="_blank" >新疆时时彩</a>|<a href="#" target="_blank" >江西11选5</a>|<a href="#" target="_blank" >11运夺金 </a>|<a href="#" target="_blank" >上海时时乐</a>|<a href="#" target="_blank" >福彩3D</a>|<a href="#" target="_blank" >排列三</a>|<a href="#" target="_blank" >快乐十分</a>|<a href="#" target="_blank" >北京快乐8</a>|<a href="#" target="_blank" >彩票预测</a>|<a href="#" target="_blank" >购彩</a>|<a href="#" target="_blank" >彩票软件</a>
-			</div>
-	    </div>
-	</div> -->
-
-		<div class="copy_new">
-			<p>
-				<a target="_blank" href="javascript:" rel="nofollow">粤ICP备13075023号</a><br>
-				<span class="red">郑重提示：彩票有风险，投注需谨慎</span> 不向未满18周岁的青少年出售彩票
-			</p>
-			<script type="text/javascript"
-				src="http://fffftb.53kf.com/kf.php?arg=10119521&amp;style=1"></script>
-		</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 	</div>
 
-	<script>
-(function() {
-  var _53code = document.createElement("script");
-  _53code.src = "//tb.53kf.com/code/code/10145634/1";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(_53code, s);
-})();
-</script>
-	<script language="javascript" type="text/javascript"
-		src="http://js.users.51.la/19041479.js"></script>
-	<a href="http://www.51.la/?19041479" target="_blank"
-		title="51.La 网站流量统计系统">网站统计</a>
-
-
-	<script>
+	<!-- <script>
 	function updateOmitValue(omitValue) {
 		// alert(omitValue);
 		omitValue = eval("(" + omitValue + ")");
@@ -1657,11 +1414,6 @@ $(function() {
 	
 	var omitValue = '{"all":{"0":"36419","11":"0","1":"1","2":"0","3":"0","4":"1","5":"0","6":"3","7":"2","8":"1","9":"0","10":"3"},"bai":{"0":"36419","11":"6","1":"2","2":"5","3":"7","4":"30","5":"16","6":"20","7":"4","8":"1","9":"0","10":"11"},"ge":{"0":"36419","11":"21","1":"10","2":"1","3":"5","4":"11","5":"0","6":"4","7":"2","8":"18","9":"15","10":"12"},"qian":{"0":"36419","11":"16","1":"1","2":"0","3":"12","4":"5","5":"9","6":"3","7":"37","8":"7","9":"2","10":"10"},"shi":{"0":"36419","11":"0","1":"13","2":"25","3":"2","4":"1","5":"38","6":"7","7":"12","8":"6","9":"17","10":"5"},"wan":{"0":"36419","11":"9","1":"23","2":"4","3":"0","4":"12","5":"1","6":"27","7":"10","8":"5","9":"11","10":"3"}}';
 	updateOmitValue(omitValue);
-</script>
-
-
-	<script id="hz6d_flp_jquery"
-		src="http://www11.53kf.com/minkh/js/jquery-1.4.2.flp.js?20121127002"
-		charset="utf-8" type="text/javascript"></script>
+</script> -->
 </body>
 </html>

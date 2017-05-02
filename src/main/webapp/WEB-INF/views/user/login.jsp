@@ -53,7 +53,7 @@
 	
 	 <form id="loginForm" action="<%=basePath %>user/dologin" method="post">
 		<div style="margin: 10px auto 0;width: 1000px;">
-			<div style="width:1000px;height:600px;background: url('<%=basePath%>static/images/login.bg.2015.jpg') no-repeat 0px 50px; ">
+			<div style="width:1000px;height:600px;background: url('<%=basePath%>static/images/login.bg.2015.png') no-repeat 0px 50px; ">
 				<div style="float: right;margin-top: 150px;">
 				<div style="width: 100px;margin: auto;color: #666;margin-bottom: 20px;margin-left: 90px;"><h1>用户登录</h1></div>
 				<table class="xc_dl04" border="0" cellspacing="0" cellpadding="0">
@@ -65,7 +65,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>密&nbsp;&nbsp;&nbsp;码：</td>
+							<td>密&nbsp;码：</td>
 							<td class="xc_dl02">
 								<input id="pwd" name="pwd" type="password" class="sk"  onkeypress="disableEnter(event);" />
 							</td>

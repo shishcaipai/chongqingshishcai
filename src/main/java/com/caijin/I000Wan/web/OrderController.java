@@ -99,9 +99,25 @@ public class OrderController {
 			return "redirect:/user/login";
 		}
 		try {
-			if (memberUser.getAvailableScore() > Integer.valueOf(totalMoney)) {
-				memberUser.setAvailableScore(memberUser.getAvailableScore()
-						- Integer.valueOf(totalMoney));
+			if (memberUser.getAvailableScore() + memberUser.getActionScore() >= Integer
+					.valueOf(totalMoney)) {
+				float money = Float.valueOf(totalMoney);
+				float actionMoney = 0;
+				if (memberUser.getActionScore() > money) {
+					memberUser.setActionScore(memberUser.getActionScore()
+							- money);
+					actionMoney = money;
+				} else if (memberUser.getActionScore() > 0
+						&& memberUser.getActionScore() < money) {
+					float actionScore = memberUser.getActionScore();
+					memberUser.setActionScore(0);
+					memberUser.setAvailableScore(memberUser.getAvailableScore()
+							- (money - actionScore));
+					actionMoney = actionScore;
+				} else {
+					memberUser.setAvailableScore(memberUser.getAvailableScore()
+							- money);
+				}
 
 				Order order = orderService.findOrderByOrderId(tradeNo);
 				if (order == null) {
@@ -112,6 +128,7 @@ public class OrderController {
 					model.addAttribute("msg", "请不要重复支付");
 					return "order/alipaysuccess";
 				}
+				order.setActionManay(actionMoney);
 				order.setPayStatus(Order.PAY_STATUS_SUCESS);
 				order.setOrderStatus(Order.ORDER_SUCESS);
 				memberUserService.update(memberUser);
@@ -234,6 +251,7 @@ public class OrderController {
 				// 投注名称
 				String name = (String) request.getParameter("playname");
 				name = new String(name.getBytes("ISO-8859-1"), "utf-8");
+
 				// name = URLDecoder.decode(name);
 				log.info("彩票名称::::" + name);
 				log.info("彩票名称::::"
@@ -259,11 +277,19 @@ public class OrderController {
 				// 追号是否停
 				String IsZhuihao = (String) request.getParameter("IsZhuihao");
 				// 投注彩票类型代码
+				String lotteryTypeId = request.getParameter("lotteryTypeId");
+				String lotteryType=Period.SHISHI_CAI_CHONGQING;
+				if("1".equals(lotteryTypeId)){
+					lotteryType=Period.SHISHI_CAI_CHONGQING;
+				}else if("4".equals(lotteryTypeId)){
+					lotteryType=Period.SHISHI_CAI_JIANGXI;
+				}
 				Integer lotteryCount = 1;
 				if (expectnum != null && !expectnum.equals("")) {
 					lotteryCount = Integer.parseInt(expectnum);
 				}
 				String orderId = GenerateOrderNoUtil.getOrderNumber();
+			    if(lotteryType.equals(Period.SHISHI_CAI_CHONGQING)){
 				if (Integer.valueOf(phase.substring(8, 11)) < Integer
 						.valueOf(DateUtils.getCurrentChongQingShiShicai()
 								.substring(8, 11))
@@ -285,13 +311,49 @@ public class OrderController {
 							+ DateUtils.getCurrentChongQingShiShicai());
 					model.put("msg", "已过下注时间!");
 					return new ModelAndView("redirect:/cqssc/cqsscview", model);
-				} else {
+				} 
+			    }else if(lotteryType.equals(Period.SHISHI_CAI_JIANGXI)){
+			    	if (Integer.valueOf(phase.substring(6, 8)) < Integer
+							.valueOf(DateUtils.getCurrentJiangXiShiShiCai()
+									.substring(6, 8))
+							|| Integer.valueOf(phase.substring(0, 6)) > Integer
+									.valueOf(DateUtils
+											.getCurrentJiangXiShiShiCai()
+											.substring(0, 6))) {
+						Map<String, Object> model = new HashMap<String, Object>();
+						model.put("current",
+								DateUtils.getCurrentJiangXiShiShiCai());
+						model.put("leftsecond", DateUtils.getLeftMisecond());
+						model.put("left", DateUtils
+								.getLeftJiangXiShiShiCai(DateUtils
+										.getCurrentJiangXiShiShiCai()));
+						model.put("sucess", false);
+						model.put("code", 4);
+						System.out.println(phase+"投注失败：：："
+								+ DateUtils.getCurrentJiangXiShiShiCai());
+						model.put("msg", "已过下注时间!");
+						return new ModelAndView("redirect:/jxssc/jxsscview", model);
+					} 
+			    	
+			    	
+			    }else{
+			    	Map<String, Object> model = new HashMap<String, Object>();
+					model.put("current", DateUtils.getCurrentChongQingShiShicai());
+					model.put("leftsecond", DateUtils.getLeftMisecond());
+					model.put("left", DateUtils.getLeftChongQingShiShicai(DateUtils
+							.getCurrentChongQingShiShicai()));
+					model.put("sucess", false);
+					model.put("code", -1);
+					model.put("msg", "不识别的彩种");
+					return new ModelAndView("redirect:/user/login", model);
+			    }
+				
 					List<Period> periods = new ArrayList<Period>();
 					StringBuffer bufferperiods = new StringBuffer();
 					Period period;
 					if (null == beishulistsuc || beishulistsuc.equals("")) {
 						period = new Period();
-						period.setLotteryCode("cqssc");
+						period.setLotteryCode(lotteryType);
 						period.setLotteryPeriod(phase);
 						period.setCreateDate(new Date());
 						period.setOrderId(orderId);
@@ -305,12 +367,11 @@ public class OrderController {
 						String[] parsh = sts[0].split(",");
 						String[] beisus = sts[1].split(",");
 						System.out.println("beishulistsuc：：：" + beishulistsuc);
-						System.out.println("beishulistsuc：：：" + beishulistsuc);
 						for (int i = 0; i < parsh.length; i++) {
 							System.out.println("parsh：：：" + parsh[i]);
 							System.out.println("beisus：：：" + beisus[i]);
 							period = new Period();
-							period.setLotteryCode("cqssc");
+							period.setLotteryCode(lotteryType);
 							period.setLotteryPeriod(parsh[i]);
 							period.setCreateDate(new Date());
 							period.setOrderId(orderId);
@@ -332,7 +393,7 @@ public class OrderController {
 					order.setCreateDate(new Date());
 					order.setMemberUser(memberUser);
 					order.setName(name);
-					order.setLotteryType(Period.SHISHI_CAI_CHONGQING);
+					order.setLotteryType(lotteryType);
 					order.setOrderStatus(Order.WAIT_ORDER);
 					order.setOrderTime(new Date());
 					order.setOrderType(Order.PROXY_BUY_ORDER);
@@ -373,7 +434,7 @@ public class OrderController {
 					model.put("lotteryCodes", buffer.toString());
 					model.put("periods", bufferperiods.toString());
 					return new ModelAndView("order/jczqOrderConfirm", model);
-				}
+				
 			} else {
 				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("current", DateUtils.getCurrentChongQingShiShicai());

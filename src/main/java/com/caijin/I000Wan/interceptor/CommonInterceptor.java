@@ -9,16 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.caijin.I000Wan.entity.MemberUser;
+import com.caijin.I000Wan.service.MemberUserService;
 
 /**
  * 拦截器 拦截所有请求
  */
 public class CommonInterceptor extends HandlerInterceptorAdapter {
 	private final Logger log = LoggerFactory.getLogger(CommonInterceptor.class);
+	@Autowired
+	private MemberUserService userService;
 
 	/**
 	 * 在业务处理器处理请求之前被调用 如果返回false 从当前的拦截器往回执行所有拦截器的afterCompletion(),再退出拦截器链
@@ -37,13 +41,13 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 		log.info("contextPath:" + contextPath);
 		log.info("url:" + url);
 		if (url.startsWith("/register/")) {
-			
+
 			if (url.startsWith("/register/") && url.endsWith(".html")) {
 				url = url.replace("/register/", "");
 				url = url.replace(".html", "");
-					request.setAttribute("regeisterID", url);
-					request.getRequestDispatcher("/user/register").forward(request,
-							response);
+				request.setAttribute("regeisterID", url);
+				request.getRequestDispatcher("/user/register").forward(request,
+						response);
 			}
 			return false;
 		}
@@ -56,11 +60,18 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 			String basePath = request.getScheme() + "://"
 					+ request.getServerName() + ":" + request.getServerPort()
 					+ path + "/";
-			response.sendRedirect(basePath+"user/login");//.forward(request,
-//					response);
+			response.sendRedirect(basePath + "user/login");// .forward(request,
+			// response);
 			return false;
-		} else
+		} else {
+			MemberUser user = userService.findByUserName(memberUser
+					.getUserName());
+			if(user!=null){
+				request.getSession().setAttribute("memberUser", user);
+			}
+
 			return true;
+		}
 	}
 
 	/**
@@ -71,17 +82,17 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		log.info("==============执行顺序: 2、postHandle================");
-//		String requestUri = request.getRequestURI();
-//		String contextPath = request.getContextPath();
-//		String url = requestUri.substring(contextPath.length());
-//		if (url.startsWith("/register/") && url.endsWith(".html")) {
-//			url = url.replace("/register/", "");
-//			url = url.replace(".html", "");
-//			if (modelAndView != null) { // 加入当前时间
-//				request.setAttribute("regeisterID", url);
-//				modelAndView.addObject("regeisterID", url);
-//			}
-//		}
+		// String requestUri = request.getRequestURI();
+		// String contextPath = request.getContextPath();
+		// String url = requestUri.substring(contextPath.length());
+		// if (url.startsWith("/register/") && url.endsWith(".html")) {
+		// url = url.replace("/register/", "");
+		// url = url.replace(".html", "");
+		// if (modelAndView != null) { // 加入当前时间
+		// request.setAttribute("regeisterID", url);
+		// modelAndView.addObject("regeisterID", url);
+		// }
+		// }
 	}
 
 	/**

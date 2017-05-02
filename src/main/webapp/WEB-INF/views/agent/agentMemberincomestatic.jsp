@@ -98,15 +98,20 @@
 				</c:otherwise>
 													</c:choose></td>
 												<td width="100" align="center" valign="middle">
-													${user.available }</td>
+													<fmt:formatNumber type="number" value="${user.available }" maxFractionDigits="2"/>
+													</td>
 												<td width="100" align="center" valign="middle">
-													${user.actionScore }</td>
+												<fmt:formatNumber type="number" value="${user.actionScore }" maxFractionDigits="2"/>
+													</td>
 												<td width="100" align="center" valign="middle">
-													${user.applyMoney }</td>
+												<fmt:formatNumber type="number" value="${user.applyMoney }" maxFractionDigits="2"/>
+													</td>
 												<td width="100" align="center" valign="middle">
-													${user.totalavailabeScore+user.totalactionScore}</td>
+												<fmt:formatNumber type="number" value="${user.totalavailabeScore+user.totalactionScore }" maxFractionDigits="2"/>
+													</td>
 												<td width="100" align="center" valign="middle">
-													${user.totalavailabeScore+user.totalactionScore+user.applyMoney -user.available-user.actionScore}</td>
+												<fmt:formatNumber type="number" value="${user.available-user.actionScore-user.totalavailabeScore-user.totalactionScore-user.applyMoney  }" maxFractionDigits="2"/>
+													</td>
 												</tr>
 
 											</c:forEach>

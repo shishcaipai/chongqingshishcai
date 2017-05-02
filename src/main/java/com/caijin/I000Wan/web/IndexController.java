@@ -37,7 +37,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Index Controller
  * 
- * @author jeff 2014-06-16
  */
 @Controller
 public class IndexController {
@@ -208,8 +207,11 @@ public class IndexController {
 	public ModelAndView zaoshi(HttpServletRequest request) {
 		return new ModelAndView("caipiao/zaoshidating");
 	}
+	
+     private void getAvailableScoreCurrent(){
+    	 
+     }
 	/**
-	 * 跳转到首页
 	 * 
 	 * @return
 	 */
@@ -228,7 +230,7 @@ public class IndexController {
 
 			}
 		} else if (request.getParameter("lotteryTypeId").equals(
-				Period.SHISHI_CAI_CHONGQING)) {
+				Period.SHISHI_CAI_GUANGDONG11XUAN5)) {
 			try {
 				List<LotteryPeriod> list = letteryPeriodService
 						.findByTopNhistory(Period.SHISHI_CAI_GUANGDONG11XUAN5,
@@ -238,7 +240,7 @@ public class IndexController {
 
 			}
 		} else if (request.getParameter("lotteryTypeId").equals(
-				Period.SHISHI_CAI_CHONGQING)) {
+				Period.SHISHI_CAI_JIANGXI)) {
 			try {
 				List<LotteryPeriod> list = letteryPeriodService
 						.findByTopNhistory(Period.SHISHI_CAI_JIANGXI, 1);

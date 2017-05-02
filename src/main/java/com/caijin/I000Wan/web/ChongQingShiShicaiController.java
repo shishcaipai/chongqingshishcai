@@ -167,11 +167,8 @@ public class ChongQingShiShicaiController {
 		if(model!=null)
 		for (int i = 0; i < order.size(); i++) {
 			model = new HashMap<String, Object>();
-			float money = periodService.getMoneyPeriodByOId(order.get(i)
-					.getOrderNo());
 			model.put("user", order.get(i).getMemberUser().getUserName());
-			model.put("money", money);
-			System.out.println("user:::"+order.get(i).getMemberUser().getUserName()+"--money--"+money);
+			model.put("money", order.get(i).getCurrentWPMoney());
 			list.add(model);
 		}
 

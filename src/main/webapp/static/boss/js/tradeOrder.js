@@ -2,30 +2,30 @@ $(function() {
 	$('#mydatagrid').datagrid({
 		title : '订单列表信息',
 		iconCls : 'icon-ok',
-		pageSize : 10,//默认选择的分页是每页5行数据
-		pageList : [ 5, 10, 15, 20 ],//可以选择的分页集合
-		nowrap : true,//设置为true，当数据长度超出列宽时将会自动截取
-		striped : true,//设置为true将交替显示行背景。
-		collapsible : true,//显示可折叠按钮
-		toolbar:"#tb",//在添加 增添、删除、修改操作的按钮要用到这个
-		url:'../../boss/order/ajax_list',//url调用Action方法
+		pageSize : 10,// 默认选择的分页是每页5行数据
+		pageList : [ 5, 10, 15, 20 ],// 可以选择的分页集合
+		nowrap : true,// 设置为true，当数据长度超出列宽时将会自动截取
+		striped : true,// 设置为true将交替显示行背景。
+		collapsible : true,// 显示可折叠按钮
+		toolbar:"#tb",// 在添加 增添、删除、修改操作的按钮要用到这个
+		url:'../../boss/order/ajax_list',// url调用Action方法
 		loadMsg : '数据装载中......',
-		singleSelect:true,//为true时只能选择单行
-		fitColumns:true,//允许表格自动缩放，以适应父容器
-		//sortName : 'xh',//当数据表格初始化时以哪一列来排序
-		//sortOrder : 'desc',//定义排序顺序，可以是'asc'或者'desc'（正序或者倒序）。
+		singleSelect:true,// 为true时只能选择单行
+		fitColumns:true,// 允许表格自动缩放，以适应父容器
+		// sortName : 'xh',//当数据表格初始化时以哪一列来排序
+		// sortOrder : 'desc',//定义排序顺序，可以是'asc'或者'desc'（正序或者倒序）。
 		remoteSort : false,
 		 frozenColumns : [ [ {
 			field : 'ck',
 			checkbox : true
 		} ] ], 
-		pagination : true,//分页
-		rownumbers : true,//行数
-//		onClickCell:function(rowIndex, field, value){
-//			if('auto_prizes' == field) {
-//				updateOrderAutoPrizes(rowIndex);
-//			}
-//		},
+		pagination : true,// 分页
+		rownumbers : true,// 行数
+// onClickCell:function(rowIndex, field, value){
+// if('auto_prizes' == field) {
+// updateOrderAutoPrizes(rowIndex);
+// }
+// },
 		columns:[[
 	              {field:'name',title:'玩法',width:90,align:'center'},  
 		            {field:'order_no',title:'订单ID',width:90,align:'center'},
@@ -75,17 +75,17 @@ $(function() {
 		            {field:'wprize_status',title:'是否中奖',width:90,align:'center',
 		            	formatter:function (value){
 		            		  if(value == 0){
+		            		    return '待开奖';
+		            		  }else if(value == 3){
 		            		    return '未中奖';
-		            		  }else if(value == 1){
-		            		    return '追号中奖';
-		            		  }else if(value == 2){
+		            		  }else if(value == 2||value == 1){
 		            		    return '中奖';
 		            		  }
 		            	}
 		            },
 					{field:'user_name',title:'下单人账号',width:90,align:'center'},
-					{field:'real_name',title:'下单人名称',width:90,align:'center'},
-					{field:'telephone',title:'电话',width:90,align:'center'},
+					{field:'number',title:'投注号码',width:180,align:'center'},
+					{field:'prash',title:'期号',width:180,align:'center'},
 					{field:'create_date',title:'订单时间',width:140,align:'center',
 						formatter: function(value,row,index){
 							var time = row.create_date;
@@ -104,13 +104,14 @@ $(function() {
 		            	     return '<a style="color:blue" href="javascript:updateOrderAutoPrizes(' + index +')">'+result+'</a>';
 		            }},
 		            
-//          		  if(value == 0){
-//          		    return '否';
-//          		  }else if(value == 1){
-//          		    return '是';
-//          		  }
+// if(value == 0){
+// return '否';
+// }else if(value == 1){
+// return '是';
+// }
 		      ]]
 	});	
+	updateAllDialog();
 });
 
 
@@ -122,11 +123,11 @@ function searchOrder(){
 	tradeOrder["orderType"]=$("#search_orderType").val().trim();
 	tradeOrder["orderStatus"]=$("#search_orderStatus").val().trim();
 	tradeOrder["payStatus"]=$("#search_payStatus").val().trim();
-	//=======================================
+	// =======================================
 	tradeOrder["startDate"]=$("#checkStartTime").datebox('getValue');
 	tradeOrder["endDate"]=$("#checkEndTime").datebox('getValue');
 	
-	//把查询条件封装到实体对象中进行条件查询
+	// 把查询条件封装到实体对象中进行条件查询
 	$('#mydatagrid').datagrid('load',tradeOrder);	
 }
 
@@ -149,6 +150,7 @@ function closeOrderUserDialog(){
 
 /**
  * 弹出修改页面
+ * 
  * @param str
  * @returns
  */
@@ -162,7 +164,7 @@ function updateOrderUserDialog(){
 	$("#dlg").dialog("open").dialog("setTitle","订单信息");
 	$("#orderForm").form("load",row);
 	$.ajax({
-		url:'../../boss/order/order_detail',//url调用Action方法
+		url:'../../boss/order/order_detail',// url调用Action方法
 		data: { orderNo: $("#order_no").val()} ,
 		dataType:'json',
 		success : function(result) {
@@ -199,8 +201,8 @@ function updateOrder(){
 	var  senOrder={};
 	senOrder["orders"]=JSON.stringify(orders);
 	senOrder["orderNo"]=$("#order_no").val();
-//	senOrder["wprizeStatus"]=$("#wprize_status").val();
-	//保存
+// senOrder["wprizeStatus"]=$("#wprize_status").val();
+	// 保存
 	$.ajax({
 		url : '../../boss/order/updateNum',
 		data:senOrder,
@@ -219,13 +221,13 @@ function updateOrder(){
  * 修改信息提交
  */
 function updateOrderAutoPrizes(rowIndex){
-	$('#mydatagrid').datagrid('selectRow',rowIndex);  //指定行选中
+	$('#mydatagrid').datagrid('selectRow',rowIndex);  // 指定行选中
     var currentRow =$("#mydatagrid").datagrid("getSelected");
     var  senOrder={};
 	senOrder["orderNo"]=currentRow.order_no;
 	senOrder["autoPrizes"]=currentRow.auto_prizes;
 	if(currentRow.order_type==2||currentRow.order_type==3){
-	//保存
+	// 保存
 	$.ajax({
 		url : '../../boss/order/updateAutoPrizes',
 		data:senOrder,
@@ -239,7 +241,54 @@ function updateOrderAutoPrizes(rowIndex){
 	}else{
 		$.messager.show({ title : '提示', msg : '只有合买方案，与彩票订单才充许修改' });
 	}
-	
 }
+	/**
+	 * 修改信息提交
+	 */
+	function updateAutoPrizes(){
+	    var  senOrder={};
+		senOrder["autoPrizes"]=$('#arw_Status').val();
+		senOrder["type"]=3;
+		// 保存
+		$.ajax({
+			url : '../../boss/order/updateAutoPrizes',
+			data:senOrder,
+			type:'post',
+			dataType:'text',
+			success : function(result) {
+				$.messager.show({ title : '提示', msg : result });
+			}    
+		});
+
+	}
+		/**
+		 * 弹出修改页面
+		 * 
+		 * @param str
+		 * @returns
+		 */
+		function updateAllDialog(){
+			 var  senOrder={};
+				senOrder["autoPrizes"]=$('#arw_Status').val();
+				senOrder["type"]=2;
+			$.ajax({
+				url : '../../boss/order/updateAutoPrizes',
+				data:senOrder,
+				dataType:'json',
+				type:'post',
+				success : function(result) {
+					var obj = result; 
+					if(obj==1){
+						 $("#arw_Status").val(1)
+//						$("#arw_Status").find("option[text='自动发奖']").attr("selected", "selected");
+					}else{
+						 $("#arw_Status").val(0)
+//						$("#arw_Status").find("option[text='手动发奖']").attr("selected", "selected");
+					}
+					   
+				}    
+			});
+		}
+
 
 

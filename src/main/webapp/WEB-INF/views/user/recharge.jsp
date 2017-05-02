@@ -25,21 +25,21 @@
 	type="text/css">
 <LINK href="<%=basePath%>static/new/css/v1.css" type=text/css
 	rel=stylesheet>
-	<script type="text/javascript"
-		src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript">
-	function showdiv(targetid){
-		if(1==targetid){
-		$("#pay_weixin_alipay").css('display','none'); 
-		$("#pay_weixin").css('display','block');
-	}else{
-		$("#pay_weixin").css('display','none'); 
-		$("#pay_weixin_alipay").css('display','block');
-	}
-	    /*   var target=document.getElementById(targetid);
-	      var current=document.getElementById(objN);
-	                target.style.display="block";
-	                current.style.display="none"; */
+<script type="text/javascript"
+	src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+	function showdiv(targetid) {
+		if (1 == targetid) {
+			$("#pay_weixin_alipay").css('display', 'none');
+			$("#pay_weixin").css('display', 'block');
+		} else {
+			$("#pay_weixin").css('display', 'none');
+			$("#pay_weixin_alipay").css('display', 'block');
+		}
+		/*   var target=document.getElementById(targetid);
+		  var current=document.getElementById(objN);
+		            target.style.display="block";
+		            current.style.display="none"; */
 	}
 </script>
 </HEAD>
@@ -156,19 +156,20 @@ div .a {
 									<tbody>
 										<tr>
 											<td class="nl"><img
-												src="<%=basePath%>static/images/weixin_alipay.png"></td>
+												src="<%=basePath%>static/images/weixin_alipay.jpg"></td>
 											</td>
 											<td>
-												<hr>
-													<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名：<font style="font-size: 14px;color: black;">${sessionScope.memberUser.userName}</font>，或及时联系在线客服。谢谢！</h4>
-													<font style="font-size: 22px; font-weight: bold;">扫码支付须知:</font><br>
-														<br> <font style="font-size: 14px;">1:请用微信扫描二维码或长按图片识别二维码进行付款。</font><br>
-																<font style="font-size: 14px;">
-																	2:可添加微信号：<font style="font-size: 14px;color: red;">HongYunCaiPiao88 </font>添加好友转账充值<span
-																	style="font-size: 14px; color: red;"></span>
-															</font><br> <font style="font-size: 14px;">3:微信扫码支付单笔限额10000,支持多次充值。<span
-																		style="font-size: 14px; color: red;"></span></font><br>
-																		<br> <br>
+												<!-- 	<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名：<font style="font-size: 14px;color: black;">${sessionScope.memberUser.userName}</font>，或及时联系在线客服。谢谢！</h4> -->
+												<font style="font-size: 22px; font-weight: bold;">扫码支付须知:</font><br>
+												<br> <font style="font-size: 18px;">1:打开微信扫一扫，添加好友后再付款。</font><br>
+												<font style="font-size: 18px;">
+													2:付款后请及时联系客服，并提供您的会员账号</font><span
+												style="font-size: 18px; color: red;"></span> </font><br> <font
+												style="font-size: 18px;">3:充值后，<span
+													style="font-size: 18px; color: red;">请手动刷新您的余额。</span>及查看相关到账变信息，<span
+													style="font-size: 18px; color: red;">若未充值成功请联系客服。</span><span
+													style="font-size: 18px; color: red;"></span></font><br>
+												4.其他充值方式，请联系客服 <br> <br>
 											</td>
 										</tr>
 
@@ -185,19 +186,21 @@ div .a {
 									width="100%">
 									<tbody>
 										<tr>
-											<td class="nl"><img
+											<td class="nl">
+													<img
 												src="<%=basePath%>static/images/zhifubao_alipay.jpg"></td>
 											<td >
-											<hr>
-											<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名:<font style="font-size: 14px;color: black;">${sessionScope.memberUser.userName}</font>，或及时联系在线客服。谢谢！</h4>
+											<img
+												src="<%=basePath%>static/images/timg.jpeg"> <br/>
 													<font style="font-size: 22px; font-weight: bold;">扫码支付须知:</font><br>
-														<br> <font style="font-size: 14px;">1:请用支付宝扫描二维码或长按图片识别二维码进行付款。</font><br>
-																<font style="font-size: 14px;">
-																	2:可添加支付宝账号：<font style="font-size: 14px; color: red;">212395988@qq.com 谢佳辉 </font> 添加好友转账充值<span
-																	style="font-size: 14px; color: red;"></span>
-															</font><br> <font style="font-size: 14px;" color: red;>3:为了你的资金及时到账，充值时请备注您的用户名：<font style="font-size: 14px; color: red;">${sessionScope.memberUser.userName}</font>，或及时联系在线客服。谢谢！。<span
-																		style="font-size: 14px; color: red;"></span></font><br>
-																		<br> <br></td>
+														<br> <font style="font-size: 18px;">1:付款备注：<font style="font-size: 18px;color: red;">${sessionScope.memberUser.userName}</font>。</font><br>
+																<font style="font-size: 18px;">
+																	2:收款账号：<font style="font-size: 18px; color: red;">212395988@qq.com </font> 添加好友转账充值<span
+																	style="font-size: 18px; color: red;"></span>
+															</font>
+															<br>
+														<font style="font-size: 18px;">	3. 收款人：</font><font style="font-size:18px; color: red;"> 谢佳辉 </font>
+															<br> </td>
 										</tr>
 									</tbody>
 								</table>
@@ -212,12 +215,10 @@ div .a {
 									width="100%">
 									<tbody style="padding: 10px">
 										<tr>
-											<td class="nl"><img src="/res/img/alipay888.png"
+											<td class="nl"><img src="<%=basePath%>static/images/timg.jpeg"
 												width="267" height="263"></td>
 											<td style="line-height: 23px; padding: 5px 0px"><img
 												src="/res/img/alipay_logo.png"><br> <br>
-															<h4 style="font-size: 16px; color: red;">为了你的资金及时到账，充值时请备注您的用户名，或及时联系在线客服，谢谢！</h4>
-
 															<font style="font-size: 22px; font-weight: bold;">支付备注:<!--<span id="alipay_msg_txt" style="padding-right:22px;color: #F30;"></span>--></font><br>
 																<br> <font
 																	style="font-size: 16px; font-weight: bold;">支付校验:<span

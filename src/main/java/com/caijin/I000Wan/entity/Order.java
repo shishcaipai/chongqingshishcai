@@ -109,7 +109,7 @@ public class Order extends BaseEntity {
 
 	public boolean autoDrawn = ConstantUtil.AUTO_DRAWN;
 	
-	
+	private float  actionManay=0;
 	
 	public boolean isAutoPrizes() {
 		return autoPrizes;
@@ -287,6 +287,14 @@ public class Order extends BaseEntity {
 
 	public void setCashBackStatus(int cashBackStatus) {
 		this.cashBackStatus = cashBackStatus;
+	}
+
+	public float getActionManay() {
+		return actionManay;
+	}
+
+	public void setActionManay(float actionManay) {
+		this.actionManay = actionManay;
 	}
 
 }

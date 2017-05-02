@@ -202,6 +202,38 @@ public class DateUtils {
 
 	}
 
+	public static String getjiangxiLeftEndDate(String pharsh) {
+		Calendar currentDate = Calendar.getInstance(TimeZone
+				.getTimeZone("GMT+08:00"));
+		int date = currentDate.get(Calendar.DAY_OF_MONTH);
+		int month = currentDate.get(Calendar.MONTH);
+		int years = currentDate.get(Calendar.YEAR);
+
+		int end = Integer.valueOf((String) pharsh.substring(6));
+			currentDate.set(years, month, date, 9+10*end/60, 10* end % 60);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.util.Date dates = currentDate.getTime();
+		String str = sdf.format(dates);
+		return str;
+
+	}
+	public static String getguandongLeftEndDate(String pharsh) {
+		Calendar currentDate = Calendar.getInstance(TimeZone
+				.getTimeZone("GMT+08:00"));
+		int date = currentDate.get(Calendar.DAY_OF_MONTH);
+		int month = currentDate.get(Calendar.MONTH);
+		int years = currentDate.get(Calendar.YEAR);
+
+		int end = Integer.valueOf((String) pharsh.substring(6));
+		currentDate.set(years, month, date, 9+10*end/60, 10* end % 60);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.util.Date dates = currentDate.getTime();
+		String str = sdf.format(dates);
+		return str;
+
+	}
+
+	
 	public static String getCurrentGuangDongShiYiYun() {
 		StringBuffer stringBuffer = new StringBuffer();
 		Calendar currentDate = Calendar.getInstance(TimeZone

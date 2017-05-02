@@ -104,8 +104,6 @@ public class ApplyController {
 
 		String cardTypes = request.getParameter("cardType");
 		String applyMoneyStr = request.getParameter("applyMoney");
-		// String idCardNo = request.getParameter("idCardNo");
-		// String applyName = request.getParameter("applyName");
 		String withdrawPassword = request.getParameter("withdrawPassword");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sucess", false);

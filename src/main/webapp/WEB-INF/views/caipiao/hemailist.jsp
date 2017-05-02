@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -93,7 +94,7 @@
 							<c:forEach var="order" items="${requestScope.heMaiOrderDetails }">
 								<tr class="tab_hemai_2">
 									<td style="display: none">1</td>
-									<td style="padding-left: 15px;">${order.memberUser.userName}</td>
+									<td style="padding-left: 15px;">${fn:substring(order.memberUser.userName, 0, 4)}***</td>
 
 									<td><span class="new_hemai_red">${order.order.totalMoney}元</span></td>
 									<td><span class="new_hemai_red"><fmt:formatNumber

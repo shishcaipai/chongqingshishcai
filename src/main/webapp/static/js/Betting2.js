@@ -323,13 +323,13 @@ function ZG_HM_PLAN_Even()
 {
 	/*自购 按钮 事件*/
 	$("#btn_SubmitZ").click(function(){
-//		checkData("zg");
-		alert("暂停销售");
+		checkData("zg");
+//		alert("暂停销售");
 	});
 	/*合买 按钮 事件*/
 	$("#btn_SubmitHM").click(function(){
-//		checkData("hm");
-		alert("暂停销售");
+		checkData("hm");
+//		alert("暂停销售");
 	});
 	/*计划倍投 按钮 事件*/
 	$("#btn_SubmitPath").click(function(){

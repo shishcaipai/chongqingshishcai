@@ -9,6 +9,11 @@
 	
 
 	<div class="copy_new">
+          <p>
+          <br>
+           <br>
+            <br>
+          </p> 
 		<p>
 			<img src="<%=basePath%>static/new/images/wljc.gif"><img
 				src="<%=basePath%>static/new/images/wangan.gif"><img

@@ -60,7 +60,7 @@ public interface OrderService extends CommonService<Order, String> {
 	List<Order> findAllOrderHeiMai(int i, int pageSize, String id);
 
 	List<Order> findOrderByStatus(int waitOrder);
-
+	List<Order> findOrderByWprizeStatus(int wprizeStatus);
 	/**
 	 * 当日金额
 	 * 
@@ -112,5 +112,9 @@ public interface OrderService extends CommonService<Order, String> {
 	float getAgnetCurrentActionMoney(MemberUser user);
 
 //	float getAgnetylMoney(MemberUser user);
+	//消费情况
+	Integer findOrderSizeByTypeNO3and7(String id);
+
+	List<Order> findAllOrderssByTypeNO3and7(int pageNum, int pageSize, String id);
 
 }

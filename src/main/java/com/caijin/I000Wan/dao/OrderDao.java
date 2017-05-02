@@ -30,6 +30,9 @@ public interface OrderDao extends OrderCustomDao, CommonDao<Order, String> {
 
 	@Query("select o from Order o where o.orderNo = ?1 and o.payStatus = ?2 ")
 	Order findOrder(String orderId, Integer payStatus);
+	
+	@Query("select o from Order o where o.wprizeStatus = ?1 and ( o.orderType=2 or o.orderType=3)")
+	List<Order> findOrderbyWprizeStatus(Integer wprizeStatus);
 
 	@Query(value = "select o.* from trade_order o where o.member_id = ?3   order by o.create_date desc limit ?1,?2 ", nativeQuery = true)
 	List<Order> findAllOrders(Integer pageNum, int size, String id);
@@ -37,25 +40,32 @@ public interface OrderDao extends OrderCustomDao, CommonDao<Order, String> {
 	@Query(value = "select count(o.id) from trade_order o  where o.member_id = ?1  ", nativeQuery = true)
 	int findOrderSize(String id);
 
+	//查看所有消费情况
+	@Query(value = "select o.* from trade_order o where o.member_id = ?3 and  o.order_type!=3  and o.order_type!=7  order by o.create_date desc limit ?1,?2 ", nativeQuery = true)
+	List<Order> findAllOrderssByTypeNO3and7(Integer pageNum, int size, String id);
+	//查看所有消费情况
+	@Query(value = "select count(o.id) from trade_order o  where o.member_id = ?1 and  o.order_type!=3  and o.order_type!=7 ", nativeQuery = true)
+	int findOrderSizeByTypeNO3and7(String id);
+	
 	@Query("select count(o) from Order o")
 	int findOrderSize();
 
 	@Query(value = "select o.* from trade_order o left join lottery_period t on o.order_no = t.orderid where t.lottery_period = ?1 order by o.create_date desc ", nativeQuery = true)
 	public List<Order> findbyQIhao(String qihao);
 
-	@Query(value = "select  o.* from trade_order o left join lottery_period t on o.order_no = t.orderid where t.winning = 1 order by o.create_date desc limit 0,10 ", nativeQuery = true)
+	@Query(value = "select  o.* from trade_order o  where (o.wprize_status=2 or o.wprize_status=1) and (o.order_type=2 or o.order_type=4)  order by o.create_date desc limit 0,10 ", nativeQuery = true)
 	public List<Order> findbyWinning();
 
-	@Query(value = "select count(o.id) from trade_order o where (o.order_type=2 or o.order_type=4) and   (o.wprize_status=2 or o.wprize_status=1) and o.member_id = ?1 ", nativeQuery = true)
+	@Query(value = "select count(o.id) from trade_order o where (o.order_type=2 or o.order_type=4 or o.order_type=3) and   (o.wprize_status=2 or o.wprize_status=1) and o.member_id = ?1 ", nativeQuery = true)
 	public int findOrderZhongjiaoSize(String id);
 
-	@Query(value = "select o.* from trade_order o where (o.order_type=2 or o.order_type=4) and   (o.wprize_status=2 or o.wprize_status=1) and o.member_id = ?3 order by o.create_date desc limit ?1,?2 ", nativeQuery = true)
+	@Query(value = "select o.* from trade_order o where (o.order_type=2 or o.order_type=4 or o.order_type=3) and   (o.wprize_status=2 or o.wprize_status=1) and o.member_id = ?3 order by o.create_date desc limit ?1,?2 ", nativeQuery = true)
 	public List<Order> findAllOrdersZhongjiao(int i, int pageSize, String id);
 
-	@Query(value = "select count(o.id) from trade_order o  where o.order_type=2  and o.member_id = ?1 ", nativeQuery = true)
+	@Query(value = "select count(o.id) from trade_order o  where (o.order_type=2  or o.order_type=3)  and o.member_id = ?1 ", nativeQuery = true)
 	public int findOrderTouZhuSize(String id);
 
-	@Query(value = "select o.* from trade_order o  where  o.order_type=2  and o.member_id = ?3 order by o.create_date desc limit ?1,?2  ", nativeQuery = true)
+	@Query(value = "select o.* from trade_order o  where (o.order_type=2  or o.order_type=3) and o.order_status=1 and o.member_id = ?3 order by o.create_date desc limit ?1,?2  ", nativeQuery = true)
 	public List<Order> findAllOrderTouZhu(int i, int pageSize, String id);
 
 	@Query(value = "select count(o.id) from trade_order o  where o.order_type=3  and o.member_id = ?1 ", nativeQuery = true)

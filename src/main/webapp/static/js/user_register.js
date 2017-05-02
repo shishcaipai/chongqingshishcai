@@ -291,7 +291,7 @@ function check_from(form_name) {
 	if ("" == pw) {
 		$("#reg_pw .hint").show();
 	}
-	if ("" == username) {
+	if ("" == username||username.length<6) {
 		$("#reg_username .hint").show();
 	}
 

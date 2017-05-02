@@ -17,7 +17,6 @@
 <meta name="description" content="十一运">
 <meta name="keywords" content="十一运">
 <link href="<%=basePath%>static/css/commonEX.css" type="text/css" rel="stylesheet">
-<script src="//tb.53kf.com/code/code/10145634/1"></script><script type="text/javascript" src="<%=basePath%>static/js/jquery-1.7.2.min.js"></script>
 <link href="http://www.ld3j.com/res/css/frequency.css" type="text/css" rel="stylesheet">
 <script src="<%=basePath%>static/js/Jquery_marquee_frequency.js" type="text/javascript"></script>
 <script src="<%=basePath%>static/js/zhs.js" type="text/javascript"></script>
@@ -1167,22 +1166,9 @@ $(function() {
 </form>
 <div class="clear"></div>
 	
-	<div class="copy_new">
-    	<p><a target="_blank" href="javascript:" rel="nofollow">粤ICP备13075023号</a><br>
-	<span class="red">郑重提示：彩票有风险，投注需谨慎</span> 不向未满18周岁的青少年出售彩票</p>
-<script type="text/javascript" src="http://fffftb.53kf.com/kf.php?arg=10119521&amp;style=1"></script>		
-	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </div>
 
-<script>
-(function() {
-  var _53code = document.createElement("script");
-  _53code.src = "//tb.53kf.com/code/code/10145634/1";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(_53code, s);
-})();
-</script>
-<script language="javascript" type="text/javascript" src="http://js.users.51.la/19041479.js"></script><a href="http://www.51.la/?19041479" target="_blank" title="51.La 网站流量统计系统">网站统计</a>
 
 
 <script>
@@ -1224,4 +1210,3 @@ function updateOmitValue(omitValue) {
 </script>
 
 
-<script id="hz6d_flp_jquery" src="http://www11.53kf.com/minkh/js/jquery-1.4.2.flp.js?20121127002" charset="utf-8" type="text/javascript"></script></body></html>

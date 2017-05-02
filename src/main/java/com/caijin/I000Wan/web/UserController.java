@@ -185,19 +185,24 @@ public class UserController {
 
 		return "user/login";
 	}
-	public String getIRealIPAddr(HttpServletRequest request) {   
-		 String ip = request.getHeader("x-forwarded-for"); 
-		  if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip) || "null".equalsIgnoreCase(ip))    {   
-		    ip = request.getHeader("Proxy-Client-IP");
-		 }
-		 if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)   || "null".equalsIgnoreCase(ip)) {  
-		  ip = request.getHeader("WL-Proxy-Client-IP");
-		 }
-		 if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)    || "null".equalsIgnoreCase(ip)) {
-		  ip = request.getRemoteAddr(); 
-		 }
-		 return ip;
+
+	public String getIRealIPAddr(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)
+				|| "null".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
 		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)
+				|| "null".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)
+				|| "null".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
+
 	/**
 	 * 登录
 	 * 
@@ -234,10 +239,10 @@ public class UserController {
 			mu = userService.findByUserName(userName);
 			if (mu != null) {
 				if (Md5Util.validatePassword(mu.getPwd(), pwd)) {
-					if(mu.getActivated()!=null&&mu.getActivated()){
-					mu.setRandomCode(realRandomCode);
-					result = true;
-					}else {
+					if (mu.getActivated() != null && mu.getActivated()) {
+						mu.setRandomCode(realRandomCode);
+						result = true;
+					} else {
 						msg = "用户未激活或被禁访问";
 					}
 				} else {
@@ -306,10 +311,19 @@ public class UserController {
 				* StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE, user.getId());
 		model.addAttribute("orders", orderDetails);
 		model.addAttribute("size", size);
-		model.addAttribute("oMomey",
-				orderService.getTodayBuyMomey(user.getId()));
-		model.addAttribute("reMomey",
-				orderService.getTodayZhongjiaoMomey(user.getId()));
+		try {
+			model.addAttribute("oMomey",
+					orderService.getTodayBuyMomey(user.getId()));
+		} catch (Exception e) {
+
+		}
+
+		try {
+			model.addAttribute("reMomey",
+					orderService.getTodayZhongjiaoMomey(user.getId()));
+		} catch (Exception e) {
+
+		}
 		model.addAttribute("page", pageSize);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("memberUser", user);
@@ -421,28 +435,29 @@ public class UserController {
 	@ResponseBody
 	public String saveBankInfo(MemberUser memberUser,
 			HttpServletRequest request, HttpServletResponse response) {
-		String message = "支付宝账号保存出错";
+		String message = "银行账号保存出错";
 		MemberUser member = userService
 				.findByUserName(memberUser.getUserName());
-		if(member!=null){
-		try {
-			if (!Md5Util.validatePassword(member.getPwd(), memberUser.getPwd())) {
-				message = "网站登录密码不正确，请重新输入";
-			} else {
-				member.setBankName(memberUser.getBankName());
-				member.setBankCode(memberUser.getBankCode());
-				member.setZfbCode(memberUser.getZfbCode());
-				member.setCity(memberUser.getCity());
-				member.setOpenBank(memberUser.getOpenBank());
-				member.setUpdateDate(new Date());// 最后修改人
-				userService.update(member);
-				sessionReload(request, member);
-				message = "支付宝账号保存成功";
+		if (member != null) {
+			try {
+				if (!Md5Util.validatePassword(member.getMoneyPwd(),
+						memberUser.getPwd())) {
+					message = "网站登录密码不正确，请重新输入";
+				} else {
+					member.setBankName(memberUser.getBankName());
+					member.setBankCode(memberUser.getBankCode());
+					member.setZfbCode(memberUser.getZfbCode());
+					member.setCity(memberUser.getCity());
+					member.setOpenBank(memberUser.getOpenBank());
+					member.setUpdateDate(new Date());// 最后修改人
+					userService.update(member);
+					sessionReload(request, member);
+					message = "银行账号保存成功";
+				}
+			} catch (Exception e) {
+				message = "银行账号保存出错:" + e.getMessage();
 			}
-		} catch (Exception e) {
-			message = "支付宝账号保存出错:" + e.getMessage();
-		}
-		}else{
+		} else {
 			message = "用户信息出错，请重新登陆";
 		}
 		return message;

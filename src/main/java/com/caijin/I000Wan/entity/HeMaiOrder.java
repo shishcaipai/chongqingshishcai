@@ -21,6 +21,7 @@ public class HeMaiOrder extends BaseEntity{
 	private int status=0;
 	private String orderNo;
 	private HeMaiOrderDetail orderDetail;
+	private float  actionManay=0;
 	
 	public float currentWPMoney;// 当前中奖金额
 	
@@ -82,6 +83,14 @@ public class HeMaiOrder extends BaseEntity{
 
 	public void setCurrentWPMoney(float currentWPMoney) {
 		this.currentWPMoney = currentWPMoney;
+	}
+
+	public float getActionManay() {
+		return actionManay;
+	}
+
+	public void setActionManay(float actionManay) {
+		this.actionManay = actionManay;
 	}
 
 }

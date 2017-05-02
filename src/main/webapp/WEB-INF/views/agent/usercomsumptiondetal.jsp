@@ -33,70 +33,10 @@
 		<jsp:include page="../header3.jsp"></jsp:include>
 	<div id="account">
 		<div class="account_left">
-			<jsp:include page="memberLeftMenu.jsp"></jsp:include>
+			<jsp:include page="agentMemberLeftMenu.jsp"></jsp:include>
 		</div>
 		<div class="account_right">
 			<div class="user_right">
-				<div class="user_tou">
-					<div class="user_yhxx">
-						<table border="0" cellpadding="0" cellspacing="0"
-							class="user_yhxxta">
-							<tr>
-								<td style="font-size: 14px; font-weight: bold; color: #666">你好，<em>${memberUser.userName}</em>&nbsp;欢迎登陆用户中心！
-								</td>
-								<td style="color: #666">冻结资金:<b style="color: #dc0000;">￥${memberUser.frozenScore}</b></td>
-								<td style="color: #666">今日购彩:<b style="color: #dc0000;">￥${oMomey}</b></td>
-								<td style="color: #666">今日中奖:<b style="color: #dc0000;">￥${reMomey}</b></td>
-							</tr>
-
-							<tr>
-								<td>可用余额:<b style="color: #dc0000;">￥${memberUser.availableScore}</b></td>
-								<td>赠送余额:<b style="color: #dc0000;">￥${memberUser.actionScore}</b></td>
-								<td>总金额:<b style="color: #dc0000;">￥${memberUser.availableScore+memberUser.actionScore}</b></td>
-								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td>&nbsp;<a href="<%=basePath%>recharge"><img
-										src="<%=basePath%>static/images/btn2.png" /></a><a
-									href="<%=basePath%>money/apply"><img
-										src="<%=basePath%>static/images/btn3.png" /></a></td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-							</tr>
-						</table>
-
-					</div>
-				</div>
-				<div class="user_neks">
-					<div class="user_span">
-						1.充值过程中若出现银行已扣款，账户余额未增加或是数目不对的情况，请立即与客服联系<br />
-						2.用户发起合买使用保底功能相应资金会被冻结<br /> 3.用户提款过程中相应资金会被冻结<br />
-						4.用户使用自动追号相应资金会被冻结 <br />
-					</div>
-				</div>
-				<div class="user_zhmx">
-					<div class="user_zhdyp">账户明细</div>
-					<div class="user_zhbge">
-						<table border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td><SELECT name="UP_BusiSort" id="businessType">
-										<OPTION value="0" selected="selected">全部</OPTION>
-										<OPTION value="2">—购买彩票—</OPTION>
-										<OPTION value="6">—用户充值—</OPTION>
-										<OPTION value="7">—用户提款—</OPTION>
-										<OPTION value="1">—方案发奖—</OPTION>
-										<OPTION value="5">—方案撤单—</OPTION>
-										<OPTION value="9">—网站扣款—</OPTION>
-										<OPTION value="10">—冻结资金—</OPTION>
-										<OPTION value="11">—解冻资金—</OPTION>
-										<OPTION value="12">—充值赠送—</OPTION>
-								</SELECT></td>
-								<td><input name="" id="btnSearch" type="button"
-									class="user_zhaiu" /></td>
-							</tr>
-						</table>
-					</div>
-				</div>
 				<div class="user_zhmx1">
 					<table border="0" cellpadding="0" cellspacing="0"
 						class="user_mxtable" id="accountDetail">
@@ -104,11 +44,11 @@
 							<td style="color: #666; font-weight: bold">订单号</td>
 							<td style="color: #666; font-weight: bold">订单名称</td>
 							<td style="color: #666; font-weight: bold">交易时间</td>
-							<td style="color: #666; font-weight: bold">交易类型</td>
+							<td style="color: #666; font-weight: bold">消费类型</td>
 							<td style="color: #666; font-weight: bold">金额</td>
-							<td style="color: #666; font-weight: bold">状态</td>
-							<td style="color: #666; font-weight: bold">备注</td>
-							<td style="color: #666; font-weight: bold">详情</td>
+							<!-- <td style="color: #666; font-weight: bold">状态</td> -->
+							<!-- <td style="color: #666; font-weight: bold">备注</td>
+							<td style="color: #666; font-weight: bold">详情</td> -->
 						</tr>
 						<c:forEach var="order" items="${requestScope.orders }">
 							<tr>
@@ -126,25 +66,25 @@
 								</td>
 								<td>${order.name }</td>
 								<td>	<fmt:formatDate  type="both" value="${order.createDate}" /></td>
-								<td><c:if test="${order.orderType ==1}">订单充值</c:if> <c:if
-										test="${order.orderType ==2}"> 彩票订单 </c:if> <c:if
+								<td><c:if test="${order.orderType ==1}">用户充值</c:if> <c:if
+										test="${order.orderType ==2}"> 用户购买彩票消费 </c:if> <c:if
 										test="${order.orderType ==3}"> 合买方案</c:if> <c:if
-										test="${order.orderType ==4}"> 合买订单</c:if> <c:if
-										test="${order.orderType ==5}"> 方案发奖</c:if>
+										test="${order.orderType ==4}"> 用户参与合买方案消费</c:if> <c:if
+										test="${order.orderType ==5}">  用户中奖返奖</c:if>
 										 <c:if
-										test="${order.orderType ==6}"> 提现</c:if>
+										test="${order.orderType ==6}"> 用户提现</c:if>
 										 <c:if
 										test="${order.orderType ==7}"> 冻结返回</c:if>
 										</td>
 								<td>${order.totalMoney }</td>
-								<td><c:if test="${order.orderStatus ==0}">下单待确认</c:if> <c:if
+								<%-- <td><c:if test="${order.orderStatus ==0}">下单待确认</c:if> <c:if
 										test="${order.orderStatus ==1}"> 成功</c:if> <c:if
 										test="${order.orderStatus ==-1}">待支付</c:if> <c:if
 										test="${order.orderStatus ==2}"> 失败</c:if> <c:if
 										test="${order.orderStatus ==3}"> 超时</c:if> <c:if
 										test="${order.orderStatus ==4}">订单取消</c:if></td>
-								<td>${order.content}</td>
-								<td width="10%" align="center" valign="middle">
+								<td>${order.content}</td> --%>
+								<%-- <td width="10%" align="center" valign="middle">
 								<c:if test="${order.orderType ==2}">
 								<a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a>
 								</c:if>
@@ -154,7 +94,7 @@
 								<c:if test="${order.orderType ==4}">
 								<a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a>
 								</c:if>
-								</td>
+								</td> --%>
 							</tr>
 						</c:forEach>
 						<TR>
@@ -166,13 +106,13 @@
 											<td align="center" class="page" id="show_page_div">页次:<b><font
 													color="red">${requestScope.pageNum}</font></b> /
 												${requestScope.page} &nbsp;&nbsp;共有:${requestScope.size} 条记录
-												<a href="<%=basePath%>user/memberCenter?type=0&pageNum=1">首页</a>
+												<a href="<%=basePath%>agent/agentMembeInDetail?type=0&pageNum=1">首页</a>
 												&nbsp;&nbsp;&nbsp;&nbsp; <a
-												href="<%=basePath%>user/memberCenter?type=0&pageNum=${requestScope.pageNum == 1 ? 1 : requestScope.pageNum - 1}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+												href="<%=basePath%>agent/agentMembeInDetail?type=0&pageNum=${requestScope.pageNum == 1 ? 1 : requestScope.pageNum - 1}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
 												<a
-												href="<%=basePath%>user/memberCenter?type=0&pageNum=${requestScope.pageNum == requestScope.page ? requestScope.pageNum : requestScope.pageNum + 1}">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+												href="<%=basePath%>agent/agentMembeInDetail?type=0&pageNum=${requestScope.pageNum == requestScope.page ? requestScope.pageNum : requestScope.pageNum + 1}">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
 												<a
-												href="<%=basePath%>user/memberCenter?type=0&pageNum=${requestScope.page}">尾页</a>
+												href="<%=basePath%>agent/agentMembeInDetail?type=0&pageNum=${requestScope.page}">尾页</a>
 												&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;跳转: <select
 												name="pageNum"
 												onchange='javascript:change(this.options[this.options.selectedIndex].value)'
@@ -260,7 +200,7 @@
 	<script type="text/javascript">
 	function change(index) {
 		var type = $("#type").val();
-		window.location.href = "<%=basePath%>user/memberCenter?type="
+		window.location.href = "<%=basePath%>agent/agentMembeInDetail?type="
 					+ type + "&pageNum=" + index;
 		}
 		function page() {

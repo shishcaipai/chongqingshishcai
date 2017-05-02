@@ -312,4 +312,24 @@ public class OrderServiceImpl extends CommonServiceImpl<Order, String>
 //		return 0;
 //	}
 
+	@Override
+	public List<Order> findOrderByWprizeStatus(int wprizeStatus) {
+		try{
+		return orderDao.findOrderbyWprizeStatus(wprizeStatus);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	//个人消费情况
+	@Override
+	public Integer findOrderSizeByTypeNO3and7(String id) {
+		return  orderDao.findOrderSizeByTypeNO3and7(id);
+	}
+
+	@Override
+	public List<Order> findAllOrderssByTypeNO3and7(int pageNum, int pageSize, String id) {
+		return orderDao.findAllOrderssByTypeNO3and7(pageNum, pageSize, id);
+	}
+
 }

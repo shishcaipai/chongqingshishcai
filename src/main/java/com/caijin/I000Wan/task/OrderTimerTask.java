@@ -14,11 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.caijin.I000Wan.entity.HeMaiOrder;
 import com.caijin.I000Wan.entity.HeMaiOrderDetail;
 import com.caijin.I000Wan.entity.LotteryPeriod;
+import com.caijin.I000Wan.entity.MemberUser;
 import com.caijin.I000Wan.entity.Order;
 import com.caijin.I000Wan.entity.Period;
 import com.caijin.I000Wan.service.HeMaiOrderDetailService;
 import com.caijin.I000Wan.service.HeMaiOrderService;
 import com.caijin.I000Wan.service.LetteryPeriodService;
+import com.caijin.I000Wan.service.MemberUserService;
 import com.caijin.I000Wan.service.OrderDetailService;
 import com.caijin.I000Wan.service.OrderService;
 import com.caijin.I000Wan.service.PeriodService;
@@ -44,11 +46,13 @@ public class OrderTimerTask {
 	private HeMaiOrderDetailService heMaiOrderDetailService;
 	@Autowired
 	private HeMaiOrderService heMaiOrderService;
+	@Autowired
+	private MemberUserService memberUserservice;
 
 	/**
 	 * 下单任务 还需计算追号投注
 	 */
-	@Scheduled(cron = "0 0/3 *  * * ? ")
+	@Scheduled(cron = "0 0/1 *  * * ? ")
 	public synchronized void job1() {
 		synchronized (OrderTimerTask.class) {
 
@@ -171,9 +175,48 @@ public class OrderTimerTask {
 									newOrder.setLotteryType(Period.SHISHI_CAI_CHONGQING);
 									newOrder.setCreateDate(new Date());
 									newOrder.setOrderTime(new Date());
-									newOrder.setName("合买订单");
+									newOrder.setName("合买跟单");
 									newOrder.setTotalMoney(a
 											* Float.valueOf(leftNum));
+									float money = a * Float.valueOf(leftNum);
+									if (hemaiOrder.getMemberUser()
+											.getActionScore() > money) {
+										hemaiOrder.setActionManay(money);
+										hemaiOrder
+												.getMemberUser()
+												.setActionScore(
+														hemaiOrder
+																.getMemberUser()
+																.getActionScore()
+																- money);
+									} else if (hemaiOrder.getMemberUser()
+											.getActionScore() > 0
+											&& hemaiOrder.getMemberUser()
+													.getActionScore() < money) {
+										float actionScore = hemaiOrder
+												.getMemberUser()
+												.getActionScore();
+										hemaiOrder.setActionManay(money);
+										hemaiOrder.getMemberUser()
+												.setActionScore(0);
+										hemaiOrder
+												.getMemberUser()
+												.setAvailableScore(
+														hemaiOrder
+																.getMemberUser()
+																.getAvailableScore()
+																- (money - actionScore));
+									} else {
+										hemaiOrder
+												.getMemberUser()
+												.setAvailableScore(
+														hemaiOrder
+																.getMemberUser()
+																.getAvailableScore()
+																- money);
+									}
+									memberUserservice.update(hemaiOrder
+											.getMemberUser());
 									orderService.save(newOrder);
 								}
 								if (order.getIsZhuiHao() == 0) {
@@ -202,15 +245,45 @@ public class OrderTimerTask {
 								if (hemaiOrder != null)
 									for (HeMaiOrder heOrder : hemaiOrder) {
 										heOrder.setStatus(HeMaiOrderDetail.TYPE_EFFECTIVE_FAIL);
-										log.info("订单过期通知任务进行中。。。订单出错:::"
+										log.info("订单过期通知任务进行中。 失败是否执行。。订单出错:::"
 												+ heOrder.getStatus());
 										heMaiOrderService.update(heOrder);
-										heOrder.getMemberUser()
-												.setAvailableScore(
-														heOrder.getMemberUser()
-																.getAvailableScore()
-																+ heOrder
-																		.getFloatManay());
+										if (heOrder.getActionManay() > 0) {
+											if (heOrder.getFloatManay() > heOrder
+													.getActionManay()) {
+												heOrder.getMemberUser()
+														.setActionScore(
+																heOrder.getMemberUser()
+																		.getActionScore()
+																		+ heOrder
+																				.getActionManay());
+
+												heOrder.getMemberUser()
+														.setAvailableScore(
+																heOrder.getMemberUser()
+																		.getAvailableScore()
+																		+ (heOrder
+																				.getFloatManay() - heOrder
+																				.getActionManay()));
+											} else if (heOrder.getFloatManay() == heOrder
+													.getActionManay()) {
+												heOrder.getMemberUser()
+														.setActionScore(
+																heOrder.getMemberUser()
+																		.getActionScore()
+																		+ heOrder
+																				.getFloatManay());
+											}
+
+										} else {
+											heOrder.getMemberUser()
+													.setAvailableScore(
+															heOrder.getMemberUser()
+																	.getAvailableScore()
+																	+ heOrder
+																			.getFloatManay());
+										}
+
 										Order ors = orderService
 												.findOrderByTypeAndOrderId(
 														Order.HEMAI_IMP_BUY_ORDER,
@@ -227,6 +300,8 @@ public class OrderTimerTask {
 										od.setTotalMoney(ors.getTotalMoney());
 										od.setName("合买方案超时撤单");
 										od.setMemberUser(heOrder
+												.getMemberUser());
+										memberUserservice.update(heOrder
 												.getMemberUser());
 										orderService.update(od);
 										log.info("订单过期通知任务进行中。 更新"

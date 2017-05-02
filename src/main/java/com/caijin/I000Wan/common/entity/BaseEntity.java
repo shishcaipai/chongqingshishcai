@@ -22,7 +22,7 @@ public class BaseEntity extends IdEntity implements Serializable {
 	/**
 	 * 创建日期
 	 */
-	protected Date createDate;
+	protected Date createDate=new Date();
 	/**
 	 * 修改日期
 	 */

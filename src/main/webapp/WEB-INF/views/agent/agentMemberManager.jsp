@@ -72,7 +72,7 @@
 										<td style="text-align: center;"><fmt:formatDate  type="both" value="${user.createdate}" pattern="yyyy-MM-dd"/></td>
 										<td style="text-align: center;">${user.username }</td>
 										<td style="text-align: center;">${user.realname }</td>
-										<td style="text-align: center;">${user.money }</td>
+										<td style="text-align: center;"><fmt:formatNumber type="number" value="${user.money }" maxFractionDigits="2"/></td>
 									<td style="text-align: center;">${user.telephone }</td>
 										<td style="text-align: center;">${user.email }</td>
 										</td>

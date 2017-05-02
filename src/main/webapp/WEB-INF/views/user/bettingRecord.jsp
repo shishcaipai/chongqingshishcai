@@ -76,10 +76,10 @@
 									<td width="12%" align="center" valign="middle">${order.memberUser.userName }</td>
 									<td width="8%" align="center" valign="middle">${order.totalMoney }</td>
 									<td width="22%" align="center" valign="middle">${order.orderTime }</td>
-									<td width="5%" align="center" valign="middle"><c:if test="${order.orderStatus ==0}">未知</c:if> <c:if
-										test="${order.orderStatus ==1}"> 成功 </c:if> <c:if
-										test="${order.orderStatus ==2}"> 失败</c:if> <c:if
-										test="${order.orderStatus ==3}"> 超时</c:if></td></td>
+									<td width="5%" align="center" valign="middle"><c:if test="${order.wprizeStatus ==0}">待开奖</c:if> <c:if
+										test="${order.wprizeStatus ==1}"> 中奖 </c:if> <c:if
+										test="${order.wprizeStatus ==2}"> 中奖</c:if> <c:if
+										test="${order.wprizeStatus ==3}">未中奖</c:if></td></td>
 									<td width="14%" align="center" valign="middle"><font style="font-size: 14px;color: red;">${order.currentWPMoney }</font></td>
 									<td width="10%" align="center" valign="middle"><a href="<%=basePath%>user/orderdetail?orderId=${order.orderNo }">查看</a></td>
 								</tr>

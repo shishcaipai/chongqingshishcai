@@ -52,7 +52,7 @@ public class ApplyRecordDaoImpl extends CustomBaseSqlDaoImpl implements
 			String auditStatus, String applystartDate, String applyendDate,
 			String startDate, String endDate) {
 		String sql = " select r.id, u.user_name,r.apply_name,r.id_card_no,r.apply_money,"
-				+ " r.create_date,r.bank_name,r.audit_status,r.auditor,r.audit_time"
+				+ " r.create_date,r.bank_name,r.audit_status,r.auditor,r.audit_time,r.bank_no,u.open_bank   "
 				+ " from apply_record r"
 				+ " inner join member_user u on u.id=r.member_id where 1=1 ";
 

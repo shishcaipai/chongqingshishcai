@@ -69,17 +69,17 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 
 	@Override
 	public List<Map> findUserTotalAmountList(String startDate) {
-		String sql = "select sum(t.money) as money,mu.user_name from member_user mu left join trade_order o on mu.id=o.member_id left join lottery_period t on o.order_no= t.orderid where t.winning = 1  ";
+		String sql = "select sum(o.current_wp_money) as money,mu.user_name from member_user mu left join trade_order o on mu.id=o.member_id "
+				+ "where (o.wprize_status = 1 or o.wprize_status = 2) and (o.order_type=2 or o.order_type=4) ";
 
 		if (startDate != null && !startDate.equals("")) {
 			sql += "and o.order_time >= '" + startDate + "' ";
 		}
 
-		sql += "group by mu.user_name order by sum(t.money) desc ";
+		sql += "group by mu.user_name order by sum(o.current_wp_money) desc limit 0,10 ";
 
 		return this.querySqlObjects(sql);
 	}
-
 
 	public List<Map> findMemberByAgentUserId(int i, int pageSize, String id) {
 		String sql = "select mu.id as id, uu.money,uu.pmoney,mu.user_name as username,mu.real_name as realname,mu.telephone as telephone,mu.create_date as createdate,mu.email as email from member_user mu  left join (select sum(td.total_money) as money,sum(td.current_wp_money) as pmoney,td.member_id from trade_order td  where td.order_status=1 group by td.member_id) as uu on uu.member_id=mu.id  where   mu.commend_member_id = '"
@@ -96,7 +96,6 @@ public class OrderDaoImpl extends CustomBaseSqlDaoImpl implements
 		log.info(sql);
 		return this.querySqlObjects(sql);
 	}
-
 
 	@Transactional
 	@Override

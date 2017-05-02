@@ -253,7 +253,7 @@ public class AgentController {
 		model.addAttribute("almoney_th", kz);
 		// 当前金额
 		model.addAttribute("almoney_f", currentMoney);
-		model.addAttribute("almoney_p", kz + currentMoney - zs - cz);
+		model.addAttribute("almoney_p", cz - zs- kz - currentMoney  );
 		model.addAttribute("size", size);
 
 		model.addAttribute("page", pageSize);
@@ -261,4 +261,38 @@ public class AgentController {
 		model.addAttribute("memberUser", user);
 		return "agent/agentMemberincomestatic";
 	}
+	
+	/**
+	 * 跳转到该用户消费情况
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/agent/agentMembeInDetail")
+	public String agentmemberCenterDetail(HttpServletRequest request, Model model) {
+		String userId=request.getParameter("userID");
+		MemberUser user = userService.find(userId);
+		if (user == null) {
+			return "redirect:/user/login";
+		}
+		Integer pageNum = Integer
+				.valueOf(request.getParameter("pageNum") == null ? "1"
+						: request.getParameter("pageNum"));
+		
+		Integer size = orderService.findOrderSizeByTypeNO3and7(user.getId());
+		Integer pageSize = size % StaticDefine.PAGE_SIZE == 0 ? size
+				/ StaticDefine.PAGE_SIZE : size / StaticDefine.PAGE_SIZE + 1;
+		List<Order> orderDetails = orderService.findAllOrderssByTypeNO3and7((pageNum - 1)
+				* StaticDefine.PAGE_SIZE, StaticDefine.PAGE_SIZE, user.getId());
+		model.addAttribute("orders", orderDetails);
+		model.addAttribute("size", size);
+//		model.addAttribute("oMomey",
+//				orderService.getTodayBuyMomey(user.getId()));
+//		model.addAttribute("reMomey",
+//				orderService.getTodayZhongjiaoMomey(user.getId()));
+		model.addAttribute("page", pageSize);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("memberUser", user);
+		return "agent/usercomsumptiondetal";
+	}
+
 }
